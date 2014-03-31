@@ -8,13 +8,16 @@ public class OpenNodeController : MonoBehaviour {
     public float buffer = 1;
     public Vector3 myScale;
     public GameObject photo; 
+   
     void Start()
     {
+        //this is randomly placing stuff 
         Vector3 wrld_width = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0.0f));
         float randXLeft = Random.Range(((-wrld_width.x/2 - wrld_width.x/2+ gameObject.renderer.bounds.size.x/2)), (wrld_width.x - gameObject.renderer.bounds.size.x / 2)-buffer);
         float randYLeft = Random.Range((-wrld_width.y+gameObject.renderer.bounds.size.y/2)+ buffer, (wrld_width.y - gameObject.renderer.bounds.size.y / 2)-buffer);
         float s = Random.Range(0.4f, 0.6f);
-        myScale = new Vector3(s, s, s);
+        myScale = new Vector3(1, 1, 1);
+        //scaling might fuck up text 
         transform.localScale=myScale;
         float zpos = Random.Range(-1.0f, -9.0f);
         transform.position = new Vector3(randXLeft, randYLeft, zpos);
@@ -35,5 +38,5 @@ public class OpenNodeController : MonoBehaviour {
 
          
     }
-   
+
 }

@@ -22,18 +22,23 @@ public class Person
     public string filepath;
     public string description; 
 }
-public class FileToLinqExample : MonoBehaviour
+public class DataPuller : MonoBehaviour
 {
     public XmlDocument data;
     public List<XmlNodeList> myList;
     public IEnumerable<Person> heroes;
     List<Person> people;
     List<Person> herosList;
-    delegate void SetData();
-    SetData dataItem;
+    public delegate void SetData();
+    public SetData dataItem;
     
     //this one sets the data item to get 
-    static public int num; 
+    static public int num=0;
+    //this vars only job is to act at a holder for the current node you want to pull out 
+    static public Person currentHero; 
+
+  //random nodes -- implement later 
+    ArrayList randomNums; 
 
     void Awake()
     {
@@ -47,6 +52,10 @@ public class FileToLinqExample : MonoBehaviour
 
         XmlElement elm = data.DocumentElement;
         XmlNodeList nodeData = elm.ChildNodes;
+
+        //this will get random nodes 
+
+
 
 
 
@@ -70,7 +79,7 @@ public class FileToLinqExample : MonoBehaviour
         }
         foreach (Person p in people)
         {
-           Debug.Log( p.familyName + " is in the database"); 
+         //  Debug.Log( p.familyName + " is in the database"); 
         }
         Debug.Log("the database has " + people.Count + " records ");
         GetHeros();     
@@ -94,6 +103,6 @@ public class FileToLinqExample : MonoBehaviour
 
     public void PickHeroData()
     {
-        Person p =  herosList[num] as Person;
+        currentHero = herosList[num] as Person;
     }
 }

@@ -2,13 +2,15 @@
 using System.Collections;
 
 public class screenManager : MonoBehaviour {
-    public GUIText width_;
-    public GUIText height_; 
+    //gets data out of the script when needed as a staic var 
+    public static Vector3 coords; 
+    //public GUIText width_;
+    //public GUIText height_; 
 
     //transform target to current if need be
     private Vector2 scaleRatio;
     public Camera cam;
-    public GameObject hills;
+    //public GameObject hills;
     public int targetScreenWidth;
     public int targetScreenHeight;
     //change this only if you changed it globally in Unity's settings. 
@@ -17,9 +19,9 @@ public class screenManager : MonoBehaviour {
 	void Start () {
         //this just prints the text to screen for my debugging /testing 
         float x = Screen.width;
-        width_.text =x.ToString();
+        //width_.text =x.ToString();
         float y = Screen.height;
-        height_.text = y.ToString();
+        //height_.text = y.ToString();
 
         //set up the scale ratio between the target and the current screen sizes. Must be run at start to establish scale ratio.
         MultiScreen(new Vector2(targetScreenHeight, targetScreenWidth));
@@ -94,6 +96,7 @@ public class screenManager : MonoBehaviour {
     }
 
     //god damn it behave like adobe's screen space - you break my brain. arrghhhh. No, like seriously, you hurt us Unity. Designers are used to thinking about the upper left corner as (0,0). All of their art is laid out with those values, making the conversion a total flipping nightmare. This function lets you account for that and lay graphics out as they are in photoshop. If you're default photoshop screen width and height don't match the current screen size, it will also acccount for the difference here and do it's best to keep the layout intact.
+    //this flips the screen grid and spits back a Vector3 in GUI space effectively, same as photoshop's grid
     Vector3 FlipItAndReverseIt(float targetZ, float xpos_, float ypos_ )
     {
         xpos_ = xpos_ * scaleRatio.x;
@@ -108,6 +111,23 @@ public class screenManager : MonoBehaviour {
         ScaledToWorld.z = targetZ; 
         return ScaledToWorld; 
     }
+
+    //Takes game object current point and flips it for GUI space generated from OnGui. 
+    void ScreenToGUI(Vector3 vals)
+    {
+        //save the z val so it doesn't get screwed up 
+        float zpos = vals.z;
+        //convert to screem space  
+        vals = cam.WorldToScreenPoint(vals); 
+        
+        //flip the y axis to account for the different spaces 
+        vals.y = Screen.height - vals.y;
+
+        vals.z = zpos;
+        coords =  vals;
+    }
+
+
 
     void RelativeToParent_bottomLeft(Transform theParent, GameObject theChild, float xpos, float ypos, float zDepth)
     {

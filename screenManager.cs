@@ -27,10 +27,9 @@ public class screenManager : MonoBehaviour {
         MultiScreen(new Vector2(targetScreenHeight, targetScreenWidth));
 
         //moves a game object relative to the bottom right 
-        moveRelativeToBottomLeft(gameObject, 0, 100, 0);
+       // moveRelativeToBottomLeft(gameObject, 0, 100, 0);
 
-         Vector3 test = FlipItAndReverseIt(-1, 0,400);
-         transform.position = test;
+     
 	}
 	
 	// Update is called once per frame
@@ -45,9 +44,12 @@ public class screenManager : MonoBehaviour {
         //ADOBE TO UNITY PIXEL SPACE -- 
         //Note: How your object aligns is in relation to the spritAlignment setting in the texture importer. Set pivot to the top left corner in the sprite texture importer for behavior exactly like the adobe suite for positioning. the default is from the center of the sprite. note I am working with an orthographic camera. And yes, I just referenced Missy Elliot. Future notes: Make this a matrix. 
         //the signiture is zdepth, xposition and yposition 
-        Vector3 test = FlipItAndReverseIt(-1, 500,150);
-        transform.position = test;
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 test = FlipItAndReverseIt(-1, 0, 150);
+            test.z = -2;
+            transform.position = test;
+        }
         //Parents a child and moves it in relation to parents position in Unity's world coordinate space. 
         //the method signiture is parent, child, x,y,z location of child to parent
       //  RelativeToParent(gameObject.transform, hills, 10,0,0);
@@ -99,16 +101,19 @@ public class screenManager : MonoBehaviour {
     //this flips the screen grid and spits back a Vector3 in GUI space effectively, same as photoshop's grid
     Vector3 FlipItAndReverseIt(float targetZ, float xpos_, float ypos_ )
     {
-        xpos_ = xpos_ * scaleRatio.x;
-        ypos_ = ypos_ * scaleRatio.y;
+
+        //xpos_ *= scaleRatio.x; 
+        //ypos_ *= scaleRatio.y; 
         
         //flip the y axis to account for the different spaces 
-        ypos_ = targetScreenHeight - ypos_; 
-
+        ypos_ = targetScreenHeight - ypos_;
+        Debug.Log(targetScreenHeight + "screen" + ypos_);
         //get this point in world space
- 
-        Vector3 ScaledToWorld = cam.ScreenToWorldPoint(new Vector2(xpos_, ypos_));
-        ScaledToWorld.z = targetZ; 
+            
+        Vector3 ScaledToWorld = cam.ScreenToWorldPoint(new Vector3(xpos_, ypos_, 1));
+        ScaledToWorld.z = targetZ;
+        Debug.Log(ScaledToWorld + "i am log");
+        transform.position = ScaledToWorld; 
         return ScaledToWorld; 
     }
 

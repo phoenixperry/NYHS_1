@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class SetUpText : MonoBehaviour {
+
     //code for adding database text to screen 
     public string name;
     public string location;
@@ -16,7 +17,8 @@ public class SetUpText : MonoBehaviour {
     public GameObject closedNode;
     public GameObject openNode;
     Vector3 scaleRatio; 
-	// Use this for initialization
+
+
 	void Start () {
 
         data = GameObject.Find("Data");
@@ -25,12 +27,8 @@ public class SetUpText : MonoBehaviour {
         //scaleRatio = scaleRatio / 2;
         Debug.Log(scaleRatio);
         
-
-
-        
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 
         //the game object scale must happen in update b/c unity 

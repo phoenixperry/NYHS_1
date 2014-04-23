@@ -48,7 +48,7 @@ public class DataPuller : MonoBehaviour
         people = new List<Person>();
         //load up the data 
         data = new XmlDocument();
-        data.Load("C:/Users/conta_000/Documents/NYHS_311/dataTest/Assets/Data.xml");
+		data.Load("./Assets/data.xml");
 
         XmlElement elm = data.DocumentElement;
         XmlNodeList nodeData = elm.ChildNodes;
@@ -81,6 +81,8 @@ public class DataPuller : MonoBehaviour
         {
          //  Debug.Log( p.familyName + " is in the database"); 
         }
+        //if not hero toss in static not hero list?
+
         Debug.Log("the database has " + people.Count + " records ");
         GetHeros();     
     }
@@ -103,6 +105,10 @@ public class DataPuller : MonoBehaviour
 
     public void PickHeroData()
     {
+        //to use. 
+        //1 set the static number of the hero you want 
+        // 2 call this function 
+        // 3 get the current hero
         currentHero = herosList[num] as Person;
     }
 }

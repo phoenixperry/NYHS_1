@@ -2,19 +2,21 @@
 using System.Collections;
 
 public class SwapTexture : MonoBehaviour {
-    public Texture2D hazel; 
+    public Texture2D photo; 
+
 	// Use this for initialization
 	void Start () {
-	
+	    //stub out a  method to get a new piece of data for this
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            renderer.material.mainTexture = photo;
+
+        }
 	}
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            renderer.material.mainTexture = hazel; 
         
-        }
 	}
 }

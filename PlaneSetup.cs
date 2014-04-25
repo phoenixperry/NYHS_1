@@ -8,9 +8,26 @@ public class PlaneSetup : MonoBehaviour {
     public float radiusX = 8;
     public float startAngle, range;
     public Vector3 pos = new Vector3();
+
     public Vector3 posLerp = new Vector3(); 
 
 
 
-	}
+
+
+ //   public Vector3 posLerp = new Vector3();
+
+    public GameObject data;
+    public GameObject photo; 
+
+    void Setup()
+    {
+        //pipe in data
+    
+    } 
+
+
+
+}
+
 

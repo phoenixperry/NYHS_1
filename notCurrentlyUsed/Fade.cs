@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Fade : MonoBehaviour {
 
+    //vars to track time
+
 	//lerp method vars  
 	public Vector3 size;
 	//public GameObject openNode; 

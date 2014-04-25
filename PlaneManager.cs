@@ -13,6 +13,7 @@ public class PlaneManager : MonoBehaviour {
     public Vector3 rotationRadius;
     public float currentRotation = 0.0f; 
     private int counter = 0;
+
 	// Use this for initialization
     void Awake()
     {
@@ -47,6 +48,7 @@ public class PlaneManager : MonoBehaviour {
         }
         Debug.Log("num of planes " + planes.Count);
     }
+
     public static double NextGaussianDouble()
     {
         double U, u, v, S;
@@ -70,17 +72,21 @@ public class PlaneManager : MonoBehaviour {
             GameObject g = planes[i] as GameObject;
 
             //sine method
-            g.GetComponent<PlaneSetup>().pos.x = (int)g.GetComponent<PlaneSetup>().radiusX * (Mathf.Cos(Time.realtimeSinceStartup * speed + g.GetComponent<PlaneSetup>().startAngle));
-            g.GetComponent<PlaneSetup>().pos.z = (int)g.GetComponent<PlaneSetup>().radius * Mathf.Sin(Time.realtimeSinceStartup * speed + g.GetComponent<PlaneSetup>().startAngle);
-            g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
-            ////offset
 
-            g.GetComponent<PlaneSetup>().pos.z += 20;
+            //g.GetComponent<PlaneSetup>().pos.x = (int)g.GetComponent<PlaneSetup>().radiusX * (Mathf.Cos(Time.realtimeSinceStartup * speed + g.GetComponent<PlaneSetup>().startAngle));
+            //g.GetComponent<PlaneSetup>().pos.z = (int)g.GetComponent<PlaneSetup>().radius * Mathf.Sin(Time.realtimeSinceStartup * speed + g.GetComponent<PlaneSetup>().startAngle);
+            //g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
+            //////offset
+
+            //g.GetComponent<PlaneSetup>().pos.z += 20;
+
             g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x, g.GetComponent<PlaneSetup>().pos.x, .5f);
 
             g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
             g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
-            g.transform.position = g.GetComponent<PlaneSetup>().pos;
+
+            g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
+
 
         }
         counter ++; 

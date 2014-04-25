@@ -81,6 +81,8 @@ public class DataPuller : MonoBehaviour
         {
          //  Debug.Log( p.familyName + " is in the database"); 
         }
+        //if not hero toss in static not hero list?
+
         Debug.Log("the database has " + people.Count + " records ");
         GetHeros();     
     }
@@ -103,6 +105,10 @@ public class DataPuller : MonoBehaviour
 
     public void PickHeroData()
     {
+        //to use. 
+        //1 set the static number of the hero you want 
+        // 2 call this function 
+        // 3 get the current hero
         currentHero = herosList[num] as Person;
     }
 }

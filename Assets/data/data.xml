@@ -13,7 +13,7 @@
     <GivenName>Yung</GivenName>
     <Location>Hartford, Connecticut</Location>
     <Lifespan>1900-1901</Lifespan>
-    <Filename>./Assets/photos/YungWing.png</Filename>
+    <Filename>YungWing.png</Filename>
     <File_Path>./Assets/photos/YungWing.png</File_Path>
     <HeroDescription>First Chinese student to graduate from an American university</HeroDescription>
   </ROW>
@@ -26,9 +26,9 @@
     <GivenName>Ching Foo</GivenName>
     <Location>New York City, NY</Location>
     <Lifespan>1847-1898</Lifespan>
-    <Filename>Wong Ching Foo.png</Filename>
+    <Filename>WongChingFoo.png</Filename>
     <File_Path>
-      ./Assets/NYHS_1/photos/WongChingFoo.png</File_Path>
+      ./Assets/photos/WongChingFoo.png</File_Path>
     <HeroDescription>Early activist for Chinese American rights</HeroDescription>
   </ROW>
   <ROW MODID="21" RECORDID="4">
@@ -40,9 +40,9 @@
     <GivenName>Ma</GivenName>
     <Location>New York, New Yotk</Location>
     <Lifespan>1955</Lifespan>
-    <Filename>Yo Yo Ma.png</Filename>
+    <Filename>YoYoMa.png</Filename>
     <File_Path>
-      ./Assets/NYHS_1/photos/YoYoMa.png</File_Path>
+      ./Assets/photos/YoYoMa.png</File_Path>
     <HeroDescription>French and American cellist. He was a child prodigy and was performing by age five. He completed a Bachelor&apos;s degree from Harvard University in 1976. He has played as a soloist with many major orchestras. His 75 albums have received fifteen Grammy Awards.</HeroDescription>
   </ROW>
   <ROW MODID="19" RECORDID="5">
@@ -54,8 +54,8 @@
     <GivenName>Wang</GivenName>
     <Location>New York, New Yotk</Location>
     <Lifespan>1983</Lifespan>
-    <Filename>Alexander Wang.png</Filename>
-    <File_Path>./Assets/NYHS_1/photos/AlexanderWang.png</File_Path>
+    <Filename>AlexanderWang.png</Filename>
+    <File_Path>./Assets/photos/AlexanderWang.png</File_Path>
     <HeroDescription>American fashion designer and Creative Director of Balenciaga.
       At age 18, he moved to New York City to attend Parsons. In 2005, after two years at Parsons, he decided to pursue the launch of his own label, which predominantly began with a knitwear collection. In Fall 2007, Wang presented a complete women’s ready-to-wear collection on the New York catwalk for the first time, to critical acclaim. He won the CFDA/Vogue Fashion Fund in 2008, an honor accompanied by a $20,000 award to expand one&apos;s business.</HeroDescription>
   </ROW>
@@ -68,8 +68,8 @@
     <GivenName>Wong</GivenName>
     <Location>Los Angeles, California</Location>
     <Lifespan></Lifespan>
-    <Filename>Anna May Wong.png</Filename>
-    <File_Path>./Assets/NYHS_1/photos/AnnaMayWong.png</File_Path>
+    <Filename>AnnaMayWong.png</Filename>
+    <File_Path>./Assets/photos/AnnaMayWong.png</File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
   <ROW MODID="17" RECORDID="7">
@@ -81,8 +81,8 @@
     <GivenName>Lee</GivenName>
     <Location>Portland, Oregon</Location>
     <Lifespan></Lifespan>
-    <Filename>Hazel Ying Lee.png</Filename>
-    <File_Path>./Assets/NYHS_1/photos/HazelYingLee.png</File_Path>
+    <Filename>HazelYingLee.png</Filename>
+    <File_Path>./Assets/photos/HazelYingLee.png</File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
   <ROW MODID="17" RECORDID="8">
@@ -94,8 +94,8 @@
     <GivenName>See</GivenName>
     <Location>Los Angeles, California</Location>
     <Lifespan></Lifespan>
-    <Filename>Lisa See.png</Filename>
-    <File_Path>./Assets/NYHS_1/photos/LisaSee.png</File_Path>
+    <Filename>LisaSee.png</Filename>
+    <File_Path>./Assets/photos/LisaSee.png</File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
   <ROW MODID="16" RECORDID="9">
@@ -107,8 +107,8 @@
     <GivenName>Adrian</GivenName>
     <Location>Bremerton, Washington</Location>
     <Lifespan></Lifespan>
-    <Filename>Nathan Adrian.png</Filename>
-    <File_Path>c./Assets/NYHS_1/photos/NathanAdrian.png</File_Path>
+    <Filename>NathanAdrian.png</Filename>
+    <File_Path>./Assets/photos/NathanAdrian.png</File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
   <ROW MODID="16" RECORDID="10">
@@ -120,8 +120,8 @@
     <GivenName>Bemis</GivenName>
     <Location>San Francisco, California</Location>
     <Lifespan></Lifespan>
-    <Filename>Polly Bemis.png</Filename>
-    <File_Path>c:/ManyFaces/data/images/</File_Path>
+    <Filename>PollyBemis.png</Filename>
+    <File_Path>./Assets/photos/PollyBemis.png</File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
   <ROW MODID="14" RECORDID="11">
@@ -129,12 +129,12 @@
     <UID>010</UID>
     <Active></Active>
     <Hero></Hero>
-    <FamilyName>May Ling</FamilyName>
+    <FamilyName>MayLing</FamilyName>
     <GivenName>Soong</GivenName>
     <Location>Macon, Georgia</Location>
     <Lifespan></Lifespan>
-    <Filename>Soong May Ling.png</Filename>
-    <File_Path>c:/ManyFaces/data/images/</File_Path>
+    <Filename>SoongMayLing.png</Filename>
+    <File_Path>./Assets/photos/SoongMayLing.png</File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
   <ROW MODID="15" RECORDID="12">
@@ -146,8 +146,8 @@
     <GivenName>Tsai</GivenName>
     <Location>Chicago, Illinois</Location>
     <Lifespan></Lifespan>
-    <Filename>Kelly Tsai.png</Filename>
-    <File_Path>c:/ManyFaces/data/images/</File_Path>
+    <Filename>KellyTsai.png</Filename>
+    <File_Path>c <File_Path>./Assets/photos/KellyTsai.png</File_Path></File_Path>
     <HeroDescription></HeroDescription>
   </ROW>
 </FMPDSORESULT>

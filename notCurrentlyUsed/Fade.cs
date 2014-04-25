@@ -84,7 +84,7 @@ public class Fade : MonoBehaviour {
 		dist = Vector3.Distance(transform.position, endMarker);
 		while(dist>.02f){	
 
-			transform.position = Vector3.Lerp(transform.position, endMarker, fadespeed);
+			transform.position = Vector3.Lerp(transform.position, endMarker, dist);
             endMarker = offestBox(); 
             dist = Vector3.Distance(transform.position, endMarker);
 			yield return null;

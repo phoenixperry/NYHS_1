@@ -17,7 +17,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public void pullPhoto()
     {
-
+        transform.position = new Vector3(10.0f, 1.0f, 1.0f);
     }
 
 

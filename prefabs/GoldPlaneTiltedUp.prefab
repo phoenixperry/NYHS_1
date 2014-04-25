@@ -88,7 +88,7 @@ MonoBehaviour:
   range: 0
   pos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
-  data: {fileID: 0}
+  data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:

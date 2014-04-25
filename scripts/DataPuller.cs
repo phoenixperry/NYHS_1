@@ -48,7 +48,7 @@ public class DataPuller : MonoBehaviour
         people = new List<Person>();
         //load up the data 
         data = new XmlDocument();
-		data.Load("./Assets/data.xml");
+		data.Load("./Assets/NYHS_1/data/data.xml");
 
         XmlElement elm = data.DocumentElement;
         XmlNodeList nodeData = elm.ChildNodes;

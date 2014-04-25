@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//test
+
 public class PlaneSetup : MonoBehaviour {
 
 	//this is the current data holder for the gold plane's positional data
@@ -9,7 +9,7 @@ public class PlaneSetup : MonoBehaviour {
     public float startAngle, range;
     public Vector3 pos = new Vector3();
 
-    public Vector3 posLerp = new Vector3(); 
+    public Vector3 posLerp = new Vector3();
 
 
     public GameObject data;
@@ -22,5 +22,3 @@ public class PlaneSetup : MonoBehaviour {
 
 
 }
-
-

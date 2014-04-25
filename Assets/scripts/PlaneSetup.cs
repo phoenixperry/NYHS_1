@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+//test
 public class PlaneSetup : MonoBehaviour {
 
 	//this is the current data holder for the gold plane's positional data

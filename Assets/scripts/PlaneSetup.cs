@@ -15,10 +15,65 @@ public class PlaneSetup : MonoBehaviour {
     public GameObject data;
     public GameObject photo;
 
-    public void pullPhoto()
+
+    /*
+     * Ben - the way we should do the hero and nonhero nodes should be the same except each "layer" should have a z axis min and max. All of the functions should work for each. 
+     */
+    public Vector3 heroNodeLayerWidth; 
+    public Vector3 nodeLayerWidth;
+
+    //also there should be a way to track origin 
+    public Vector3 originPos;
+
+    //each note should set up the data 
+    public void setData()
     {
-        transform.position = new Vector3(10.0f, 1.0f, 1.0f);
+        //Phoenix 
     }
+
+    //only heros fade orange 
+    public void fadeOrange() {
+        //Phoenix 
+
+    }
+
+
+    public void setOrigin()
+    {
+        //ben 
+        //position on z axis to archive scale 
+    }
+
+
+    public void fadeIn()
+    {
+        //ben 
+    }
+
+    public void fadeOut()
+    {
+        //ben
+    }
+
+
+
+    public void moveToCenter() {
+        //Phoenix     
+    }
+
+    public void AnimateHero()
+    {
+        //Phoenix 
+    }
+
+    public void returnToOrigin()
+    {
+        //Phoenix 
+    }
+
+ 
+
+
 
 
 }

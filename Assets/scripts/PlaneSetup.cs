@@ -15,6 +15,13 @@ public class PlaneSetup : MonoBehaviour {
     public GameObject data;
     public GameObject photo;
 
+   
+    public float colorFadeDuration = 2.0f;
+    private Color startColor;
+    private Color endColor;
+    private float timeOfColorFade = 0.0f; 
+
+
 
     /*
      * Ben - the way we should do the hero and nonhero nodes should be the same except each "layer" should have a z axis min and max. All of the functions should work for each. 
@@ -25,6 +32,27 @@ public class PlaneSetup : MonoBehaviour {
     //also there should be a way to track origin 
     public Vector3 originPos;
 
+    //different possible states 
+    private bool fadeInState;
+    private bool moveToCenterState;
+    private bool animateState;
+    private bool fadeOutState;
+
+    public void Setup()
+    {
+        startColor = gameObject.renderer.material.GetColor("_Color");
+        endColor = new Color(0.768f, 0.392f, 0.188f);
+    }
+
+    public void Update()
+    {
+        //this should be one big arse state machine. 
+        if (fadeInState) { }
+        if (moveToCenterState) { }
+        if (animateState) { }
+        if (fadeOutState) { }
+            
+    }
     //each note should set up the data 
     public void setData()
     {
@@ -35,6 +63,11 @@ public class PlaneSetup : MonoBehaviour {
     public void fadeOrange() {
         //Phoenix 
 
+        renderer.material.color = Color.Lerp(startColor, endColor, timeOfColorFade);
+        if (timeOfColorFade < 1)
+        {
+            timeOfColorFade += Time.deltaTime / colorFadeDuration; 
+        }
     }
 
 

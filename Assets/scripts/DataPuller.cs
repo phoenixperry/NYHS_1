@@ -29,6 +29,8 @@ public class DataPuller : MonoBehaviour
     public IEnumerable<Person> heroes;
     List<Person> people;
     List<Person> herosList;
+
+    //I set this up as a delegate so more than one function could subscribe to it if need be... 
     public delegate void SetData();
     public SetData dataItem;
     

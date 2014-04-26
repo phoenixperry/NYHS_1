@@ -123,6 +123,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 232047516}
   - 114: {fileID: 232047515}
+  - 114: {fileID: 232047517}
   m_Layer: 0
   m_Name: Data
   m_TagString: Untagged
@@ -153,6 +154,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &232047517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 9fe2b6227057ad642be7b3f95149a0b4,
+    type: 2}
+  m_PrefabInternal: {fileID: 218255273}
+  m_GameObject: {fileID: 232047514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f134febdb6e94a4389b225b0a71eafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 232047514}
 --- !u!1 &261708366
 GameObject:
   m_ObjectHideFlags: 0

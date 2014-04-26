@@ -44,6 +44,7 @@ public class PlaneSetup : MonoBehaviour {
     {
         startColor = gameObject.renderer.material.GetColor("_Color");
         endColor = new Color(0.768f, 0.392f, 0.188f);
+
     }
 
     public void Update()
@@ -69,7 +70,8 @@ public class PlaneSetup : MonoBehaviour {
     //each note should set up the data 
     public void setData()
     {
-        //Phoenix 
+        //Phoenix
+        //data.GetComponent<DataPuller>().
     }
 
     //only heros fade orange 

@@ -47,10 +47,21 @@ public class PlaneSetup : MonoBehaviour {
     public void Update()
     {
         //this should be one big arse state machine. 
-        if (fadeInState) { }
-        if (moveToCenterState) { }
-        if (animateState) { }
-        if (fadeOutState) { }
+        if (fadeInState) {
+            fadeIn();
+        }
+        if (moveToCenterState) {
+            moveToCenter(); 
+        }
+        if (animateState)
+        {
+            AnimateHero(); 
+
+        }
+        if (fadeOutState)
+        {
+            fadeOut(); 
+        }
             
     }
     //each note should set up the data 

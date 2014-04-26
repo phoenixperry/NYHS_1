@@ -13,14 +13,14 @@ public class PlaneSetup : MonoBehaviour {
 
 
     public GameObject data;
-    public GameObject photo;
-
+    public GameObject photo; 
    
     public float colorFadeDuration = 2.0f;
     private Color startColor;
     private Color endColor;
-    private float timeOfColorFade = 0.0f; 
+    private float timeOfColorFade = 0.0f;
 
+    public GameObject OpenNode; 
 
 
     /*
@@ -37,6 +37,8 @@ public class PlaneSetup : MonoBehaviour {
     private bool moveToCenterState;
     private bool animateState;
     private bool fadeOutState;
+
+
 
     public void Setup()
     {

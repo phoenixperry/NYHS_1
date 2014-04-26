@@ -90,6 +90,11 @@ MonoBehaviour:
   posLerp: {x: 0, y: 0, z: 0}
   data: {fileID: 0}
   photo: {fileID: 0}
+  colorFadeDuration: 2
+  OpenNode: {fileID: 0}
+  heroNodeLayerWidth: {x: 0, y: 0, z: 0}
+  nodeLayerWidth: {x: 0, y: 0, z: 0}
+  originPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

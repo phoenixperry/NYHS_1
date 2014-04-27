@@ -13,14 +13,16 @@ public class PlaneSetup : MonoBehaviour {
 
 
     public GameObject data;
-    public GameObject photo; 
-   
+    public GameObject photo;
+
     public float colorFadeDuration = 2.000f;
     private float timeOfColorFade = 0.0f;
 
+    public float alphaFadeDuration = 2.0f;
+
 
     public GameObject OpenNode;
-    private Person p; 
+    private Person p;
 
   
 
@@ -35,15 +37,15 @@ public class PlaneSetup : MonoBehaviour {
     Vector3 scaleRatio; 
 
     /*
-     * Ben - the way we should do the hero and nonhero nodes should be the same except each "layer" should have a z axis min and max. All of the functions should work for each. 
+     * Ben - the way we should do the hero and nonhero nodes should be the same except each "layer" should have a z axis min and max. All of the functions should work for each.
      */
-    public Vector3 heroNodeLayerWidth; 
+    public Vector3 heroNodeLayerWidth;
     public Vector3 nodeLayerWidth;
 
-    //also there should be a way to track origin 
+    //also there should be a way to track origin
     public Vector3 originPos;
 
-    //different possible states 
+    //different possible states
     private bool fadeInState = false;
     private bool moveToCenterState = false;
     private bool animateState = false;
@@ -53,6 +55,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Start()
     {
+
       
         scaleRatio = gameObject.transform.lossyScale;
  
@@ -100,38 +103,50 @@ public class PlaneSetup : MonoBehaviour {
         return vals;
     }
 
+
+ 
+   
+
     public void Update()
     {
-         
-        //this should be one big arse state machine. 
+
+        //this should be one big arse state machine.
         if (fadeInState) {
             fadeIn();
         }
         if (moveToCenterState) {
-            moveToCenter(); 
+            moveToCenter();
         }
         if (animateState)
         {
-            AnimateHero(); 
+            AnimateHero();
 
         }
         if (fadeOutState)
         {
-            fadeOut(); 
+            fadeOut();
         }
+
      
         //keeps GUI at scale ratio of chip 
         gameObject.transform.localScale = new Vector3(scaleRatio.x, scaleRatio.y, scaleRatio.z);
      
     }
-    //each note should set up the data 
+
+
+
+
+   
+    //each note should set up the data
     public void setData()
     {
         //Phoenix -- this still needs to happen for real
         description = p.description;
         name = p.familyName + " " + p.givenName + " " + p.lifespan;
         location = p.location; 
-   
+
+        //Phoenix
+
     }
 
     public void fadeYellow()
@@ -139,7 +154,7 @@ public class PlaneSetup : MonoBehaviour {
         float a = Mathf.Lerp(1.0f, 0.0f, timeOfColorFade);
         Debug.Log(a);
         renderer.material.SetFloat("_Blend", timeOfColorFade);
-         
+
         if (timeOfColorFade > 0)
         {
             timeOfColorFade -= Time.deltaTime / colorFadeDuration;
@@ -147,54 +162,68 @@ public class PlaneSetup : MonoBehaviour {
 
     }
     public void fadeOrange() {
-        //Phoenix 
-      
+        //Phoenix
+
         float a = Mathf.Lerp(0.0f, 1.0f, timeOfColorFade);
-        renderer.material.SetFloat("_Blend", timeOfColorFade); 
-      
+        renderer.material.SetFloat("_Blend", timeOfColorFade);
+
         if (timeOfColorFade < 1)
         {
             timeOfColorFade += Time.deltaTime / colorFadeDuration;
             Debug.Log(timeOfColorFade + "i am time of fade");
         }
-      
+
     }
 
 
     public void setOrigin()
     {
-        //ben 
-        //position on z axis to archive scale 
+		originPos = transform.position;
+        Debug.Log("originPos set: " + originPos);
     }
 
 
     public void fadeIn()
     {
-        //ben 
+        var color = renderer.material.color;
+
+        color.a += Time.deltaTime/alphaFadeDuration;
+        if ( color.a >= 1.0f ) {
+          color.a = 1.0f;
+          fadeInState = false;
+        }
+        renderer.material.color = color;
     }
 
     public void fadeOut()
     {
-        //ben
+        var color = renderer.material.color;
+
+        color.a -= Time.deltaTime/alphaFadeDuration;
+        if ( color.a <= 0.0f ) {
+          color.a = 0.0f;
+          fadeOutState = false;
+        }
+        renderer.material.color = color;
     }
 
 
 
     public void moveToCenter() {
-        //Phoenix     
+        //Phoenix
     }
 
     public void AnimateHero()
     {
-        //Phoenix 
+        //Phoenix
     }
 
     public void returnToOrigin()
     {
-        //Phoenix 
+        //Phoenix
     }
 
- 
+
 
 
 

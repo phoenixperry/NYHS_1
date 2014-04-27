@@ -18,8 +18,7 @@ public class PlaneSetup : MonoBehaviour {
     public float colorFadeDuration = 2.000f;
     private Color startColor;
     private Color endColor;
-    private float timeOfColorFade = 0.0f;
-  
+
 
     public GameObject OpenNode; 
 
@@ -43,8 +42,8 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Start()
     {
-        startColor = gameObject.renderer.material.GetColor("_Color");
-        endColor = new Color32(180,178,38,255);
+        //startColor = gameObject.renderer.material.GetColor("_Color");
+        //endColor = new Color32(180,178,38,255);
        
         // you are here InvokeRepeating("moveToCenterState",)
 
@@ -77,11 +76,13 @@ public class PlaneSetup : MonoBehaviour {
         //Phoenix
         //data.GetComponent<DataPuller>().
     }
-    //only heros fade orange 
+    //only heros fade orange
+    float timeOfColorFade = 0.0f; 
     public void fadeOrange() {
         //Phoenix 
         Debug.Log(endColor + "I am end color");
-        renderer.material.color =  Color.Lerp(startColor, endColor, timeOfColorFade);
+        float a = Mathf.Lerp(0.0f, 1.0f, timeOfColorFade);
+        renderer.material.SetFloat("_Blend", timeOfColorFade); 
       
         if (timeOfColorFade < 1)
         {

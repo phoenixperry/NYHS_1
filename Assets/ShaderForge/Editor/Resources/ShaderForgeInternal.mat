@@ -15,16 +15,23 @@ Material:
     m_TexEnvs:
       data:
         first:
-          name: _node_76
+          name: _roundedCorner
         second:
-          m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _node_109
+          name: _organe_asset
         second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
+          m_Texture: {fileID: 2800000, guid: 4ea2a300cf25896498655b95016bb042, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _yellow_asset
+        second:
+          m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -32,4 +39,8 @@ Material:
         first:
           name: _Cutoff
         second: .5
+      data:
+        first:
+          name: _Blend
+        second: 0
     m_Colors: {}

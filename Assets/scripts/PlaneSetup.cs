@@ -45,6 +45,7 @@ public class PlaneSetup : MonoBehaviour {
     public void Start()
     {
         p = NodeTracker.p;
+		setOrigin();
 
     }
     public void OnGUI()
@@ -110,8 +111,8 @@ public class PlaneSetup : MonoBehaviour {
 
     public void setOrigin()
     {
-        //ben
-        //position on z axis to archive scale
+		originPos = transform.position;
+        Debug.Log("originPos set: " + originPos);
     }
 
 

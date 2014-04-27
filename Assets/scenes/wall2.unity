@@ -514,6 +514,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d544f4c9a8af54dbb861ef365210800b, type: 2}
+    - target: {fileID: 11400000, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
+      propertyPath: OpenNode
+      value: 
+      objectReference: {fileID: 1950510846}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
   m_RootGameObject: {fileID: 1804444902}
@@ -701,7 +705,8 @@ MonoBehaviour:
   data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2
-  OpenNode: {fileID: 100000, guid: e5d893040abb7db489254fe25fb617ff, type: 2}
+  alphaFadeDuration: 2
+  OpenNode: {fileID: 1950510846}
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
   originPos: {x: 0, y: 0, z: 0}

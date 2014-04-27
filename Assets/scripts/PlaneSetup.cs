@@ -15,10 +15,11 @@ public class PlaneSetup : MonoBehaviour {
     public GameObject data;
     public GameObject photo; 
    
-    public float colorFadeDuration = 2.0f;
+    public float colorFadeDuration = 2.000f;
     private Color startColor;
     private Color endColor;
     private float timeOfColorFade = 0.0f;
+  
 
     public GameObject OpenNode; 
 
@@ -33,22 +34,25 @@ public class PlaneSetup : MonoBehaviour {
     public Vector3 originPos;
 
     //different possible states 
-    private bool fadeInState;
-    private bool moveToCenterState;
-    private bool animateState;
-    private bool fadeOutState;
+    private bool fadeInState = false;
+    private bool moveToCenterState = false;
+    private bool animateState = false;
+    private bool fadeOutState = false;
 
 
 
-    public void Setup()
+    public void Start()
     {
         startColor = gameObject.renderer.material.GetColor("_Color");
-        endColor = new Color(0.768f, 0.392f, 0.188f);
+        endColor = new Color32(180,178,38,255);
+       
+        // you are here InvokeRepeating("moveToCenterState",)
 
     }
 
     public void Update()
     {
+         
         //this should be one big arse state machine. 
         if (fadeInState) {
             fadeIn();
@@ -65,7 +69,7 @@ public class PlaneSetup : MonoBehaviour {
         {
             fadeOut(); 
         }
-            
+        fadeOrange();
     }
     //each note should set up the data 
     public void setData()
@@ -73,12 +77,12 @@ public class PlaneSetup : MonoBehaviour {
         //Phoenix
         //data.GetComponent<DataPuller>().
     }
-
     //only heros fade orange 
     public void fadeOrange() {
         //Phoenix 
-
-        renderer.material.color = Color.Lerp(startColor, endColor, timeOfColorFade);
+        Debug.Log(endColor + "I am end color");
+        renderer.material.color =  Color.Lerp(startColor, endColor, timeOfColorFade);
+      
         if (timeOfColorFade < 1)
         {
             timeOfColorFade += Time.deltaTime / colorFadeDuration; 

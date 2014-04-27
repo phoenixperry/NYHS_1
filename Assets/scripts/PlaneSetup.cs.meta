@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: b69320499f2eb4b4dbb3dc833933d44e
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
+  - photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
+  - OpenNode: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

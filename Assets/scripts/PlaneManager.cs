@@ -4,14 +4,16 @@ using System.Collections;
 public class PlaneManager : MonoBehaviour {
     public GameObject plane_;
     public ArrayList planes;
+    public ArrayList bgPlanes;
     public int numPlanes = 10;
+    public int numBgPlanes = 10;
     public float radius = 8;
-    public float radiusX = 10; 
+    public float radiusX = 10;
     public float startAngle, range;
     public float speed = 2.0f;
     public Quaternion rotation;
     public Vector3 rotationRadius;
-    public float currentRotation = 0.0f; 
+    public float currentRotation = 0.0f;
     private int counter = 0;
 
 	// Use this for initialization
@@ -21,14 +23,14 @@ public class PlaneManager : MonoBehaviour {
         rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
 
         planes = new ArrayList();
-        startAngle = 360 / numPlanes;
+        startAngle = 360 / (numPlanes == 0 ? 1 : numPlanes);
         for (int i = 0; i < numPlanes; i++)
         {
-            //instantiate plane rotated up 
+            //instantiate plane rotated up
             Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
             GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
 
-            //radius from center 
+            //radius from center
             float radiusRange = Random.RandomRange(0.0f, -2.0f);
 
             p.GetComponent<PlaneSetup>().radius = radiusRange + radius;
@@ -47,9 +49,11 @@ public class PlaneManager : MonoBehaviour {
 
         }
         Debug.Log("num of planes " + planes.Count);
+
+        InitBackgroundPanels();
     }
 
-    public static double NextGaussianDouble()
+    public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
     {
         double U, u, v, S;
 
@@ -63,7 +67,7 @@ public class PlaneManager : MonoBehaviour {
         float s_ = (float)S;
         float Ss = (float)(-2.0 * Mathf.Log(s_) / S);
         float fac = Mathf.Sqrt(Ss);
-        return u * fac;
+        return u * fac * sigma + mu;
     }
     public void FixedUpdate()
     {
@@ -89,19 +93,19 @@ public class PlaneManager : MonoBehaviour {
 
 
         }
-        counter ++; 
+        counter ++;
     }
 
     public void Update()
     {
-      
-        
+
+
     }
     public void spin()
     {
 
             // for (int i = 0; i < numPlanes; i++ )
-            //{   
+            //{
             //    GameObject g = planes[i] as GameObject;
 
             //    //sine method
@@ -110,15 +114,29 @@ public class PlaneManager : MonoBehaviour {
             //    g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
             //    ////offset
             //    g.GetComponent<PlaneSetup>().pos.z += 20;
-            
+
             //    g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x,g.GetComponent<PlaneSetup>().pos.x, .5f);
 
             //    g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
             //    g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
-            //    g.transform.position = g.GetComponent<PlaneSetup>().posLerp; 
+            //    g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
 
             //}
              Invoke("spin", 0.0f);
+    }
+
+    public void InitBackgroundPanels()
+    {
+        bgPlanes = new ArrayList();
+        for( int i=0; i < numBgPlanes; i++) {
+            Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
+            GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+            float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
+            float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
+            p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 57.0f) );
+            bgPlanes.Add(p);
+        }
+        Debug.Log( "BG Planes: " + bgPlanes.Count );
     }
 
 

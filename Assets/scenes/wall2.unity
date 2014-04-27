@@ -554,6 +554,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d544f4c9a8af54dbb861ef365210800b, type: 2}
+    - target: {fileID: 11400000, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1654057361}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
   m_RootGameObject: {fileID: 1804444902}
@@ -572,8 +576,8 @@ GameObject:
   - 92: {fileID: 1654057359}
   - 81: {fileID: 1654057358}
   m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
+  m_Name: MainCamera
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -742,6 +746,11 @@ MonoBehaviour:
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2
   OpenNode: {fileID: 100000, guid: e5d893040abb7db489254fe25fb617ff, type: 2}
+  person_name: 
+  location: 
+  description: 
+  mySkin: {fileID: 11400000, guid: fa18e15e2f9fae147acd8139510ba004, type: 2}
+  cam: {fileID: 1654057361}
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
   originPos: {x: 0, y: 0, z: 0}

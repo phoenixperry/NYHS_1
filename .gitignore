@@ -29,3 +29,6 @@ obj/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+#INCLUDE META FILES
+!*.*meta

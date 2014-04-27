@@ -22,6 +22,17 @@ public class PlaneSetup : MonoBehaviour {
     public GameObject OpenNode;
     private Person p; 
 
+  
+
+    //code for adding database text to screen 
+    public string person_name;
+    public string location;
+    public string description;
+    public GUISkin mySkin; 
+
+    public Camera cam;
+    //GUI space to world space conversion variable 
+    Vector3 scaleRatio; 
 
     /*
      * Ben - the way we should do the hero and nonhero nodes should be the same except each "layer" should have a z axis min and max. All of the functions should work for each. 
@@ -42,13 +53,53 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Start()
     {
-        p = NodeTracker.p;  
-        
+      
+        scaleRatio = gameObject.transform.lossyScale;
+ 
+        cam = Camera.main; 
     }
     public void OnGUI()
     {
+        p = NodeTracker.p;
+        GUI.skin = mySkin;
+        Vector3 currentPos = ScreenToGUI(gameObject);
+        currentPos.x = currentPos.x - 460 * scaleRatio.x; // this value is computed by getting to the end of the box and the subtracting out the width - so 1
+        currentPos.y = currentPos.y + 45 * scaleRatio.y; // there's no need to do the subtraction here b/c the bounds y pos is the same 
+       
+        person_name = person_name.ToUpper();
+        pos.x = pos.x - 340;
+        pos.y = pos.y + 335;
+        //need to adjust for scale 
+        person_name = GUI.TextArea(new Rect(pos.x * scaleRatio.x, pos.y * scaleRatio.y, 390 * scaleRatio.x, 50 * scaleRatio.y), person_name, "name_style");
+
+        location = location.ToUpper();
+        Vector3 pos1 = ScreenToGUI(gameObject);
+        pos1.x = pos1.x - 340;
+        pos1.y = pos1.y + 365;
+        location = GUI.TextArea(new Rect(pos1.x * scaleRatio.x, pos1.y * scaleRatio.y, 390 * scaleRatio.x, 50 * scaleRatio.y), "name_style");
+
+
         
-    } 
+    }
+
+    //Takes game object current point and flips it for GUI space generated from OnGui. 
+    Vector3 ScreenToGUI(GameObject go)
+    {
+
+        //save the z val so it doesn't get screwed up 
+        float zpos = go.transform.position.z;
+        //convert to screem space  
+        Vector3 bounds = go.renderer.bounds.min;
+
+        Vector3 vals = cam.WorldToScreenPoint(go.renderer.bounds.max);
+
+        //flip the y axis to account for the different spaces 
+        vals.y = Screen.height - vals.y;
+
+        vals.z = zpos;
+        return vals;
+    }
+
     public void Update()
     {
          
@@ -69,13 +120,17 @@ public class PlaneSetup : MonoBehaviour {
             fadeOut(); 
         }
      
- 
+        //keeps GUI at scale ratio of chip 
+        gameObject.transform.localScale = new Vector3(scaleRatio.x, scaleRatio.y, scaleRatio.z);
      
     }
     //each note should set up the data 
     public void setData()
     {
-        //Phoenix
+        //Phoenix -- this still needs to happen for real
+        description = p.description;
+        name = p.familyName + " " + p.givenName + " " + p.lifespan;
+        location = p.location; 
    
     }
 

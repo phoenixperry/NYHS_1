@@ -45,8 +45,8 @@ public class SetUpText : MonoBehaviour {
     void OnGUI()
     {
         Vector3 currentPos = ScreenToGUI(openNode);
-        Debug.Log(closedNode.renderer.bounds.min + "I am the min");
-        Debug.Log(currentPos + "prepped");
+       // Debug.Log(closedNode.renderer.bounds.min + "I am the min");
+       // Debug.Log(currentPos + "prepped");
         currentPos.x = currentPos.x - 460*scaleRatio.x; // this value is computed by getting to the end of the box and the subtracting out the width - so 1
         currentPos.y = currentPos.y + 45*scaleRatio.y; // there's no need to do the subtraction here b/c the bounds y pos is the same 
         descriptionStyle.fixedWidth = 450*scaleRatio.x;
@@ -90,7 +90,7 @@ public class SetUpText : MonoBehaviour {
     }
     void populateData()
     {
-        Debug.Log(p.description);
+  //      Debug.Log(p.description);
         
         description = p.description;
         name = p.familyName + " " + p.givenName + " " + p.lifespan;

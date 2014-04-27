@@ -16,11 +16,11 @@ public class PlaneSetup : MonoBehaviour {
     public GameObject photo; 
    
     public float colorFadeDuration = 2.000f;
-    private Color startColor;
-    private Color endColor;
+    private float timeOfColorFade = 0.0f;
 
 
-    public GameObject OpenNode; 
+    public GameObject OpenNode;
+    private Person p; 
 
 
     /*
@@ -42,13 +42,13 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Start()
     {
-        //startColor = gameObject.renderer.material.GetColor("_Color");
-        //endColor = new Color32(180,178,38,255);
-       
-        // you are here InvokeRepeating("moveToCenterState",)
-
+        p = NodeTracker.p;  
+        
     }
-
+    public void OnGUI()
+    {
+        
+    } 
     public void Update()
     {
          
@@ -68,26 +68,41 @@ public class PlaneSetup : MonoBehaviour {
         {
             fadeOut(); 
         }
-        fadeOrange();
+     
+ 
+     
     }
     //each note should set up the data 
     public void setData()
     {
         //Phoenix
-        //data.GetComponent<DataPuller>().
+   
     }
-    //only heros fade orange
-    float timeOfColorFade = 0.0f; 
+
+    public void fadeYellow()
+    {
+        float a = Mathf.Lerp(1.0f, 0.0f, timeOfColorFade);
+        Debug.Log(a);
+        renderer.material.SetFloat("_Blend", timeOfColorFade);
+         
+        if (timeOfColorFade > 0)
+        {
+            timeOfColorFade -= Time.deltaTime / colorFadeDuration;
+        }
+
+    }
     public void fadeOrange() {
         //Phoenix 
-        Debug.Log(endColor + "I am end color");
+      
         float a = Mathf.Lerp(0.0f, 1.0f, timeOfColorFade);
         renderer.material.SetFloat("_Blend", timeOfColorFade); 
       
         if (timeOfColorFade < 1)
         {
-            timeOfColorFade += Time.deltaTime / colorFadeDuration; 
+            timeOfColorFade += Time.deltaTime / colorFadeDuration;
+            Debug.Log(timeOfColorFade + "i am time of fade");
         }
+      
     }
 
 

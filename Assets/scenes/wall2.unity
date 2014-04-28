@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 232047514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95bcfdad9bd841f88728a66f5a9ddcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f134febdb6e94a4389b225b0a71eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &774554014
@@ -648,9 +648,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1804444902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b69320499f2eb4b4dbb3dc833933d44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 6
+  radiusX: 8
+  startAngle: 0
+  range: 0
+  pos: {x: 0, y: 0, z: 0}
+  posLerp: {x: 0, y: 0, z: 0}
+  data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
+  photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
+  colorFadeDuration: 2
+  alphaFadeDuration: 2
+  OpenNode: {fileID: 0}
+  person_name: 
+  location: 
+  description: 
+  mySkin: {fileID: 0}
+  cam: {fileID: 0}
+  heroNodeLayerWidth: {x: 0, y: 0, z: 0}
+  nodeLayerWidth: {x: 0, y: 0, z: 0}
+  originPos: {x: 0, y: 0, z: 0}
 --- !u!23 &1804444904
 Renderer:
   m_ObjectHideFlags: 0

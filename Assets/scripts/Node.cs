@@ -29,7 +29,7 @@ public class Node : MonoBehaviour {
 	public Vector3 pos; //start pos 
 	// Use this for initialization
 
-	void rotateX(float theAngle) 
+	public void rotateX(float theAngle) 
 	{
 		float newy = pos.y * Mathf.Cos(theAngle) - pos.z * Mathf.Sin(theAngle);
 		float newz = pos.y * Mathf.Sin(theAngle) + pos.z * Mathf.Cos(theAngle);
@@ -37,47 +37,47 @@ public class Node : MonoBehaviour {
 		pos.z = newz; 
 	}
 
-	void rotateY(float theAngle) {
+	public void rotateY(float theAngle) {
 		float newx = pos.x * Mathf.Cos(-theAngle) - pos.z * Mathf.Sin(-theAngle);
 		float newz = pos.x * Mathf.Sin(-theAngle) + pos.z * Mathf.Cos(-theAngle);
 		pos.x = newx;
 		pos.z = newz;
 	}
 	
-	void rotateZ(float theAngle) {
+	public void rotateZ(float theAngle) {
 		float newx = pos.x * Mathf.Cos(theAngle) - pos.y * Mathf.Sin(theAngle);
 		float newy = pos.x * Mathf.Sin(theAngle) + pos.y * Mathf.Cos(theAngle);
 		pos.x = newx;
 		pos.y = newy;
 	}
 	// ------ calculate attraction ------
-	void attract(ArrayList theNodes) {
+	public void attract(ArrayList theNodes) {
 		// attraction or repulsion part
 		for (int i = 0; i < theNodes.Count; i++) {
-			Node otherNode = theNodes[i] as Node;
+			GameObject otherNode = theNodes[i] as GameObject;
 			// stop when empty
 			// if (otherNode == null) break;
 			// not with itself
 			if (otherNode == this) continue;
 			
-			this.attract(otherNode);
+			//attractIt(otherNode);
 		}
 	}
 
-	void attract(Node theNode) {
-		float d = Vector3.Distance(gameObject.transform.position, theNode.pos);
-		
-		if (d > 0 && d < radius) {
-			float s = Mathf.Pow(d / radius, 1 / ramp);
-			float f = s * 9 * strength * (1 / (s + 1) + ((s - 3) / 4)) / d;
-			//this script is going to need to live each node
-			Vector3 df = gameObject.transform.position- theNode.pos;
-			df = df *f;
-			
-			theNode.velocity.x += df.x;
-			theNode.velocity.y += df.y;
-			theNode.velocity.z += df.z;
-		}
+	public void attractIt(GameObject theNode) {
+//		float d = Vector3.Distance(gameObject.transform.position, theNode.pos);
+//		
+//		if (d > 0 && d < radius) {
+//			float s = Mathf.Pow(d / radius, 1 / ramp);
+//			float f = s * 9 * strength * (1 / (s + 1) + ((s - 3) / 4)) / d;
+//			//this script is going to need to live each node
+//			Vector3 df = gameObject.transform.position- theNode.pos;
+//			df = df *f;
+//			
+//			theNode.velocity.x += df.x;
+//			theNode.velocity.y += df.y;
+//			theNode.velocity.z += df.z;
+//		}
 	}
 	// Update is called once per frame
 
@@ -119,14 +119,25 @@ public class Node : MonoBehaviour {
 	}
 	
 	// ------ getters and setters ------
-	string getID() {
+	public string getID() {
 		return id;
 	}
 	
-	void setID(string theID) {
-		this.id = theID;
+	public void setID(string theID) {
+
+		id = theID;
 	}
-	
+
+	public void setBoundary(Vector3 theMin,
+	                 Vector3 theMax) {
+		minX = theMin.x;
+		maxX = theMax.x;
+		minY = theMin.y;
+		maxY = theMax.y;
+		minZ = theMin.z;
+		maxZ = theMax.z;
+	}
+
 
 
 

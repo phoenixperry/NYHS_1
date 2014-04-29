@@ -20,37 +20,37 @@ public class PlaneManager : MonoBehaviour {
     void Awake()
     {
 
-        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
-
-        planes = new ArrayList();
-        startAngle = 360 / (numPlanes == 0 ? 1 : numPlanes);
-        for (int i = 0; i < numPlanes; i++)
-        {
-            //instantiate plane rotated up
-            Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
-            GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-
-            //radius from center
-            float radiusRange = Random.RandomRange(0.0f, -2.0f);
-
-            p.GetComponent<PlaneSetup>().radius = radiusRange + radius;
-            p.GetComponent<PlaneSetup>().radiusX = radiusRange + radiusX;
-            float randomHeight = (float)NextGaussianDouble();
-            randomHeight = Random.RandomRange(-5.0f, 5.0f) * randomHeight;
-            p.transform.position = new Vector3(p.transform.position.x, randomHeight, p.transform.position.z);
-            planes.Add(p);
-            Debug.Log(planes.Count);
-        }
+//        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
+//
+//        planes = new ArrayList();
+//        startAngle = 360 / (numPlanes == 0 ? 1 : numPlanes);
+//        for (int i = 0; i < numPlanes; i++)
+//        {
+//            //instantiate plane rotated up
+//            Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
+//            GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+//
+//            //radius from center
+//            float radiusRange = Random.RandomRange(0.0f, -2.0f);
+//
+//            p.GetComponent<PlaneSetup>().radius = radiusRange + radius;
+//            p.GetComponent<PlaneSetup>().radiusX = radiusRange + radiusX;
+//            float randomHeight = (float)NextGaussianDouble();
+//            randomHeight = Random.RandomRange(-5.0f, 5.0f) * randomHeight;
+//            p.transform.position = new Vector3(p.transform.position.x, randomHeight, p.transform.position.z);
+//            planes.Add(p);
+//            Debug.Log(planes.Count);
+//        }
         //update start angle after going through
-        for (int i = 0; i < numPlanes; i++)
-        {
-            GameObject g = planes[i] as GameObject;
-            g.GetComponent<PlaneSetup>().startAngle = startAngle * i;
-
-        }
-        Debug.Log("num of planes " + planes.Count);
-
-        InitBackgroundPanels();
+//        for (int i = 0; i < numPlanes; i++)
+//        {
+//            GameObject g = planes[i] as GameObject;
+//            g.GetComponent<PlaneSetup>().startAngle = startAngle * i;
+//
+//        }
+//        Debug.Log("num of planes " + planes.Count);
+		        InitBackgroundPanels();
+				InitForgroundPanels(); 
     }
 
     public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
@@ -73,7 +73,7 @@ public class PlaneManager : MonoBehaviour {
     {
         for (int i = 0; i < numPlanes; i++)
         {
-            GameObject g = planes[i] as GameObject;
+//            GameObject g = planes[i] as GameObject;
 
             //sine method
 
@@ -84,12 +84,12 @@ public class PlaneManager : MonoBehaviour {
 
             //g.GetComponent<PlaneSetup>().pos.z += 20;
 
-            g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x, g.GetComponent<PlaneSetup>().pos.x, .5f);
+            //g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x, g.GetComponent<PlaneSetup>().pos.x, .5f);
 
-            g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
-            g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
+           // g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
+           // g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
 
-            g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
+           // g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
 
 
         }
@@ -138,6 +138,20 @@ public class PlaneManager : MonoBehaviour {
         }
         Debug.Log( "BG Planes: " + bgPlanes.Count );
     }
+
+	public void InitForgroundPanels()
+	{
+		bgPlanes = new ArrayList();
+		for( int i=0; i < numBgPlanes; i++) {
+			Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
+			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
+			float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
+			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(0.0f, 19.0f) );
+			bgPlanes.Add(p);
+		}
+		Debug.Log( "BG Planes: " + bgPlanes.Count );
+	}
 
 
 }

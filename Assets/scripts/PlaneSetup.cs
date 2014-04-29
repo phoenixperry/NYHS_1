@@ -61,29 +61,7 @@ public class PlaneSetup : MonoBehaviour {
  
         cam = Camera.main; 
     }
-    public void OnGUI()
-    {
-        p = NodeTracker.p;
-        GUI.skin = mySkin;
-        Vector3 currentPos = ScreenToGUI(gameObject);
-        currentPos.x = currentPos.x - 460 * scaleRatio.x; // this value is computed by getting to the end of the box and the subtracting out the width - so 1
-        currentPos.y = currentPos.y + 45 * scaleRatio.y; // there's no need to do the subtraction here b/c the bounds y pos is the same 
-       
-        person_name = person_name.ToUpper();
-        pos.x = pos.x - 340;
-        pos.y = pos.y + 335;
-        //need to adjust for scale 
-        person_name = GUI.TextArea(new Rect(pos.x * scaleRatio.x, pos.y * scaleRatio.y, 390 * scaleRatio.x, 50 * scaleRatio.y), person_name, "name_style");
-
-        location = location.ToUpper();
-        Vector3 pos1 = ScreenToGUI(gameObject);
-        pos1.x = pos1.x - 340;
-        pos1.y = pos1.y + 365;
-        location = GUI.TextArea(new Rect(pos1.x * scaleRatio.x, pos1.y * scaleRatio.y, 390 * scaleRatio.x, 50 * scaleRatio.y), "name_style");
-
-
-        
-    }
+  
 
     //Takes game object current point and flips it for GUI space generated from OnGui. 
     Vector3 ScreenToGUI(GameObject go)

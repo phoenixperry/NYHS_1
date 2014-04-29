@@ -12,6 +12,7 @@ GameObject:
   - 64: {fileID: 6400000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: GoldPlaneTiltedUp
   m_TagString: Untagged
@@ -91,6 +92,7 @@ MonoBehaviour:
   data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2
+  alphaFadeDuration: 2
   OpenNode: {fileID: 100000, guid: e5d893040abb7db489254fe25fb617ff, type: 2}
   person_name: 
   location: 
@@ -100,6 +102,31 @@ MonoBehaviour:
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
   originPos: {x: 0, y: 0, z: 0}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0d9ed19c9254ff0883b4b81f9f0007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -3.40282347e+38
+  maxX: 3.40282347e+38
+  minY: -3.40282347e+38
+  maxY: 3.40282347e+38
+  minZ: -3.40282347e+38
+  maxZ: 3.40282347e+38
+  velocity: {x: 0, y: 0, z: 0}
+  pVelocity: {x: 0, y: 0, z: 0}
+  maxVelocity: 2
+  damping: 1
+  radius: 50
+  strength: -1
+  ramp: 1
+  pos: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

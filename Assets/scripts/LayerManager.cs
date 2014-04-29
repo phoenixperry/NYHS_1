@@ -11,8 +11,9 @@ public class LayerManager : MonoBehaviour {
 	void Start () {
 		nodes = new ArrayList();
 		for (int i = 0 ; i < numNodes; i++) {
-			Vector3 pos = new Vector3(Screen.width/2+ Random.Range(-1.0f, 1.0f), Screen.height/2+Random.Range(-1.0f, 1.0f), Screen.height/2+Random.Range(-1.0f, 1.0f)); 
-			GameObject n = Instantiate(node, pos, Quaternion.identity) as GameObject;
+			Vector3 pos = new Vector3(Random.Range(-4.0f, 4.0f), Random.Range(-4.0f, 4.0f), Random.Range(-20,1)); 
+			Quaternion rot = node.GetComponent<Transform>().rotation; 
+			GameObject n = Instantiate(node, pos, rot ) as GameObject;
 			n.GetComponent<Node>().pos = pos; 
 			n.GetComponent<Node>().setBoundary(min,max);
 			nodes.Add(n); 
@@ -22,11 +23,12 @@ public class LayerManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(nodes.Count > 0){
+
 			for (int i = 0 ; i < nodes.Count; i++) {
-		//		GameObject n = nodes[i] as GameObject; 
-//				n.GetComponent<Node>().attract(nodes);
-			} 
+				GameObject n = nodes[i] as GameObject; 
+				n.GetComponent<Node>().attract(nodes);
+				n.transform.position = n.GetComponent<Node>().pos; 
+
 		}
 	}
 }

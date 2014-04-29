@@ -8,14 +8,14 @@ public class Node : MonoBehaviour {
 	string id = "";
 	float diameter = 0.0f;
 	
-	public float minX = -float.MaxValue;
-	public float maxX = float.MaxValue;
-	public float minY = -float.MaxValue;
-	public float maxY = float.MaxValue;
-	public float minZ = -float.MaxValue;
-	public float maxZ = float.MaxValue;
+	public float minX = 0.0f;
+	public float maxX = 0.0f;
+	public float minY = 0.0f;
+	public float maxY = 0.0f;
+	public float minZ = 0.0f;
+	public float maxZ = 0.0f;
 	
-	public Vector3 velocity;
+	private Vector3 velocity;
 	public Vector3 pVelocity;
 	public float maxVelocity = 2;
 	
@@ -60,34 +60,67 @@ public class Node : MonoBehaviour {
 			// not with itself
 			if (otherNode == this) continue;
 			
-			//attractIt(otherNode);
+			attractIt(otherNode);
 		}
 	}
 
 	public void attractIt(GameObject theNode) {
-//		float d = Vector3.Distance(gameObject.transform.position, theNode.pos);
-//		
-//		if (d > 0 && d < radius) {
-//			float s = Mathf.Pow(d / radius, 1 / ramp);
-//			float f = s * 9 * strength * (1 / (s + 1) + ((s - 3) / 4)) / d;
-//			//this script is going to need to live each node
-//			Vector3 df = gameObject.transform.position- theNode.pos;
-//			df = df *f;
+
+		float d = Vector3.Distance(gameObject.transform.position, theNode.GetComponent<Node>().pos);
+
+		if (d > 0 && d < radius) {
+			float s = Mathf.Pow(d / radius, 1 / ramp);
+			float f = s * .9f * strength * (.1f / (s + .1f) + ((s - .3f) / .4f)) / d; 
+			Debug.Log(f); 
+			//this script is going to need to live each node
+			Vector3 df = gameObject.transform.position - theNode.GetComponent<Node>().pos;
+			df.Normalize();
+			df = df *f;
 //			
-//			theNode.velocity.x += df.x;
-//			theNode.velocity.y += df.y;
-//			theNode.velocity.z += df.z;
-//		}
+//			theNode.GetComponent<Node>().velocity.x += df.x;
+//			theNode.GetComponent<Node>().velocity.y += df.y;
+//			theNode.GetComponent<Node>().velocity.z += df.z;
+		}
 	}
-	// Update is called once per frame
+
 
 	void Update() {
-		
-		//velocity.limit(maxVelocity); (gotta do this the long ass way in Unity 
-		
-		pVelocity = velocity;
+	//	pVelocity = velocity; 
 
-		
+//		velocity.x = Mathf.Clamp(velocity.x, -1, maxVelocity);
+//		velocity.y = Mathf.Clamp(velocity.y, -1, maxVelocity);
+//		velocity.z = Mathf.Clamp(velocity.z, -1, maxVelocity);
+//
+//		if (pos.x < minX) {
+//			pos.x = minX - (pos.x - minX);
+//			velocity.x = -velocity.x;
+//		}
+//		if (pos.x > maxX) {
+//			pos.x = maxX - (pos.x - maxX);
+//			velocity.x = -velocity.x;
+//		}
+//		
+//		if (pos.y < minY) {
+//			pos.y = minY - (pos.y - minY);
+//			velocity.y = -velocity.y;
+//		}
+//		if (pos.y > maxY) {
+//			pos.y = maxY - (pos.y - maxY);
+//			velocity.y = -velocity.y;
+//		}
+//		
+//		if (pos.z < minZ) {
+//			pos.z = minZ - (pos.z - minZ);
+//			velocity.z = -velocity.z;
+//		}
+//		if (pos.z > maxZ) {
+//			pos.z = maxZ - (pos.z - maxZ);
+//			velocity.z = -velocity.z;
+//		}
+//		
+//		velocity = velocity * (1.0f - damping);
+	
+
 		if (pos.x < minX) {
 			pos.x = minX - (pos.x - minX);
 			velocity.x = -velocity.x;
@@ -106,16 +139,17 @@ public class Node : MonoBehaviour {
 			velocity.y = -velocity.y;
 		}
 		
-		if (pos.z < minZ) {
+		if (pos.z > minZ) {
 			pos.z = minZ - (pos.z - minZ);
 			velocity.z = -velocity.z;
 		}
-		if (pos.z > maxZ) {
+		if (pos.z < maxZ) {
 			pos.z = maxZ - (pos.z - maxZ);
 			velocity.z = -velocity.z;
 		}
 		
-		velocity = velocity * (1.0f - damping);
+		velocity = velocity * (1 - damping);
+		//	
 	}
 	
 	// ------ getters and setters ------

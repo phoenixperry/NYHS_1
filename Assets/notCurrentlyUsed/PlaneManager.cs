@@ -5,6 +5,7 @@ public class PlaneManager : MonoBehaviour {
     public GameObject plane_;
     public ArrayList planes;
     public ArrayList bgPlanes;
+	public ArrayList fgPlanes;
     public int numPlanes = 10;
     public int numBgPlanes = 10;
     public float radius = 8;
@@ -141,16 +142,16 @@ public class PlaneManager : MonoBehaviour {
 
 	public void InitForgroundPanels()
 	{
-		bgPlanes = new ArrayList();
+		fgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
 			Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
 			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
 			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
 			float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
 			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(0.0f, 19.0f) );
-			bgPlanes.Add(p);
+			fgPlanes.Add(p);
 		}
-		Debug.Log( "BG Planes: " + bgPlanes.Count );
+		Debug.Log( "fg Planes: " + fgPlanes.Count );
 	}
 
 

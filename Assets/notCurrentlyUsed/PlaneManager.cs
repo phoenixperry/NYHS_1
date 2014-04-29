@@ -131,7 +131,7 @@ public class PlaneManager : MonoBehaviour {
         bgPlanes = new ArrayList();
         for( int i=0; i < numBgPlanes; i++) {
             Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
-            GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+            GameObject p = Instantiate(plane_, transform.position, Quaternion.identity) as GameObject;
             float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
             float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
             p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 57.0f) );
@@ -145,7 +145,7 @@ public class PlaneManager : MonoBehaviour {
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
 			Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
-			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+			GameObject p = Instantiate(plane_, transform.position, Quaternion.identity) as GameObject;
 			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
 			float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
 			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(0.0f, 19.0f) );

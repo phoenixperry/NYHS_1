@@ -9,9 +9,6 @@ public class PlaneSetup : MonoBehaviour {
     public float startAngle, range;
     public Vector3 pos = new Vector3();
 
-    public Vector3 posLerp = new Vector3();
-
-
     public GameObject data;
     public GameObject photo;
 
@@ -43,13 +40,14 @@ public class PlaneSetup : MonoBehaviour {
     public Vector3 nodeLayerWidth;
 
     //also there should be a way to track origin
-    public Vector3 originPos;
+    
 
     //different possible states
     private bool fadeInState = false;
-    private bool moveToCenterState = false;
+    
     private bool animateState = false;
-    private bool fadeOutState = false;
+	private bool fadeOutState = false;
+    	
 
 
 
@@ -92,9 +90,7 @@ public class PlaneSetup : MonoBehaviour {
         if (fadeInState) {
             fadeIn();
         }
-        if (moveToCenterState) {
-            moveToCenter();
-        }
+        
         if (animateState)
         {
             AnimateHero();
@@ -154,11 +150,7 @@ public class PlaneSetup : MonoBehaviour {
     }
 
 
-    public void setOrigin()
-    {
-		originPos = transform.position;
-        Debug.Log("originPos set: " + originPos);
-    }
+    
 
 
     public void fadeIn()
@@ -183,12 +175,6 @@ public class PlaneSetup : MonoBehaviour {
           fadeOutState = false;
         }
         renderer.material.color = color;
-    }
-
-
-
-    public void moveToCenter() {
-        //Phoenix
     }
 
     public void AnimateHero()

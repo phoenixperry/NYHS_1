@@ -89,6 +89,8 @@ MonoBehaviour:
   range: 0
   pos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
+  centerPoint: {fileID: 100000, guid: 44516a697d48747808fc6c9c7770778f, type: 2}
+  moveToCenterDuration: 2
   data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2

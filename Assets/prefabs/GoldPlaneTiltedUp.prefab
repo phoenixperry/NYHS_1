@@ -12,6 +12,7 @@ GameObject:
   - 64: {fileID: 6400000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: GoldPlaneTiltedUp
   m_TagString: Untagged
@@ -25,8 +26,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -.030843595, y: .706433773, z: -.706433773, w: -.030843595}
-  m_LocalPosition: {x: -1.17259729, y: -2.1304831e-07, z: -11.8713665}
+  m_LocalRotation: {x: -1.15202326e-07, y: .707106709, z: -.707106829, w: -1.15202312e-07}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +78,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b69320499f2eb4b4dbb3dc833933d44e, type: 3}
   m_Name: 
@@ -88,9 +89,12 @@ MonoBehaviour:
   range: 0
   pos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
+  centerPoint: {fileID: 100000, guid: 44516a697d48747808fc6c9c7770778f, type: 2}
+  moveToCenterDuration: 2
   data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2
+  alphaFadeDuration: 2
   OpenNode: {fileID: 100000, guid: e5d893040abb7db489254fe25fb617ff, type: 2}
   person_name: 
   location: 
@@ -100,6 +104,30 @@ MonoBehaviour:
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
   originPos: {x: 0, y: 0, z: 0}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3954c5b21307e492fb1e038acc1a6c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -4
+  maxX: 4
+  minY: -4
+  maxY: 4
+  minZ: -1
+  maxZ: -20
+  pVelocity: {x: 1, y: 1, z: 1}
+  maxVelocity: 2
+  damping: -1
+  radius: 2
+  strength: -1
+  ramp: 1
+  pos: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

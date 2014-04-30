@@ -9,9 +9,6 @@ public class PlaneSetup : MonoBehaviour {
     public float startAngle, range;
     public Vector3 pos = new Vector3();
 
-    public Vector3 posLerp = new Vector3();
-
-
     public GameObject data;
     public GameObject photo;
 
@@ -43,13 +40,14 @@ public class PlaneSetup : MonoBehaviour {
     public Vector3 nodeLayerWidth;
 
     //also there should be a way to track origin
-    public Vector3 originPos;
+    
 
     //different possible states
     private bool fadeInState = false;
-    private bool moveToCenterState = false;
+    
     private bool animateState = false;
-    private bool fadeOutState = false;
+	private bool fadeOutState = false;
+    	
 
 
 
@@ -61,29 +59,7 @@ public class PlaneSetup : MonoBehaviour {
  
         cam = Camera.main; 
     }
-    public void OnGUI()
-    {
-        p = NodeTracker.p;
-        GUI.skin = mySkin;
-        Vector3 currentPos = ScreenToGUI(gameObject);
-        currentPos.x = currentPos.x - 460 * scaleRatio.x; // this value is computed by getting to the end of the box and the subtracting out the width - so 1
-        currentPos.y = currentPos.y + 45 * scaleRatio.y; // there's no need to do the subtraction here b/c the bounds y pos is the same 
-       
-        person_name = person_name.ToUpper();
-        pos.x = pos.x - 340;
-        pos.y = pos.y + 335;
-        //need to adjust for scale 
-        person_name = GUI.TextArea(new Rect(pos.x * scaleRatio.x, pos.y * scaleRatio.y, 390 * scaleRatio.x, 50 * scaleRatio.y), person_name, "name_style");
-
-        location = location.ToUpper();
-        Vector3 pos1 = ScreenToGUI(gameObject);
-        pos1.x = pos1.x - 340;
-        pos1.y = pos1.y + 365;
-        location = GUI.TextArea(new Rect(pos1.x * scaleRatio.x, pos1.y * scaleRatio.y, 390 * scaleRatio.x, 50 * scaleRatio.y), "name_style");
-
-
-        
-    }
+  
 
     //Takes game object current point and flips it for GUI space generated from OnGui. 
     Vector3 ScreenToGUI(GameObject go)
@@ -114,9 +90,7 @@ public class PlaneSetup : MonoBehaviour {
         if (fadeInState) {
             fadeIn();
         }
-        if (moveToCenterState) {
-            moveToCenter();
-        }
+        
         if (animateState)
         {
             AnimateHero();
@@ -176,11 +150,7 @@ public class PlaneSetup : MonoBehaviour {
     }
 
 
-    public void setOrigin()
-    {
-		originPos = transform.position;
-        Debug.Log("originPos set: " + originPos);
-    }
+    
 
 
     public void fadeIn()
@@ -205,12 +175,6 @@ public class PlaneSetup : MonoBehaviour {
           fadeOutState = false;
         }
         renderer.material.color = color;
-    }
-
-
-
-    public void moveToCenter() {
-        //Phoenix
     }
 
     public void AnimateHero()

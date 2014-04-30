@@ -24,25 +24,25 @@ public class SetUpText : MonoBehaviour {
 	public float fadeTimer = 0.5f;
 	public float moveToCenterDuration = 2.0f;
 	public float animationDuration = 2.0f;
+	public float stayOpenDuration = 2.0f;
 	private float moveTimer = 0.0f;
 
 	private bool fadeInState = false;
 	private bool moveToCenterState = false;
 	private bool returnToOriginState = false;
-	private bool animateState = false;
+	private bool animateOpenState = false;
+	private bool animateCloseState = false;
 	private bool fadeOutState = false;
 
 
 	void Start () {
         data = GameObject.Find("Data");
-//		renderer.material.color = new Vector4(1.0f, 1.0f, 1.0f, 0.0f);
         GetData();
         scaleRatio = closedNode.transform.lossyScale;
 		setOrigin();
         //scaleRatio = scaleRatio / 2;
-        Debug.Log(scaleRatio);
-		MakeInvisible();
-		fadeIn();
+//        Debug.Log(scaleRatio);
+//		fadeIn();
 	}
 
 	void Update () {
@@ -55,8 +55,11 @@ public class SetUpText : MonoBehaviour {
 		if (returnToOriginState) {
 			returnToOrigin();
 		}
-		if (animateState) {
-			doAnimation();
+		if (animateOpenState) {
+			doOpenAnimation();
+		}
+		if (animateCloseState) {
+			doCloseAnimation();
 		}
 		if (fadeOutState) {
 			fadeOut();
@@ -104,10 +107,10 @@ public class SetUpText : MonoBehaviour {
 	public void setOrigin()
 	{
 		originPos = transform.position;
-		Debug.Log("originPos set: " + originPos);
+//		Debug.Log("originPos set: " + originPos);
 	}
 
-	public void fadeIn() {
+	public void fadeIn(float t = -1.0f) {
 		if ( fadeInState == false ) {
 			fadeInState = true;
 			return;
@@ -122,18 +125,11 @@ public class SetUpText : MonoBehaviour {
 		Component[] faders;
 		faders = GetComponentsInChildren<SmoothAlpha>();
 		foreach (SmoothAlpha fader in faders) {
-			fader.MakeVisible();
-		}
-	}
-
-	public void MakeInvisible() {
-		foreach (Transform child in transform) {
-			child.renderer.material.color = Color.clear;
+			fader.MakeVisible(t);
 		}
 	}
 
 	public void moveToCenter() {
-		Debug.Log(originPos);
 		if(moveToCenterState == false) {
 			moveToCenterState = true;
 			return;
@@ -143,13 +139,14 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			gameObject.transform.position = centerPoint.transform.position;
 			moveToCenterState = false;
-			doAnimation();
+			doOpenAnimation();
 			return;
 		}
 		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
 	}
 
 	public void returnToOrigin() {
+		Debug.Log("returnToOrigin");
 		if(returnToOriginState == false) {
 			returnToOriginState = true;
 			return;
@@ -165,26 +162,41 @@ public class SetUpText : MonoBehaviour {
 		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, moveTimer/moveToCenterDuration);
 	}
 
-	public void doAnimation() {
-		if(animateState == false ) {
-			animateState = true;
+	public void doOpenAnimation() {
+		if(animateOpenState == false ) {
+			animateOpenState = true;
+			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 			return;
 		}
 		moveTimer += Time.deltaTime;
 		if( moveTimer >= animationDuration ) {
 			moveTimer = 0.0f;
-			animateState = false;
+			animateOpenState = false;;
+			doCloseAnimation();
+			return;
+		}
+	}
+
+	public void doCloseAnimation() {
+		if(animateCloseState == false ) {
+			animateCloseState = true;
+			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
+			return;
+		}
+		moveTimer += Time.deltaTime;
+		if( moveTimer >= 4.0f ) {
+			moveTimer = 0.0f;
+			animateCloseState = false;
 			returnToOrigin();
 			return;
 		}
 	}
 
-	public void fadeOut() {
+	public void fadeOut(float t = -1.0f) {
 		if ( fadeOutState == false ) {
 			fadeOutState = true;
 			return;
 		}
-		Debug.Log("fadeOut");
 		moveTimer += Time.deltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
@@ -195,7 +207,7 @@ public class SetUpText : MonoBehaviour {
 		Component[] faders;
 		faders = GetComponentsInChildren<SmoothAlpha>();
 		foreach (SmoothAlpha fader in faders) {
-			fader.MakeInvisible();
+			fader.MakeInvisible(t);
 		}
 	}
 

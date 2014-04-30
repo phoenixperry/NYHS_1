@@ -8,8 +8,9 @@ public class SmoothAlpha : MonoBehaviour {
 	
 	private bool m_isVisible = true;
 	private bool m_isTransitioning = false;
-	
-	public float duration = 0.5f;
+
+	public float defaultDuration = 0.5f;
+	private float duration;
 	
 	public bool isVisible
 	{
@@ -28,9 +29,13 @@ public class SmoothAlpha : MonoBehaviour {
 	{
 		if (!m_isTransitioning)
 			return;
-		
-		stage += Time.deltaTime / duration;
-		
+
+		if (duration > 0.0f) {
+			stage += Time.deltaTime / duration;
+		} else {
+			stage = 1.0f;
+		}
+
 		if (m_isVisible)
 		{
 			transform.renderer.material.color = Color.Lerp(origionalColor, transparantColor, stage);
@@ -51,8 +56,10 @@ public class SmoothAlpha : MonoBehaviour {
 		}
 	}
 	
-	public void MakeInvisible()
+	public void MakeInvisible(float t = -1.0f)
 	{
+		duration = (t >= 0.0f ? t : defaultDuration);
+
 		if (m_isTransitioning)
 			return;
 		
@@ -64,8 +71,10 @@ public class SmoothAlpha : MonoBehaviour {
 		m_isTransitioning = true;
 	}
 	
-	public void MakeVisible()
+	public void MakeVisible(float t = -1.0f)
 	{
+		duration = (t >= 0.0f ? t : defaultDuration);
+
 		if (m_isTransitioning)
 			return;
 		

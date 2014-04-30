@@ -27,8 +27,8 @@ public class LayerManager : MonoBehaviour {
 			for (int i = 0 ; i < nodes.Count; i++) {
 				GameObject n = nodes[i] as GameObject; 
 				n.GetComponent<Node>().attract(nodes);
-				n.transform.position = n.GetComponent<Node>().pos; 
-
+                n.transform.position = n.GetComponent<Node>().pos + n.GetComponent<Node>().pVelocity; 
+               
 		}
 	}
 }

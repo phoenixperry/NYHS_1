@@ -73,13 +73,14 @@ public class Node : MonoBehaviour {
 			float f = s * .9f * strength * (.1f / (s + .1f) + ((s - .3f) / .4f)) / d; 
 			Debug.Log(f); 
 			//this script is going to need to live each node
-			Vector3 df = gameObject.transform.position - theNode.GetComponent<Node>().pos;
+            Vector3 df = gameObject.transform.position - theNode.GetComponent<Node>().pos;
 			df.Normalize();
 			df = df *f;
 //			
             theNode.GetComponent<Node>().velocity.x += df.x;
             theNode.GetComponent<Node>().velocity.y += df.y;
             theNode.GetComponent<Node>().velocity.z += df.z;
+
 		}
 	}
 
@@ -106,7 +107,8 @@ public class Node : MonoBehaviour {
 			pos.y = maxY - (pos.y - maxY);
 			velocity.y = -velocity.y;
 		}
-		
+		//reverse these to see the crazy z freak out 
+
 		if (pos.z > minZ) {
 			pos.z = minZ - (pos.z - minZ);
 			velocity.z = -velocity.z;

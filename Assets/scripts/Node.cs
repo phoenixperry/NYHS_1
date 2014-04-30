@@ -77,48 +77,16 @@ public class Node : MonoBehaviour {
 			df.Normalize();
 			df = df *f;
 //			
-//			theNode.GetComponent<Node>().velocity.x += df.x;
-//			theNode.GetComponent<Node>().velocity.y += df.y;
-//			theNode.GetComponent<Node>().velocity.z += df.z;
+            theNode.GetComponent<Node>().velocity.x += df.x;
+            theNode.GetComponent<Node>().velocity.y += df.y;
+            theNode.GetComponent<Node>().velocity.z += df.z;
 		}
 	}
 
 
 	void Update() {
-	//	pVelocity = velocity; 
+		pVelocity = velocity; 
 
-//		velocity.x = Mathf.Clamp(velocity.x, -1, maxVelocity);
-//		velocity.y = Mathf.Clamp(velocity.y, -1, maxVelocity);
-//		velocity.z = Mathf.Clamp(velocity.z, -1, maxVelocity);
-//
-//		if (pos.x < minX) {
-//			pos.x = minX - (pos.x - minX);
-//			velocity.x = -velocity.x;
-//		}
-//		if (pos.x > maxX) {
-//			pos.x = maxX - (pos.x - maxX);
-//			velocity.x = -velocity.x;
-//		}
-//		
-//		if (pos.y < minY) {
-//			pos.y = minY - (pos.y - minY);
-//			velocity.y = -velocity.y;
-//		}
-//		if (pos.y > maxY) {
-//			pos.y = maxY - (pos.y - maxY);
-//			velocity.y = -velocity.y;
-//		}
-//		
-//		if (pos.z < minZ) {
-//			pos.z = minZ - (pos.z - minZ);
-//			velocity.z = -velocity.z;
-//		}
-//		if (pos.z > maxZ) {
-//			pos.z = maxZ - (pos.z - maxZ);
-//			velocity.z = -velocity.z;
-//		}
-//		
-//		velocity = velocity * (1.0f - damping);
 	
 
 		if (pos.x < minX) {

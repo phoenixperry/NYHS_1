@@ -26,7 +26,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: -1.15202326e-07, y: .707106709, z: -.707106829, w: -1.15202312e-07}
+  m_LocalRotation: {x: -1.15202333e-07, y: .707106769, z: -.707106888, w: -1.15202319e-07}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children: []
@@ -88,9 +88,6 @@ MonoBehaviour:
   startAngle: 0
   range: 0
   pos: {x: 0, y: 0, z: 0}
-  posLerp: {x: 0, y: 0, z: 0}
-  centerPoint: {fileID: 100000, guid: 44516a697d48747808fc6c9c7770778f, type: 2}
-  moveToCenterDuration: 2
   data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2
@@ -103,7 +100,6 @@ MonoBehaviour:
   cam: {fileID: 0}
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
-  originPos: {x: 0, y: 0, z: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,17 +111,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3954c5b21307e492fb1e038acc1a6c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minX: -4
-  maxX: 4
-  minY: -4
-  maxY: 4
-  minZ: -1
-  maxZ: -20
-  pVelocity: {x: 1, y: 1, z: 1}
-  maxVelocity: 2
-  damping: -1
-  radius: 2
-  strength: -1
+  minX: -8
+  maxX: 8
+  minY: -6
+  maxY: 6
+  minZ: 50
+  maxZ: 1
+  pVelocity: {x: .100000001, y: .100000001, z: .100000001}
+  maxVelocity: .00499999989
+  damping: .00999999978
+  radius: 3
+  strength: -.800000012
   ramp: 1
   pos: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000

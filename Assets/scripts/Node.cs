@@ -28,7 +28,7 @@ public class Node : MonoBehaviour {
 	public float ramp = 1.0f;
 	public Vector3 pos; //start pos 
 	// Use this for initialization
-
+    public float chip_fade = 1.0f; 
 	public void rotateX(float theAngle) 
 	{
 		float newy = pos.y * Mathf.Cos(theAngle) - pos.z * Mathf.Sin(theAngle);
@@ -70,7 +70,7 @@ public class Node : MonoBehaviour {
 
 		if (d > 0 && d < radius) {
 			float s = Mathf.Pow(d / radius, 1 / ramp);
-			float f = s * .9f * strength * (.1f / (s + .1f) + ((s - .3f) / .4f)) / d; 
+			float f = s * .09f * strength * (.01f / (s + .1f) + ((s - .03f) / .04f)) / d; 
 			Debug.Log(f); 
 			//this script is going to need to live each node
             Vector3 df = gameObject.transform.position - theNode.GetComponent<Node>().pos;
@@ -86,10 +86,11 @@ public class Node : MonoBehaviour {
 
 
 	void Update() {
-		pVelocity = velocity; 
 
-	
-
+  
+            this.gameObject.renderer.material.SetFloat("_alpha_blend", chip_fade);
+            Debug.Log(this.gameObject.renderer.material);
+        
 		if (pos.x < minX) {
 			pos.x = minX - (pos.x - minX);
 			velocity.x = -velocity.x;
@@ -118,7 +119,9 @@ public class Node : MonoBehaviour {
 			velocity.z = -velocity.z;
 		}
 		
-		velocity = velocity * (1 - damping);
+		velocity = velocity * (.0f - damping);
+        pVelocity = velocity; 
+
 		//	
 	}
 	

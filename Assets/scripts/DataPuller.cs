@@ -29,8 +29,8 @@ public class DataPuller : MonoBehaviour
     public List<XmlNodeList> myList;
     public IEnumerable<Person> heroes;
     List<Person> people;
-    List<Person> herosList;
-	List<Person> normalPeople; 
+    public static List<Person> herosList;
+	public static List<Person> normalPeople; 
     //I set this up as a delegate so more than one function could subscribe to it if need be... 
     public delegate void SetData();
     public SetData dataItem;
@@ -53,16 +53,17 @@ public class DataPuller : MonoBehaviour
 	public static void SetActiveHeroes()
 	{
 		activeHeroes = new List<Person>(); 
+	
 		for(int i = 0; i < SetNumHeroPeople; i++) 
 		{
 			Person temp = herosList[i]; 
 			activeHeroes.Add(temp); 
 		}
-		int numNotUsed = (int)heros.Count() - SetNumHeroPeople; 
+		int numNotUsed = (int)herosList.Count() - SetNumHeroPeople; 
 
-		for(int i = heros.Count()-numNotUsed; i< heros.Count(); i++) 
+		for(int i = herosList.Count()-numNotUsed; i< herosList.Count(); i++) 
 		{
-			innactiveHeroes.Add(activeHeros[i]); 
+			inactiveHeroes.Add(herosList[i]); 
 		}
 
 	}
@@ -107,7 +108,7 @@ public class DataPuller : MonoBehaviour
 		int numNotUsed = (int)normalPeople.Count() - SetNumNormalPeople; 
 		for(int i = normalPeople.Count()-numNotUsed; i< normalPeople.Count(); i++) 
 		{
-			inactiveNormalPeople.Add(activeNormalPeople[i]); 
+			inactiveNormalPeople.Add(normalPeople[i]); 
 		}
 		
 	}

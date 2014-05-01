@@ -25,12 +25,14 @@ public class SetUpText : MonoBehaviour {
 	public float moveToCenterDuration = 2.0f;
 	public float animationDuration = 2.0f;
 	public float stayOpenDuration = 2.0f;
+	public float bodyTextAppearDuration = 2.0f;
 	private float moveTimer = 0.0f;
 
 	private bool fadeInState = false;
 	private bool moveToCenterState = false;
 	private bool returnToOriginState = false;
 	private bool animateOpenState = false;
+	private bool bodyTextAppearState = false;
 	private bool animateCloseState = false;
 	private bool fadeOutState = false;
 
@@ -57,6 +59,9 @@ public class SetUpText : MonoBehaviour {
 		}
 		if (animateOpenState) {
 			doOpenAnimation();
+		}
+		if (bodyTextAppearState) {
+			doBodyTextAppear();
 		}
 		if (animateCloseState) {
 			doCloseAnimation();
@@ -172,6 +177,22 @@ public class SetUpText : MonoBehaviour {
 		if( moveTimer >= animationDuration ) {
 			moveTimer = 0.0f;
 			animateOpenState = false;;
+			doBodyTextAppear();
+			return;
+		}
+	}
+
+	public void doBodyTextAppear() {
+		if (bodyTextAppearState == false) {
+			bodyTextAppearState = true;
+			transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeVisible();
+			return;
+		}
+		moveTimer += Time.deltaTime;
+		if( moveTimer >= bodyTextAppearDuration ) {
+			moveTimer = 0.0f;
+			transform.Find ("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
+			bodyTextAppearState = false;
 			doCloseAnimation();
 			return;
 		}

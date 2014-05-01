@@ -151,6 +151,7 @@ public class PlaneManager : MonoBehaviour {
             Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
 			p.SetActive(true);
+			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
             float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
             float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
             p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
@@ -166,6 +167,7 @@ public class PlaneManager : MonoBehaviour {
 			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
 			p.SetActive(true);
+			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
 			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
 			float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
 			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 45.0f) );

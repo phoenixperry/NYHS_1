@@ -396,7 +396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &556769845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,5 +1624,6 @@ MonoBehaviour:
   centerPoint: {fileID: 1642384391}
   fadeTimer: .5
   moveToCenterDuration: .5
-  animationDuration: 6
-  stayOpenDuration: 4
+  animationDuration: 2
+  stayOpenDuration: 2
+  bodyTextAppearDuration: 6

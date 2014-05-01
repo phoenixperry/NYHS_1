@@ -68,7 +68,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: New Bool
     m_EventTreshold: 0
     m_ExitTime: .5
   m_Atomic: 0
@@ -104,7 +104,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: New Bool
     m_EventTreshold: 0
     m_ExitTime: .5
   m_Atomic: 1
@@ -194,7 +194,7 @@ Transition:
   m_TransitionOffset: .756058216
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: New Bool
     m_EventTreshold: 0
     m_ExitTime: .995323598
   m_Atomic: 0
@@ -399,6 +399,9 @@ StateMachine:
       first: {fileID: 110295583}
       second:
       - {fileID: 110133895}
+    data:
+      first: {fileID: 110292247}
+      second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 12, y: -108, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b69320499f2eb4b4dbb3dc833933d44e, type: 3}
   m_Name: 
@@ -100,13 +100,14 @@ MonoBehaviour:
   cam: {fileID: 0}
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
+  chip_fade: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3954c5b21307e492fb1e038acc1a6c05, type: 3}
   m_Name: 
@@ -124,6 +125,7 @@ MonoBehaviour:
   strength: -.800000012
   ramp: 1
   pos: {x: 0, y: 0, z: 0}
+  chip_fade: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

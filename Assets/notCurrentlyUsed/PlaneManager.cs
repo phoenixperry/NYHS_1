@@ -21,12 +21,11 @@ public class PlaneManager : MonoBehaviour {
 	private float heroTimer;
 	private GameObject heroInFocus;
 
-    public float chipAlpha; 
 
 	// Use this for initialization
     void Awake()
     {
-       // renderer.material.shader = Shader.Find("Mine/GradientMask");
+       
 		heroTimer = 0.0f;
 //        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
 //
@@ -106,7 +105,8 @@ public class PlaneManager : MonoBehaviour {
 
     public void Update()
     {
-   
+
+
 		heroTimer += Time.deltaTime;
 		if(heroTimer >= timeBetweenHeroes) {
 			heroTimer = 0.0f;
@@ -116,6 +116,7 @@ public class PlaneManager : MonoBehaviour {
 				fgPlanes.RemoveAt(0);
 			}
 		}
+
 
     }
 

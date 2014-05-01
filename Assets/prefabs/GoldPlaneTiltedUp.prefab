@@ -100,7 +100,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
-  chip_fade: 1
+  chip_fade: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

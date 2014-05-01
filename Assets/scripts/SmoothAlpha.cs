@@ -11,7 +11,9 @@ public class SmoothAlpha : MonoBehaviour {
 
 	public float defaultDuration = 0.5f;
 	private float duration;
-	
+	private bool useShader = false;
+
+
 	public bool isVisible
 	{
 		get { return m_isVisible; }
@@ -20,8 +22,12 @@ public class SmoothAlpha : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		origionalColor = transform.renderer.material.color;
-		transparantColor = new Color(origionalColor.r, origionalColor.g, origionalColor.b, Color.clear.a);
+		if (transform.renderer.material.HasProperty("_Color") ) {
+			origionalColor = transform.renderer.material.color;
+			transparantColor = new Color(origionalColor.r, origionalColor.g, origionalColor.b, Color.clear.a);
+		} else {
+			useShader = true;
+		}
 	}
 	
 	// Update is called once per frame
@@ -38,20 +44,38 @@ public class SmoothAlpha : MonoBehaviour {
 
 		if (m_isVisible)
 		{
-			transform.renderer.material.color = Color.Lerp(origionalColor, transparantColor, stage);
-			if (transform.renderer.material.color == transparantColor)
-			{
-				m_isTransitioning = false;
-				m_isVisible = false;
+			if(useShader) {
+				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(0.0f, 1.0f, stage) );
+				if (stage >= 1.0f)
+				{
+					m_isTransitioning = false;
+					m_isVisible = false;
+				}
+			} else {
+				transform.renderer.material.color = Color.Lerp(origionalColor, transparantColor, stage);
+				if (transform.renderer.material.color == transparantColor)
+				{
+					m_isTransitioning = false;
+					m_isVisible = false;
+				}
 			}
 		}
 		else
 		{
-			transform.renderer.material.color = Color.Lerp(transparantColor, origionalColor, stage);
-			if (transform.renderer.material.color == origionalColor)
-			{
-				m_isTransitioning = false;
-				m_isVisible = true;
+			if(useShader) {
+				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(1.0f, 0.0f, stage) );
+				if (stage >= 1.0f)
+				{
+					m_isTransitioning = false;
+					m_isVisible = true;
+				}
+			} else {
+				transform.renderer.material.color = Color.Lerp(transparantColor, origionalColor, stage);
+				if (transform.renderer.material.color == origionalColor)
+				{
+					m_isTransitioning = false;
+					m_isVisible = true;
+				}
 			}
 		}
 	}

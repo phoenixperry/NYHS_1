@@ -53,7 +53,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Start()
     {
-
+		GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
       
         scaleRatio = gameObject.transform.lossyScale;
  
@@ -85,7 +85,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Update()
     {
-		this.gameObject.renderer.material.SetFloat("_alpha_blend", chip_fade);
+//		this.gameObject.renderer.material.SetFloat("_alpha_blend", chip_fade);
         //this should be one big arse state machine.
         if (fadeInState) {
             fadeIn();

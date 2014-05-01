@@ -179,6 +179,7 @@ GameObject:
   - 23: {fileID: 431602802}
   - 114: {fileID: 431602801}
   - 114: {fileID: 431602800}
+  - 114: {fileID: 431602805}
   m_Layer: 0
   m_Name: GoldPlaneTiltedUp
   m_TagString: Untagged
@@ -252,7 +253,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   heroNodeLayerWidth: {x: 0, y: 0, z: 0}
   nodeLayerWidth: {x: 0, y: 0, z: 0}
-  chip_fade: 0
+  chip_fade: 1
 --- !u!23 &431602802
 Renderer:
   m_ObjectHideFlags: 0
@@ -297,6 +298,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1329822627}
   m_GameObject: {fileID: 431602798}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &431602805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431602798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e305d12a3574b4bf68faa5a585eab469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultDuration: .5
 --- !u!1 &476237917
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,6 +321,7 @@ GameObject:
   - 23: {fileID: 476237920}
   - 102: {fileID: 476237919}
   - 114: {fileID: 476237921}
+  - 114: {fileID: 476237922}
   m_Layer: 0
   m_Name: LocationText
   m_TagString: Untagged
@@ -382,6 +396,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: .5
+--- !u!114 &476237922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 476237917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7c030be53a462aa5fee2abcf357ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &556769844
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +469,7 @@ GameObject:
   - 102: {fileID: 852402489}
   - 114: {fileID: 852402488}
   - 114: {fileID: 852402491}
+  - 114: {fileID: 852402492}
   m_Layer: 0
   m_Name: BodyTextMesh
   m_TagString: Untagged
@@ -536,6 +562,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: .5
+--- !u!114 &852402492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 852402486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7c030be53a462aa5fee2abcf357ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &905923902
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +846,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
+      propertyPath: chip_fade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
+      propertyPath: chip_fade
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95debe002eed72e428c859badee9f3b1, type: 2}
   m_RootGameObject: {fileID: 431602798}
@@ -825,6 +870,7 @@ GameObject:
   - 23: {fileID: 1410316454}
   - 102: {fileID: 1410316453}
   - 114: {fileID: 1410316456}
+  - 114: {fileID: 1410316457}
   m_Layer: 0
   m_Name: NameText
   m_TagString: Untagged
@@ -899,6 +945,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: .5
+--- !u!114 &1410316457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1410316452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bab7c030be53a462aa5fee2abcf357ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1558035221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1374,7 @@ GameObject:
   - 64: {fileID: 1940097207}
   - 23: {fileID: 1940097206}
   - 114: {fileID: 1940097210}
+  - 114: {fileID: 1940097211}
   m_Layer: 0
   m_Name: Photo
   m_TagString: Untagged
@@ -1392,6 +1450,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photo: {fileID: 0}
+--- !u!114 &1940097211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940097205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e305d12a3574b4bf68faa5a585eab469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultDuration: .5
 --- !u!1 &2100995417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1694,7 @@ MonoBehaviour:
   posLerp: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 1642384391}
   fadeTimer: .5
+  preFadeOutDelay: 5
   moveToCenterDuration: .5
   animationDuration: 2
   stayOpenDuration: 2

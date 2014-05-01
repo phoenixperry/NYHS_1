@@ -88,7 +88,7 @@ public class Node : MonoBehaviour {
 	void Update() {
 
   
-            this.gameObject.renderer.material.SetFloat("_alpha_blend", chip_fade);
+            
             Debug.Log(this.gameObject.renderer.material);
         
 		if (pos.x < minX) {

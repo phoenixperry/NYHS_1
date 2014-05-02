@@ -175,15 +175,15 @@ public class DataPuller : MonoBehaviour
 		}
 		foreach (Person p in people)
 		{
-			//  Debug.Log( p.familyName + " is in the database"); 
+			Debug.Log( p.familyName + " is in the database"); 
 		}
 		//if not hero toss in static not hero list?
 		
 		Debug.Log("the database has " + people.Count + " records ");
 		GetHeros();  
-		GetNormalPeople(); 
-		shuffleList(normalPeople); 
-		shuffleList(herosList); 
+		//GetNormalPeople(); 
+		//shuffleList(normalPeople); 
+		//shuffleList(herosList); 
 		//		foreach(Person p in normalPeople)
 		//		{
 		//			Debug.Log(p.givenName + p.familyName);
@@ -206,26 +206,24 @@ public class DataPuller : MonoBehaviour
 		Debug.Log("there are " + num + " heroes" ); 
 	}
 	
-	public void GetNormalPeople()
-	{
-		
-		
-		heroes = from person in people
-			where person.hero == "no"
-				select person;
-		
-		normalPeople = new List<Person>(); 
-		foreach(Person p in heroes)
-		{
-			normalPeople.Add(p); 
-		}
-		
-		int num = normalPeople.Count; 
-		Debug.Log("there are " + num + " normal people" ); 
-		
-		
-	}
-	
+	//	public void GetNormalPeople()
+	//	{
+	//		heroes = from person in people
+	//			where person.hero == "no"
+	//				select person;
+	//		
+	//		normalPeople = new List<Person>(); 
+	//		foreach(Person p in heroes)
+	//		{
+	//			normalPeople.Add(p); 
+	//		}
+	//		
+	//		int num = normalPeople.Count; 
+	//		Debug.Log("there are " + num + " normal people" ); 
+	//		
+	//		
+	//	}
+	//	
 	public void PickHeroData()
 	{
 		//to use. 

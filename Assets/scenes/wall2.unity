@@ -774,6 +774,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .380000025
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
+      propertyPath: photo
+      value: 
+      objectReference: {fileID: 2800000, guid: 956a505e4620d5041b701760d4262dbb, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   m_RootGameObject: {fileID: 1940097205}
@@ -1449,7 +1453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5928816763ff941439b925a4150680d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photo: {fileID: 0}
+  photo: {fileID: 2800000, guid: 956a505e4620d5041b701760d4262dbb, type: 3}
 --- !u!114 &1940097211
 MonoBehaviour:
   m_ObjectHideFlags: 0

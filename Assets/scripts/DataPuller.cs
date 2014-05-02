@@ -26,7 +26,6 @@ public class Person
 public class DataPuller : MonoBehaviour
 {
 	public XmlDocument data;
-
 	public List<XmlNodeList> myList;
 	public IEnumerable<Person> heroes;
 	List<Person> people;
@@ -43,16 +42,15 @@ public class DataPuller : MonoBehaviour
 	
 	public static List<Person> activeHeroes; 
 	public static List<Person> inactiveHeroes; 
-	public static int SetNumHeroPeople; 
+	public static int SetNumHeroPeople =2; 
 	
 	public static List<Person> activeNormalPeople; 
 	public static List<Person> inactiveNormalPeople; 
-	public static int SetNumNormalPeople; 
-
-
-	void Start(){
+	public static int SetNumNormalPeople =6; 
+	
+	void Start (){
 		
-
+		
 		//set up the deligate to set a current hero. 
 		dataItem += PickHeroData; 
 		
@@ -63,19 +61,23 @@ public class DataPuller : MonoBehaviour
 		
 		XmlElement elm = data.DocumentElement;
 		XmlNodeList nodeData = elm.ChildNodes;
-		while(nodeData.Count < 5){
+		
 		//this will get random nodes 
 		Debug.Log(nodeData.Count +" items in db");
-		}
 		
-					
+		inactiveNormalPeople = new List<Person>(); 
+		activeNormalPeople = new List<Person>(); 
+		activeHeroes = new List<Person>(); 
+		inactiveHeroes = new List<Person>(); 
+		
 		
 		for (int i = 0; i < nodeData.Count; i++)
 		{
 			if (nodeData[i].Name == "ROW")
 			{
 				Person p = new Person();
-				p.familyName = nodeData[i]["FamilyName"].InnerText;
+				p.familyName = nodeData[i][
+				                           "FamilyName"].InnerText;
 				p.givenName = nodeData[i]["GivenName"].InnerText;
 				p.location = nodeData[i]["Location"].InnerText;
 				p.hero = nodeData[i]["Hero"].InnerText;
@@ -86,59 +88,66 @@ public class DataPuller : MonoBehaviour
 				p.description = nodeData[i]["HeroDescription"].InnerText;
 				p.id = nodeData[i]["UID"].InnerText; 
 				people.Add(p);
-				Debug.Log(p.familyName + i); 
+			 
 			}
 		}
 		foreach (Person p in people)
 		{
-			Debug.Log( p.familyName + " is in the database"); 
+//			Debug.Log( p.familyName + " is in the database"); 
 		}
 		//if not hero toss in static not hero list?
 		
 		Debug.Log("the database has " + people.Count + " records ");
 		GetHeros();  
-		//GetNormalPeople(); 
-		//shuffleList(normalPeople); 
-		//shuffleList(herosList); 
+
 		//		foreach(Person p in normalPeople)
 		//		{
 		//			Debug.Log(p.givenName + p.familyName);
 		//		}
-	}
-	
-	public void GetHeros()
-	{
-		heroes = from person in people
-			where person.hero == "yes"
-				select person;
-		
-		herosList = new List<Person>(); 
-		foreach(Person p in heroes)
-		{
-			herosList.Add(p); 
-		}
-		
-		int num = herosList.Count; 
-		Debug.Log("there are " + num + " heroes" ); 
-	}
+		GetNormalPeople(); 
+		SetActiveHeroes(); 
+		SetActiveNormalPeople(); 
+		Debug.Log("There are " +activeHeroes.Count() + " active heroes"); 
+		Debug.Log("There are " + activeNormalPeople.Count() + " active normal people"); 
 
+		shuffleList(activeNormalPeople); 
+		shuffleList(activeHeroes); 
+		RemoveHeroFromActiveList(activeHeroes[0]); 
+		RemoveNormalPersonFromActiveList(activeNormalPeople[0]);
+		Debug.Log("There are " +activeHeroes.Count() + " active heroes after remove"); 
+		Debug.Log("There are " + activeNormalPeople.Count() + " active normal people after remove"); 
+
+	
+		Person pn = PullNewNormalPerson(); 
+		Debug.Log(pn.familyName + "the pulled normal person"); 
+		Person pa = PullNewHero(); 
+		Debug.Log(pa.familyName + "the pulled hero"); 
+
+		RemoveHeroFromActiveList(pa); 
+		RemoveNormalPersonFromActiveList(pn); 
+
+		Person pn1 = PullNewNormalPerson(); 
+		Debug.Log(pn1.familyName + "the pulled normal person double test"); 
+		Person pa1 = PullNewHero(); 
+		Debug.Log(pa1.familyName + "the pulled hero double test"); 
+
+	}
 	//this function should set up the initial inactive and active hero lists  
 	public static void SetActiveHeroes()
 	{
-		activeHeroes = new List<Person>(); 
-		
+
 		for(int i = 0; i < SetNumHeroPeople; i++) 
 		{
 			Person temp = herosList[i]; 
 			activeHeroes.Add(temp); 
 		}
 		int numNotUsed = (int)herosList.Count() - SetNumHeroPeople; 
-		
+		Debug.Log(numNotUsed + " num of hereos not used."); 
 		for(int i = herosList.Count()-numNotUsed; i< herosList.Count(); i++) 
 		{
 			inactiveHeroes.Add(herosList[i]); 
 		}
-		
+		Debug.Log("there are " + inactiveHeroes.Count() + " innactive heroes."); 
 	}
 	
 	//this function lets you remove a hero from the active list and add them to the inactive one
@@ -167,12 +176,13 @@ public class DataPuller : MonoBehaviour
 	//sets up the inactive and active normal people lists 
 	public static void SetActiveNormalPeople()
 	{
-		if(SetNumNormalPeople > normalPeople.Count) 
+
+		if(SetNumNormalPeople > normalPeople.Count())
 		{
 			Debug.Log("invalid num of normal people. Please try again"); 
 			return; 
 		}
-		activeNormalPeople = new List<Person>(); 
+
 		for(int i = 0; i < SetNumNormalPeople; i++) 
 		{
 			Person temp = normalPeople[i]; 
@@ -183,7 +193,7 @@ public class DataPuller : MonoBehaviour
 		{
 			inactiveNormalPeople.Add(normalPeople[i]); 
 		}
-		
+		Debug.Log("there are "  + inactiveNormalPeople.Count() + "inactive Normal people");
 	}
 	//lets you remove a normal person from the current normal active list and put them in the normal inactive list 
 	public static void RemoveNormalPersonFromActiveList(Person p) 
@@ -194,6 +204,7 @@ public class DataPuller : MonoBehaviour
 			{
 				inactiveNormalPeople.Add(p); 
 				activeNormalPeople.RemoveAt(i); 
+				Debug.Log("Person removed " + p.familyName); 
 			}
 		}
 	}
@@ -206,26 +217,42 @@ public class DataPuller : MonoBehaviour
 		return temp; 
 		
 	}
-
 	
-	//	public void GetNormalPeople()
-	//	{
-	//		heroes = from person in people
-	//			where person.hero == "no"
-	//				select person;
-	//		
-	//		normalPeople = new List<Person>(); 
-	//		foreach(Person p in heroes)
-	//		{
-	//			normalPeople.Add(p); 
-	//		}
-	//		
-	//		int num = normalPeople.Count; 
-	//		Debug.Log("there are " + num + " normal people" ); 
-	//		
-	//		
-	//	}
-	//	
+	
+	public void GetHeros()
+	{
+		heroes = from person in people
+			where person.hero == "yes"
+				select person;
+		
+		herosList = new List<Person>(); 
+		foreach(Person p in heroes)
+		{
+			herosList.Add(p); 
+		}
+		
+		int num = herosList.Count; 
+		Debug.Log("there are " + herosList.Count() + " heroes" ); 
+	}
+	
+		public void GetNormalPeople()
+		{
+			heroes = from person in people
+				where person.hero == "no"
+					select person;
+			
+			normalPeople = new List<Person>(); 
+			foreach(Person p in heroes)
+			{
+				normalPeople.Add(p); 
+			}
+			
+			int num = normalPeople.Count(); 
+			Debug.Log("there are " + normalPeople.Count() + " normal people" ); 
+			
+			
+		}
+		
 	public void PickHeroData()
 	{
 		//to use. 

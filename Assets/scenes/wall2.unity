@@ -1379,6 +1379,7 @@ GameObject:
   - 23: {fileID: 1940097206}
   - 114: {fileID: 1940097210}
   - 114: {fileID: 1940097211}
+  - 114: {fileID: 1940097212}
   m_Layer: 0
   m_Name: Photo
   m_TagString: Untagged
@@ -1466,6 +1467,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: .5
+--- !u!114 &1940097212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940097205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52715d31024d94776a5f230d462bf8f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2100995417
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class DataPuller : MonoBehaviour
     public IEnumerable<Person> heroes;
     List<Person> people;
     List<Person> herosList;
-
+	List<Person> normalPeople; 
     //I set this up as a delegate so more than one function could subscribe to it if need be... 
     public delegate void SetData();
     public SetData dataItem;
@@ -44,6 +44,7 @@ public class DataPuller : MonoBehaviour
 
     void Awake()
     {
+
         //set up the deligate to set a current hero. 
         dataItem += PickHeroData; 
 
@@ -86,7 +87,13 @@ public class DataPuller : MonoBehaviour
         //if not hero toss in static not hero list?
 
         Debug.Log("the database has " + people.Count + " records ");
-        GetHeros();     
+        GetHeros();  
+		GetNormalPeople(); 
+		shuffleList(normalPeople); 
+		foreach(Person p in normalPeople)
+		{
+			Debug.Log(p.givenName + p.familyName);
+		}
     }
 
     public void GetHeros()
@@ -105,6 +112,26 @@ public class DataPuller : MonoBehaviour
         Debug.Log("there are " + num + " heroes" ); 
     }
 
+	public void GetNormalPeople()
+	{
+	
+
+			heroes = from person in people
+				where person.hero == "no"
+					select person;
+			
+			normalPeople = new List<Person>(); 
+			foreach(Person p in heroes)
+			{
+				normalPeople.Add(p); 
+			}
+			
+			int num = normalPeople.Count; 
+			Debug.Log("there are " + num + " normal people" ); 
+		
+
+	}
+	
     public void PickHeroData()
     {
         //to use. 
@@ -113,4 +140,21 @@ public class DataPuller : MonoBehaviour
         // 3 get the current hero
         currentHero = herosList[num] as Person;
     }
+
+	public void shuffleList(List<Person> l)
+	{
+		System.Random rng = new System.Random(); 
+	
+		var n = (int)(l.Count()); 
+		while( n > 1) 
+		{
+			int k  = (int)rng.Next(n); 
+			n--; 
+			Person temp = l[n]; 
+			l[n] = l[k]; 
+			l[k] = temp; 
+		}
+
+
+	}
 }

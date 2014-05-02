@@ -21,12 +21,11 @@ public class PlaneManager : MonoBehaviour {
 	private float heroTimer;
 	private GameObject heroInFocus;
 
-    public float chipAlpha; 
 
 	// Use this for initialization
     void Awake()
     {
-       // renderer.material.shader = Shader.Find("Mine/GradientMask");
+       
 		heroTimer = 0.0f;
 //        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
 //
@@ -106,7 +105,8 @@ public class PlaneManager : MonoBehaviour {
 
     public void Update()
     {
-   
+
+
 		heroTimer += Time.deltaTime;
 		if(heroTimer >= timeBetweenHeroes) {
 			heroTimer = 0.0f;
@@ -117,6 +117,7 @@ public class PlaneManager : MonoBehaviour {
 			}
 		}
 
+
     }
 
 	public void FocusOnHero(GameObject hero)
@@ -124,29 +125,29 @@ public class PlaneManager : MonoBehaviour {
 		hero.GetComponent<SetUpText>().moveToCenter();
 	}
 
-    public void spin()
-    {
-
-            // for (int i = 0; i < numPlanes; i++ )
-            //{
-            //    GameObject g = planes[i] as GameObject;
-
-            //    //sine method
-            //    g.GetComponent<PlaneSetup>().pos.x = g.GetComponent<PlaneSetup>().radiusX * (Mathf.Cos((Time.time*speed) + g.GetComponent<PlaneSetup>().startAngle));
-            //    g.GetComponent<PlaneSetup>().pos.z = g.GetComponent<PlaneSetup>().radius * Mathf.Sin((Time.time*speed) + g.GetComponent<PlaneSetup>().startAngle);
-            //    g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
-            //    ////offset
-            //    g.GetComponent<PlaneSetup>().pos.z += 20;
-
-            //    g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x,g.GetComponent<PlaneSetup>().pos.x, .5f);
-
-            //    g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
-            //    g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
-            //    g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
-
-            //}
-             Invoke("spin", 0.0f);
-    }
+//    public void spin()
+//    {
+//
+//            // for (int i = 0; i < numPlanes; i++ )
+//            //{
+//            //    GameObject g = planes[i] as GameObject;
+//
+//            //    //sine method
+//            //    g.GetComponent<PlaneSetup>().pos.x = g.GetComponent<PlaneSetup>().radiusX * (Mathf.Cos((Time.time*speed) + g.GetComponent<PlaneSetup>().startAngle));
+//            //    g.GetComponent<PlaneSetup>().pos.z = g.GetComponent<PlaneSetup>().radius * Mathf.Sin((Time.time*speed) + g.GetComponent<PlaneSetup>().startAngle);
+//            //    g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
+//            //    ////offset
+//            //    g.GetComponent<PlaneSetup>().pos.z += 20;
+//
+//            //    g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x,g.GetComponent<PlaneSetup>().pos.x, .5f);
+//
+//            //    g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
+//            //    g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
+//            //    g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
+//
+//            //}
+//             Invoke("spin", 0.0f);
+//    }
 
     public void InitBackgroundPanels()
     {

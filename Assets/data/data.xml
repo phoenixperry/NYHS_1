@@ -24,7 +24,7 @@
     <Hero>yes</Hero>
     <FamilyName>Wong</FamilyName>
     <GivenName>Ching Foo</GivenName>
-    <Location>New York City, NY</Location>
+    
     <Lifespan>1847-1898</Lifespan>
     <Filename>WongChingFoo.png</Filename>
     <File_Path>
@@ -63,7 +63,7 @@
     <Document_ID>5</Document_ID>
     <UID>005</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>Anna May</FamilyName>
     <GivenName>Wong</GivenName>
     <Location>Los Angeles, California</Location>
@@ -76,7 +76,7 @@
     <Document_ID>6</Document_ID>
     <UID>006</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>Hazel Ying</FamilyName>
     <GivenName>Lee</GivenName>
     <Location>Portland, Oregon</Location>
@@ -89,7 +89,7 @@
     <Document_ID>7</Document_ID>
     <UID>007</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>Lisa</FamilyName>
     <GivenName>See</GivenName>
     <Location>Los Angeles, California</Location>
@@ -102,7 +102,7 @@
     <Document_ID>8</Document_ID>
     <UID>008</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>Nathan</FamilyName>
     <GivenName>Adrian</GivenName>
     <Location>Bremerton, Washington</Location>
@@ -115,7 +115,7 @@
     <Document_ID>9</Document_ID>
     <UID>009</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>Polly</FamilyName>
     <GivenName>Bemis</GivenName>
     <Location>San Francisco, California</Location>
@@ -128,7 +128,7 @@
     <Document_ID>10</Document_ID>
     <UID>010</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>MayLing</FamilyName>
     <GivenName>Soong</GivenName>
     <Location>Macon, Georgia</Location>
@@ -141,7 +141,7 @@
     <Document_ID>11</Document_ID>
     <UID>011</UID>
     <Active></Active>
-    <Hero></Hero>
+    <Hero>no</Hero>
     <FamilyName>Kelly</FamilyName>
     <GivenName>Tsai</GivenName>
     <Location>Chicago, Illinois</Location>

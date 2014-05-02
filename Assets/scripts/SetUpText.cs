@@ -22,18 +22,21 @@ public class SetUpText : MonoBehaviour {
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
 	public float fadeTimer = 0.5f;
+	public float preFadeOutDelay = 5.0f;
 	public float moveToCenterDuration = 2.0f;
 	public float animationDuration = 2.0f;
 	public float stayOpenDuration = 2.0f;
 	public float bodyTextAppearDuration = 2.0f;
 	private float moveTimer = 0.0f;
 
+	private bool spawnState = false;
 	private bool fadeInState = false;
 	private bool moveToCenterState = false;
 	private bool returnToOriginState = false;
 	private bool animateOpenState = false;
 	private bool bodyTextAppearState = false;
 	private bool animateCloseState = false;
+	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
 
 
@@ -42,12 +45,16 @@ public class SetUpText : MonoBehaviour {
         GetData();
         scaleRatio = closedNode.transform.lossyScale;
 		setOrigin();
+		spawnState = true;
         //scaleRatio = scaleRatio / 2;
 //        Debug.Log(scaleRatio);
 //		fadeIn();
 	}
 
 	void Update () {
+		if (spawnState) {
+			spawn();
+		}
 		if (fadeInState) {
 			fadeIn();
 		}
@@ -65,6 +72,9 @@ public class SetUpText : MonoBehaviour {
 		}
 		if (animateCloseState) {
 			doCloseAnimation();
+		}
+		if (fadeOutDelayState) {
+			fadeOutDelay();
 		}
 		if (fadeOutState) {
 			fadeOut();
@@ -88,7 +98,7 @@ public class SetUpText : MonoBehaviour {
 
         locationTextObject.GetComponent<TextMesh>().text = p.location; 
 
-		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
+//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
     }
 
     //Takes game object current point and flips it for GUI space generated from OnGui. 
@@ -115,23 +125,35 @@ public class SetUpText : MonoBehaviour {
 //		Debug.Log("originPos set: " + originPos);
 	}
 
+	public void spawn() {
+		moveTimer += Time.deltaTime;
+		if (moveTimer >= 1.0f) {
+			moveTimer = 0.0f;
+			spawnState = false;
+			fadeIn(fadeTimer);
+		}
+	}
+
 	public void fadeIn(float t = -1.0f) {
 		if ( fadeInState == false ) {
 			fadeInState = true;
+
+			Component[] faders;
+			faders = GetComponentsInChildren<SmoothAlpha>();
+			foreach (SmoothAlpha fader in faders) {
+				if(fader.gameObject.name != "BodyTextMesh") {
+					fader.MakeVisible(t);
+				}
+			}
 			return;
 		}
 		moveTimer += Time.deltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
-
 			fadeInState = false;
 			return;
 		}
-		Component[] faders;
-		faders = GetComponentsInChildren<SmoothAlpha>();
-		foreach (SmoothAlpha fader in faders) {
-			fader.MakeVisible(t);
-		}
+
 	}
 
 	public void moveToCenter() {
@@ -150,22 +172,7 @@ public class SetUpText : MonoBehaviour {
 		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
 	}
 
-	public void returnToOrigin() {
-		Debug.Log("returnToOrigin");
-		if(returnToOriginState == false) {
-			returnToOriginState = true;
-			return;
-		}
-		moveTimer += Time.deltaTime;
-		if ( moveTimer >= moveToCenterDuration ) {
-			moveTimer = 0.0f;
-			gameObject.transform.position = originPos;
-			returnToOriginState = false;
-			fadeOut();
-			return;
-		}
-		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, moveTimer/moveToCenterDuration);
-	}
+
 
 	public void doOpenAnimation() {
 		if(animateOpenState == false ) {
@@ -213,9 +220,45 @@ public class SetUpText : MonoBehaviour {
 		}
 	}
 
+	public void returnToOrigin() {
+		Debug.Log("returnToOrigin");
+		if(returnToOriginState == false) {
+			returnToOriginState = true;
+			return;
+		}
+		moveTimer += Time.deltaTime;
+		if ( moveTimer >= moveToCenterDuration ) {
+			moveTimer = 0.0f;
+			gameObject.transform.position = originPos;
+			returnToOriginState = false;
+			fadeOutDelay();
+			return;
+		}
+		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, moveTimer/moveToCenterDuration);
+	}
+
+	public void fadeOutDelay() {
+		if (fadeOutDelayState == false) {
+			fadeOutDelayState = true;
+			return;
+		}
+		moveTimer += Time.deltaTime;
+		if (moveTimer >= preFadeOutDelay) {
+			fadeOutDelayState = false;
+			fadeOut (fadeTimer);
+			return;
+		}
+	}
+
 	public void fadeOut(float t = -1.0f) {
 		if ( fadeOutState == false ) {
 			fadeOutState = true;
+
+			Component[] faders;
+			faders = GetComponentsInChildren<SmoothAlpha>();
+			foreach (SmoothAlpha fader in faders) {
+				fader.MakeInvisible(t);
+			}
 			return;
 		}
 		moveTimer += Time.deltaTime;
@@ -225,11 +268,7 @@ public class SetUpText : MonoBehaviour {
 			fadeOutState = false;
 			return;
 		}
-		Component[] faders;
-		faders = GetComponentsInChildren<SmoothAlpha>();
-		foreach (SmoothAlpha fader in faders) {
-			fader.MakeInvisible(t);
-		}
+
 	}
 
 }

@@ -15,7 +15,7 @@ public class NodeTracker : MonoBehaviour {
 	void Start () {
 
 	    //set dummy hero node up for now for dev purposes 
-        DataPuller.num = 1;
+        DataPuller.num = 0;
         gameObject.GetComponent<DataPuller>().dataItem(); 
         p = DataPuller.currentHero; 
 

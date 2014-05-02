@@ -22,6 +22,34 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _rounded
+        second:
+          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _yellow_asset
+        second:
+          m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _organe_asset
+        second:
+          m_Texture: {fileID: 2800000, guid: 4ea2a300cf25896498655b95016bb042, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _invisible_shader
+        second:
+          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _tex1
         second:
           m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
@@ -127,37 +155,9 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _organe_asset
-        second:
-          m_Texture: {fileID: 2800000, guid: 4ea2a300cf25896498655b95016bb042, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _yellow_asset
-        second:
-          m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _node_1144
         second:
           m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _rounded
-        second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _invisible_shader
-        second:
-          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -172,7 +172,7 @@ Material:
       data:
         first:
           name: _alpha_blend
-        second: 0
+        second: 1
     m_Colors:
       data:
         first:

@@ -9,7 +9,7 @@ public class TextWrapper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ts = new TextSize(gameObject.GetComponent<TextMesh>());
-		Debug.Log("Initial width of string: " + ts.width);
+	//	Debug.Log("Initial width of string: " + ts.width);
 		ts.FitToWidth(lineWidth);
 	}
 

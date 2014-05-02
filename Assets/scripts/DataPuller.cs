@@ -26,6 +26,7 @@ public class Person
 public class DataPuller : MonoBehaviour
 {
 	public XmlDocument data;
+
 	public List<XmlNodeList> myList;
 	public IEnumerable<Person> heroes;
 	List<Person> people;
@@ -47,8 +48,80 @@ public class DataPuller : MonoBehaviour
 	public static List<Person> activeNormalPeople; 
 	public static List<Person> inactiveNormalPeople; 
 	public static int SetNumNormalPeople; 
+
+
+	void Start(){
+		
+
+		//set up the deligate to set a current hero. 
+		dataItem += PickHeroData; 
+		
+		people = new List<Person>();
+		//load up the data 
+		data = new XmlDocument();
+		data.Load("./Assets/data/data.xml");
+		
+		XmlElement elm = data.DocumentElement;
+		XmlNodeList nodeData = elm.ChildNodes;
+		while(nodeData.Count < 5){
+		//this will get random nodes 
+		Debug.Log(nodeData.Count +" items in db");
+		}
+		
+					
+		
+		for (int i = 0; i < nodeData.Count; i++)
+		{
+			if (nodeData[i].Name == "ROW")
+			{
+				Person p = new Person();
+				p.familyName = nodeData[i]["FamilyName"].InnerText;
+				p.givenName = nodeData[i]["GivenName"].InnerText;
+				p.location = nodeData[i]["Location"].InnerText;
+				p.hero = nodeData[i]["Hero"].InnerText;
+				p.active = nodeData[i]["Active"].InnerText;
+				p.lifespan = nodeData[i]["Lifespan"].InnerText;
+				p.filename = nodeData[i]["Filename"].InnerText;
+				p.filepath = nodeData[i]["File_Path"].InnerText;
+				p.description = nodeData[i]["HeroDescription"].InnerText;
+				p.id = nodeData[i]["UID"].InnerText; 
+				people.Add(p);
+				Debug.Log(p.familyName + i); 
+			}
+		}
+		foreach (Person p in people)
+		{
+			Debug.Log( p.familyName + " is in the database"); 
+		}
+		//if not hero toss in static not hero list?
+		
+		Debug.Log("the database has " + people.Count + " records ");
+		GetHeros();  
+		//GetNormalPeople(); 
+		//shuffleList(normalPeople); 
+		//shuffleList(herosList); 
+		//		foreach(Person p in normalPeople)
+		//		{
+		//			Debug.Log(p.givenName + p.familyName);
+		//		}
+	}
 	
-	
+	public void GetHeros()
+	{
+		heroes = from person in people
+			where person.hero == "yes"
+				select person;
+		
+		herosList = new List<Person>(); 
+		foreach(Person p in heroes)
+		{
+			herosList.Add(p); 
+		}
+		
+		int num = herosList.Count; 
+		Debug.Log("there are " + num + " heroes" ); 
+	}
+
 	//this function should set up the initial inactive and active hero lists  
 	public static void SetActiveHeroes()
 	{
@@ -133,78 +206,7 @@ public class DataPuller : MonoBehaviour
 		return temp; 
 		
 	}
-	void Start(){
 
-			
-		//set up the deligate to set a current hero. 
-		dataItem += PickHeroData; 
-		
-		people = new List<Person>();
-		//load up the data 
-		data = new XmlDocument();
-		data.Load("./Assets/data/data.xml");
-		
-		XmlElement elm = data.DocumentElement;
-		XmlNodeList nodeData = elm.ChildNodes;
-		
-		//this will get random nodes 
-		Debug.Log(nodeData.Count +" items in db");
-		
-		
-		
-		
-		for (int i = 0; i < nodeData.Count; i++)
-		{
-			if (nodeData[i].Name == "ROW")
-			{
-				Person p = new Person();
-				p.familyName = nodeData[i][
-				                           "FamilyName"].InnerText;
-				p.givenName = nodeData[i]["GivenName"].InnerText;
-				p.location = nodeData[i]["Location"].InnerText;
-				p.hero = nodeData[i]["Hero"].InnerText;
-				p.active = nodeData[i]["Active"].InnerText;
-				p.lifespan = nodeData[i]["Lifespan"].InnerText;
-				p.filename = nodeData[i]["Filename"].InnerText;
-				p.filepath = nodeData[i]["File_Path"].InnerText;
-				p.description = nodeData[i]["HeroDescription"].InnerText;
-				p.id = nodeData[i]["UID"].InnerText; 
-				people.Add(p);
-				Debug.Log(p.familyName + i); 
-			}
-		}
-		foreach (Person p in people)
-		{
-			Debug.Log( p.familyName + " is in the database"); 
-		}
-		//if not hero toss in static not hero list?
-		
-		Debug.Log("the database has " + people.Count + " records ");
-		GetHeros();  
-		//GetNormalPeople(); 
-		//shuffleList(normalPeople); 
-		//shuffleList(herosList); 
-		//		foreach(Person p in normalPeople)
-		//		{
-		//			Debug.Log(p.givenName + p.familyName);
-		//		}
-	}
-	
-	public void GetHeros()
-	{
-		heroes = from person in people
-			where person.hero == "yes"
-				select person;
-		
-		herosList = new List<Person>(); 
-		foreach(Person p in heroes)
-		{
-			herosList.Add(p); 
-		}
-		
-		int num = herosList.Count; 
-		Debug.Log("there are " + num + " heroes" ); 
-	}
 	
 	//	public void GetNormalPeople()
 	//	{

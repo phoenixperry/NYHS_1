@@ -133,9 +133,9 @@ public class DataPuller : MonoBehaviour
 		return temp; 
 		
 	}
-	void Awake()
-	{
-		
+	void Start(){
+
+			
 		//set up the deligate to set a current hero. 
 		dataItem += PickHeroData; 
 		

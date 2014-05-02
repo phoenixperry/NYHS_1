@@ -42,15 +42,18 @@ public class SetUpText : MonoBehaviour {
 
 	void Start () {
         data = GameObject.Find("Data");
-        GetData();
+       
         scaleRatio = closedNode.transform.lossyScale;
 		setOrigin();
 		spawnState = true;
-        //scaleRatio = scaleRatio / 2;
+		GiveItASecond(); 
+		//scaleRatio = scaleRatio / 2;
 //        Debug.Log(scaleRatio);
 //		fadeIn();
 	}
-
+	void GiveItASecond(){
+		Invoke("GetData", 0.1f); 
+	}
 	void Update () {
 		if (spawnState) {
 			spawn();

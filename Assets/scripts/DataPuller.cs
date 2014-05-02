@@ -112,12 +112,13 @@ public class DataPuller : MonoBehaviour
 
 		shuffleList(activeNormalPeople); 
 		shuffleList(activeHeroes); 
-		RemoveHeroFromActiveList(activeHeroes[0]); 
-		RemoveNormalPersonFromActiveList(activeNormalPeople[0]);
-		Debug.Log("There are " +activeHeroes.Count() + " active heroes after remove"); 
-		Debug.Log("There are " + activeNormalPeople.Count() + " active normal people after remove"); 
 
-	
+		//working remove test 
+//		RemoveHeroFromActiveList(activeHeroes[0]); 
+//		RemoveNormalPersonFromActiveList(activeNormalPeople[0]);
+//		Debug.Log("There are " +activeHeroes.Count() + " active heroes after remove"); 
+//		Debug.Log("There are " + activeNormalPeople.Count() + " active normal people after remove"); 
+		
 		Person pn = PullNewNormalPerson(); 
 		Debug.Log(pn.familyName + "the pulled normal person"); 
 		Person pa = PullNewHero(); 

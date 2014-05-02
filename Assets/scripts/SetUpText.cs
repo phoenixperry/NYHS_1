@@ -35,6 +35,7 @@ public class SetUpText : MonoBehaviour {
 	private bool returnToOriginState = false;
 	private bool animateOpenState = false;
 	private bool bodyTextAppearState = false;
+	private bool colorChangeDelayState = false;
 	private bool animateCloseState = false;
 	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
@@ -72,6 +73,9 @@ public class SetUpText : MonoBehaviour {
 		}
 		if (animateCloseState) {
 			doCloseAnimation();
+		}
+		if (colorChangeDelayState) {
+			colorChangeDelay();
 		}
 		if (fadeOutDelayState) {
 			fadeOutDelay();
@@ -177,6 +181,7 @@ public class SetUpText : MonoBehaviour {
 	public void doOpenAnimation() {
 		if(animateOpenState == false ) {
 			animateOpenState = true;
+			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
 			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 			return;
 		}
@@ -212,14 +217,29 @@ public class SetUpText : MonoBehaviour {
 			return;
 		}
 		moveTimer += Time.deltaTime;
-		if( moveTimer >= 4.0f ) {
+		if( moveTimer >= 2.0f ) {
 			moveTimer = 0.0f;
 			animateCloseState = false;
+			colorChangeDelay();
+			return;
+		}
+	}
+
+	public void colorChangeDelay() {
+		if (colorChangeDelayState == false) {
+			colorChangeDelayState = true;
+			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
+			return;
+		}
+		moveTimer += Time.deltaTime;
+		if (moveTimer >= 2.0f) {
+			moveTimer = 0.0f;
+			colorChangeDelayState = false;
 			returnToOrigin();
 			return;
 		}
 	}
-	
+
 	public void returnToOrigin() {
 		Debug.Log("returnToOrigin");
 		if(returnToOriginState == false) {
@@ -244,6 +264,7 @@ public class SetUpText : MonoBehaviour {
 		}
 		moveTimer += Time.deltaTime;
 		if (moveTimer >= preFadeOutDelay) {
+			moveTimer = 0.0f;
 			fadeOutDelayState = false;
 			fadeOut (fadeTimer);
 			return;

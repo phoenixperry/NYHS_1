@@ -58,11 +58,11 @@ Shader "Mine/GradientMask" {
             fixed4 frag(VertexOutput i) : COLOR {
 ////// Lighting:
 ////// Emissive:
-                float2 node_1169 = i.uv0;
-                float3 emissive = lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1169.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1169.rg, _organe_asset)).rgb,_Blend);
+                float2 node_1165 = i.uv0;
+                float3 emissive = lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1165.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1165.rg, _organe_asset)).rgb,_Blend);
                 float3 finalColor = emissive;
 /// Final Color:
-                return fixed4(finalColor,lerp(tex2D(_rounded,TRANSFORM_TEX(node_1169.rg, _rounded)).a,tex2D(_invisible_shader,TRANSFORM_TEX(node_1169.rg, _invisible_shader)).a,_alpha_blend));
+                return fixed4(finalColor,lerp(tex2D(_rounded,TRANSFORM_TEX(node_1165.rg, _rounded)).a,tex2D(_invisible_shader,TRANSFORM_TEX(node_1165.rg, _invisible_shader)).a,_alpha_blend));
             }
             ENDCG
         }

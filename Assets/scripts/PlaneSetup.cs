@@ -47,6 +47,9 @@ public class PlaneSetup : MonoBehaviour {
     
     private bool animateState = false;
 	private bool fadeOutState = false;
+
+	private bool fadeOrangeState = false;
+	private bool fadeYellowState = false;
     	
 	public float chip_fade;
 
@@ -101,6 +104,13 @@ public class PlaneSetup : MonoBehaviour {
             fadeOut();
         }
 
+		if (fadeOrangeState){
+			fadeOrange();
+		}
+
+		if (fadeYellowState) {
+			fadeYellow();
+		}
      
         //keeps GUI at scale ratio of chip 
         gameObject.transform.localScale = new Vector3(scaleRatio.x, scaleRatio.y, scaleRatio.z);
@@ -125,27 +135,49 @@ public class PlaneSetup : MonoBehaviour {
 
     public void fadeYellow()
     {
-        float a = Mathf.Lerp(1.0f, 0.0f, timeOfColorFade);
-        Debug.Log(a);
-        renderer.material.SetFloat("_Blend", timeOfColorFade);
-
-        if (timeOfColorFade > 0)
-        {
-            timeOfColorFade -= Time.deltaTime / colorFadeDuration;
-        }
+		Debug.Log("fade to yellow");
+		if(fadeYellowState == false) {
+			fadeYellowState = true;
+			return;
+		}
+		timeOfColorFade += Time.deltaTime;
+		renderer.material.SetFloat("_Blend", Mathf.Lerp(1.0f, 0.0f, timeOfColorFade) );
+		if (timeOfColorFade >= colorFadeDuration) {
+			timeOfColorFade = 0.0f;
+			fadeYellowState = false;
+		}
+//        float a = Mathf.Lerp(1.0f, 0.0f, timeOfColorFade);
+//        Debug.Log(a);
+//        renderer.material.SetFloat("_Blend", timeOfColorFade);
+//
+//        if (timeOfColorFade > 0)
+//        {
+//            timeOfColorFade -= Time.deltaTime / colorFadeDuration;
+//        }
 
     }
     public void fadeOrange() {
         //Phoenix
+		Debug.Log("fade to orange");
+		if(fadeOrangeState == false) {
+			fadeOrangeState = true;
+			return;
+		}
+		timeOfColorFade += Time.deltaTime;
+		renderer.material.SetFloat("_Blend", Mathf.Lerp(0.0f, 1.0f, timeOfColorFade) );
+		if (timeOfColorFade >= colorFadeDuration) {
+			timeOfColorFade = 0.0f;
+			fadeOrangeState = false;
+		}
 
-        float a = Mathf.Lerp(0.0f, 1.0f, timeOfColorFade);
-        renderer.material.SetFloat("_Blend", timeOfColorFade);
-
-        if (timeOfColorFade < 1)
-        {
-            timeOfColorFade += Time.deltaTime / colorFadeDuration;
-            Debug.Log(timeOfColorFade + "i am time of fade");
-        }
+//        float a = Mathf.Lerp(0.0f, 1.0f, timeOfColorFade);
+//        renderer.material.SetFloat("_Blend", timeOfColorFade);
+//
+//        if (timeOfColorFade < 1)
+//        {
+//            timeOfColorFade += Time.deltaTime / colorFadeDuration;
+//            Debug.Log(timeOfColorFade + "i am time of fade");
+//        }
 
     }
 

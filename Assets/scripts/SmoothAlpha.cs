@@ -45,7 +45,7 @@ public class SmoothAlpha : MonoBehaviour {
 		if (m_isVisible)
 		{
 			if(useShader) {
-				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(0.0f, 1.0f, stage) );
+				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(1.0f, 0.0f, stage) );
 				if (stage >= 1.0f)
 				{
 					m_isTransitioning = false;
@@ -63,7 +63,7 @@ public class SmoothAlpha : MonoBehaviour {
 		else
 		{
 			if(useShader) {
-				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(1.0f, 0.0f, stage) );
+				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(0.0f, 1.0f, stage) );
 				if (stage >= 1.0f)
 				{
 					m_isTransitioning = false;

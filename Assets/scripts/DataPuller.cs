@@ -21,7 +21,6 @@ public class Person
     public string filename;
     public string filepath;
     public string description; 
-	public string id; 
 }
 public class DataPuller : MonoBehaviour
 {
@@ -29,8 +28,8 @@ public class DataPuller : MonoBehaviour
     public List<XmlNodeList> myList;
     public IEnumerable<Person> heroes;
     List<Person> people;
-    public static List<Person> herosList;
-	public static List<Person> normalPeople; 
+    List<Person> herosList;
+	List<Person> normalPeople; 
     //I set this up as a delegate so more than one function could subscribe to it if need be... 
     public delegate void SetData();
     public SetData dataItem;
@@ -40,99 +39,9 @@ public class DataPuller : MonoBehaviour
     //this vars only job is to act at a holder for the current node you want to pull out 
 	public static Person currentHero; 
 
-	public static List<Person> activeHeroes; 
-	public static List<Person> inactiveHeroes; 
-	public static int SetNumHeroPeople; 
+  //random nodes -- implement later 
+    ArrayList randomNums; 
 
-	public static List<Person> activeNormalPeople; 
-	public static List<Person> inactiveNormalPeople; 
-	public static int SetNumNormalPeople; 
-
-
-	//this function should set up the initial inactive and active hero lists  
-	public static void SetActiveHeroes()
-	{
-		activeHeroes = new List<Person>(); 
-	
-		for(int i = 0; i < SetNumHeroPeople; i++) 
-		{
-			Person temp = herosList[i]; 
-			activeHeroes.Add(temp); 
-		}
-		int numNotUsed = (int)herosList.Count() - SetNumHeroPeople; 
-
-		for(int i = herosList.Count()-numNotUsed; i< herosList.Count(); i++) 
-		{
-			inactiveHeroes.Add(herosList[i]); 
-		}
-
-	}
-
-	//this function lets you remove a hero from the active list and add them to the inactive one
-	public static void RemoveHeroFromActiveList(Person p)
-	{
-		for(int i =0; i < activeHeroes.Count; i++) 
-		{
-			if(p.id == activeHeroes[i].id) 
-			{
-				inactiveHeroes.Add(p); 
-				activeHeroes.RemoveAt(i); 
-			}
-		}
-	}
-
-	//this function lets you get a new hero out of the innactive list and put it to the active list
-	public static Person PullNewHero()
-	{
-		activeHeroes.Add(inactiveHeroes[0]);
-		//always get the first one in the list 
-		Person temp = inactiveHeroes[0];
-		inactiveHeroes.RemoveAt(0); 
-
-		return temp; 
-	}
-	//sets up the inactive and active normal people lists 
-	public static void SetActiveNormalPeople()
-	{
-		if(SetNumNormalPeople > normalPeople.Count) 
-		{
-			Debug.Log("invalid num of normal people. Please try again"); 
-			return; 
-		}
-		activeNormalPeople = new List<Person>(); 
-		for(int i = 0; i < SetNumNormalPeople; i++) 
-		{
-			Person temp = normalPeople[i]; 
-			activeNormalPeople.Add(temp); 
-		}
-		int numNotUsed = (int)normalPeople.Count() - SetNumNormalPeople; 
-		for(int i = normalPeople.Count()-numNotUsed; i< normalPeople.Count(); i++) 
-		{
-			inactiveNormalPeople.Add(normalPeople[i]); 
-		}
-		
-	}
-	//lets you remove a normal person from the current normal active list and put them in the normal inactive list 
-	public static void RemoveNormalPersonFromActiveList(Person p) 
-	{
-		for(int i = 0; i < activeNormalPeople.Count(); i++)
-		{
-			if(p.id==activeNormalPeople[i].id)
-			{
-				inactiveNormalPeople.Add(p); 
-				activeNormalPeople.RemoveAt(i); 
-			}
-		}
-	}
-	//gets a new normal person out of the inactive list and adds them to the active list. 
-	public static Person PullNewNormalPerson()
-	{
-		activeNormalPeople.Add(inactiveHeroes[0]); 
-		Person temp = inactiveNormalPeople[0]; 
-		inactiveNormalPeople.RemoveAt(0); 
-		return temp; 
-
-	}
     void Awake()
     {
 
@@ -168,7 +77,6 @@ public class DataPuller : MonoBehaviour
                 p.filename = nodeData[i]["Filename"].InnerText;
                 p.filepath = nodeData[i]["File_Path"].InnerText;
                 p.description = nodeData[i]["HeroDescription"].InnerText;
-				p.id = nodeData[i]["UID"].InnerText; 
                 people.Add(p);
             }
         }
@@ -182,11 +90,10 @@ public class DataPuller : MonoBehaviour
         GetHeros();  
 		GetNormalPeople(); 
 		shuffleList(normalPeople); 
-		shuffleList(herosList); 
-//		foreach(Person p in normalPeople)
-//		{
-//			Debug.Log(p.givenName + p.familyName);
-//		}
+		foreach(Person p in normalPeople)
+		{
+			Debug.Log(p.givenName + p.familyName);
+		}
     }
 
     public void GetHeros()

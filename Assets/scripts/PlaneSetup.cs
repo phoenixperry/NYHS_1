@@ -135,7 +135,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public void fadeYellow()
     {
-		Debug.Log("fade to yellow");
+//		Debug.Log("fade to yellow");
 		if(fadeYellowState == false) {
 			fadeYellowState = true;
 			return;
@@ -158,7 +158,7 @@ public class PlaneSetup : MonoBehaviour {
     }
     public void fadeOrange() {
         //Phoenix
-		Debug.Log("fade to orange");
+//		Debug.Log("fade to orange");
 		if(fadeOrangeState == false) {
 			fadeOrangeState = true;
 			return;

@@ -153,7 +153,7 @@ public class PlaneManager : MonoBehaviour {
 			p.SetActive(true);
 			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
 			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
-			float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
+			float randomX = (float)NextGaussianDouble(Random.RandomRange(-10.0f, 10.0f), 4.5) ;
 			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
 			bgPlanes.Add(p);
 		}
@@ -168,8 +168,8 @@ public class PlaneManager : MonoBehaviour {
 			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
 			p.SetActive(true);
 			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
-			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
-			float randomX = (float)NextGaussianDouble(Random.RandomRange(-4.0f, 4.0f), 4.5) ;
+			float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
+			float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
 			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 45.0f) );
 			fgPlanes.Add(p);
 		}

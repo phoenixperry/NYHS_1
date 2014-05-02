@@ -143,7 +143,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44516a697d48747808fc6c9c7770778f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -7.35998154
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 44516a697d48747808fc6c9c7770778f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -355,7 +355,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 44
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 858b9bddbae833c498fccb31cf912259, type: 3}
@@ -516,12 +516,12 @@ TextMesh:
     fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
   m_OffsetZ: 0
-  m_CharacterSize: .0399999991
+  m_CharacterSize: .0500000007
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 44
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 123696f20391a2d4cad0900a214a7a85, type: 3}
@@ -735,6 +735,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 8824afc9cf3d940b2871f92b8e26d612, type: 2}
+      propertyPath: m_CharacterSize
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 8824afc9cf3d940b2871f92b8e26d612, type: 2}
+      propertyPath: m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8824afc9cf3d940b2871f92b8e26d612, type: 2}
   m_RootGameObject: {fileID: 852402486}
@@ -910,7 +918,7 @@ TextMesh:
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 44
+  m_FontSize: 50
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 858b9bddbae833c498fccb31cf912259, type: 3}
@@ -1066,6 +1074,14 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: fa96e3cfb3b5042cd8d4ec5efaa327e2, type: 2}
+      propertyPath: m_CharacterSize
+      value: .0399999991
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: fa96e3cfb3b5042cd8d4ec5efaa327e2, type: 2}
+      propertyPath: m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa96e3cfb3b5042cd8d4ec5efaa327e2, type: 2}
   m_RootGameObject: {fileID: 1410316452}
@@ -1126,6 +1142,14 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: fa96e3cfb3b5042cd8d4ec5efaa327e2, type: 2}
+      propertyPath: m_CharacterSize
+      value: .0399999991
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: fa96e3cfb3b5042cd8d4ec5efaa327e2, type: 2}
+      propertyPath: m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa96e3cfb3b5042cd8d4ec5efaa327e2, type: 2}
   m_RootGameObject: {fileID: 476237917}
@@ -1153,7 +1177,7 @@ Transform:
   m_PrefabInternal: {fileID: 271546204}
   m_GameObject: {fileID: 1642384391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0}
+  m_LocalPosition: {x: -2.5, y: 0, z: -7.35998154}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

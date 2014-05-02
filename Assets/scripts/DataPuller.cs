@@ -38,7 +38,7 @@ public class DataPuller : MonoBehaviour
     //this one sets the data item to get 
     static public int num=0;
     //this vars only job is to act at a holder for the current node you want to pull out 
-    static public Person currentHero; 
+	public static Person currentHero; 
 
 	public static List<Person> activeHeroes; 
 	public static List<Person> inactiveHeroes; 

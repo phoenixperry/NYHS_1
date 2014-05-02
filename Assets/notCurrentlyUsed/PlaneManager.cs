@@ -112,9 +112,36 @@ public class PlaneManager : MonoBehaviour {
 				fgPlanes.RemoveAt(0);
 			}
 		}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SaveNodes();
+        } 
+        
+
 		
 	}
-	
+    public void SaveNodes()
+    {
+        ArrayList positions = new ArrayList(); 
+        foreach (GameObject bg in bgPlanes)
+        {
+            Vector3 pos = bg.transform.position;
+            positions.Add(pos); 
+        }
+
+        foreach (GameObject fg in fgPlanes)
+        {
+            Vector3 pos = fg.transform.position;
+            positions.Add(pos);
+        }
+        Debug.Log("you have " + positions.Count + "number of positions");
+        foreach(Vector3 pos in positions){
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\data_test\dataPositions.txt", true))
+        {
+            file.WriteLine(pos);
+        }
+        }
+    } 
 	public void FocusOnHero(GameObject hero)
 	{
 		hero.GetComponent<SetUpText>().moveToCenter();

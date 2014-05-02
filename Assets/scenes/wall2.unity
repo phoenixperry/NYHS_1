@@ -435,8 +435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
-  numPlanes: 20
-  timeBetweenHeroes: 20
+  numPlanes: 50
+  timeBetweenHeroes: 20000
   numBgPlanes: 10
   radius: 8
   radiusX: 10
@@ -621,7 +621,7 @@ Transform:
   m_GameObject: {fileID: 905923902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 57.3059616}
-  m_LocalScale: {x: 5.94707155, y: 5.94707155, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &905923905

@@ -137,6 +137,7 @@ public class DataPuller : MonoBehaviour
     //this function should set up the initial inactive and active hero lists  
     public static void SetActiveHeroes()
     {
+        //add in an active check. 
 
         for (int i = 0; i < SetNumHeroPeople; i++)
         {

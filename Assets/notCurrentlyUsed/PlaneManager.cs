@@ -8,6 +8,7 @@ public class PlaneManager : MonoBehaviour {
 	public ArrayList fgPlanes;
 	public int numPlanes = 10;
 	public float timeBetweenHeroes = 2.0f;
+	public float timeForFirstHero = 1.0f;
 	public int numBgPlanes = 10;
 	public float radius = 8;
 	public float radiusX = 10;
@@ -24,7 +25,7 @@ public class PlaneManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake()
 	{
-		heroTimer = 0.0f;
+		heroTimer = timeBetweenHeroes - timeForFirstHero;
 		//        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
 		//
 		//        planes = new ArrayList();

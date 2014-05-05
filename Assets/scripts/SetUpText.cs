@@ -98,9 +98,9 @@ public class SetUpText : MonoBehaviour {
 		bodyTextObject.GetComponent<TextMesh>().text = p.description;
 		bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		nameTextObject.GetComponent<TextMesh>().text = p.familyName + " " + p.givenName + " " + p.lifespan;
+		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
 		
-		locationTextObject.GetComponent<TextMesh>().text = p.location; 
+		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
 		
 		//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
@@ -173,7 +173,8 @@ public class SetUpText : MonoBehaviour {
 			doOpenAnimation();
 			return;
 		}
-		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
+		transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, Mathf.SmoothStep(0.0f, 1.0f, moveTimer/moveToCenterDuration));
+//		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
 	}
 	
 	

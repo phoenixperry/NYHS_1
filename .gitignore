@@ -32,3 +32,6 @@ Thumbs.db
 
 #INCLUDE META FILES
 !*.*meta
+
+#BUT NOT THUMBS META
+Thumbs.db.meta

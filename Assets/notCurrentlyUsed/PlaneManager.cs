@@ -124,9 +124,11 @@ public class PlaneManager : MonoBehaviour {
 		}
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           // SaveNodes();
 			loadNodePositions(); 
-        } 
+        }
+		//will allow for new positions to be written while Unity is running 
+//		if(Input.GetKeyDown(KeyCode.R))
+//			 SaveNodes();
         
 
 		

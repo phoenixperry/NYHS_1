@@ -163,6 +163,7 @@ public class SetUpText : MonoBehaviour {
 	public void moveToCenter() {
 		if(moveToCenterState == false) {
 			moveToCenterState = true;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
 		moveTimer += Time.deltaTime;
@@ -170,6 +171,7 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			gameObject.transform.position = centerPoint.transform.position;
 			moveToCenterState = false;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
 			doOpenAnimation();
 			return;
 		}
@@ -242,9 +244,10 @@ public class SetUpText : MonoBehaviour {
 	}
 
 	public void returnToOrigin() {
-		Debug.Log("returnToOrigin");
+//		Debug.Log("returnToOrigin");
 		if(returnToOriginState == false) {
 			returnToOriginState = true;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
 		moveTimer += Time.deltaTime;
@@ -252,6 +255,7 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			gameObject.transform.position = originPos;
 			returnToOriginState = false;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
 			fadeOutDelay();
 			return;
 		}

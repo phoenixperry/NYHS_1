@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.IO; 
+using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Text;
+using System.Linq;
+
+//using System.Xml.Li
 public class PlaneManager : MonoBehaviour {
 	public GameObject plane_;
 	public ArrayList planes;
 	public ArrayList bgPlanes;
 	public ArrayList fgPlanes;
-	public int numPlanes = 10;
+
 	public float timeBetweenHeroes = 2.0f;
 	public float timeForFirstHero = 1.0f;
 	public int numBgPlanes = 10;
-	public int numFgPlanes = 10; 
+	public int numPlanes = 10; //refractor to be numFgPlanes
 	public float radius = 8;
 	public float radiusX = 10;
 	public float startAngle, range;
@@ -22,8 +29,8 @@ public class PlaneManager : MonoBehaviour {
 	
 	private float heroTimer;
 	private GameObject heroInFocus;
-	ArrayList positions; 
-	ArrayList vect3positions; 
+	List<Vector3> positions; 
+	List<Vector3> vect3positions; 
 	// Use this for initialization
 	void Awake()
 	{
@@ -127,30 +134,39 @@ public class PlaneManager : MonoBehaviour {
 
 	public void loadNodePositions() 
 	{	 
-		positions = new ArrayList(); 
-		vect3positions = new ArrayList(); 
+		positions = new List<Vector3>(); 
+		vect3positions = new List<Vector3>(); 
 		foreach(string pos in File.ReadAllLines("./Assets/data/dataPositions.txt"))
 		{
 			Debug.Log(pos); 
 			Vector3 num = stripData(pos);
 			positions.Add(num); 
 		}
+		IEnumerable<Vector3> sorted = positions.OrderBy(v => v.z);
+		foreach(Vector3 vect in sorted)
+		{		
+			Debug.Log(vect.z + "I am sorted"); 
+			vect3positions.Add(vect); 
+		}
+		//vect3positions = positions.OrderBy(v =>v.z).ToArray<Vector3>(); 
 
 		//testing
-		for(int i =0; i <positions.Count; i++) 
-		{
-			Debug.Log(positions[i]);
-			Vector3 testVect = (Vector3)positions[i]; 
-			Debug.Log(testVect + "i am the test");
-		} 
-	
-							
-	
+//		for(int i =0; i <vect3positions.Count; i++) 
+//		{
+//			Debug.Log(vect3positions[i]);
+//			Vector3 testVect = (Vector3)positions[i]; 
+//		} 
 
-		foreach(GameObject node in bgPlanes)
+		for(int i = 0; i <fgPlanes.Count; i++)
 		{
-
+			GameObject temp = fgPlanes[i] as GameObject; 
+			temp.transform.position= vect3positions[i];
 		
+		}
+		for(int i=0; i<bgPlanes.Count; i++)
+		{
+			GameObject temp = bgPlanes[i] as GameObject;	
+			temp.transform.position = vect3positions[i+numPlanes];
 		}
 
 	}

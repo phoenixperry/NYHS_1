@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.IO; 
 public class PlaneManager : MonoBehaviour {
 	public GameObject plane_;
 	public ArrayList planes;
@@ -10,6 +10,7 @@ public class PlaneManager : MonoBehaviour {
 	public float timeBetweenHeroes = 2.0f;
 	public float timeForFirstHero = 1.0f;
 	public int numBgPlanes = 10;
+	public int numFgPlanes = 10; 
 	public float radius = 8;
 	public float radiusX = 10;
 	public float startAngle, range;
@@ -21,7 +22,8 @@ public class PlaneManager : MonoBehaviour {
 	
 	private float heroTimer;
 	private GameObject heroInFocus;
-	
+	ArrayList positions; 
+	ArrayList vect3positions; 
 	// Use this for initialization
 	void Awake()
 	{
@@ -115,11 +117,59 @@ public class PlaneManager : MonoBehaviour {
 		}
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SaveNodes();
+           // SaveNodes();
+			loadNodePositions(); 
         } 
         
 
 		
+	}
+
+	public void loadNodePositions() 
+	{	 
+		positions = new ArrayList(); 
+		vect3positions = new ArrayList(); 
+		foreach(string pos in File.ReadAllLines("./Assets/data/dataPositions.txt"))
+		{
+			Debug.Log(pos); 
+			Vector3 num = stripData(pos);
+			positions.Add(num); 
+		}
+
+		//testing
+		for(int i =0; i <positions.Count; i++) 
+		{
+			Debug.Log(positions[i]);
+			Vector3 testVect = (Vector3)positions[i]; 
+			Debug.Log(testVect + "i am the test");
+		} 
+	
+							
+	
+
+		foreach(GameObject node in bgPlanes)
+		{
+
+		
+		}
+
+	}
+	public Vector3 stripData(string sourceString) 
+	{
+			
+			Vector3 outVector3; 
+			string outString; 
+			string[] splitString; 
+			//trim parenthesis 
+			outString = sourceString.Substring(1,sourceString.Length -2); 
+
+			//split delimted values into an array 
+			splitString = outString.Split("," [0]); 
+			outVector3.x = float.Parse(splitString[0]); 
+			outVector3.y = float.Parse(splitString[1]); 
+			outVector3.z = float.Parse(splitString[2]); 
+			int index = 0; 
+		return outVector3; 		
 	}
     public void SaveNodes()
     {
@@ -137,7 +187,7 @@ public class PlaneManager : MonoBehaviour {
         }
         Debug.Log("you have " + positions.Count + "number of positions");
         foreach(Vector3 pos in positions){
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\data_test\dataPositions.txt", true))
+			using (System.IO.StreamWriter file = new System.IO.StreamWriter("./Assets/data/dataPositions.txt", true))
         {
             file.WriteLine(pos);
         }

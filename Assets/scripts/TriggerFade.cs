@@ -7,9 +7,9 @@ public class TriggerFade : MonoBehaviour {
 	public SmoothAlpha smoothAlphaScript;
 	public float fadeDuration;
 
-	private int touchCount;
-	public bool justEntered;
-	public bool justExited;
+	private int touchCount = 0;
+	public bool justEntered = false;
+	public bool justExited = false;
 
 	// Use this for initialization
 	void Start () {
@@ -43,21 +43,25 @@ public class TriggerFade : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		other.gameObject.GetComponent<TriggerFade>().justEntered = true;
+		if (other.gameObject.GetComponent<TriggerFade>()) {
+			other.gameObject.GetComponent<TriggerFade>().justEntered = true;
+		}
 		if (touchCount == 0) {
 			justEntered = true;
 		}
 		touchCount++;
-		Debug.Log("Enter: " + touchCount + ", " + justEntered);
+//		Debug.Log("Enter: " + touchCount + ", " + justEntered);
 	}
 
 	void OnTriggerExit(Collider other) {
-		other.gameObject.GetComponent<TriggerFade>().justExited = true;
+		if (other.gameObject.GetComponent<TriggerFade>()) {
+			other.gameObject.GetComponent<TriggerFade>().justExited = true;
+		}
 		touchCount--;
 		if (touchCount == 0) {
 			justExited = true;
 		}
-		Debug.Log("Exit: " + touchCount + ", " + justExited);
+//		Debug.Log("Exit: " + touchCount + ", " + justExited);
 	}
 
 	public void Reset() {

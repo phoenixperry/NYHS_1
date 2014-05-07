@@ -20,9 +20,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public GameObject OpenNode;
     private Person p;
-
-  
-
+	
     //code for adding database text to screen 
     public string person_name;
     public string location;
@@ -116,11 +114,7 @@ public class PlaneSetup : MonoBehaviour {
         gameObject.transform.localScale = new Vector3(scaleRatio.x, scaleRatio.y, scaleRatio.z);
      
     }
-
-
-
-
-   
+	
     //each note should set up the data
     public void setData()
     {

@@ -468,8 +468,8 @@ MonoBehaviour:
   plane_: {fileID: 2100995417}
   timeBetweenHeroes: 20
   timeForFirstHero: 2
-  numBgPlanes: 10
-  numPlanes: 50
+  numBgPlanes: 50
+  numPlanes: 20
   radius: 8
   radiusX: 10
   startAngle: 0
@@ -1632,6 +1632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9378ae64cb601f4c8256d9db3f52885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m: {fileID: 556769845}
   data: {fileID: 232047514}
   descriptionStyle:
     m_Name: DescriptionStyle

@@ -5,6 +5,7 @@ public class SetUpText : MonoBehaviour {
 	
 	//code for adding database text to screen 
 	//you put the data on the camera encase you forgot 
+	public PlaneManager m;
 	public GameObject data;
 	Person p;
 	public GUIStyle descriptionStyle;
@@ -290,7 +291,9 @@ public class SetUpText : MonoBehaviour {
 		moveTimer += Time.deltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
-			
+			m.fgPlanes.Remove(gameObject);
+			m.bgPlanes.Remove(gameObject);
+			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;
 		}

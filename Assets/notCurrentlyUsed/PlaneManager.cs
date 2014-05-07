@@ -31,6 +31,7 @@ public class PlaneManager : MonoBehaviour {
 	private GameObject heroInFocus;
 	List<Vector3> positions; 
 	List<Vector3> vect3positions; 
+
 	// Use this for initialization
 	void Awake()
 	{
@@ -84,10 +85,11 @@ public class PlaneManager : MonoBehaviour {
 		float fac = Mathf.Sqrt(Ss);
 		return u * fac * sigma + mu;
 	}
+
 	public void FixedUpdate()
 	{
-		for (int i = 0; i < numPlanes; i++)
-		{
+//		for (int i = 0; i < numPlanes; i++)
+//		{
 			//            GameObject g = planes[i] as GameObject;
 			
 			//sine method
@@ -107,8 +109,8 @@ public class PlaneManager : MonoBehaviour {
 			// g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
 			
 			
-		}
-		counter ++;
+//		}
+//		counter ++;
 	}
 	
 	public void Update()
@@ -129,9 +131,6 @@ public class PlaneManager : MonoBehaviour {
 		//will allow for new positions to be written while Unity is running 
 //		if(Input.GetKeyDown(KeyCode.R))
 //			 SaveNodes();
-        
-
-		
 	}
 
 	public void loadNodePositions() 
@@ -172,6 +171,7 @@ public class PlaneManager : MonoBehaviour {
 		}
 
 	}
+
 	public Vector3 stripData(string sourceString) 
 	{
 			
@@ -189,6 +189,7 @@ public class PlaneManager : MonoBehaviour {
 			int index = 0; 
 		return outVector3; 		
 	}
+
     public void SaveNodes()
     {
         ArrayList positions = new ArrayList(); 
@@ -206,11 +207,12 @@ public class PlaneManager : MonoBehaviour {
         Debug.Log("you have " + positions.Count + "number of positions");
         foreach(Vector3 pos in positions){
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter("./Assets/data/dataPositions.txt", true))
-        {
-            file.WriteLine(pos);
+        	{
+            	file.WriteLine(pos);
+        	}
         }
-        }
-    } 
+    }
+
 	public void FocusOnHero(GameObject hero)
 	{
 		hero.GetComponent<SetUpText>().moveToCenter();
@@ -244,33 +246,85 @@ public class PlaneManager : MonoBehaviour {
 	{
 		bgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
-			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-			p.SetActive(true);
-			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
-			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
-			float randomX = (float)NextGaussianDouble(Random.RandomRange(-10.0f, 10.0f), 4.5) ;
-			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
-			bgPlanes.Add(p);
+//			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+//			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+//			p.SetActive(true);
+//			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+//			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
+//			float randomX = (float)NextGaussianDouble(Random.RandomRange(-10.0f, 10.0f), 4.5) ;
+//			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
+			bgPlanes.Add(SpawnPanel(Random.Range(47.0f, 67.0f)));
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
+		StartCoroutine(TryToSpawnBG());
 	}
 	
 	public void InitForgroundPanels()
 	{
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numPlanes; i++) {
-			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-			p.SetActive(true);
-			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
-			float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
-			float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
-			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 45.0f) );
-			fgPlanes.Add(p);
+//			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+//			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+//			p.SetActive(true);
+//			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+//			float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
+//			float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
+//			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 45.0f) );
+			fgPlanes.Add(SpawnPanel(Random.Range(20.0f, 45.0f)));
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
+		StartCoroutine(TryToSpawnFG());
 	}
-	
+
+	public GameObject SpawnPanel(float depth){
+		Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+		GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+		p.SetActive(true);
+		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+		float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
+		float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
+		p.transform.position = new Vector3(randomX, randomY, depth );
+		return p;
+	}
+
+	public IEnumerator TryToSpawnBG() {
+		float t = Random.Range(4.0f, 10.0f);
+		while (t > 0.0f) {
+			t -= Time.deltaTime;
+			yield return 0;
+		}
+		if (bgPlanes.Count < numBgPlanes) {
+			bgPlanes.Add(SpawnPanel(Random.Range(47.0f, 67.0f)));
+		}
+		StartCoroutine(TryToSpawnBG());
+		StartCoroutine(TryToRemoveBG());
+	}
+
+	public IEnumerator TryToSpawnFG() {
+//		Debug.Log("TryToSpawn");
+		float t = Random.Range(5.0f, 15.0f);
+		while (t > 0.0f) {
+			t -= Time.deltaTime;
+			yield return 0;
+		}
+		if (fgPlanes.Count < numPlanes) {
+//			Debug.Log("spawning new FG panel");
+			fgPlanes.Add(SpawnPanel(Random.Range(20.0f, 45.0f)));
+		}
+		StartCoroutine(TryToSpawnFG());
+	}
+
+	public IEnumerator TryToRemoveBG() {
+		float t = Random.Range(4.0f, 10.0f);
+		while (t > 0.0f) {
+			t -= Time.deltaTime;
+			yield return 0;
+		}
+		if (bgPlanes.Count > 0) {
+			GameObject p = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
+			p.GetComponent<SetUpText>().fadeOut();
+		}
+		StartCoroutine(TryToRemoveBG());
+	}
 	
 }

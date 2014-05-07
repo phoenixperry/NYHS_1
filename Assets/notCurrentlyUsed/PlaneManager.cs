@@ -31,6 +31,12 @@ public class PlaneManager : MonoBehaviour {
 	private GameObject heroInFocus;
 	List<Vector3> positions; 
 	List<Vector3> vect3positions; 
+
+	public GameObject bodyText; 
+	public GameObject locationText; 
+	public GameObject nameText; 
+	List<Texture2D> images; 
+
 	// Use this for initialization
 	void Awake()
 	{
@@ -66,6 +72,7 @@ public class PlaneManager : MonoBehaviour {
 		//        Debug.Log("num of planes " + planes.Count);
 		InitBackgroundPanels();
 		InitForgroundPanels(); 
+	
 	}
 	
 	public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
@@ -129,6 +136,11 @@ public class PlaneManager : MonoBehaviour {
 		//will allow for new positions to be written while Unity is running 
 //		if(Input.GetKeyDown(KeyCode.R))
 //			 SaveNodes();
+
+		if(Input.GetKeyDown(KeyCode.J))
+		{
+			//Texture2D texture = Resources.Load("
+		}
         
 
 		
@@ -251,6 +263,7 @@ public class PlaneManager : MonoBehaviour {
 			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
 			float randomX = (float)NextGaussianDouble(Random.RandomRange(-10.0f, 10.0f), 4.5) ;
 			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
+
 			bgPlanes.Add(p);
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );

@@ -435,11 +435,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
-  numPlanes: 50
   timeBetweenHeroes: 20000
   timeForFirstHero: 2
   numBgPlanes: 10
-  numFgPlanes: 10
+  numPlanes: 50
   radius: 8
   radiusX: 10
   startAngle: 0
@@ -448,6 +447,9 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0, w: 0}
   rotationRadius: {x: 0, y: 0, z: 0}
   currentRotation: 0
+  bodyText: {fileID: 0}
+  locationText: {fileID: 0}
+  nameText: {fileID: 0}
 --- !u!4 &556769846
 Transform:
   m_ObjectHideFlags: 0

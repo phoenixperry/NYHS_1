@@ -85,10 +85,11 @@ public class DataPuller : MonoBehaviour
                 p.active = nodeData[i]["Active"].InnerText;
                 p.lifespan = nodeData[i]["Lifespan"].InnerText;
                 p.filename = nodeData[i]["Filename"].InnerText;
-                p.filepath = nodeData[i]["File_Path"].InnerText;
+         //       p.filepath = nodeData[i]["File_Path"].InnerText;
                 p.description = nodeData[i]["HeroDescription"].InnerText;
                 p.id = nodeData[i]["UID"].InnerText;
                 people.Add(p);
+
 
             }
         }

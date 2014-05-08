@@ -96,12 +96,12 @@ public class SetUpText : MonoBehaviour {
 	
 	void populateData()
 	{   
-		bodyTextObject.GetComponent<TextMesh>().text = p.description;
-		bodyTextObject.GetComponent<TextWrapper>().SetText();
+		//bodyTextObject.GetComponent<TextMesh>().text = p.description;
+		//bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+		//nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
 		
-		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+		//locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
 		
 		//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}

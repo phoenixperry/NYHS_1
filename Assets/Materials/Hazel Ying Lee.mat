@@ -29,27 +29,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _image
-        second:
-          m_Texture: {fileID: 2800000, guid: 956a505e4620d5041b701760d4262dbb, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _visible
-        second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _invisible
-        second:
-          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _rounded
         second:
           m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
@@ -72,6 +51,27 @@ Material:
       data:
         first:
           name: _invisible_shader
+        second:
+          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _image
+        second:
+          m_Texture: {fileID: 2800000, guid: b48f6390da55d4060873679bbb022a4d, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _visible
+        second:
+          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _invisible
         second:
           m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
           m_Scale: {x: 1, y: 1}
@@ -104,27 +104,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _image
-        second:
-          m_Texture: {fileID: 2800000, guid: 3bd9e6b0e6a56499f8c42a2ad728dff1, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _visible
-        second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _invisible
-        second:
-          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -142,10 +121,6 @@ Material:
         first:
           name: _Parallax
         second: .0199999996
-      data:
-        first:
-          name: _alpha_blend
-        second: 1
     m_Colors:
       data:
         first:

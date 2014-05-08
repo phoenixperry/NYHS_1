@@ -34,6 +34,10 @@ public class PlaneManager : MonoBehaviour {
 
 	List<Texture2D> images; 
 
+	void Start(){
+		//testAddfgPlaneData(); 
+	}
+
 	// Use this for initialization
 	void Awake()
 	{
@@ -180,7 +184,7 @@ public class PlaneManager : MonoBehaviour {
 	{
 			
 			Vector3 outVector3; 
-			string outString; 
+			string outString;
 			string[] splitString; 
 			//trim parenthesis 
 			outString = sourceString.Substring(1,sourceString.Length -2); 
@@ -297,12 +301,13 @@ public class PlaneManager : MonoBehaviour {
 	{
 		
 
-		Person p = DataPuller.PullNewNormalPerson(); 
+		Person p = DataPuller.PullNewHero(); 
 		Transform[] ts = plane.GetComponentsInChildren<Transform>();
 		foreach(Transform t in ts) 
 		{
 			if (t.gameObject.name == "NameText")
 			{
+				Debug.Log(p.familyName +"just pulled onto a chip"); 
 				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
 			}
 			if (t.gameObject.name == "LocationText") 
@@ -315,15 +320,23 @@ public class PlaneManager : MonoBehaviour {
 			}
 			if(t.gameObject.name == "Photo") 
 			{
-				string s = p.filename; 
-				string[] ss = s.Split('.');
+				//handle stupid file name. trunkake it for Unity 
+				string s = p.filename;
+				int index = s.IndexOf('.'); 
 				string sn = ""; 
-				foreach(string c in ss) 
+				//make a substring w/out file name 
+				if(index >=0)
 				{
-					sn += c; 
+					sn = s.Substring(0,index); 
 				}
-				Texture image = Resources.Load(s) as Texture; 
-				t.gameObject.GetComponent<Renderer>().material.mainTexture = image; 
+
+				//Debug.Log (sn + " should be file name"); 
+				string sl = "photos/" + sn; 
+				//Debug.Log(sl);
+				Texture2D image = Resources.Load(sl) as Texture2D; 
+				//Debug.Log(image + "is the file");
+				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
+			
 			}
 		}
 			
@@ -333,6 +346,7 @@ public class PlaneManager : MonoBehaviour {
 	{
 		Vector3 pos = new Vector3(0.0f, 0.0f, -10.0f); 
 		GameObject g = Instantiate(plane_, pos, Quaternion.identity) as GameObject; 
+		g.SetActive(true); 
 		addfgPanelData(g);  
 	}
 	

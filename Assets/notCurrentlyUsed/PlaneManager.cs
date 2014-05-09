@@ -266,6 +266,7 @@ public class PlaneManager : MonoBehaviour {
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
 		StartCoroutine(TryToSpawnBG());
+		StartCoroutine(TryToRemoveBG());
 	}
 	
 	public void InitForgroundPanels()
@@ -289,7 +290,15 @@ public class PlaneManager : MonoBehaviour {
 		Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 		GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
 		p.SetActive(true);
-		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+		Component[] faders;
+		faders = GetComponentsInChildren<SmoothAlpha>();
+		foreach (SmoothAlpha fader in faders) {
+			if(fader.gameObject.name != "BodyTextMesh") {
+				fader.MakeInvisible(0.0f, 0.0f, true);
+			}
+		}
+
+//		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
 		float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
 		float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
 		p.transform.position = new Vector3(randomX, randomY, depth );
@@ -365,7 +374,6 @@ public class PlaneManager : MonoBehaviour {
 			bgPlanes.Add(SpawnPanel(Random.Range(47.0f, 67.0f)));
 		}
 		StartCoroutine(TryToSpawnBG());
-		StartCoroutine(TryToRemoveBG());
 	}
 
 	public IEnumerator TryToSpawnFG() {

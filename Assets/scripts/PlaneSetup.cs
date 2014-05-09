@@ -54,7 +54,7 @@ public class PlaneSetup : MonoBehaviour {
 
     public void Start()
     {
-		GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+//		GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
       
         scaleRatio = gameObject.transform.lossyScale;
  

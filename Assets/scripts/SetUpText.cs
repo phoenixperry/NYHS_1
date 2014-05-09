@@ -256,7 +256,9 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			gameObject.transform.position = originPos;
 			returnToOriginState = false;
-			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
+			Transform t = transform.Find("GoldPlaneTiltedUp").transform;
+			t.GetComponent<TriggerFade>().Reset();
+			t.collider.isTrigger = false;
 			fadeOutDelay();
 			return;
 		}
@@ -266,6 +268,7 @@ public class SetUpText : MonoBehaviour {
 	public void fadeOutDelay() {
 		if (fadeOutDelayState == false) {
 			fadeOutDelayState = true;
+			;
 			return;
 		}
 		moveTimer += Time.deltaTime;

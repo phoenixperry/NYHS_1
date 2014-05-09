@@ -88,10 +88,10 @@ public class SetUpText : MonoBehaviour {
 	void GetData() {
 		
 		DataPuller.num = 2;
-		data.GetComponent<DataPuller>().dataItem();
-		p = DataPuller.currentHero;
+		//data.GetComponent<DataPuller>().dataItem();
+		//p = DataPuller.currentHero;
 		
-		populateData();
+		//populateData();
 	}
 	
 	void populateData()
@@ -293,6 +293,7 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			m.fgPlanes.Remove(gameObject);
 			m.bgPlanes.Remove(gameObject);
+
 			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;

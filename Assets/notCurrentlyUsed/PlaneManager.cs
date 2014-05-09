@@ -34,12 +34,9 @@ public class PlaneManager : MonoBehaviour {
 
 	List<Texture2D> images; 
 
-	void Start(){
-		//testAddfgPlaneData(); 
-	}
 
 	// Use this for initialization
-	void Awake()
+	void Start()
 	{
 		heroTimer = timeBetweenHeroes - timeForFirstHero;
 		//        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
@@ -134,7 +131,7 @@ public class PlaneManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
         {
 			//loadNodePositions(); 
-			testAddfgPlaneData();
+			//testAddfgPlaneData();
         }
 		//will allow for new positions to be written while Unity is running 
 //		if(Input.GetKeyDown(KeyCode.R))
@@ -261,8 +258,9 @@ public class PlaneManager : MonoBehaviour {
 //			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
 //			float randomX = (float)NextGaussianDouble(Random.RandomRange(-10.0f, 10.0f), 4.5) ;
 //			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
-			bgPlanes.Add(SpawnPanel(Random.Range(47.0f, 67.0f)));
-
+			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f));
+			p = addbgPanelData(p); 
+			bgPlanes.Add(p); 
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
 		StartCoroutine(TryToSpawnBG());
@@ -279,7 +277,10 @@ public class PlaneManager : MonoBehaviour {
 //			float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
 //			float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
 //			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 45.0f) );
-			fgPlanes.Add(SpawnPanel(Random.Range(20.0f, 45.0f)));
+			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f));
+			p = addfgPanelData(p); 
+			Debug.Log(p + "should totally exhist"); 
+			fgPlanes.Add(p); 
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
 		StartCoroutine(TryToSpawnFG());
@@ -297,10 +298,9 @@ public class PlaneManager : MonoBehaviour {
 	}
 
 	//function for adding foreground data 
-	public void addfgPanelData(GameObject plane)
+	public GameObject addfgPanelData(GameObject plane)
 	{
-		
-
+		Debug.Log(plane+" is a fg"); 
 		Person p = DataPuller.PullNewHero(); 
 		Transform[] ts = plane.GetComponentsInChildren<Transform>();
 		foreach(Transform t in ts) 
@@ -339,22 +339,62 @@ public class PlaneManager : MonoBehaviour {
 			
 			}
 		}
-			
+		return plane; 
 	}
 
-	public void testAddfgPlaneData()
+	public GameObject addbgPanelData(GameObject plane)
 	{
-		Vector3 pos = new Vector3(0.0f, 0.0f, -10.0f); 
-		GameObject g = Instantiate(plane_, pos, Quaternion.identity) as GameObject; 
-		g.SetActive(true); 
-		addfgPanelData(g);  
-	}
-	
-	public void addbgPanelData(GameObject p) 
-	{
+		Person p = DataPuller.PullNewNormalPerson(); 
+		Transform[] ts = plane.GetComponentsInChildren<Transform>();
+		foreach(Transform t in ts) 
+		{
+			if (t.gameObject.name == "NameText")
+			{
+				Debug.Log(p.familyName +"just pulled onto a chip"); 
+				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+			}
+			if (t.gameObject.name == "LocationText") 
+			{
+				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+			}
+//			if(t.gameObject.name == "BodyTextMesh") 
+//			{
+//				t.gameObject.GetComponent<TextMesh>().text = p.description; 
+//			}
+			if(t.gameObject.name == "Photo") 
+			{
+				//handle stupid file name. trunkake it for Unity 
+				string s = p.filename;
+				int index = s.IndexOf('.'); 
+				string sn = ""; 
+				//make a substring w/out file name 
+				if(index >=0)
+				{
+					sn = s.Substring(0,index); 
+				}
+				
+				//Debug.Log (sn + " should be file name"); 
+				string sl = "photos/" + sn; 
+				//Debug.Log(sl);
+				Texture2D image = Resources.Load(sl) as Texture2D; 
+				//Debug.Log(image + "is the file");
+				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
+				
+			}
+		}
+		return plane; 
 		
-		
 	}
+//test data case 
+//	public void testAddfgPlaneData()
+//	{
+//		Vector3 pos = new Vector3(0.0f, 0.0f, -10.0f); 
+//		GameObject g = Instantiate(plane_, pos, Quaternion.identity) as GameObject; 
+//		g.SetActive(true); 
+//		addbgPanelData(g);  
+//	}
+//	
+
 	public IEnumerator TryToSpawnBG() {
 		float t = Random.Range(4.0f, 10.0f);
 		while (t > 0.0f) {
@@ -362,7 +402,9 @@ public class PlaneManager : MonoBehaviour {
 			yield return 0;
 		}
 		if (bgPlanes.Count < numBgPlanes) {
-			bgPlanes.Add(SpawnPanel(Random.Range(47.0f, 67.0f)));
+			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f)); 
+			addbgPanelData(p); 
+		
 		}
 		StartCoroutine(TryToSpawnBG());
 		StartCoroutine(TryToRemoveBG());
@@ -377,7 +419,9 @@ public class PlaneManager : MonoBehaviour {
 		}
 		if (fgPlanes.Count < numPlanes) {
 //			Debug.Log("spawning new FG panel");
-			fgPlanes.Add(SpawnPanel(Random.Range(20.0f, 45.0f)));
+
+			GameObject p =SpawnPanel(Random.Range(20.0f, 45.0f)); 
+			addfgPanelData(p); 
 
 		}
 		StartCoroutine(TryToSpawnFG());

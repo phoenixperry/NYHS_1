@@ -7,12 +7,14 @@ public class TriggerFade : MonoBehaviour {
 	public SmoothAlpha smoothAlphaScript;
 	public float fadeDuration;
 
+	private ArrayList touchList;
 	private int touchCount = 0;
 	public bool justEntered = false;
 	public bool justExited = false;
 
 	// Use this for initialization
 	void Start () {
+		touchList = new ArrayList();
 //		collider.isTrigger = false;
 		Reset();
 	}
@@ -43,13 +45,18 @@ public class TriggerFade : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.gameObject.GetComponent<TriggerFade>()) {
-			other.gameObject.GetComponent<TriggerFade>().justEntered = true;
-		}
-		if (touchCount == 0) {
-			justEntered = true;
-		}
-		touchCount++;
+//		if (other) {
+			if (other.gameObject.GetComponent<TriggerFade>()) {
+				other.gameObject.GetComponent<TriggerFade>().justEntered = true;
+			}
+			if (touchCount == 0) {
+				justEntered = true;
+			}
+			if ( touchList.Contains( other.transform ) == false ) {
+				touchList.Add(other.transform);
+				touchCount++;
+			}
+//		}
 //		Debug.Log("Enter: " + touchCount + ", " + justEntered);
 	}
 
@@ -57,6 +64,7 @@ public class TriggerFade : MonoBehaviour {
 		if (other.gameObject.GetComponent<TriggerFade>()) {
 			other.gameObject.GetComponent<TriggerFade>().justExited = true;
 		}
+		touchList.Remove(other.transform);
 		touchCount--;
 		if (touchCount == 0) {
 			justExited = true;
@@ -65,6 +73,19 @@ public class TriggerFade : MonoBehaviour {
 	}
 
 	public void Reset() {
+		foreach ( Transform t in touchList ) {
+			Transform plane = t.Find ("GoldPlaneTiltedUp");
+			if (plane) {
+				Transform p = plane.GetComponent<TriggerFade>().parent;
+				Component[] faders = p.GetComponentsInChildren<SmoothAlpha>();
+				foreach (SmoothAlpha fader in faders) {
+					if(fader.gameObject.name != "BodyTextMesh") {
+						fader.MakeVisible(fadeDuration, 1.0f, true);
+					}
+				}
+			}
+		}
+		touchList.Clear();
 		touchCount = 0;
 		justEntered = false;
 		justExited = false;

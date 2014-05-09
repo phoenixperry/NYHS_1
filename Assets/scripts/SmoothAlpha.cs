@@ -90,6 +90,18 @@ public class SmoothAlpha : MonoBehaviour {
 		alpha = Mathf.Max(0.0f, alpha);
 		alpha = Mathf.Min(1.0f, alpha);
 
+		if( t == 0.0f ) {
+			if (transform.renderer.material.HasProperty("_Color") ) {
+				transitionStartColor = renderer.material.color;
+				transitionEndColor = new Color(transparantColor.r, transparantColor.g, transparantColor.b, alpha);
+				oldAlpha = renderer.material.color.a;
+				renderer.material.color = transitionEndColor;
+			} else {
+				oldAlpha = transform.renderer.material.GetFloat("_alpha_blend");
+				transform.renderer.material.SetFloat("_alpha_blend", alpha);
+			}
+		}
+
 		duration = (t >= 0.0f ? t : defaultDuration);
 
 //		if (m_isTransitioning && !force) {

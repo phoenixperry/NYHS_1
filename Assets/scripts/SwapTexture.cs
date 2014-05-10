@@ -6,12 +6,13 @@ public class SwapTexture : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		renderer.material.mainTexture = photo;
 	    //stub out a  method to get a new piece of data for this
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            renderer.material.mainTexture = photo;
-
-        }
+//        if (Input.GetKeyDown(KeyCode.Space))
+//        {
+//            renderer.material.mainTexture = photo;
+//
+//        }
 	}
 
     // Update is called once per frame

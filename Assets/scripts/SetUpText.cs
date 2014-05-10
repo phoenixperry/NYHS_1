@@ -5,6 +5,7 @@ public class SetUpText : MonoBehaviour {
 	
 	//code for adding database text to screen 
 	//you put the data on the camera encase you forgot 
+	public PlaneManager m;
 	public GameObject data;
 	Person p;
 	public GUIStyle descriptionStyle;
@@ -95,12 +96,12 @@ public class SetUpText : MonoBehaviour {
 	
 	void populateData()
 	{   
-		bodyTextObject.GetComponent<TextMesh>().text = p.description;
-		bodyTextObject.GetComponent<TextWrapper>().SetText();
+		//bodyTextObject.GetComponent<TextMesh>().text = p.description;
+		//bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+		//nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
 		
-		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+		//locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
 		
 		//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
@@ -163,6 +164,7 @@ public class SetUpText : MonoBehaviour {
 	public void moveToCenter() {
 		if(moveToCenterState == false) {
 			moveToCenterState = true;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
 		moveTimer += Time.deltaTime;
@@ -170,6 +172,7 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			gameObject.transform.position = centerPoint.transform.position;
 			moveToCenterState = false;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
 			doOpenAnimation();
 			return;
 		}
@@ -242,9 +245,10 @@ public class SetUpText : MonoBehaviour {
 	}
 
 	public void returnToOrigin() {
-		Debug.Log("returnToOrigin");
+//		Debug.Log("returnToOrigin");
 		if(returnToOriginState == false) {
 			returnToOriginState = true;
+			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
 		moveTimer += Time.deltaTime;
@@ -252,6 +256,9 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			gameObject.transform.position = originPos;
 			returnToOriginState = false;
+			Transform t = transform.Find("GoldPlaneTiltedUp").transform;
+			t.GetComponent<TriggerFade>().Reset();
+			t.collider.isTrigger = false;
 			fadeOutDelay();
 			return;
 		}
@@ -261,6 +268,7 @@ public class SetUpText : MonoBehaviour {
 	public void fadeOutDelay() {
 		if (fadeOutDelayState == false) {
 			fadeOutDelayState = true;
+			;
 			return;
 		}
 		moveTimer += Time.deltaTime;
@@ -286,7 +294,9 @@ public class SetUpText : MonoBehaviour {
 		moveTimer += Time.deltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
-			
+			m.fgPlanes.Remove(gameObject);
+			m.bgPlanes.Remove(gameObject);
+			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;
 		}

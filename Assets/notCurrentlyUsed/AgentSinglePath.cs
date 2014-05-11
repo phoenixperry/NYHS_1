@@ -50,7 +50,7 @@ public class AgentSinglePath : MonoBehaviour {
         follow(start,end);
         run();
         render();
-       // transform.position += velocity *Time.deltaTime;
+       // transform.position += velocity *Time.fixedDeltaTime;
  
        
 	}

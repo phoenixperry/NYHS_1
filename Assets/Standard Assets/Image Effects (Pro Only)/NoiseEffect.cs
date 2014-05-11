@@ -102,7 +102,7 @@ public class NoiseEffect : MonoBehaviour
 			scratchX = Random.value;
 			scratchY = Random.value;
 		}
-		scratchTimeLeft -= Time.deltaTime;
+		scratchTimeLeft -= Time.fixedDeltaTime;
 
 		Material mat = material;
 

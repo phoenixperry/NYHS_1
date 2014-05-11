@@ -120,7 +120,7 @@ public class PlaneManager : MonoBehaviour {
 	
 	public void Update()
 	{
-		heroTimer += Time.deltaTime;
+		heroTimer += Time.fixedDeltaTime;
 		if(heroTimer >= timeBetweenHeroes) {
 			heroTimer = 0.0f;
 			if (fgPlanes.Count > 0) {
@@ -408,7 +408,7 @@ public class PlaneManager : MonoBehaviour {
 	public IEnumerator TryToSpawnBG() {
 		float t = Random.Range(4.0f, 10.0f);
 		while (t > 0.0f) {
-			t -= Time.deltaTime;
+			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
 		if (bgPlanes.Count < numBgPlanes) {
@@ -424,7 +424,7 @@ public class PlaneManager : MonoBehaviour {
 		//		Debug.Log("TryToSpawn");
 		float t = Random.Range(5.0f, 15.0f);
 		while (t > 0.0f) {
-			t -= Time.deltaTime;
+			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
 		if (fgPlanes.Count < numPlanes) {
@@ -440,7 +440,7 @@ public class PlaneManager : MonoBehaviour {
 	public IEnumerator TryToRemoveBG() {
 		float t = Random.Range(4.0f, 10.0f);
 		while (t > 0.0f) {
-			t -= Time.deltaTime;
+			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
 		if (bgPlanes.Count > 0) {

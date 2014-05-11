@@ -42,7 +42,7 @@ public class Fade : MonoBehaviour {
 	void Update () {
 
 		//sr = gameObject.GetComponent<SpriteRenderer>(); 
-		//sr.material.color = Color.Lerp(sr.material.color, color, fadespeed *Time.deltaTime); 
+		//sr.material.color = Color.Lerp(sr.material.color, color, fadespeed *Time.fixedDeltaTime); 
 		if(Input.GetKeyDown(KeyCode.Space)){
 
 			StartCoroutine(moveToCenter());
@@ -74,7 +74,7 @@ public class Fade : MonoBehaviour {
     //    SpriteRenderer sr = obj.GetComponent<SpriteRenderer>(); 
     //    while(sr.material.color.a < endVal){
 			
-    //        sr.material.color = Color.Lerp(sr.material.color, color, fadespeed *Time.deltaTime); 
+    //        sr.material.color = Color.Lerp(sr.material.color, color, fadespeed *Time.fixedDeltaTime); 
     //        yield return null; 
 			
     //    }

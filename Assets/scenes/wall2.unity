@@ -468,8 +468,6 @@ MonoBehaviour:
   plane_: {fileID: 2100995417}
   timeBetweenHeroes: 20
   timeForFirstHero: 2
-  numBgPlanes: 50
-  numPlanes: 20
   radius: 8
   radiusX: 10
   startAngle: 0
@@ -1266,6 +1264,7 @@ GameObject:
   - 124: {fileID: 1654057360}
   - 92: {fileID: 1654057359}
   - 81: {fileID: 1654057358}
+  - 114: {fileID: 1654057363}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -1334,6 +1333,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1654057363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654057357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478a2083ad114a07d000fbfb8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: e9ba2083ad114a07d000fbfb8d76c639, type: 3}
+  blurAmount: .5
+  extraBlur: 0
 --- !u!1 &1667985664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1458,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_Strength: 1
     m_Bias: .0500000007
@@ -1455,11 +1468,11 @@ Light:
   m_DrawHalo: 0
   m_ActuallyLightmapped: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_ShadowSamples: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1826,3 +1839,4 @@ MonoBehaviour:
   animationDuration: 2
   stayOpenDuration: 2
   bodyTextAppearDuration: 6
+  trackDatabasePostition: 0

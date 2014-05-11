@@ -21,7 +21,7 @@ public class Person
     public string filename;
     public string filepath;
     public string description;
-    public string id;
+    public int id;
 }
 public class DataPuller : MonoBehaviour
 {
@@ -87,7 +87,7 @@ public class DataPuller : MonoBehaviour
                 p.filename = nodeData[i]["Filename"].InnerText;
          //       p.filepath = nodeData[i]["File_Path"].InnerText;
                 p.description = nodeData[i]["HeroDescription"].InnerText;
-                p.id = nodeData[i]["UID"].InnerText;
+                p.id = int.Parse(nodeData[i]["UID"].InnerText);
                 people.Add(p);
 
 
@@ -116,29 +116,50 @@ public class DataPuller : MonoBehaviour
         shuffleList(activeHeroes);
 
         //working remove test 
-	
-        RemoveHeroFromActiveList(activeHeroes[0]);
-        RemoveNormalPersonFromActiveList(activeNormalPeople[0]);
-        Debug.Log("There are " + activeHeroes.Count() + " active heroes after remove");
-        Debug.Log("There are " + activeNormalPeople.Count() + " active normal people after remove");
-
-		//this is how you get a new person. Person class living at the top of the DataPuller.cs file    
-		Person pn = PullNewNormalPerson();
-        Debug.Log(pn.familyName + "the pulled normal person");
-        //this is how you get a new hero out of the list 
-		Person pa = PullNewHero();
-        Debug.Log(pa.familyName + "the pulled hero");
-		//this line will remove an activeHero from that list 
-        RemoveHeroFromActiveList(pa);
-		//this line will remove an activeNormalPerson from the list 
-        RemoveNormalPersonFromActiveList(pn);
-
-        Person pn1 = PullNewNormalPerson();
-        Debug.Log(pn1.familyName + "the pulled normal person double test");
-        Person pa1 = PullNewHero();
-        Debug.Log(pa1.familyName + "the pulled hero double test");
+//	
+//        RemoveHeroFromActiveList(activeHeroes[0]);
+//        RemoveNormalPersonFromActiveList(activeNormalPeople[0]);
+//        Debug.Log("There are " + activeHeroes.Count() + " active heroes after remove");
+//        Debug.Log("There are " + activeNormalPeople.Count() + " active normal people after remove");
+//
+//		//this is how you get a new person. Person class living at the top of the DataPuller.cs file    
+//		Person pn = PullNewNormalPerson();
+//        Debug.Log(pn.familyName + "the pulled normal person");
+//        //this is how you get a new hero out of the list 
+//		Person pa = PullNewHero();
+//        Debug.Log(pa.familyName + "the pulled hero");
+//		//this line will remove an activeHero from that list 
+//        RemoveHeroFromActiveList(pa);
+//		//this line will remove an activeNormalPerson from the list 
+//        RemoveNormalPersonFromActiveList(pn);
+//
+//        Person pn1 = PullNewNormalPerson();
+//        Debug.Log(pn1.familyName + "the pulled normal person double test");
+//        Person pa1 = PullNewHero();
+//        Debug.Log(pa1.familyName + "the pulled hero double test");
 
     }
+	public static Person findCurrentPerson(int num){
+		Person person = new Person(); 
+		bool found = false; 
+		foreach(Person p in activeNormalPeople)
+		{
+			if(p.id == num)
+			{
+				person=p;
+			}
+		}
+		if(!found) 
+		{
+			//search heroes last as they are fewer in number
+			foreach(Person p in activeHeroes)
+			{
+				if(p.id == num)
+					person = p; 
+			}
+		}
+		return person;
+	}
     //this function should set up the initial inactive and active hero lists  
     public static void SetActiveHeroes()
     {
@@ -174,12 +195,16 @@ public class DataPuller : MonoBehaviour
     //this function lets you get a new hero out of the innactive list and put it to the active list
     public static Person PullNewHero()
     {
-        activeHeroes.Add(inactiveHeroes[0]);
-        //always get the first one in the list 
-        Person temp = inactiveHeroes[0];
-        inactiveHeroes.RemoveAt(0);
-
-        return temp;
+		Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
+		Person p = new Person(); 
+		if(inactiveHeroes.Count > 0)
+		{
+			activeHeroes.Add(inactiveHeroes[0]);
+    	    //always get the first one in the list 
+       		p = inactiveHeroes[0];
+       	 	inactiveHeroes.RemoveAt(0);
+		}
+        return p;
     }
     //sets up the inactive and active normal people lists 
     public static void SetActiveNormalPeople()
@@ -219,10 +244,15 @@ public class DataPuller : MonoBehaviour
     //gets a new normal person out of the inactive list and adds them to the active list. 
     public static Person PullNewNormalPerson()
     {
-        activeNormalPeople.Add(inactiveHeroes[0]);
-        Person temp = inactiveNormalPeople[0];
-        inactiveNormalPeople.RemoveAt(0);
-        return temp;
+		Person p = new Person(); 
+		if(inactiveNormalPeople.Count > 0)
+		{
+	        activeNormalPeople.Add(inactiveHeroes[0]);
+	        p = inactiveNormalPeople[0];
+	        inactiveNormalPeople.RemoveAt(0);
+		}
+		Debug.Log("there are " +inactiveNormalPeople.Count + " innactive Normal people"); 
+		return p;
 
     }
 

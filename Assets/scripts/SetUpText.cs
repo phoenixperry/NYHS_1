@@ -41,7 +41,7 @@ public class SetUpText : MonoBehaviour {
 	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
 	
-	
+	public int trackDatabasePostition; 
 	void Start () {
 		data = GameObject.Find("Data");
 		GetData();

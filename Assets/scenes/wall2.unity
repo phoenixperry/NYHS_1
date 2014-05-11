@@ -869,6 +869,10 @@ Prefab:
       propertyPath: centerPoint
       value: 
       objectReference: {fileID: 1642384391}
+    - target: {fileID: 100012, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
   m_RootGameObject: {fileID: 2100995417}
@@ -1491,7 +1495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2100995418
 Transform:
   m_ObjectHideFlags: 0

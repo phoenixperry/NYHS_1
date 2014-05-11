@@ -109,10 +109,6 @@ public class PlaneSetup : MonoBehaviour {
 		if (fadeYellowState) {
 			fadeYellow();
 		}
-     
-        //keeps GUI at scale ratio of chip 
-        gameObject.transform.localScale = new Vector3(scaleRatio.x, scaleRatio.y, scaleRatio.z);
-     
     }
 	
     //each note should set up the data

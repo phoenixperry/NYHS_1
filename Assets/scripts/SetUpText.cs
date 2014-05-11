@@ -17,6 +17,7 @@ public class SetUpText : MonoBehaviour {
 	public GameObject nameTextObject;
 	public GameObject locationTextObject;
 	public GameObject bodyTextObject;
+	public GameObject photoObject;
 	Vector3 scaleRatio;
 	
 	public Vector3 originPos;
@@ -29,6 +30,8 @@ public class SetUpText : MonoBehaviour {
 	public float stayOpenDuration = 2.0f;
 	public float bodyTextAppearDuration = 2.0f;
 	private float moveTimer = 0.0f;
+
+	public bool isHero;
 	
 	private bool spawnState = false;
 	private bool fadeInState = false;
@@ -41,7 +44,9 @@ public class SetUpText : MonoBehaviour {
 	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
 	
-	public int trackDatabasePostition; 
+//	public int trackDatabasePostition;
+
+
 	void Start () {
 		data = GameObject.Find("Data");
 		GetData();
@@ -87,23 +92,31 @@ public class SetUpText : MonoBehaviour {
 	}
 	void GetData() {
 		
-		DataPuller.num = 2;
-		//data.GetComponent<DataPuller>().dataItem();
-		//p = DataPuller.currentHero;
-		
-		//populateData();
+//		DataPuller.num = 2;
+//		data.GetComponent<DataPuller>().dataItem();
+		if( isHero ) {
+			p = DataPuller.PullNewHero();
+		} else {
+			p = DataPuller.PullNewNormalPerson();
+		}
+		populateData();
 	}
 	
 	void populateData()
 	{   
-		//bodyTextObject.GetComponent<TextMesh>().text = p.description;
-		//bodyTextObject.GetComponent<TextWrapper>().SetText();
+		bodyTextObject.GetComponent<TextMesh>().text = p.description;
+		bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		//nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
 		
-		//locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
+
+		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
+		Debug.Log("photo: " + photoPath);
+		Texture2D img = Resources.Load(photoPath) as Texture2D;
+		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
 		
-		//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
+		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
 	
 	//Takes game object current point and flips it for GUI space generated from OnGui. 
@@ -296,7 +309,7 @@ public class SetUpText : MonoBehaviour {
 			moveTimer = 0.0f;
 			m.fgPlanes.Remove(gameObject);
 			m.bgPlanes.Remove(gameObject);
-
+			m.RecyclePerson(p);
 			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;

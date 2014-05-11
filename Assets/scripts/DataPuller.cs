@@ -53,7 +53,7 @@ public class DataPuller : MonoBehaviour
 
 
         //set up the deligate to set a current hero. 
-        dataItem += PickHeroData;
+     //   dataItem += PickHeroData;
 
         people = new List<Person>();
         //load up the data 
@@ -97,7 +97,12 @@ public class DataPuller : MonoBehaviour
         {
             //			Debug.Log( p.familyName + " is in the database"); 
         }
-        //if not hero toss in static not hero list?
+        
+
+		//matches the number of planes to make to the user's input
+		SetNumHeroPeople = PlaneManager.numPlanes; 
+		SetNumNormalPeople = PlaneManager.numBgPlanes; 
+
 
         Debug.Log("the database has " + people.Count + " records ");
         GetHeros();
@@ -138,15 +143,17 @@ public class DataPuller : MonoBehaviour
 //        Person pa1 = PullNewHero();
 //        Debug.Log(pa1.familyName + "the pulled hero double test");
 
+
     }
 	public static Person findCurrentPerson(int num){
 		Person person = new Person(); 
-		bool found = false; 
+		bool found=false; 
 		foreach(Person p in activeNormalPeople)
 		{
 			if(p.id == num)
 			{
 				person=p;
+				found = false; 
 			}
 		}
 		if(!found) 
@@ -156,8 +163,11 @@ public class DataPuller : MonoBehaviour
 			{
 				if(p.id == num)
 					person = p; 
+					found = true; 
 			}
+
 		}
+		Debug.Log(person.familyName + " searched for and found"); 
 		return person;
 	}
     //this function should set up the initial inactive and active hero lists  
@@ -167,12 +177,17 @@ public class DataPuller : MonoBehaviour
 
         for (int i = 0; i < SetNumHeroPeople; i++)
         {
+			//gets number of hero people to use based on Unity interface input in plane manager script and creates an active hero for each one
             Person temp = herosList[i];
             activeHeroes.Add(temp);
         }
-        int numNotUsed = (int)herosList.Count() - SetNumHeroPeople;
-        Debug.Log(numNotUsed + " num of hereos not used.");
-        for (int i = herosList.Count() - numNotUsed; i < herosList.Count(); i++)
+		//counts all of the heroes and subtracts out the number currently used to find out how many are left to add + 
+		//adds them to the inactive list 
+        int numNotUsed = herosList.Count() - SetNumHeroPeople;
+        //Debug.Log(numNotUsed + " num of hereos not used.");
+		//offsets for a list starting at 0 and the takes the totally count, minus the number not used and goes to that slot in the list
+		//then it added all the remaining to the inactive list 
+        for (int i = (herosList.Count()-1) - numNotUsed; i < herosList.Count(); i++)
         {
             inactiveHeroes.Add(herosList[i]);
         }
@@ -186,8 +201,11 @@ public class DataPuller : MonoBehaviour
         {
             if (p.id == activeHeroes[i].id)
             {
-                inactiveHeroes.Add(p);
-                activeHeroes.RemoveAt(i);
+				//hero to remove found. 
+				Debug.Log(p.familyName + " added to inactive heroes list"); 
+                inactiveHeroes.Add(p); //add hero to innactive list 
+				Debug.Log(p.familyName + " removed from active heroes list"); 
+                activeHeroes.RemoveAt(i); //remove hero at their current location in the active array 
             }
         }
     }
@@ -200,16 +218,18 @@ public class DataPuller : MonoBehaviour
 		if(inactiveHeroes.Count > 0)
 		{
 			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
-			activeHeroes.Add(inactiveHeroes[0]);
-    	    //always get the first one in the list 
-       		p = inactiveHeroes[0];
-       	 	inactiveHeroes.RemoveAt(0);
+			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 
+    	    //always get the first one in the list to move lists 
+       		p = inactiveHeroes[0]; //the inactive herp is sent back to the Plane Manager 
+			//then remove it out in innactive 
+       	 	inactiveHeroes.RemoveAt(0);//we remove the now active hero from the innactive list
 		}
         return p;
+
     }
     //sets up the inactive and active normal people lists 
     public static void SetActiveNormalPeople()
-    {
+    {	
 
         if (SetNumNormalPeople > normalPeople.Count())
         {
@@ -223,9 +243,9 @@ public class DataPuller : MonoBehaviour
             activeNormalPeople.Add(temp);
         }
         int numNotUsed = (int)normalPeople.Count() - SetNumNormalPeople;
-        for (int i = normalPeople.Count() - numNotUsed; i < normalPeople.Count(); i++)
+        for (int i = (normalPeople.Count()-1) - numNotUsed; i < normalPeople.Count(); i++)
         {
-            inactiveNormalPeople.Add(normalPeople[i]);
+			inactiveNormalPeople.Add(normalPeople[i]);
         }
         Debug.Log("there are " + inactiveNormalPeople.Count() + "inactive Normal people");
     }
@@ -237,8 +257,9 @@ public class DataPuller : MonoBehaviour
             if (p.id == activeNormalPeople[i].id)
             {
                 inactiveNormalPeople.Add(p);
+				Debug.Log("Inactive Person added " + p.familyName);
                 activeNormalPeople.RemoveAt(i);
-                Debug.Log("Person removed " + p.familyName);
+                Debug.Log("Person moved to innactive list " + p.familyName);
             }
         }
     }
@@ -248,7 +269,7 @@ public class DataPuller : MonoBehaviour
 		Person p = new Person(); 
 		if(inactiveNormalPeople.Count > 0)
 		{
-	        activeNormalPeople.Add(inactiveHeroes[0]);
+	        activeNormalPeople.Add(inactiveNormalPeople[0]);
 	        p = inactiveNormalPeople[0];
 	        inactiveNormalPeople.RemoveAt(0);
 		}
@@ -291,15 +312,16 @@ public class DataPuller : MonoBehaviour
 
 
     }
-
-    public void PickHeroData()
-    {
-        //to use. 
-        //1 set the static number of the hero you want 
-        // 2 call this function 
-        // 3 get the current hero
-        currentHero = people[0] as Person;
-    }
+//
+//    public void PickHeroData()
+//    {
+//        
+//	//to use. 
+//        //1 set the static number of the hero you want 
+//        // 2 call this function 
+//        // 3 get the current hero
+//        currentHero = people[0] as Person;
+//    }
 
     public void shuffleList(List<Person> l)
     {

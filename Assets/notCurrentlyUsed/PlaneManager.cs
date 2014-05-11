@@ -146,14 +146,14 @@ public class PlaneManager : MonoBehaviour {
 		vect3positions = new List<Vector3>(); 
 		foreach(string pos in File.ReadAllLines("./Assets/data/dataPositions.txt"))
 		{
-			Debug.Log(pos); 
+		//	Debug.Log(pos); 
 			Vector3 num = stripData(pos);
 			positions.Add(num); 
 		}
 		IEnumerable<Vector3> sorted = positions.OrderBy(v => v.z);
 		foreach(Vector3 vect in sorted)
 		{		
-			Debug.Log(vect.z + "I am sorted"); 
+//			Debug.Log(vect.z + "I am sorted"); 
 			vect3positions.Add(vect); 
 		}
 		//vect3positions = positions.OrderBy(v =>v.z).ToArray<Vector3>(); 

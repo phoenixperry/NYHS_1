@@ -131,7 +131,7 @@ public class SetUpText : MonoBehaviour {
 	}
 	
 	public void spawn() {
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= 1.0f) {
 			moveTimer = 0.0f;
 			spawnState = false;
@@ -152,7 +152,7 @@ public class SetUpText : MonoBehaviour {
 			}
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
 			fadeInState = false;
@@ -167,7 +167,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= moveToCenterDuration ) {
 			moveTimer = 0.0f;
 			gameObject.transform.position = centerPoint.transform.position;
@@ -189,7 +189,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if( moveTimer >= animationDuration ) {
 			moveTimer = 0.0f;
 			animateOpenState = false;;
@@ -204,7 +204,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeVisible();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if( moveTimer >= bodyTextAppearDuration ) {
 			moveTimer = 0.0f;
 			transform.Find ("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
@@ -220,7 +220,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if( moveTimer >= 2.0f ) {
 			moveTimer = 0.0f;
 			animateCloseState = false;
@@ -235,7 +235,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= 2.0f) {
 			moveTimer = 0.0f;
 			colorChangeDelayState = false;
@@ -251,7 +251,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= moveToCenterDuration ) {
 			moveTimer = 0.0f;
 			gameObject.transform.position = originPos;
@@ -271,7 +271,7 @@ public class SetUpText : MonoBehaviour {
 			;
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= preFadeOutDelay) {
 			moveTimer = 0.0f;
 			fadeOutDelayState = false;
@@ -291,7 +291,7 @@ public class SetUpText : MonoBehaviour {
 			}
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
 			m.fgPlanes.Remove(gameObject);

@@ -159,11 +159,11 @@ public class SetUpText : MonoBehaviour {
 		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
 
 		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
-		Debug.Log("photo: " + photoPath);
+//		Debug.Log("photo: " + photoPath);
 		Texture2D img = Resources.Load(photoPath) as Texture2D;
 		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
 		
-		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
+//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
 	
 	//Takes game object current point and flips it for GUI space generated from OnGui. 

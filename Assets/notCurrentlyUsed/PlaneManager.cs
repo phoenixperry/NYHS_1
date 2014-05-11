@@ -400,6 +400,7 @@ public class PlaneManager : MonoBehaviour {
 		}
 		if (bgPlanes.Count < numBgPlanes) {
 			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f), false); 
+			bgPlanes.Add(p);
 //			addbgPanelData(p); 
 			
 		}
@@ -412,10 +413,13 @@ public class PlaneManager : MonoBehaviour {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
+		Debug.Log("Try To Spawn FG");
 		if (fgPlanes.Count < numPlanes) {
-			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true); 
-//			addfgPanelData(p); 
-
+			Debug.Log ("OK to spawn FG");
+			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true);
+			fgPlanes.Add(p);
+		} else {
+			Debug.LogWarning("Too many FG planes to add a new one!");
 		}
 		StartCoroutine(TryToSpawnFG());
 	}

@@ -26,7 +26,9 @@ public class PlaneManager : MonoBehaviour {
 	public Vector3 rotationRadius;
 	public float currentRotation = 0.0f;
 	private int counter = 0;
-	
+
+	public Person nextPerson;
+
 	private float heroTimer;
 	private GameObject heroInFocus;
 	List<Vector3> positions; 
@@ -251,8 +253,8 @@ public class PlaneManager : MonoBehaviour {
 	{
 		bgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
-			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f));
-			p = addbgPanelData(p); 
+			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f), false);
+//			p = addbgPanelData(p); 
 			bgPlanes.Add(p); 
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
@@ -264,17 +266,18 @@ public class PlaneManager : MonoBehaviour {
 	{
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numPlanes; i++) {
-			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f));
-			p = addfgPanelData(p);  
+			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true);
+//			p = addfgPanelData(p);  
 			fgPlanes.Add(p); 
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
 		StartCoroutine(TryToSpawnFG());
 	}
 	
-	public GameObject SpawnPanel(float depth){
+	public GameObject SpawnPanel(float depth, bool isHero){
 		Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 		GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
+		p.GetComponent<SetUpText>().isHero = isHero;
 		p.SetActive(true);
 		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
 		float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
@@ -284,102 +287,101 @@ public class PlaneManager : MonoBehaviour {
 	}
 	
 	//function for adding foreground data 
-	public GameObject addfgPanelData(GameObject plane)
-	{
-//		Debug.Log(plane+" is a fg"); 
-		Person p = DataPuller.PullNewHero(); 
-		Transform[] ts = plane.GetComponentsInChildren<Transform>();
-		foreach(Transform t in ts) 
-		{
-			if (t.gameObject.name == "NameText")
-			{
-//				Debug.Log(p.familyName +"just pulled onto a chip"); 
-				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
-			}
-			if (t.gameObject.name == "LocationText") 
-			{
-				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
-			}
-			if(t.gameObject.name == "BodyTextMesh") 
-			{
-				t.gameObject.GetComponent<TextMesh>().text = p.description; 
-			}
-			if(t.gameObject.name == "Photo") 
-			{
-				//handle stupid file name. truncate it for Unity 
-				string s = p.filename;
-				int index = s.IndexOf('.'); 
-				string sn = ""; 
-				//make a substring w/out file name 
-				if(index >=0)
-				{
-					sn = s.Substring(0,index); 
-				}
-				
-				//Debug.Log (sn + " should be file name"); 
-				string sl = "photos/" + sn; 
-				//Debug.Log(sl);
-				Texture2D image = Resources.Load(sl) as Texture2D; 
-				//Debug.Log(image + "is the file");
-				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
-				
-			}
-		}
-		return plane; 
-	}
+//	public GameObject addfgPanelData(GameObject plane)
+//	{ 
+//		Person p = DataPuller.PullNewHero();
+//		Transform[] ts = plane.GetComponentsInChildren<Transform>();
+//		foreach(Transform t in ts) 
+//		{
+//			if (t.gameObject.name == "NameText")
+//			{
+//				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+//			}
+//			if (t.gameObject.name == "LocationText") 
+//			{
+//				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+//			}
+//			if(t.gameObject.name == "BodyTextMesh") 
+//			{
+//				t.gameObject.GetComponent<TextMesh>().text = p.description; 
+//			}
+//			if(t.gameObject.name == "Photo") 
+//			{
+//				//handle stupid file name. truncate it for Unity 
+//				string s = p.filename;
+//				int index = s.IndexOf('.'); 
+//				string sn = ""; 
+//				//make a substring w/out file name 
+//				if(index >=0)
+//				{
+//					sn = s.Substring(0,index); 
+//				}
+//				
+//				//Debug.Log (sn + " should be file name"); 
+//				string sl = "photos/" + sn; 
+//				//Debug.Log(sl);
+//				Texture2D image = Resources.Load(sl) as Texture2D; 
+//				//Debug.Log(image + "is the file");
+//				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
+//				
+//			}
+//		}
+//		return plane; 
+//	}
 	
-	public GameObject addbgPanelData(GameObject plane)
-	{
-		Person p = DataPuller.PullNewNormalPerson(); 
+//	public GameObject addbgPanelData(GameObject plane)
+//	{
+//		Person p = DataPuller.PullNewNormalPerson(); 
+//
+//		Transform[] ts = plane.GetComponentsInChildren<Transform>();
+//		foreach(Transform t in ts) 
+//		{
+//			if (t.gameObject.name == "NameText")
+//			{
+//			//	Debug.Log(p.familyName +"just pulled onto a chip"); 
+//				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+//			}
+//			if (t.gameObject.name == "LocationText") 
+//			{
+//				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+//			}
+//			//			if(t.gameObject.name == "BodyTextMesh") 
+//			//			{
+//			//				t.gameObject.GetComponent<TextMesh>().text = p.description; 
+//			//			}
+//			if(t.gameObject.name == "Photo") 
+//			{
+//				//handle stupid file name. truncate it for Unity 
+//				string s = p.filename;
+//				int index = s.IndexOf('.'); 
+//				string sn = ""; 
+//				//make a substring w/out file name 
+//				if(index >=0)
+//				{
+//					sn = s.Substring(0,index); 
+//				}
+//				
+//				//Debug.Log (sn + " should be file name"); 
+//				string sl = "photos/" + sn; 
+//				//Debug.Log(sl);
+//				Texture2D image = Resources.Load(sl) as Texture2D; 
+//				//Debug.Log(image + "is the file");
+//				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
+//				
+//			}
+//
+//			//track person 
+//		}
+////		plane = SetDataBaseNumber(plane, p); 
+//		return plane;
+//			
+//	}
 
-		Transform[] ts = plane.GetComponentsInChildren<Transform>();
-		foreach(Transform t in ts) 
-		{
-			if (t.gameObject.name == "NameText")
-			{
-			//	Debug.Log(p.familyName +"just pulled onto a chip"); 
-				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
-			}
-			if (t.gameObject.name == "LocationText") 
-			{
-				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
-			}
-			//			if(t.gameObject.name == "BodyTextMesh") 
-			//			{
-			//				t.gameObject.GetComponent<TextMesh>().text = p.description; 
-			//			}
-			if(t.gameObject.name == "Photo") 
-			{
-				//handle stupid file name. trunkake it for Unity 
-				string s = p.filename;
-				int index = s.IndexOf('.'); 
-				string sn = ""; 
-				//make a substring w/out file name 
-				if(index >=0)
-				{
-					sn = s.Substring(0,index); 
-				}
-				
-				//Debug.Log (sn + " should be file name"); 
-				string sl = "photos/" + sn; 
-				//Debug.Log(sl);
-				Texture2D image = Resources.Load(sl) as Texture2D; 
-				//Debug.Log(image + "is the file");
-				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
-				
-			}
-
-			//track person 
-		}
-		plane = SetDataBaseNumber(plane, p); 
-		return plane;
-			
-	}
-	public GameObject SetDataBaseNumber(GameObject plane, Person p) 
-	{
-		plane.GetComponent<SetUpText>().trackDatabasePostition = p.id;  
-		return plane; 
-	}
+//	public GameObject SetDataBaseNumber(GameObject plane, Person p) 
+//	{
+//		plane.GetComponent<SetUpText>().trackDatabasePostition = p.id;  
+//		return plane; 
+//	}
 	//test data case 
 	//	public void testAddfgPlaneData()
 	//	{
@@ -397,54 +399,61 @@ public class PlaneManager : MonoBehaviour {
 			yield return 0;
 		}
 		if (bgPlanes.Count < numBgPlanes) {
-			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f)); 
-			addbgPanelData(p); 
+			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f), false); 
+//			addbgPanelData(p); 
 			
 		}
 		StartCoroutine(TryToSpawnBG());
 	}
 	
 	public IEnumerator TryToSpawnFG() {
-		//		Debug.Log("TryToSpawn");
 		float t = Random.Range(5.0f, 15.0f);
 		while (t > 0.0f) {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
 		if (fgPlanes.Count < numPlanes) {
-			//			Debug.Log("spawning new FG panel");
-			
-			GameObject p =SpawnPanel(Random.Range(20.0f, 45.0f)); 
-			addfgPanelData(p); 
+			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true); 
+//			addfgPanelData(p); 
 
 		}
 		StartCoroutine(TryToSpawnFG());
 	}
 	
 	public IEnumerator TryToRemoveBG() {
-		float t = Random.Range(4.0f, 10.0f);
+
 		if (bgPlanes.Count > 0) {
 			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
-			int id = plane.GetComponent<SetUpText>().trackDatabasePostition; 
-			Person p = DataPuller.findCurrentPerson(id); 
-			if(p.hero == "no")
-			{
-				Debug.Log("not a hero to remove" + p.id); 
-				DataPuller.RemoveNormalPersonFromActiveList(p); 
-			}
-			else if(p.hero == "yes")
-			{
-				Debug.Log("hero to remove" + p.id); 
-				DataPuller.RemoveHeroFromActiveList(p); 
-			}
+//			int id = plane.GetComponent<SetUpText>().trackDatabasePostition; 
+//			Person p = DataPuller.findCurrentPerson(id); 
+//			if(p.hero == "no")
+//			{
+////				Debug.Log("not a hero to remove" + p.id); 
+//				DataPuller.RemoveNormalPersonFromActiveList(p); 
+//			}
+//			else if(p.hero == "yes")
+//			{
+////				Debug.Log("hero to remove" + p.id); 
+//				DataPuller.RemoveHeroFromActiveList(p); 
+//			}
 			plane.GetComponent<SetUpText>().fadeOut();
 		}
 
+		float t = Random.Range(4.0f, 10.0f);
 		while (t > 0.0f) {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
-				StartCoroutine(TryToRemoveBG());
+
+		StartCoroutine(TryToRemoveBG());
+	}
+
+	public void RecyclePerson( Person p ) {
+		if (p.hero == "no") {
+			DataPuller.RemoveNormalPersonFromActiveList(p);
+		} else {
+			DataPuller.RemoveHeroFromActiveList(p);
+		}
 	}
 	
 }

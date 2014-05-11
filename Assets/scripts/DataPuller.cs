@@ -217,15 +217,20 @@ public class DataPuller : MonoBehaviour
 		Person p = new Person(); 
 		if(inactiveHeroes.Count > 0)
 		{
-			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
-			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 
-    	    //always get the first one in the list to move lists 
-			Debug.Log(p.familyName + " moved ot active heroes list"); 
+			p = inactiveHeroes[0];
+			inactiveHeroes.RemoveAt(0);
+			activeHeroes.Add(p);
+			Debug.Log(p.familyName + " active." );
 
-       		p = inactiveHeroes[0]; //the inactive herp is sent back to the Plane Manager 
+//			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
+//			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 
+    	    //always get the first one in the list to move lists 
+//			Debug.Log(p.familyName + " moved to active heroes list"); 
+
+//       		p = inactiveHeroes[0]; //the inactive hero is sent back to the Plane Manager 
 			//then remove it out in innactive 
-       	 	inactiveHeroes.RemoveAt(0);//we remove the now active hero from the innactive list
-			Debug.Log(p.familyName + "removed from innactive heroes list " + inactiveHeroes.Count); 
+//       	 	inactiveHeroes.RemoveAt(0);//we remove the now active hero from the innactive list
+//			Debug.Log(p.familyName + " removed from innactive heroes list " + inactiveHeroes.Count); 
 		}
         return p;
 
@@ -272,8 +277,8 @@ public class DataPuller : MonoBehaviour
 		Person p = new Person(); 
 		if(inactiveNormalPeople.Count > 0)
 		{
-	        activeNormalPeople.Add(inactiveNormalPeople[0]);
-	        p = inactiveNormalPeople[0];
+			p = inactiveNormalPeople[0];
+			activeNormalPeople.Add(p);
 	        inactiveNormalPeople.RemoveAt(0);
 		}
 //		Debug.Log("there are " +inactiveNormalPeople.Count + " innactive Normal people"); 

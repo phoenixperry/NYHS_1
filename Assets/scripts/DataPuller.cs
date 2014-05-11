@@ -276,7 +276,7 @@ public class DataPuller : MonoBehaviour
 	        p = inactiveNormalPeople[0];
 	        inactiveNormalPeople.RemoveAt(0);
 		}
-		Debug.Log("there are " +inactiveNormalPeople.Count + " innactive Normal people"); 
+//		Debug.Log("there are " +inactiveNormalPeople.Count + " innactive Normal people"); 
 		return p;
 
     }

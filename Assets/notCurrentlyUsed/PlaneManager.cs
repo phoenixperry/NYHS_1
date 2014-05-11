@@ -224,9 +224,8 @@ public class PlaneManager : MonoBehaviour {
 		hero.GetComponent<SetUpText>().moveToCenter();
 	}
 	
-	public void spin()
-	{
-		
+//	public void spin()
+//	{
 		// for (int i = 0; i < numPlanes; i++ )
 		//{
 		//    GameObject g = planes[i] as GameObject;
@@ -245,42 +244,28 @@ public class PlaneManager : MonoBehaviour {
 		//    g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
 		
 		//}
-		Invoke("spin", 0.0f);
-	}
+//		Invoke("spin", 0.0f);
+//	}
 	
 	public void InitBackgroundPanels()
 	{
 		bgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
-			//			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-			//			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-			//			p.SetActive(true);
-			//			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
-			//			float randomY = (float)NextGaussianDouble(Random.RandomRange(-3.0f, 3.0f), 3.5);
-			//			float randomX = (float)NextGaussianDouble(Random.RandomRange(-10.0f, 10.0f), 4.5) ;
-			//			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(47.0f, 67.0f) );
 			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f));
 			p = addbgPanelData(p); 
 			bgPlanes.Add(p); 
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
 		StartCoroutine(TryToSpawnBG());
+		StartCoroutine(TryToRemoveBG());
 	}
 	
 	public void InitForgroundPanels()
 	{
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numPlanes; i++) {
-			//			Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-			//			GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-			//			p.SetActive(true);
-			//			p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
-			//			float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
-			//			float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
-			//			p.transform.position = new Vector3(randomX, randomY, Random.RandomRange(20.0f, 45.0f) );
 			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f));
-			p = addfgPanelData(p); 
-//			Debug.Log(p + "should totally exhist"); 
+			p = addfgPanelData(p);  
 			fgPlanes.Add(p); 
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
@@ -321,7 +306,7 @@ public class PlaneManager : MonoBehaviour {
 			}
 			if(t.gameObject.name == "Photo") 
 			{
-				//handle stupid file name. trunkake it for Unity 
+				//handle stupid file name. truncate it for Unity 
 				string s = p.filename;
 				int index = s.IndexOf('.'); 
 				string sn = ""; 
@@ -417,7 +402,6 @@ public class PlaneManager : MonoBehaviour {
 			
 		}
 		StartCoroutine(TryToSpawnBG());
-		StartCoroutine(TryToRemoveBG());
 	}
 	
 	public IEnumerator TryToSpawnFG() {

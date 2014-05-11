@@ -63,22 +63,22 @@ public class PlaneSetup : MonoBehaviour {
   
 
     //Takes game object current point and flips it for GUI space generated from OnGui. 
-    Vector3 ScreenToGUI(GameObject go)
-    {
-
-        //save the z val so it doesn't get screwed up 
-        float zpos = go.transform.position.z;
-        //convert to screem space  
-        Vector3 bounds = go.renderer.bounds.min;
-
-        Vector3 vals = cam.WorldToScreenPoint(go.renderer.bounds.max);
-
-        //flip the y axis to account for the different spaces 
-        vals.y = Screen.height - vals.y;
-
-        vals.z = zpos;
-        return vals;
-    }
+//    Vector3 ScreenToGUI(GameObject go)
+//    {
+//
+//        //save the z val so it doesn't get screwed up 
+//        float zpos = go.transform.position.z;
+//        //convert to screem space  
+//        Vector3 bounds = go.renderer.bounds.min;
+//
+//        Vector3 vals = cam.WorldToScreenPoint(go.renderer.bounds.max);
+//
+//        //flip the y axis to account for the different spaces 
+//        vals.y = Screen.height - vals.y;
+//
+//        vals.z = zpos;
+//        return vals;
+//    }
 
 
  

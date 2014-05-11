@@ -21,6 +21,7 @@ public class SetUpText : MonoBehaviour {
 	public GameObject photoObject;
 	Vector3 scaleRatio;
 
+	public SpawnPoint sp;
 	public Vector3 originPos;
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
@@ -359,6 +360,7 @@ public class SetUpText : MonoBehaviour {
 			m.fgPlanes.Remove(gameObject);
 			m.bgPlanes.Remove(gameObject);
 			m.RecyclePerson(p);
+			sp.occupied = false;
 			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;

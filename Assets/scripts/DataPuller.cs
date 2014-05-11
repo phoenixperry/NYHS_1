@@ -12,16 +12,16 @@ using System.Linq;
 public class Person
 {
 
-    public string active;
-    public string hero;
-    public string familyName;
-    public string givenName;
-    public string location;
-    public string lifespan;
-    public string filename;
-    public string filepath;
-    public string description;
-    public int id;
+    public string active = "no";
+    public string hero = "no";
+    public string familyName = "empty";
+	public string givenName="empty";
+	public string location="empty";
+	public string lifespan="empty";
+	public string filename="empty";
+	public string filepath="empty";
+	public string description="empty";
+    public int id=0;
 }
 public class DataPuller : MonoBehaviour
 {
@@ -195,10 +195,11 @@ public class DataPuller : MonoBehaviour
     //this function lets you get a new hero out of the innactive list and put it to the active list
     public static Person PullNewHero()
     {
-		Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
+
 		Person p = new Person(); 
 		if(inactiveHeroes.Count > 0)
 		{
+			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
 			activeHeroes.Add(inactiveHeroes[0]);
     	    //always get the first one in the list 
        		p = inactiveHeroes[0];

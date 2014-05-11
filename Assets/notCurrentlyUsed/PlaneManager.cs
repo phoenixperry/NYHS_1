@@ -70,6 +70,7 @@ public class PlaneManager : MonoBehaviour {
 		//        Debug.Log("num of planes " + planes.Count);
 		InitBackgroundPanels();
 		InitForgroundPanels(); 
+		loadNodePositions(); 
 		
 	}
 	

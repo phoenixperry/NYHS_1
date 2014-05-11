@@ -21,6 +21,7 @@ public class SetUpText : MonoBehaviour {
 	public GameObject photoObject;
 	Vector3 scaleRatio;
 
+	public SpawnPoint sp;
 	public Vector3 originPos;
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
@@ -159,11 +160,11 @@ public class SetUpText : MonoBehaviour {
 		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
 
 		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
-		Debug.Log("photo: " + photoPath);
+//		Debug.Log("photo: " + photoPath);
 		Texture2D img = Resources.Load(photoPath) as Texture2D;
 		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
 		
-		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
+//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
 	
 	//Takes game object current point and flips it for GUI space generated from OnGui. 
@@ -359,6 +360,7 @@ public class SetUpText : MonoBehaviour {
 			m.fgPlanes.Remove(gameObject);
 			m.bgPlanes.Remove(gameObject);
 			m.RecyclePerson(p);
+			sp.occupied = false;
 			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;

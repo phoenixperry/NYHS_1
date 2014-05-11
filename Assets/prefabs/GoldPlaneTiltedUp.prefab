@@ -16,7 +16,10 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+<<<<<<< HEAD
   - 64: {fileID: 6400000}
+=======
+>>>>>>> FETCH_HEAD
   m_Layer: 0
   m_Name: GoldPlaneTiltedUp
   m_TagString: Untagged
@@ -78,9 +81,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+<<<<<<< HEAD
 --- !u!64 &6400000
 MeshCollider:
   m_ObjectHideFlags: 0
+=======
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+>>>>>>> FETCH_HEAD
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
@@ -88,6 +97,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
+<<<<<<< HEAD
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
@@ -101,6 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
+=======
+>>>>>>> FETCH_HEAD
   m_Size: {x: 9.5, y: 2, z: 9.5}
   m_Center: {x: 0, y: .25, z: 0}
 --- !u!114 &11400000

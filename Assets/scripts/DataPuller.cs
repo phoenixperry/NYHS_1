@@ -23,6 +23,7 @@ public class Person
 	public string description="empty";
     public int id=0;
 }
+
 public class DataPuller : MonoBehaviour
 {
     public XmlDocument data;
@@ -197,17 +198,25 @@ public class DataPuller : MonoBehaviour
     //this function lets you remove a hero from the active list and add them to the inactive one
     public static void RemoveHeroFromActiveList(Person p)
     {
-        for (int i = 0; i < activeHeroes.Count; i++)
-        {
-            if (p.id == activeHeroes[i].id)
-            {
-				//hero to remove found. 
-				Debug.Log(p.familyName + " added to inactive heroes list"); 
-                inactiveHeroes.Add(p); //add hero to innactive list 
-				Debug.Log(p.familyName + " removed from active heroes list"); 
-                activeHeroes.RemoveAt(i); //remove hero at their current location in the active array 
-            }
-        }
+		Debug.Log("Try to remove Hero: " + p.givenName + " ID: " + p.id);
+
+		if (activeHeroes.Contains(p)) {
+			activeHeroes.Remove(p);
+			inactiveHeroes.Add(p);
+		} else {
+			Debug.LogError("activeHeros did not contain " + p.givenName);
+		}
+//        for (int i = 0; i < activeHeroes.Count; i++)
+//        {
+//            if (p.id == activeHeroes[i].id)
+//            {
+//				//hero to remove found. 
+//				Debug.Log(p.familyName + " added to inactive heroes list"); 
+//                inactiveHeroes.Add(p); //add hero to innactive list 
+//				Debug.Log(p.familyName + " removed from active heroes list"); 
+//                activeHeroes.RemoveAt(i); //remove hero at their current location in the active array 
+//            }
+//        }
     }
 
     //this function lets you get a new hero out of the innactive list and put it to the active list
@@ -220,7 +229,7 @@ public class DataPuller : MonoBehaviour
 			p = inactiveHeroes[0];
 			inactiveHeroes.RemoveAt(0);
 			activeHeroes.Add(p);
-			Debug.Log(p.familyName + " active." );
+//			Debug.Log(p.familyName + " active." );
 
 //			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
 //			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 

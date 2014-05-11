@@ -6,8 +6,14 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Text;
 using System.Linq;
-
 //using System.Xml.Li
+
+public class SpawnPoint {
+	public Vector3  position;
+	public bool		occupied;
+}
+
+
 public class PlaneManager : MonoBehaviour {
 	public GameObject plane_;
 	public ArrayList planes;
@@ -27,12 +33,15 @@ public class PlaneManager : MonoBehaviour {
 	public float currentRotation = 0.0f;
 	private int counter = 0;
 
-	public Person nextPerson;
+//	public Person nextPerson;
 
 	private float heroTimer;
 	private GameObject heroInFocus;
 	List<Vector3> positions; 
 	List<Vector3> vect3positions; 
+
+	List<SpawnPoint> heroPositions;
+	List<SpawnPoint> normalPositions;
 	
 	List<Texture2D> images; 
 	
@@ -41,39 +50,9 @@ public class PlaneManager : MonoBehaviour {
 	void Start()
 	{
 		heroTimer = timeBetweenHeroes - timeForFirstHero;
-		//        rotationRadius = new Vector3(0.5f, 0.0f, 0.0f);
-		//
-		//        planes = new ArrayList();
-		//        startAngle = 360 / (numPlanes == 0 ? 1 : numPlanes);
-		//        for (int i = 0; i < numPlanes; i++)
-		//        {
-		//            //instantiate plane rotated up
-		//            Quaternion r = Quaternion.Euler(90.0f, 180.0f, 0.0f);
-		//            GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-		//
-		//            //radius from center
-		//            float radiusRange = Random.RandomRange(0.0f, -2.0f);
-		//
-		//            p.GetComponent<PlaneSetup>().radius = radiusRange + radius;
-		//            p.GetComponent<PlaneSetup>().radiusX = radiusRange + radiusX;
-		//            float randomHeight = (float)NextGaussianDouble();
-		//            randomHeight = Random.RandomRange(-5.0f, 5.0f) * randomHeight;
-		//            p.transform.position = new Vector3(p.transform.position.x, randomHeight, p.transform.position.z);
-		//            planes.Add(p);
-		//            Debug.Log(planes.Count);
-		//        }
-		//update start angle after going through
-		//        for (int i = 0; i < numPlanes; i++)
-		//        {
-		//            GameObject g = planes[i] as GameObject;
-		//            g.GetComponent<PlaneSetup>().startAngle = startAngle * i;
-		//
-		//        }
-		//        Debug.Log("num of planes " + planes.Count);
+		loadNodePositions();
 		InitBackgroundPanels();
 		InitForgroundPanels(); 
-		loadNodePositions(); 
-		
 	}
 	
 	public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
@@ -144,20 +123,36 @@ public class PlaneManager : MonoBehaviour {
 	
 	public void loadNodePositions() 
 	{	 
-		positions = new List<Vector3>(); 
-		vect3positions = new List<Vector3>(); 
+//		positions = new List<Vector3>(); 
+//		vect3positions = new List<Vector3>(); 
+		heroPositions = new List<SpawnPoint>();
+		normalPositions = new List<SpawnPoint>();
+
 		foreach(string pos in File.ReadAllLines("./Assets/data/dataPositions.txt"))
 		{
-		//	Debug.Log(pos); 
-			Vector3 num = stripData(pos);
-			positions.Add(num); 
+			SpawnPoint sp = new SpawnPoint();
+
+			sp.position = stripData(pos);
+			sp.occupied = false;
+
+			if(sp.position.z < 45.0f) {
+				heroPositions.Add(sp);
+			} else {
+				normalPositions.Add(sp);
+			}
+
+			Debug.Log("Hero Positions: " + heroPositions.Count);
+			Debug.Log("Normal Positions: " + normalPositions.Count);
+
+//			Vector3 num = stripData(pos);
+//			positions.Add(num); 
 		}
-		IEnumerable<Vector3> sorted = positions.OrderBy(v => v.z);
-		foreach(Vector3 vect in sorted)
-		{		
-//			Debug.Log(vect.z + "I am sorted"); 
-			vect3positions.Add(vect); 
-		}
+//		IEnumerable<Vector3> sorted = positions.OrderBy(v => v.z);
+//		foreach(Vector3 vect in sorted)
+//		{		
+////			Debug.Log(vect.z + "I am sorted"); 
+//			vect3positions.Add(vect); 
+//		}
 		//vect3positions = positions.OrderBy(v =>v.z).ToArray<Vector3>(); 
 		
 		//testing
@@ -167,19 +162,30 @@ public class PlaneManager : MonoBehaviour {
 		//			Vector3 testVect = (Vector3)positions[i]; 
 		//		} 
 		
-		for(int i = 0; i <fgPlanes.Count; i++)
-		{
-			GameObject temp = fgPlanes[i] as GameObject; 
-			temp.transform.position= vect3positions[i];
-			
-		}
-		for(int i=0; i<bgPlanes.Count; i++)
-		{
-			GameObject temp = bgPlanes[i] as GameObject;	
-			temp.transform.position = vect3positions[i+numPlanes];
-		}
+//		for(int i = 0; i <fgPlanes.Count; i++)
+//		{
+//			GameObject temp = fgPlanes[i] as GameObject; 
+//			temp.transform.position= vect3positions[i];
+//			
+//		}
+//		for(int i=0; i<bgPlanes.Count; i++)
+//		{
+//			GameObject temp = bgPlanes[i] as GameObject;	
+//			temp.transform.position = vect3positions[i+numPlanes];
+//		}
 		
 	}
+
+	public SpawnPoint GetValidSpawnPoint( List<SpawnPoint> pointList ) {
+		foreach (SpawnPoint sp in pointList) {
+			if (false == sp.occupied) {
+				return sp;
+			}
+		}
+		Debug.LogWarning("There were no unoccupied spawn points in the list!");
+		return null;
+	}
+
 	public Vector3 stripData(string sourceString) 
 	{
 		
@@ -275,14 +281,24 @@ public class PlaneManager : MonoBehaviour {
 	}
 	
 	public GameObject SpawnPanel(float depth, bool isHero){
+		SpawnPoint sp = isHero ? GetValidSpawnPoint(heroPositions) : GetValidSpawnPoint(normalPositions);
+		if (sp == null) {
+			Debug.LogWarning("SPAWN FAILED: No unoccupied spawnpoint was found. isHero=" + isHero);
+			return null;
+		}
+		sp.occupied = true;
+
 		Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 		GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-		p.GetComponent<SetUpText>().isHero = isHero;
-		p.SetActive(true);
 		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
-		float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
-		float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
-		p.transform.position = new Vector3(randomX, randomY, depth );
+		p.transform.position = sp.position;
+		p.GetComponent<SetUpText>().isHero = isHero;
+		p.GetComponent<SetUpText>().sp = sp;
+
+//		float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
+//		float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
+//		p.transform.position = new Vector3(randomX, randomY, depth );
+		p.SetActive(true);
 		return p;
 	}
 	
@@ -400,6 +416,7 @@ public class PlaneManager : MonoBehaviour {
 		}
 		if (bgPlanes.Count < numBgPlanes) {
 			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f), false); 
+			bgPlanes.Add(p);
 //			addbgPanelData(p); 
 			
 		}
@@ -412,10 +429,13 @@ public class PlaneManager : MonoBehaviour {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
+		Debug.Log("Try To Spawn FG");
 		if (fgPlanes.Count < numPlanes) {
-			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true); 
-//			addfgPanelData(p); 
-
+			Debug.Log ("OK to spawn FG");
+			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true);
+			fgPlanes.Add(p);
+		} else {
+			Debug.LogWarning("Too many FG planes to add a new one!");
 		}
 		StartCoroutine(TryToSpawnFG());
 	}

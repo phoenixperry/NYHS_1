@@ -167,12 +167,12 @@ Material:
         second: .5
       data:
         first:
-          name: _alpha_blend
+          name: _Blend
         second: 0
       data:
         first:
-          name: _Blend
-        second: 0
+          name: _alpha_blend
+        second: 1
     m_Colors:
       data:
         first:

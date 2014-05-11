@@ -439,10 +439,6 @@ public class PlaneManager : MonoBehaviour {
 	
 	public IEnumerator TryToRemoveBG() {
 		float t = Random.Range(4.0f, 10.0f);
-		while (t > 0.0f) {
-			t -= Time.fixedDeltaTime;
-			yield return 0;
-		}
 		if (bgPlanes.Count > 0) {
 			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
 			int id = plane.GetComponent<SetUpText>().trackDatabasePostition; 
@@ -459,7 +455,12 @@ public class PlaneManager : MonoBehaviour {
 			}
 			plane.GetComponent<SetUpText>().fadeOut();
 		}
-		StartCoroutine(TryToRemoveBG());
+
+		while (t > 0.0f) {
+			t -= Time.fixedDeltaTime;
+			yield return 0;
+		}
+				StartCoroutine(TryToRemoveBG());
 	}
 	
 }

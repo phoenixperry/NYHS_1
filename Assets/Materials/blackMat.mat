@@ -6,13 +6,20 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ShaderForgeInternal
+  m_Name: blackMat
   m_Shader: {fileID: 4800000, guid: 645ff5ab09c5b4ace9b86d16f067443b, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
-    m_TexEnvs: {}
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -21,5 +28,9 @@ Material:
     m_Colors:
       data:
         first:
-          name: _c
-        second: {r: 0, g: 0, b: 0, a: 1}
+          name: _Color
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _blackMat
+        second: {r: 0, g: 0, b: 0, a: 0}

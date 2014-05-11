@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class SetUpText : MonoBehaviour {
-	
+	public GameObject blackBox;  
+
 	//code for adding database text to screen 
 	//you put the data on the camera encase you forgot 
 	public PlaneManager m;
@@ -18,7 +19,7 @@ public class SetUpText : MonoBehaviour {
 	public GameObject locationTextObject;
 	public GameObject bodyTextObject;
 	Vector3 scaleRatio;
-	
+
 	public Vector3 originPos;
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
@@ -40,7 +41,9 @@ public class SetUpText : MonoBehaviour {
 	private bool animateCloseState = false;
 	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
-	
+
+	private bool fadeBoxUp = false;
+	private bool fadeBoxDown = false; 
 	public int trackDatabasePostition; 
 	void Start () {
 		data = GameObject.Find("Data");
@@ -84,6 +87,48 @@ public class SetUpText : MonoBehaviour {
 		if (fadeOutState) {
 			fadeOut();
 		}
+		if(fadeBoxUp) 
+		{
+			fadeBoxIn(); 
+		}
+		if(fadeBoxDown) 
+		{
+			fadeBoxOut(); 
+		}
+	}
+	private float alpha_time = 0.0f; 
+	private float alpha_duration = 300.0f; 
+	public void fadeBoxIn()
+	{
+		Color fadedUpColor = new Color(0.0f, 0.0f, 0.0f, 1.0f); 
+		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
+		if(col.a < 0.4f) 
+		{
+			col = Color.Lerp(col, fadedUpColor, alpha_time); 
+			alpha_time += Time.deltaTime/alpha_duration; 
+			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+
+		}
+		else {
+			fadeBoxUp = false;
+			alpha_time = 0.0f; 
+		} 
+	}
+
+	public void fadeBoxOut()
+	{
+		Color fadedOutColor = new Color(0.0f, 0.0f, 0.0f, 0.0f); 
+		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
+		if(col.a > 0.0f) 
+		{
+			col = Color.Lerp(col, fadedOutColor, alpha_time); 
+			alpha_time += Time.deltaTime/alpha_duration; 
+			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+			
+		}
+		else {
+			fadeBoxDown = false;
+		} 
 	}
 	void GetData() {
 		
@@ -184,6 +229,7 @@ public class SetUpText : MonoBehaviour {
 	
 	public void doOpenAnimation() {
 		if(animateOpenState == false ) {
+			fadeBoxUp = true; 
 			animateOpenState = true;
 			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
 			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
@@ -215,6 +261,7 @@ public class SetUpText : MonoBehaviour {
 	}
 	
 	public void doCloseAnimation() {
+		fadeBoxDown = true; 
 		if(animateCloseState == false ) {
 			animateCloseState = true;
 			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();

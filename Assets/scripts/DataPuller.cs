@@ -220,9 +220,12 @@ public class DataPuller : MonoBehaviour
 			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
 			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 
     	    //always get the first one in the list to move lists 
+			Debug.Log(p.familyName + " moved ot active heroes list"); 
+
        		p = inactiveHeroes[0]; //the inactive herp is sent back to the Plane Manager 
 			//then remove it out in innactive 
        	 	inactiveHeroes.RemoveAt(0);//we remove the now active hero from the innactive list
+			Debug.Log(p.familyName + "removed from innactive heroes list " + inactiveHeroes.Count); 
 		}
         return p;
 

@@ -17,7 +17,7 @@ public class PlaneManager : MonoBehaviour {
 	public float timeBetweenHeroes = 2.0f;
 	public float timeForFirstHero = 1.0f;
 	public static int numBgPlanes = 10;
-	public static int numPlanes = 10; //refractor to be numFgPlanes
+	public static int numPlanes = 3; //refractor to be numFgPlanes
 	public float radius = 8;
 	public float radiusX = 10;
 	public float startAngle, range;

@@ -13,6 +13,7 @@ public class PlaneSetup : MonoBehaviour {
     public GameObject photo;
 
     public float colorFadeDuration = 2.000f;
+	public EasingType colorFadeEaseType = EasingType.Linear;
     private float timeOfColorFade = 0.0f;
 
     public float alphaFadeDuration = 2.0f;
@@ -131,7 +132,7 @@ public class PlaneSetup : MonoBehaviour {
 			return;
 		}
 		timeOfColorFade += Time.fixedDeltaTime;
-		renderer.material.SetFloat("_Blend", Mathf.Lerp(1.0f, 0.0f, timeOfColorFade) );
+		renderer.material.SetFloat("_Blend", Mathf.Lerp(1.0f, 0.0f, Easing.EaseIn(timeOfColorFade/colorFadeDuration, colorFadeEaseType ) ) );
 		if (timeOfColorFade >= colorFadeDuration) {
 			timeOfColorFade = 0.0f;
 			fadeYellowState = false;
@@ -154,7 +155,7 @@ public class PlaneSetup : MonoBehaviour {
 			return;
 		}
 		timeOfColorFade += Time.fixedDeltaTime;
-		renderer.material.SetFloat("_Blend", Mathf.Lerp(0.0f, 1.0f, timeOfColorFade) );
+		renderer.material.SetFloat("_Blend", Mathf.Lerp(0.0f, 1.0f, Easing.EaseIn(timeOfColorFade/colorFadeDuration, colorFadeEaseType )) );
 		if (timeOfColorFade >= colorFadeDuration) {
 			timeOfColorFade = 0.0f;
 			fadeOrangeState = false;

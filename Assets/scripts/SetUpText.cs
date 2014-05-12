@@ -26,11 +26,16 @@ public class SetUpText : MonoBehaviour {
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
 	public float fadeInTimer = 2.0f;
+	public EasingType fadeInEaseType = EasingType.Linear;
 	public float fadeInScalar = 0.5f;
+	public EasingType fadeInScaleEaseType = EasingType.Linear;
 	public float fadeOutTimer = 2.0f;
+	public EasingType fadeOutEaseType = EasingType.Linear;
 	public float fadeOutScalar = 0.5f;
+	public EasingType fadeOutScaleEaseType = EasingType.Linear;
 	public float preFadeOutDelay = 5.0f;
 	public float moveToCenterDuration = 2.0f;
+	public EasingType moveToCenterEaseType = EasingType.Linear;
 	public float animationDuration = 2.0f;
 	public float stayOpenDuration = 2.0f;
 	public float bodyTextAppearDuration = 2.0f;
@@ -196,7 +201,7 @@ public class SetUpText : MonoBehaviour {
 			faders = GetComponentsInChildren<SmoothAlpha>();
 			foreach (SmoothAlpha fader in faders) {
 				if(fader.gameObject.name != "BodyTextMesh") {
-					fader.MakeVisible(t);
+					fader.MakeVisible(t, 1.0f, fadeInEaseType);
 				}
 			}
 			return;
@@ -208,7 +213,7 @@ public class SetUpText : MonoBehaviour {
 			fadeInState = false;
 			return;
 		}
-		transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, moveTimer/fadeInTimer);
+		transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, Easing.EaseInOut(moveTimer/fadeInTimer, fadeInScaleEaseType));
 	}
 	
 	public void moveToCenter() {
@@ -226,7 +231,7 @@ public class SetUpText : MonoBehaviour {
 			doOpenAnimation();
 			return;
 		}
-		transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, Mathf.SmoothStep(0.0f, 1.0f, moveTimer/moveToCenterDuration));
+		transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, Easing.EaseInOut(moveTimer/moveToCenterDuration, moveToCenterEaseType));
 //		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
 	}
 	
@@ -314,7 +319,7 @@ public class SetUpText : MonoBehaviour {
 			fadeOutDelay();
 			return;
 		}
-		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, moveTimer/moveToCenterDuration);
+		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, Easing.EaseInOut(moveTimer/moveToCenterDuration, moveToCenterEaseType));
 	}
 	
 	public void fadeOutDelay() {
@@ -339,7 +344,7 @@ public class SetUpText : MonoBehaviour {
 			Component[] faders;
 			faders = GetComponentsInChildren<SmoothAlpha>();
 			foreach (SmoothAlpha fader in faders) {
-				fader.MakeInvisible(t);
+				fader.MakeInvisible(t, 0.0f, fadeOutEaseType);
 			}
 			return;
 		}
@@ -354,7 +359,7 @@ public class SetUpText : MonoBehaviour {
 			fadeOutState = false;
 			return;
 		}
-		transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, moveTimer/fadeOutTimer);
+		transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, Easing.EaseIn( moveTimer/fadeOutTimer, fadeOutScaleEaseType) );
 	}
 	
 }

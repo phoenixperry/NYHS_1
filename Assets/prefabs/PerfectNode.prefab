@@ -540,6 +540,7 @@ MonoBehaviour:
   data: {fileID: 100000, guid: 9fe2b6227057ad642be7b3f95149a0b4, type: 2}
   photo: {fileID: 100000, guid: 231d70d74a59f57479b895b61bf89d4a, type: 2}
   colorFadeDuration: 2
+  colorFadeEaseType: 3
   alphaFadeDuration: 2
   OpenNode: {fileID: 100000, guid: e5d893040abb7db489254fe25fb617ff, type: 2}
   person_name: 
@@ -907,11 +908,16 @@ MonoBehaviour:
   posLerp: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 0}
   fadeInTimer: 2
+  fadeInEaseType: 3
   fadeInScalar: .5
+  fadeInScaleEaseType: 3
   fadeOutTimer: 2
+  fadeOutEaseType: 3
   fadeOutScalar: .5
+  fadeOutScaleEaseType: 3
   preFadeOutDelay: 5
   moveToCenterDuration: 8
+  moveToCenterEaseType: 3
   animationDuration: 2
   stayOpenDuration: 2
   bodyTextAppearDuration: 6

@@ -26,7 +26,7 @@ public class TriggerFade : MonoBehaviour {
 			faders = parent.GetComponentsInChildren<SmoothAlpha>();
 			foreach (SmoothAlpha fader in faders) {
 				if(fader.gameObject.name != "BodyTextMesh") {
-					fader.MakeInvisible(fadeDuration, 0.5f, true);
+					fader.MakeInvisible(fadeDuration, 0.5f, EasingType.Linear, true);
 				}
 			}
 			justEntered = false;
@@ -37,7 +37,7 @@ public class TriggerFade : MonoBehaviour {
 			faders = parent.GetComponentsInChildren<SmoothAlpha>();
 			foreach (SmoothAlpha fader in faders) {
 				if(fader.gameObject.name != "BodyTextMesh") {
-					fader.MakeVisible(fadeDuration, 1.0f, true);
+					fader.MakeVisible(fadeDuration, 1.0f, EasingType.Linear, true);
 				}
 			}
 			justExited = false;
@@ -78,7 +78,7 @@ public class TriggerFade : MonoBehaviour {
 				Component[] faders = p.GetComponentsInChildren<SmoothAlpha>();
 				foreach (SmoothAlpha fader in faders) {
 					if(fader.gameObject.name != "BodyTextMesh") {
-						fader.MakeVisible(fadeDuration, 1.0f, true);
+						fader.MakeVisible(fadeDuration, 1.0f, EasingType.Linear, true);
 					}
 				}
 			}

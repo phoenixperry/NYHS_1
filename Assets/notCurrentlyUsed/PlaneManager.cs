@@ -218,7 +218,7 @@ public class PlaneManager : MonoBehaviour {
 
 		Quaternion r = Quaternion.Euler(0.0f, 0.0f, 0.0f);
 		GameObject p = Instantiate(plane_, transform.position, r) as GameObject;
-		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+		p.transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
 		p.transform.position = sp.position;
 		p.GetComponent<SetUpText>().isHero = isHero;
 		p.GetComponent<SetUpText>().sp = sp;

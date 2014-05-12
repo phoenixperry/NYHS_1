@@ -138,6 +138,7 @@ public class SetUpText : MonoBehaviour {
 			fadeBoxDown = false;
 		} 
 	}
+
 	void GetData() {
 		
 //		DataPuller.num = 2;

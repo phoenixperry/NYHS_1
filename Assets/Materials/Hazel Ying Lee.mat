@@ -29,6 +29,27 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _image
+        second:
+          m_Texture: {fileID: 2800000, guid: b48f6390da55d4060873679bbb022a4d, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _visible
+        second:
+          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _invisible
+        second:
+          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _rounded
         second:
           m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
@@ -51,27 +72,6 @@ Material:
       data:
         first:
           name: _invisible_shader
-        second:
-          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _image
-        second:
-          m_Texture: {fileID: 2800000, guid: b48f6390da55d4060873679bbb022a4d, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _visible
-        second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _invisible
         second:
           m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
           m_Scale: {x: 1, y: 1}
@@ -111,12 +111,16 @@ Material:
         second: .446428567
       data:
         first:
-          name: _Blend
+          name: _alpha_blend
         second: 0
       data:
         first:
-          name: _alpha_blend
+          name: _desaturate
         second: 1
+      data:
+        first:
+          name: _Blend
+        second: 0
       data:
         first:
           name: _Parallax

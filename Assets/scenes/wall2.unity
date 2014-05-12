@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
   timeBetweenHeroes: 30
-  timeForFirstHero: 4
+  timeForFirstHero: 8
   spawnBgDelay_Min: 4
   spawnBgDelay_Max: 10
   removeBgDelay_Min: 4
@@ -514,6 +514,14 @@ Prefab:
     - target: {fileID: 400008, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.68269968
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: fadeInTimer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: fadeOutTimer
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
@@ -1762,11 +1770,11 @@ MonoBehaviour:
   originPos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 1642384391}
-  fadeInTimer: 2
+  fadeInTimer: 4
   fadeInEaseType: 3
   fadeInScalar: .5
   fadeInScaleEaseType: 3
-  fadeOutTimer: 2
+  fadeOutTimer: 4
   fadeOutEaseType: 3
   fadeOutScalar: .5
   fadeOutScaleEaseType: 3

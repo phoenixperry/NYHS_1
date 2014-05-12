@@ -19,6 +19,7 @@ public class PlaneManager : MonoBehaviour {
 	public ArrayList planes;
 	public ArrayList bgPlanes;
 	public ArrayList fgPlanes;
+	public float foregroundZCutoff = 45.0f;
 	
 	public float timeBetweenHeroes = 2.0f;
 	public float timeForFirstHero = 1.0f;
@@ -117,7 +118,7 @@ public class PlaneManager : MonoBehaviour {
 			sp.position = stripData(pos);
 			sp.occupied = false;
 
-			if(sp.position.z < 45.0f) {
+			if(sp.position.z < foregroundZCutoff) {
 				heroPositions.Add(sp);
 			} else {
 				normalPositions.Add(sp);
@@ -188,7 +189,9 @@ public class PlaneManager : MonoBehaviour {
 		bgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
 			GameObject p = SpawnPanel(false);
-			bgPlanes.Add(p); 
+			if (p != null) {
+				bgPlanes.Add(p); 
+			}
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
 		StartCoroutine(TryToSpawnBG());
@@ -200,7 +203,9 @@ public class PlaneManager : MonoBehaviour {
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numPlanes; i++) {
 			GameObject p = SpawnPanel(true);
-			fgPlanes.Add(p); 
+			if (p != null) {
+				fgPlanes.Add(p); 
+			}
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
 		StartCoroutine(TryToSpawnFG());
@@ -234,8 +239,10 @@ public class PlaneManager : MonoBehaviour {
 		Debug.Log ("Try To Spawn BG");
 		if (bgPlanes.Count < numBgPlanes) {
 			Debug.Log ("OK to spawn BG");
-			GameObject p = SpawnPanel(false); 
-			bgPlanes.Add(p);
+			GameObject p = SpawnPanel(false);
+			if (p != null) {
+				bgPlanes.Add(p);
+			}
 //			addbgPanelData(p); 
 		} else {
 			Debug.LogWarning("Too many BG planes to add a new one!");
@@ -253,7 +260,9 @@ public class PlaneManager : MonoBehaviour {
 		if (fgPlanes.Count < numPlanes) {
 			Debug.Log ("OK to spawn FG");
 			GameObject p = SpawnPanel(true);
-			fgPlanes.Add(p);
+			if (p != null) {
+				fgPlanes.Add(p);
+			}
 		} else {
 			Debug.LogWarning("Too many FG planes to add a new one!");
 		}

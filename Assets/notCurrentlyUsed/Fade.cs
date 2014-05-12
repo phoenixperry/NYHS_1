@@ -136,7 +136,7 @@ public class Fade : MonoBehaviour {
 		//get the center of the screen in relation to our object in 
 		Vector3 p = cam.ScreenToWorldPoint( new Vector2(Screen.width/2, Screen.height/2));
         Debug.Log(p+ "I am p"); 
-		Vector3 newP = new Vector3(p.x, p.y, -1); 
+//		Vector3 newP = new Vector3(p.x, p.y, -1); 
 		//create an end point for that marker
 	//	endMarker = newP;
  

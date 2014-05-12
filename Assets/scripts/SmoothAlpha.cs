@@ -12,6 +12,7 @@ public class SmoothAlpha : MonoBehaviour {
 	private bool m_isTransitioning = false;
 
 	public float defaultDuration = 0.5f;
+	private EasingType alphaEaseType = EasingType.Linear;
 	private float oldAlpha = 1.0f;
 	private float targetAlpha;
 	private float duration;
@@ -50,14 +51,15 @@ public class SmoothAlpha : MonoBehaviour {
 		if (m_isVisible)
 		{
 			if(useShader) {
-				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, stage) );
+//				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, stage) );
+				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, Easing.EaseIn(stage, alphaEaseType) ));
 				if (stage >= 1.0f)
 				{
 					m_isTransitioning = false;
 					m_isVisible = targetAlpha > 0.0f;
 				}
 			} else {
-				transform.renderer.material.color = Color.Lerp(transitionStartColor, transitionEndColor, stage);
+				transform.renderer.material.color = Color.Lerp(transitionStartColor, transitionEndColor, Easing.EaseIn(stage, alphaEaseType));
 				if (transform.renderer.material.color == transitionEndColor)
 				{
 					m_isTransitioning = false;
@@ -68,14 +70,14 @@ public class SmoothAlpha : MonoBehaviour {
 		else
 		{
 			if(useShader) {
-				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, stage) );
+				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, Easing.EaseIn(stage, alphaEaseType)) );
 				if (stage >= 1.0f)
 				{
 					m_isTransitioning = false;
 					m_isVisible = targetAlpha > 0.0f;
 				}
 			} else {
-				transform.renderer.material.color = Color.Lerp(transitionStartColor, transitionEndColor, stage);
+				transform.renderer.material.color = Color.Lerp(transitionStartColor, transitionEndColor, Easing.EaseIn(stage, alphaEaseType));
 				if (transform.renderer.material.color == transitionEndColor)
 				{
 					m_isTransitioning = false;
@@ -85,8 +87,9 @@ public class SmoothAlpha : MonoBehaviour {
 		}
 	}
 	
-	public void MakeInvisible(float t = -1.0f, float alpha = 0.0f, bool force = false)
+	public void MakeInvisible(float t = -1.0f, float alpha = 0.0f, EasingType easingType=EasingType.Linear, bool force = false)
 	{
+		alphaEaseType = easingType;
 		alpha = Mathf.Max(0.0f, alpha);
 		alpha = Mathf.Min(1.0f, alpha);
 
@@ -129,8 +132,9 @@ public class SmoothAlpha : MonoBehaviour {
 		m_isTransitioning = true;
 	}
 	
-	public void MakeVisible(float t = -1.0f, float alpha = 1.0f, bool force = false)
+	public void MakeVisible(float t = -1.0f, float alpha = 1.0f, EasingType easingType=EasingType.Linear, bool force = false)
 	{
+		alphaEaseType = easingType;
 		alpha = Mathf.Max(0.0f, alpha);
 		alpha = Mathf.Min(1.0f, alpha);
 

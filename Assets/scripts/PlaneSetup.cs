@@ -63,22 +63,22 @@ public class PlaneSetup : MonoBehaviour {
   
 
     //Takes game object current point and flips it for GUI space generated from OnGui. 
-    Vector3 ScreenToGUI(GameObject go)
-    {
-
-        //save the z val so it doesn't get screwed up 
-        float zpos = go.transform.position.z;
-        //convert to screem space  
-        Vector3 bounds = go.renderer.bounds.min;
-
-        Vector3 vals = cam.WorldToScreenPoint(go.renderer.bounds.max);
-
-        //flip the y axis to account for the different spaces 
-        vals.y = Screen.height - vals.y;
-
-        vals.z = zpos;
-        return vals;
-    }
+//    Vector3 ScreenToGUI(GameObject go)
+//    {
+//
+//        //save the z val so it doesn't get screwed up 
+//        float zpos = go.transform.position.z;
+//        //convert to screem space  
+//        Vector3 bounds = go.renderer.bounds.min;
+//
+//        Vector3 vals = cam.WorldToScreenPoint(go.renderer.bounds.max);
+//
+//        //flip the y axis to account for the different spaces 
+//        vals.y = Screen.height - vals.y;
+//
+//        vals.z = zpos;
+//        return vals;
+//    }
 
 
  
@@ -109,10 +109,6 @@ public class PlaneSetup : MonoBehaviour {
 		if (fadeYellowState) {
 			fadeYellow();
 		}
-     
-        //keeps GUI at scale ratio of chip 
-        gameObject.transform.localScale = new Vector3(scaleRatio.x, scaleRatio.y, scaleRatio.z);
-     
     }
 	
     //each note should set up the data
@@ -134,7 +130,7 @@ public class PlaneSetup : MonoBehaviour {
 			fadeYellowState = true;
 			return;
 		}
-		timeOfColorFade += Time.deltaTime;
+		timeOfColorFade += Time.fixedDeltaTime;
 		renderer.material.SetFloat("_Blend", Mathf.Lerp(1.0f, 0.0f, timeOfColorFade) );
 		if (timeOfColorFade >= colorFadeDuration) {
 			timeOfColorFade = 0.0f;
@@ -146,7 +142,7 @@ public class PlaneSetup : MonoBehaviour {
 //
 //        if (timeOfColorFade > 0)
 //        {
-//            timeOfColorFade -= Time.deltaTime / colorFadeDuration;
+//            timeOfColorFade -= Time.fixedDeltaTime / colorFadeDuration;
 //        }
 
     }
@@ -157,7 +153,7 @@ public class PlaneSetup : MonoBehaviour {
 			fadeOrangeState = true;
 			return;
 		}
-		timeOfColorFade += Time.deltaTime;
+		timeOfColorFade += Time.fixedDeltaTime;
 		renderer.material.SetFloat("_Blend", Mathf.Lerp(0.0f, 1.0f, timeOfColorFade) );
 		if (timeOfColorFade >= colorFadeDuration) {
 			timeOfColorFade = 0.0f;
@@ -169,7 +165,7 @@ public class PlaneSetup : MonoBehaviour {
 //
 //        if (timeOfColorFade < 1)
 //        {
-//            timeOfColorFade += Time.deltaTime / colorFadeDuration;
+//            timeOfColorFade += Time.fixedDeltaTime / colorFadeDuration;
 //            Debug.Log(timeOfColorFade + "i am time of fade");
 //        }
 
@@ -183,7 +179,7 @@ public class PlaneSetup : MonoBehaviour {
     {
         var color = renderer.material.color;
 
-        color.a += Time.deltaTime/alphaFadeDuration;
+        color.a += Time.fixedDeltaTime/alphaFadeDuration;
         if ( color.a >= 1.0f ) {
           color.a = 1.0f;
           fadeInState = false;
@@ -195,7 +191,7 @@ public class PlaneSetup : MonoBehaviour {
     {
         var color = renderer.material.color;
 
-        color.a -= Time.deltaTime/alphaFadeDuration;
+        color.a -= Time.fixedDeltaTime/alphaFadeDuration;
         if ( color.a <= 0.0f ) {
           color.a = 0.0f;
           fadeOutState = false;

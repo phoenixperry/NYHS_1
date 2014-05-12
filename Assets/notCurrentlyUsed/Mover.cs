@@ -13,10 +13,10 @@ public class Mover : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-       /// Debug.Log(Time.deltaTime);
+       /// Debug.Log(Time.fixedDeltaTime);
         Debug.Log(Input.GetAxis("Horizontal") + "axis");
-        xpos = Input.GetAxis("Horizontal") * Time.deltaTime;
-        zpos = Input.GetAxis("Vertical") * Time.deltaTime;
+        xpos = Input.GetAxis("Horizontal") * Time.fixedDeltaTime;
+        zpos = Input.GetAxis("Vertical") * Time.fixedDeltaTime;
        // transform.Translate(xpos, zpos, 0);    
         transform.position =cam.ScreenToWorldPoint(Input.mousePosition);
 	}

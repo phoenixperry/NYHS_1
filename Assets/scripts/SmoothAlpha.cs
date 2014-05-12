@@ -42,7 +42,7 @@ public class SmoothAlpha : MonoBehaviour {
 			return;
 
 		if (duration > 0.0f) {
-			stage += Time.deltaTime / duration;
+			stage += Time.fixedDeltaTime / duration;
 		} else {
 			stage = 1.0f;
 		}

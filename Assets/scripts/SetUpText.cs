@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class SetUpText : MonoBehaviour {
-	
+	public GameObject blackBox;  
+
 	//code for adding database text to screen 
 	//you put the data on the camera encase you forgot 
 	public PlaneManager m;
@@ -17,8 +18,10 @@ public class SetUpText : MonoBehaviour {
 	public GameObject nameTextObject;
 	public GameObject locationTextObject;
 	public GameObject bodyTextObject;
+	public GameObject photoObject;
 	Vector3 scaleRatio;
-	
+
+	public SpawnPoint sp;
 	public Vector3 originPos;
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
@@ -29,6 +32,8 @@ public class SetUpText : MonoBehaviour {
 	public float stayOpenDuration = 2.0f;
 	public float bodyTextAppearDuration = 2.0f;
 	private float moveTimer = 0.0f;
+
+	public bool isHero;
 	
 	private bool spawnState = false;
 	private bool fadeInState = false;
@@ -41,7 +46,13 @@ public class SetUpText : MonoBehaviour {
 	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
 	
-	
+//	public int trackDatabasePostition;
+
+	private bool fadeBoxUp = false;
+	private bool fadeBoxDown = false; 
+	public int trackDatabasePostition; 
+
+
 	void Start () {
 		data = GameObject.Find("Data");
 		GetData();
@@ -84,26 +95,77 @@ public class SetUpText : MonoBehaviour {
 		if (fadeOutState) {
 			fadeOut();
 		}
+		if(fadeBoxUp) 
+		{
+			fadeBoxIn(); 
+		}
+		if(fadeBoxDown) 
+		{
+			fadeBoxOut(); 
+		}
 	}
+	private float alpha_time = 0.0f; 
+	private float alpha_duration = 300.0f; 
+	public void fadeBoxIn()
+	{
+		Color fadedUpColor = new Color(0.0f, 0.0f, 0.0f, 1.0f); 
+		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
+		if(col.a < 0.4f) 
+		{
+			col = Color.Lerp(col, fadedUpColor, alpha_time); 
+			alpha_time += Time.deltaTime/alpha_duration; 
+			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+
+		}
+		else {
+			fadeBoxUp = false;
+			alpha_time = 0.0f; 
+		} 
+	}
+
+	public void fadeBoxOut()
+	{
+		Color fadedOutColor = new Color(0.0f, 0.0f, 0.0f, 0.0f); 
+		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
+		if(col.a > 0.0f) 
+		{
+			col = Color.Lerp(col, fadedOutColor, alpha_time); 
+			alpha_time += Time.deltaTime/alpha_duration; 
+			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+			
+		}
+		else {
+			fadeBoxDown = false;
+		} 
+	}
+
 	void GetData() {
 		
-		DataPuller.num = 2;
-		data.GetComponent<DataPuller>().dataItem();
-		p = DataPuller.currentHero;
-		
+//		DataPuller.num = 2;
+//		data.GetComponent<DataPuller>().dataItem();
+		if( isHero ) {
+			p = DataPuller.PullNewHero();
+		} else {
+			p = DataPuller.PullNewNormalPerson();
+		}
 		populateData();
 	}
 	
 	void populateData()
 	{   
-		//bodyTextObject.GetComponent<TextMesh>().text = p.description;
-		//bodyTextObject.GetComponent<TextWrapper>().SetText();
+		bodyTextObject.GetComponent<TextMesh>().text = p.description;
+		bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		//nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
 		
-		//locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
+		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
+
+		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
+//		Debug.Log("photo: " + photoPath);
+		Texture2D img = Resources.Load(photoPath) as Texture2D;
+		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
 		
-		//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
+//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
 	
 	//Takes game object current point and flips it for GUI space generated from OnGui. 
@@ -131,7 +193,7 @@ public class SetUpText : MonoBehaviour {
 	}
 	
 	public void spawn() {
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= 1.0f) {
 			moveTimer = 0.0f;
 			spawnState = false;
@@ -152,7 +214,7 @@ public class SetUpText : MonoBehaviour {
 			}
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
 			fadeInState = false;
@@ -167,7 +229,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= moveToCenterDuration ) {
 			moveTimer = 0.0f;
 			gameObject.transform.position = centerPoint.transform.position;
@@ -184,12 +246,13 @@ public class SetUpText : MonoBehaviour {
 	
 	public void doOpenAnimation() {
 		if(animateOpenState == false ) {
+			fadeBoxUp = true; 
 			animateOpenState = true;
 			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
 			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if( moveTimer >= animationDuration ) {
 			moveTimer = 0.0f;
 			animateOpenState = false;;
@@ -204,7 +267,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeVisible();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if( moveTimer >= bodyTextAppearDuration ) {
 			moveTimer = 0.0f;
 			transform.Find ("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
@@ -215,12 +278,13 @@ public class SetUpText : MonoBehaviour {
 	}
 	
 	public void doCloseAnimation() {
+		fadeBoxDown = true; 
 		if(animateCloseState == false ) {
 			animateCloseState = true;
 			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if( moveTimer >= 2.0f ) {
 			moveTimer = 0.0f;
 			animateCloseState = false;
@@ -235,7 +299,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= 2.0f) {
 			moveTimer = 0.0f;
 			colorChangeDelayState = false;
@@ -251,7 +315,7 @@ public class SetUpText : MonoBehaviour {
 			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= moveToCenterDuration ) {
 			moveTimer = 0.0f;
 			gameObject.transform.position = originPos;
@@ -271,7 +335,7 @@ public class SetUpText : MonoBehaviour {
 			;
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= preFadeOutDelay) {
 			moveTimer = 0.0f;
 			fadeOutDelayState = false;
@@ -291,11 +355,13 @@ public class SetUpText : MonoBehaviour {
 			}
 			return;
 		}
-		moveTimer += Time.deltaTime;
+		moveTimer += Time.fixedDeltaTime;
 		if ( moveTimer >= fadeTimer ) {
 			moveTimer = 0.0f;
 			m.fgPlanes.Remove(gameObject);
 			m.bgPlanes.Remove(gameObject);
+			m.RecyclePerson(p);
+			sp.occupied = false;
 			Destroy(gameObject, 1.0f);
 			fadeOutState = false;
 			return;

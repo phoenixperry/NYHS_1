@@ -45,19 +45,17 @@ public class TriggerFade : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-//		if (other) {
-			if (other.gameObject.GetComponent<TriggerFade>()) {
-				other.gameObject.GetComponent<TriggerFade>().justEntered = true;
-			}
-			if (touchCount == 0) {
-				justEntered = true;
-			}
-			if ( touchList.Contains( other.transform ) == false ) {
-				touchList.Add(other.transform);
-				touchCount++;
-			}
-//		}
-//		Debug.Log("Enter: " + touchCount + ", " + justEntered);
+		if (other.gameObject.GetComponent<TriggerFade>()) {
+			other.gameObject.GetComponent<TriggerFade>().justEntered = true;
+		}
+		if (touchCount == 0) {
+			justEntered = true;
+		}
+		if ( touchList.Contains( other.transform ) == false ) {
+			touchList.Add(other.transform);
+			touchCount++;
+		}
+//		Debug.Log("Enter: " + other.name + " " + touchCount + ", " + justEntered);
 	}
 
 	void OnTriggerExit(Collider other) {

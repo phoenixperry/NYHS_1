@@ -36,6 +36,7 @@ public class SetUpText : MonoBehaviour {
 	public float preFadeOutDelay = 5.0f;
 	public float moveToCenterDuration = 2.0f;
 	public EasingType moveToCenterEaseType = EasingType.Linear;
+	public float colorChangeDelayDuration = 2.0f;
 	public float animationDuration = 2.0f;
 	public float stayOpenDuration = 2.0f;
 	public float bodyTextAppearDuration = 2.0f;
@@ -293,7 +294,7 @@ public class SetUpText : MonoBehaviour {
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
-		if (moveTimer >= 2.0f) {
+		if (moveTimer >= colorChangeDelayDuration) {
 			moveTimer = 0.0f;
 			colorChangeDelayState = false;
 			returnToOrigin();

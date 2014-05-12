@@ -1773,6 +1773,7 @@ MonoBehaviour:
   preFadeOutDelay: 5
   moveToCenterDuration: 8
   moveToCenterEaseType: 3
+  colorChangeDelayDuration: 2
   animationDuration: 2
   stayOpenDuration: 2
   bodyTextAppearDuration: 6

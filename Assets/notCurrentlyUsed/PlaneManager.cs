@@ -22,6 +22,12 @@ public class PlaneManager : MonoBehaviour {
 	
 	public float timeBetweenHeroes = 2.0f;
 	public float timeForFirstHero = 1.0f;
+	public float spawnBgDelay_Min = 4.0f;
+	public float spawnBgDelay_Max = 10.0f;
+	public float removeBgDelay_Min = 4.0f;
+	public float removeBgDelay_Max = 10.0f;
+	public float spawnFgDelay_Min = 4.0f;
+	public float spawnFgDelay_Max = 10.0f;
 	public static int numBgPlanes = 10;
 	public static int numPlanes = 3; //refractor to be numFgPlanes
 	public float radius = 8;
@@ -74,29 +80,7 @@ public class PlaneManager : MonoBehaviour {
 	
 	public void FixedUpdate()
 	{
-		//		for (int i = 0; i < numPlanes; i++)
-		//		{
-		//            GameObject g = planes[i] as GameObject;
-		
-		//sine method
-		
-		//g.GetComponent<PlaneSetup>().pos.x = (int)g.GetComponent<PlaneSetup>().radiusX * (Mathf.Cos(Time.realtimeSinceStartup * speed + g.GetComponent<PlaneSetup>().startAngle));
-		//g.GetComponent<PlaneSetup>().pos.z = (int)g.GetComponent<PlaneSetup>().radius * Mathf.Sin(Time.realtimeSinceStartup * speed + g.GetComponent<PlaneSetup>().startAngle);
-		//g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
-		//////offset
-		
-		//g.GetComponent<PlaneSetup>().pos.z += 20;
-		
-		//g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x, g.GetComponent<PlaneSetup>().pos.x, .5f);
-		
-		// g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
-		// g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
-		
-		// g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
-		
-		
-		//		}
-		//		counter ++;
+
 	}
 	
 	public void Update()
@@ -122,9 +106,7 @@ public class PlaneManager : MonoBehaviour {
 	}
 	
 	public void loadNodePositions() 
-	{	 
-//		positions = new List<Vector3>(); 
-//		vect3positions = new List<Vector3>(); 
+	{	  
 		heroPositions = new List<SpawnPoint>();
 		normalPositions = new List<SpawnPoint>();
 
@@ -143,36 +125,7 @@ public class PlaneManager : MonoBehaviour {
 
 			Debug.Log("Hero Positions: " + heroPositions.Count);
 			Debug.Log("Normal Positions: " + normalPositions.Count);
-
-//			Vector3 num = stripData(pos);
-//			positions.Add(num); 
 		}
-//		IEnumerable<Vector3> sorted = positions.OrderBy(v => v.z);
-//		foreach(Vector3 vect in sorted)
-//		{		
-////			Debug.Log(vect.z + "I am sorted"); 
-//			vect3positions.Add(vect); 
-//		}
-		//vect3positions = positions.OrderBy(v =>v.z).ToArray<Vector3>(); 
-		
-		//testing
-		//		for(int i =0; i <vect3positions.Count; i++) 
-		//		{
-		//			Debug.Log(vect3positions[i]);
-		//			Vector3 testVect = (Vector3)positions[i]; 
-		//		} 
-		
-//		for(int i = 0; i <fgPlanes.Count; i++)
-//		{
-//			GameObject temp = fgPlanes[i] as GameObject; 
-//			temp.transform.position= vect3positions[i];
-//			
-//		}
-//		for(int i=0; i<bgPlanes.Count; i++)
-//		{
-//			GameObject temp = bgPlanes[i] as GameObject;	
-//			temp.transform.position = vect3positions[i+numPlanes];
-//		}
 		
 	}
 
@@ -232,35 +185,11 @@ public class PlaneManager : MonoBehaviour {
 		hero.GetComponent<SetUpText>().moveToCenter();
 	}
 	
-//	public void spin()
-//	{
-		// for (int i = 0; i < numPlanes; i++ )
-		//{
-		//    GameObject g = planes[i] as GameObject;
-		
-		//    //sine method
-		//    g.GetComponent<PlaneSetup>().pos.x = g.GetComponent<PlaneSetup>().radiusX * (Mathf.Cos((Time.time*speed) + g.GetComponent<PlaneSetup>().startAngle));
-		//    g.GetComponent<PlaneSetup>().pos.z = g.GetComponent<PlaneSetup>().radius * Mathf.Sin((Time.time*speed) + g.GetComponent<PlaneSetup>().startAngle);
-		//    g.GetComponent<PlaneSetup>().pos.y = g.GetComponent<Transform>().position.y;
-		//    ////offset
-		//    g.GetComponent<PlaneSetup>().pos.z += 20;
-		
-		//    g.GetComponent<PlaneSetup>().posLerp.x = Mathf.Lerp(g.transform.position.x,g.GetComponent<PlaneSetup>().pos.x, .5f);
-		
-		//    g.GetComponent<PlaneSetup>().posLerp.z = Mathf.Lerp(g.transform.position.z, g.GetComponent<PlaneSetup>().pos.z, .5f);
-		//    g.GetComponent<PlaneSetup>().posLerp.y = g.GetComponent<Transform>().position.y;
-		//    g.transform.position = g.GetComponent<PlaneSetup>().posLerp;
-		
-		//}
-//		Invoke("spin", 0.0f);
-//	}
-	
 	public void InitBackgroundPanels()
 	{
 		bgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
-			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f), false);
-//			p = addbgPanelData(p); 
+			GameObject p = SpawnPanel(false);
 			bgPlanes.Add(p); 
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
@@ -272,15 +201,14 @@ public class PlaneManager : MonoBehaviour {
 	{
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numPlanes; i++) {
-			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true);
-//			p = addfgPanelData(p);  
+			GameObject p = SpawnPanel(true);
 			fgPlanes.Add(p); 
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
 		StartCoroutine(TryToSpawnFG());
 	}
 	
-	public GameObject SpawnPanel(float depth, bool isHero){
+	public GameObject SpawnPanel(bool isHero){
 		SpawnPoint sp = isHero ? GetValidSpawnPoint(heroPositions) : GetValidSpawnPoint(normalPositions);
 		if (sp == null) {
 			Debug.LogWarning("SPAWN FAILED: No unoccupied spawnpoint was found. isHero=" + isHero);
@@ -295,127 +223,18 @@ public class PlaneManager : MonoBehaviour {
 		p.GetComponent<SetUpText>().isHero = isHero;
 		p.GetComponent<SetUpText>().sp = sp;
 
-//		float randomY = (float)NextGaussianDouble(Random.RandomRange(-5.0f, 5.0f), 5.5);
-//		float randomX = (float)NextGaussianDouble(Random.RandomRange(-12.0f, 12.0f), 5.5) ;
-//		p.transform.position = new Vector3(randomX, randomY, depth );
 		p.SetActive(true);
 		return p;
 	}
-	
-	//function for adding foreground data 
-//	public GameObject addfgPanelData(GameObject plane)
-//	{ 
-//		Person p = DataPuller.PullNewHero();
-//		Transform[] ts = plane.GetComponentsInChildren<Transform>();
-//		foreach(Transform t in ts) 
-//		{
-//			if (t.gameObject.name == "NameText")
-//			{
-//				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
-//			}
-//			if (t.gameObject.name == "LocationText") 
-//			{
-//				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
-//			}
-//			if(t.gameObject.name == "BodyTextMesh") 
-//			{
-//				t.gameObject.GetComponent<TextMesh>().text = p.description; 
-//			}
-//			if(t.gameObject.name == "Photo") 
-//			{
-//				//handle stupid file name. truncate it for Unity 
-//				string s = p.filename;
-//				int index = s.IndexOf('.'); 
-//				string sn = ""; 
-//				//make a substring w/out file name 
-//				if(index >=0)
-//				{
-//					sn = s.Substring(0,index); 
-//				}
-//				
-//				//Debug.Log (sn + " should be file name"); 
-//				string sl = "photos/" + sn; 
-//				//Debug.Log(sl);
-//				Texture2D image = Resources.Load(sl) as Texture2D; 
-//				//Debug.Log(image + "is the file");
-//				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
-//				
-//			}
-//		}
-//		return plane; 
-//	}
-	
-//	public GameObject addbgPanelData(GameObject plane)
-//	{
-//		Person p = DataPuller.PullNewNormalPerson(); 
-//
-//		Transform[] ts = plane.GetComponentsInChildren<Transform>();
-//		foreach(Transform t in ts) 
-//		{
-//			if (t.gameObject.name == "NameText")
-//			{
-//			//	Debug.Log(p.familyName +"just pulled onto a chip"); 
-//				t.gameObject.GetComponent<TextMesh>().text =  p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
-//			}
-//			if (t.gameObject.name == "LocationText") 
-//			{
-//				t.gameObject.GetComponent<TextMesh>().text = p.location.ToUpper(); 
-//			}
-//			//			if(t.gameObject.name == "BodyTextMesh") 
-//			//			{
-//			//				t.gameObject.GetComponent<TextMesh>().text = p.description; 
-//			//			}
-//			if(t.gameObject.name == "Photo") 
-//			{
-//				//handle stupid file name. truncate it for Unity 
-//				string s = p.filename;
-//				int index = s.IndexOf('.'); 
-//				string sn = ""; 
-//				//make a substring w/out file name 
-//				if(index >=0)
-//				{
-//					sn = s.Substring(0,index); 
-//				}
-//				
-//				//Debug.Log (sn + " should be file name"); 
-//				string sl = "photos/" + sn; 
-//				//Debug.Log(sl);
-//				Texture2D image = Resources.Load(sl) as Texture2D; 
-//				//Debug.Log(image + "is the file");
-//				t.gameObject.GetComponent<Renderer>().material.SetTexture("_image", image); 
-//				
-//			}
-//
-//			//track person 
-//		}
-////		plane = SetDataBaseNumber(plane, p); 
-//		return plane;
-//			
-//	}
 
-//	public GameObject SetDataBaseNumber(GameObject plane, Person p) 
-//	{
-//		plane.GetComponent<SetUpText>().trackDatabasePostition = p.id;  
-//		return plane; 
-//	}
-	//test data case 
-	//	public void testAddfgPlaneData()
-	//	{
-	//		Vector3 pos = new Vector3(0.0f, 0.0f, -10.0f); 
-	//		GameObject g = Instantiate(plane_, pos, Quaternion.identity) as GameObject; 
-	//		g.SetActive(true); 
-	//		addbgPanelData(g);  
-	//	}
-	//	
-	
 	public IEnumerator TryToSpawnBG() {
-		float t = Random.Range(4.0f, 10.0f);
+		float t = Random.Range(spawnBgDelay_Min, spawnBgDelay_Max);
 		while (t > 0.0f) {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
 		if (bgPlanes.Count < numBgPlanes) {
-			GameObject p = SpawnPanel(Random.Range(47.0f, 67.0f), false); 
+			GameObject p = SpawnPanel(false); 
 			bgPlanes.Add(p);
 //			addbgPanelData(p); 
 			
@@ -424,7 +243,7 @@ public class PlaneManager : MonoBehaviour {
 	}
 	
 	public IEnumerator TryToSpawnFG() {
-		float t = Random.Range(5.0f, 15.0f);
+		float t = Random.Range(spawnFgDelay_Min, spawnFgDelay_Max);
 		while (t > 0.0f) {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
@@ -432,7 +251,7 @@ public class PlaneManager : MonoBehaviour {
 		Debug.Log("Try To Spawn FG");
 		if (fgPlanes.Count < numPlanes) {
 			Debug.Log ("OK to spawn FG");
-			GameObject p = SpawnPanel(Random.Range(20.0f, 45.0f), true);
+			GameObject p = SpawnPanel(true);
 			fgPlanes.Add(p);
 		} else {
 			Debug.LogWarning("Too many FG planes to add a new one!");
@@ -442,27 +261,15 @@ public class PlaneManager : MonoBehaviour {
 	
 	public IEnumerator TryToRemoveBG() {
 
-		if (bgPlanes.Count > 0) {
-			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
-//			int id = plane.GetComponent<SetUpText>().trackDatabasePostition; 
-//			Person p = DataPuller.findCurrentPerson(id); 
-//			if(p.hero == "no")
-//			{
-////				Debug.Log("not a hero to remove" + p.id); 
-//				DataPuller.RemoveNormalPersonFromActiveList(p); 
-//			}
-//			else if(p.hero == "yes")
-//			{
-////				Debug.Log("hero to remove" + p.id); 
-//				DataPuller.RemoveHeroFromActiveList(p); 
-//			}
-			plane.GetComponent<SetUpText>().fadeOut();
-		}
-
-		float t = Random.Range(4.0f, 10.0f);
+		float t = Random.Range(removeBgDelay_Min, removeBgDelay_Max);
 		while (t > 0.0f) {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
+		}
+
+		if (bgPlanes.Count > 0) {
+			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
+			plane.GetComponent<SetUpText>().fadeOut();
 		}
 
 		StartCoroutine(TryToRemoveBG());

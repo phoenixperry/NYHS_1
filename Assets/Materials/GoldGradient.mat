@@ -172,7 +172,7 @@ Material:
       data:
         first:
           name: _alpha_blend
-        second: 1
+        second: 0
     m_Colors:
       data:
         first:

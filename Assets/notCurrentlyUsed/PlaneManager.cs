@@ -28,8 +28,8 @@ public class PlaneManager : MonoBehaviour {
 	public float removeBgDelay_Max = 10.0f;
 	public float spawnFgDelay_Min = 4.0f;
 	public float spawnFgDelay_Max = 10.0f;
-	public static int numBgPlanes = 10;
-	public static int numPlanes = 3; //refractor to be numFgPlanes
+	public static int numBgPlanes = 30;
+	public static int numPlanes = 7; //refractor to be numFgPlanes
 	public float radius = 8;
 	public float radiusX = 10;
 	public float startAngle, range;

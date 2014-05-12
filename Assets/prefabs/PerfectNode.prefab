@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -906,14 +906,16 @@ MonoBehaviour:
   originPos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 0}
-  fadeTimer: 2
+  fadeInTimer: 2
+  fadeInScalar: .5
+  fadeOutTimer: 2
+  fadeOutScalar: .5
   preFadeOutDelay: 5
   moveToCenterDuration: 8
   animationDuration: 2
   stayOpenDuration: 2
   bodyTextAppearDuration: 6
   isHero: 0
-  trackDatabasePostition: 0
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

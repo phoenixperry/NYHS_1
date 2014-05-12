@@ -25,7 +25,10 @@ public class SetUpText : MonoBehaviour {
 	public Vector3 originPos;
 	public Vector3 posLerp = new Vector3();
 	public GameObject centerPoint;
-	public float fadeTimer = 0.5f;
+	public float fadeInTimer = 2.0f;
+	public float fadeInScalar = 0.5f;
+	public float fadeOutTimer = 2.0f;
+	public float fadeOutScalar = 0.5f;
 	public float preFadeOutDelay = 5.0f;
 	public float moveToCenterDuration = 2.0f;
 	public float animationDuration = 2.0f;
@@ -45,15 +48,16 @@ public class SetUpText : MonoBehaviour {
 	private bool animateCloseState = false;
 	private bool fadeOutDelayState = false;
 	private bool fadeOutState = false;
-	
-//	public int trackDatabasePostition;
 
 	private bool fadeBoxUp = false;
-	private bool fadeBoxDown = false; 
-	public int trackDatabasePostition; 
+	private bool fadeBoxDown = false;
+
+	private Vector3 originalScale;
 
 
 	void Start () {
+		originalScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		transform.localScale *= fadeInScalar;
 		data = GameObject.Find("Data");
 		GetData();
 		scaleRatio = closedNode.transform.lossyScale;
@@ -167,24 +171,7 @@ public class SetUpText : MonoBehaviour {
 		
 //		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
 	}
-	
-	//Takes game object current point and flips it for GUI space generated from OnGui. 
-	//    Vector3 ScreenToGUI(GameObject go)
-	//    {   
-	//        
-	//        //save the z val so it doesn't get screwed up 
-	//        float zpos = go.transform.position.z;
-	//        //convert to screem space  
-	//        Vector3 bounds = go.renderer.bounds.min; 
-	//
-	//        Vector3 vals = cam.WorldToScreenPoint(go.renderer.bounds.max);
-	//
-	//        //flip the y axis to account for the different spaces 
-	//        vals.y = Screen.height - vals.y;
-	//
-	//        vals.z = zpos;
-	//        return vals;
-	//    }
+
 	
 	public void setOrigin()
 	{
@@ -197,7 +184,7 @@ public class SetUpText : MonoBehaviour {
 		if (moveTimer >= 1.0f) {
 			moveTimer = 0.0f;
 			spawnState = false;
-			fadeIn(fadeTimer);
+			fadeIn(fadeInTimer);
 		}
 	}
 	
@@ -215,12 +202,13 @@ public class SetUpText : MonoBehaviour {
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
-		if ( moveTimer >= fadeTimer ) {
+		if ( moveTimer >= fadeInTimer ) {
+			transform.localScale.Set(originalScale.x, originalScale.y, originalScale.z);
 			moveTimer = 0.0f;
 			fadeInState = false;
 			return;
 		}
-		
+		transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, moveTimer/fadeInTimer);
 	}
 	
 	public void moveToCenter() {
@@ -339,7 +327,7 @@ public class SetUpText : MonoBehaviour {
 		if (moveTimer >= preFadeOutDelay) {
 			moveTimer = 0.0f;
 			fadeOutDelayState = false;
-			fadeOut (fadeTimer);
+			fadeOut (fadeOutTimer);
 			return;
 		}
 	}
@@ -356,7 +344,7 @@ public class SetUpText : MonoBehaviour {
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
-		if ( moveTimer >= fadeTimer ) {
+		if ( moveTimer >= fadeOutTimer ) {
 			moveTimer = 0.0f;
 			m.fgPlanes.Remove(gameObject);
 			m.bgPlanes.Remove(gameObject);
@@ -366,7 +354,7 @@ public class SetUpText : MonoBehaviour {
 			fadeOutState = false;
 			return;
 		}
-		
+		transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, moveTimer/fadeOutTimer);
 	}
 	
 }

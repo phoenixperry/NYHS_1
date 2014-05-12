@@ -122,11 +122,9 @@ public class PlaneManager : MonoBehaviour {
 			} else {
 				normalPositions.Add(sp);
 			}
-
-			Debug.Log("Hero Positions: " + heroPositions.Count);
-			Debug.Log("Normal Positions: " + normalPositions.Count);
 		}
-		
+		Debug.Log("Hero Positions: " + heroPositions.Count);
+		Debug.Log("Normal Positions: " + normalPositions.Count);
 	}
 
 	public SpawnPoint GetValidSpawnPoint( List<SpawnPoint> pointList ) {
@@ -211,7 +209,7 @@ public class PlaneManager : MonoBehaviour {
 	public GameObject SpawnPanel(bool isHero){
 		SpawnPoint sp = isHero ? GetValidSpawnPoint(heroPositions) : GetValidSpawnPoint(normalPositions);
 		if (sp == null) {
-			Debug.LogWarning("SPAWN FAILED: No unoccupied spawnpoint was found. isHero=" + isHero);
+			Debug.LogWarning("SPAWN FAILED: No unoccupied " + (isHero? "HERO" : "NORMAL")  + " spawnpoint was found.");
 			return null;
 		}
 		sp.occupied = true;
@@ -233,11 +231,14 @@ public class PlaneManager : MonoBehaviour {
 			t -= Time.fixedDeltaTime;
 			yield return 0;
 		}
+		Debug.Log ("Try To Spawn BG");
 		if (bgPlanes.Count < numBgPlanes) {
+			Debug.Log ("OK to spawn BG");
 			GameObject p = SpawnPanel(false); 
 			bgPlanes.Add(p);
 //			addbgPanelData(p); 
-			
+		} else {
+			Debug.LogWarning("Too many BG planes to add a new one!");
 		}
 		StartCoroutine(TryToSpawnBG());
 	}

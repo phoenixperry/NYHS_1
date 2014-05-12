@@ -107,14 +107,9 @@ public class DataPuller : MonoBehaviour
 
         Debug.Log("the database has " + people.Count + " records ");
         GetHeros();
-
-        //		foreach(Person p in normalPeople)
-        //		{
-        //			Debug.Log(p.givenName + p.familyName);
-        //		}
         GetNormalPeople();
-        SetActiveHeroes();
-        SetActiveNormalPeople();
+//        SetActiveHeroes();
+//        SetActiveNormalPeople();
         Debug.Log("There are " + activeHeroes.Count() + " active heroes");
         Debug.Log("There are " + activeNormalPeople.Count() + " active normal people");
 
@@ -171,6 +166,7 @@ public class DataPuller : MonoBehaviour
 		Debug.Log(person.familyName + " searched for and found"); 
 		return person;
 	}
+
     //this function should set up the initial inactive and active hero lists  
     public static void SetActiveHeroes()
     {
@@ -226,10 +222,14 @@ public class DataPuller : MonoBehaviour
 		Person p = new Person(); 
 		if(inactiveHeroes.Count > 0)
 		{
+			Debug.Log(inactiveHeroes.Count);
 			p = inactiveHeroes[0];
-			inactiveHeroes.RemoveAt(0);
+			Debug.Log(p.givenName + " " + p.familyName);
 			activeHeroes.Add(p);
+//			inactiveHeroes.Remove(p);
+			inactiveHeroes.RemoveAt(0);
 //			Debug.Log(p.familyName + " active." );
+			Debug.Log(inactiveHeroes.Count);
 
 //			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
 //			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 
@@ -306,9 +306,10 @@ public class DataPuller : MonoBehaviour
         foreach (Person p in heroes)
         {
             herosList.Add(p);
+			inactiveHeroes.Add(p);
         }
 
-        int num = herosList.Count;
+//        int num = herosList.Count;
         Debug.Log("there are " + herosList.Count() + " heroes");
     }
 
@@ -322,12 +323,11 @@ public class DataPuller : MonoBehaviour
         foreach (Person p in heroes)
         {
             normalPeople.Add(p);
+			inactiveNormalPeople.Add(p);
         }
 
-        int num = normalPeople.Count();
+//        int num = normalPeople.Count();
         Debug.Log("there are " + normalPeople.Count() + " normal people");
-
-
     }
 //
 //    public void PickHeroData()

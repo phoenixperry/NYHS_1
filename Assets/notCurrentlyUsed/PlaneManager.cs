@@ -279,7 +279,7 @@ public class PlaneManager : MonoBehaviour {
 
 		if (bgPlanes.Count > 0) {
 			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
-			plane.GetComponent<SetUpText>().fadeOut();
+			plane.GetComponent<SetUpText>().fadeOut(plane.GetComponent<SetUpText>().fadeOutTimer);
 		}
 
 		StartCoroutine(TryToRemoveBG());

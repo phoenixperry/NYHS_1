@@ -7,44 +7,19 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ShaderForgeInternal
-  m_Shader: {fileID: 4800000, guid: 81c176d49210b52458a92fc8d91c42df, type: 3}
+  m_Shader: {fileID: 4800000, guid: 645ff5ab09c5b4ace9b86d16f067443b, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _image
-        second:
-          m_Texture: {fileID: 2800000, guid: b48f6390da55d4060873679bbb022a4d, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _visible
-        second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _invisible
-        second:
-          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
+    m_TexEnvs: {}
     m_Floats:
       data:
         first:
           name: _Cutoff
         second: .5
+    m_Colors:
       data:
         first:
-          name: _alpha_blend
-        second: 1
-      data:
-        first:
-          name: _desaturate
-        second: 1
-    m_Colors: {}
+          name: _Color
+        second: {r: 0, g: 0, b: 0, a: 1}

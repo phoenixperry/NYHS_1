@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
+  foregroundZCutoff: 35
   timeBetweenHeroes: 30
   timeForFirstHero: 8
   spawnBgDelay_Min: 4
@@ -748,6 +749,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 182.547455
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e19a39ebd025747f48c27caa7a7d378c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e19a39ebd025747f48c27caa7a7d378c, type: 2}
   m_RootGameObject: {fileID: 1487349971}
@@ -1076,7 +1081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1487349972
 Renderer:
   m_ObjectHideFlags: 0

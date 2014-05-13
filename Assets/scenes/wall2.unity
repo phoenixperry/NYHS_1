@@ -389,8 +389,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
+<<<<<<< HEAD
   foregroundZCutoff: 20
   timeBetweenHeroes: 10
+=======
+  foregroundZCutoff: 35
+  timeBetweenHeroes: 30
+>>>>>>> 6a458f4e8159517466d8463b9ec89171d6b16282
   timeForFirstHero: 8
   spawnBgDelay_Min: 4
   spawnBgDelay_Max: 10
@@ -524,6 +529,7 @@ Prefab:
       propertyPath: fadeOutTimer
       value: 4
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: fadeOutScalar
       value: .100000001
@@ -539,6 +545,11 @@ Prefab:
     - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: isHero
       value: 1
+=======
+    - target: {fileID: 11400020, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: lineWidth
+      value: 2.54999995
+>>>>>>> 6a458f4e8159517466d8463b9ec89171d6b16282
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
@@ -588,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27a13b082ab1412a89cef3fddf4c130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineWidth: 4.80000019
+  lineWidth: 2.54999995
 --- !u!102 &852402489
 TextMesh:
   serializedVersion: 3
@@ -764,6 +775,10 @@ Prefab:
     - target: {fileID: 400000, guid: e19a39ebd025747f48c27caa7a7d378c, type: 2}
       propertyPath: m_LocalScale.x
       value: 182.547455
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e19a39ebd025747f48c27caa7a7d378c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e19a39ebd025747f48c27caa7a7d378c, type: 2}
@@ -1093,7 +1108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1487349972
 Renderer:
   m_ObjectHideFlags: 0

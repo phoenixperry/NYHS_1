@@ -524,6 +524,10 @@ Prefab:
       propertyPath: fadeOutTimer
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 11400020, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: lineWidth
+      value: 2.54999995
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
   m_RootGameObject: {fileID: 2100995417}
@@ -572,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27a13b082ab1412a89cef3fddf4c130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineWidth: 4.80000019
+  lineWidth: 2.54999995
 --- !u!102 &852402489
 TextMesh:
   serializedVersion: 3

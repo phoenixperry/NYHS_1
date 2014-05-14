@@ -58,8 +58,8 @@ public class PlaneManager : MonoBehaviour {
 	{
 		heroTimer = timeBetweenHeroes - timeForFirstHero;
 		loadNodePositions();
-		InitBackgroundPanels();
-		InitForgroundPanels(); 
+		StartCoroutine(InitBackgroundPanels());
+		StartCoroutine(InitForgroundPanels()); 
 	}
 	
 	public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
@@ -184,7 +184,7 @@ public class PlaneManager : MonoBehaviour {
 		hero.GetComponent<SetUpText>().moveToCenter();
 	}
 	
-	public void InitBackgroundPanels()
+	public IEnumerator InitBackgroundPanels()
 	{
 		bgPlanes = new ArrayList();
 		for( int i=0; i < numBgPlanes; i++) {
@@ -192,13 +192,14 @@ public class PlaneManager : MonoBehaviour {
 			if (p != null) {
 				bgPlanes.Add(p); 
 			}
+			yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
 		}
 		Debug.Log( "BG Planes: " + bgPlanes.Count );
 		StartCoroutine(TryToSpawnBG());
 		StartCoroutine(TryToRemoveBG());
 	}
 	
-	public void InitForgroundPanels()
+	public IEnumerator InitForgroundPanels()
 	{
 		fgPlanes = new ArrayList();
 		for( int i=0; i < numPlanes; i++) {
@@ -206,6 +207,7 @@ public class PlaneManager : MonoBehaviour {
 			if (p != null) {
 				fgPlanes.Add(p); 
 			}
+			yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 		}
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
 		StartCoroutine(TryToSpawnFG());

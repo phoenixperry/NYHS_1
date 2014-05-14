@@ -390,12 +390,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
   foregroundZCutoff: 35
-  timeBetweenHeroes: 30
+  timeBetweenHeroes: 65
   timeForFirstHero: 8
   spawnBgDelay_Min: 4
   spawnBgDelay_Max: 10
-  removeBgDelay_Min: 4
-  removeBgDelay_Max: 10
+  removeBgDelay_Min: 120
+  removeBgDelay_Max: 180
   spawnFgDelay_Min: 5
   spawnFgDelay_Max: 15
   radius: 8
@@ -527,6 +527,18 @@ Prefab:
     - target: {fileID: 11400020, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: lineWidth
       value: 2.54999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: moveToCenterDuration
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: stayOpenDuration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: bodyTextAppearDuration
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
@@ -1788,10 +1800,10 @@ MonoBehaviour:
   fadeOutScalar: .5
   fadeOutScaleEaseType: 3
   preFadeOutDelay: 5
-  moveToCenterDuration: 8
+  moveToCenterDuration: 4
   moveToCenterEaseType: 3
   colorChangeDelayDuration: 2
   animationDuration: 2
-  stayOpenDuration: 2
-  bodyTextAppearDuration: 6
+  stayOpenDuration: 15
+  bodyTextAppearDuration: 17
   isHero: 0

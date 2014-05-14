@@ -170,12 +170,23 @@ public class SetUpText : MonoBehaviour {
 		
 		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
 
-		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
+		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename; //+ p.filename.Split(new char[]{'.'})[0];
+
+		photoObject.GetComponent<Renderer>().material.SetTexture("_image", LoadPhoto(photoPath));
+
+
+//		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
 //		Debug.Log("photo: " + photoPath);
-		Texture2D img = Resources.Load(photoPath) as Texture2D;
-		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
-		
-//		Debug.Log("Name: " + nameTextObject.GetComponent<TextMesh>().text);
+//		Texture2D img = Resources.Load(photoPath) as Texture2D;
+//		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
+	}
+
+	private Texture2D LoadPhoto(string path) {
+		WWW www = new WWW(path);
+		while (!www.isDone); // wait for file load to complete
+		Texture2D img = new Texture2D(1024, 1024, TextureFormat.ARGB32, false);
+		www.LoadImageIntoTexture(img);
+		return img;
 	}
 
 	

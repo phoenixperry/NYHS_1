@@ -27,11 +27,37 @@ Material:
           m_Texture: {fileID: 2800000, guid: deb50e372bee54c2596e17acfea28943, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _image
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_7
+        second:
+          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Cutoff
         second: .5
+      data:
+        first:
+          name: _alpha_blend
+        second: 0
+      data:
+        first:
+          name: _node_10
+        second: 0
+      data:
+        first:
+          name: _alpha
+        second: 0
     m_Colors:
       data:
         first:

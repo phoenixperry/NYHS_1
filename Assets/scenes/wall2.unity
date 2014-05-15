@@ -177,6 +177,7 @@ GameObject:
   - 33: {fileID: 399893331}
   - 65: {fileID: 399893330}
   - 23: {fileID: 399893329}
+  - 114: {fileID: 399893333}
   m_Layer: 0
   m_Name: Logo
   m_TagString: Untagged
@@ -235,6 +236,18 @@ Transform:
   m_LocalScale: {x: 1.19472134, y: .626958728, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &399893333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 399893328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76521678d4b14452a9edec551cf2ab12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 2
 --- !u!1 &476237917
 GameObject:
   m_ObjectHideFlags: 0

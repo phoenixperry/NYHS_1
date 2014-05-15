@@ -74,10 +74,10 @@ Shader "Mine/GradientMask" {
                 float3 diffuse = max( 0.0, NdotL) * attenColor + UNITY_LIGHTMODEL_AMBIENT.xyz;
                 float3 finalColor = 0;
                 float3 diffuseLight = diffuse;
-                float2 node_1173 = i.uv0;
-                finalColor += diffuseLight * lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1173.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1173.rg, _organe_asset)).rgb,_Blend);
+                float2 node_1165 = i.uv0;
+                finalColor += diffuseLight * lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1165.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1165.rg, _organe_asset)).rgb,_Blend);
 /// Final Color:
-                return fixed4(finalColor,lerp(tex2D(_invisible_shader,TRANSFORM_TEX(node_1173.rg, _invisible_shader)).a,tex2D(_rounded,TRANSFORM_TEX(node_1173.rg, _rounded)).a,_alpha_blend));
+                return fixed4(finalColor,lerp(tex2D(_invisible_shader,TRANSFORM_TEX(node_1165.rg, _invisible_shader)).a,tex2D(_rounded,TRANSFORM_TEX(node_1165.rg, _rounded)).a,_alpha_blend));
             }
             ENDCG
         }
@@ -140,10 +140,10 @@ Shader "Mine/GradientMask" {
                 float3 diffuse = max( 0.0, NdotL) * attenColor;
                 float3 finalColor = 0;
                 float3 diffuseLight = diffuse;
-                float2 node_1174 = i.uv0;
-                finalColor += diffuseLight * lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1174.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1174.rg, _organe_asset)).rgb,_Blend);
+                float2 node_1166 = i.uv0;
+                finalColor += diffuseLight * lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1166.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1166.rg, _organe_asset)).rgb,_Blend);
 /// Final Color:
-                return fixed4(finalColor * lerp(tex2D(_invisible_shader,TRANSFORM_TEX(node_1174.rg, _invisible_shader)).a,tex2D(_rounded,TRANSFORM_TEX(node_1174.rg, _rounded)).a,_alpha_blend),0);
+                return fixed4(finalColor * lerp(tex2D(_invisible_shader,TRANSFORM_TEX(node_1166.rg, _invisible_shader)).a,tex2D(_rounded,TRANSFORM_TEX(node_1166.rg, _rounded)).a,_alpha_blend),0);
             }
             ENDCG
         }

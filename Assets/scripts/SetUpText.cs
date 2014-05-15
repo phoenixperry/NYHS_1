@@ -170,7 +170,7 @@ public class SetUpText : MonoBehaviour {
 		
 		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
 
-		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename; //+ p.filename.Split(new char[]{'.'})[0];
+		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename;
 
 		photoObject.GetComponent<Renderer>().material.SetTexture("_image", LoadPhoto(photoPath));
 

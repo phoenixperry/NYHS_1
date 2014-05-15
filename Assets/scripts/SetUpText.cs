@@ -235,6 +235,10 @@ public class SetUpText : MonoBehaviour {
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
+		if ( !animateOpenState && moveTimer >= moveToCenterDuration - 0.5f ) {
+			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
+			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
+		}
 		if ( moveTimer >= moveToCenterDuration ) {
 			moveTimer = 0.0f;
 			gameObject.transform.position = centerPoint.transform.position;
@@ -253,8 +257,8 @@ public class SetUpText : MonoBehaviour {
 		if(animateOpenState == false ) {
 			fadeBoxUp = true; 
 			animateOpenState = true;
-			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
-			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
+//			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
+//			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
@@ -290,7 +294,7 @@ public class SetUpText : MonoBehaviour {
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
-		if( moveTimer >= 2.0f ) {
+		if( moveTimer >= 1.0f ) {
 			moveTimer = 0.0f;
 			animateCloseState = false;
 			colorChangeDelay();

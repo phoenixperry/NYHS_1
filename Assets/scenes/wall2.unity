@@ -553,6 +553,14 @@ Prefab:
       propertyPath: bodyTextAppearDuration
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: preFadeOutDelay
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: colorChangeDelayDuration
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
   m_RootGameObject: {fileID: 2100995417}
@@ -1812,10 +1820,10 @@ MonoBehaviour:
   fadeOutEaseType: 3
   fadeOutScalar: .5
   fadeOutScaleEaseType: 3
-  preFadeOutDelay: 5
+  preFadeOutDelay: 40
   moveToCenterDuration: 4
   moveToCenterEaseType: 3
-  colorChangeDelayDuration: 2
+  colorChangeDelayDuration: .5
   animationDuration: 2
   stayOpenDuration: 15
   bodyTextAppearDuration: 17

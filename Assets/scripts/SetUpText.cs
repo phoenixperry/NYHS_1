@@ -166,7 +166,7 @@ public class SetUpText : MonoBehaviour {
 		bodyTextObject.GetComponent<TextMesh>().text = p.description;
 		bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + p.lifespan + ")";
+		nameTextObject.GetComponent<TextMesh>().text = p.familyName.ToUpper() + " " + p.givenName.ToUpper() + " (" + System.Text.RegularExpressions.Regex.Replace( p.lifespan, @"[\(\)]", "") + ")";
 		
 		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
 

@@ -1,0 +1,18 @@
+# lines that start with # are comments
+# this file must be located in the SAME DIRECTORY as the executable!
+# this file must be called config.txt
+#
+#####################
+## DEFAULT SETTINGS##
+#####################
+# These are the values the game will use if uncommented overrides are used in this file!
+# It is recommended that you COPY the default setting and PASTE it below, so that you
+# do not forget what the default values are!
+#
+#camera_pos=0,0,-20
+#logo_pos=2.644268,-1.689596,-15
+#resolution=1280x800
+#
+###################################
+## PASTE MODIFIED SETTINGS BELOW ##
+###################################

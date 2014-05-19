@@ -15,13 +15,6 @@ Material:
     m_TexEnvs:
       data:
         first:
-          name: _image
-        second:
-          m_Texture: {fileID: 2800000, guid: 253a1ce48002f7542b447920e66dcce6, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _visible
         second:
           m_Texture: {fileID: 2800000, guid: a84588c5617df3f4bb34c94c6181d6eb, type: 3}
@@ -34,6 +27,13 @@ Material:
           m_Texture: {fileID: 2800000, guid: 0912c2000dc03684ab8fa95123c0fc37, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _IMAGE
+        second:
+          m_Texture: {fileID: 2800000, guid: 253a1ce48002f7542b447920e66dcce6, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -43,4 +43,16 @@ Material:
         first:
           name: _node_wipe
         second: 1
-    m_Colors: {}
+      data:
+        first:
+          name: _node_62
+        second: .5
+    m_Colors:
+      data:
+        first:
+          name: _node_51
+        second: {r: .694100022, g: .290100008, b: .141000003, a: 1}
+      data:
+        first:
+          name: _node_52
+        second: {r: .800000012, g: .435290009, b: .207800001, a: 1}

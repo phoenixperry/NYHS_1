@@ -75,6 +75,13 @@ public class SetUpText : MonoBehaviour {
 	}
 	
 	void Update () {
+
+		transform.FindChild("GoldPlaneTiltedUp").renderer.material.renderQueue = 3000 - (int)transform.position.z;
+		transform.FindChild("BodyTextMesh").renderer.material.renderQueue = 3001 - (int)transform.position.z;
+		transform.FindChild("LocationText").renderer.material.renderQueue = 3001 - (int)transform.position.z;
+		transform.FindChild("NameText").renderer.material.renderQueue = 3001 - (int)transform.position.z;
+		transform.FindChild("Photo").renderer.material.renderQueue = 3001 - (int)transform.position.z;
+
 		if (spawnState) {
 			spawn();
 		}

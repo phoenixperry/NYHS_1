@@ -244,7 +244,7 @@ public class SetUpText : MonoBehaviour {
 		moveTimer += Time.fixedDeltaTime;
 		if ( !animateOpenState && moveTimer >= moveToCenterDuration - 0.5f ) {
 			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
-			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
+//			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 		}
 		if ( moveTimer >= moveToCenterDuration ) {
 			moveTimer = 0.0f;
@@ -275,6 +275,7 @@ public class SetUpText : MonoBehaviour {
 			doBodyTextAppear();
 			return;
 		}
+		transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(0, 1, moveTimer/animationDuration ));
 	}
 	
 	public void doBodyTextAppear() {
@@ -297,16 +298,17 @@ public class SetUpText : MonoBehaviour {
 		fadeBoxDown = true; 
 		if(animateCloseState == false ) {
 			animateCloseState = true;
-			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
+//			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
 			return;
 		}
 		moveTimer += Time.fixedDeltaTime;
-		if( moveTimer >= 1.0f ) {
+		if( moveTimer >= animationDuration ) {
 			moveTimer = 0.0f;
 			animateCloseState = false;
 			colorChangeDelay();
 			return;
 		}
+		transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(1, 0, moveTimer/animationDuration ));
 	}
 
 	public void colorChangeDelay() {

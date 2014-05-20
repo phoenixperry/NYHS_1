@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ShaderForgeInternal
-  m_Shader: {fileID: 4800000, guid: c3953f546f881db4ca7028e443dae60c, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8cfde385d91384de18242e473f08dee5, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -15,23 +15,44 @@ Material:
     m_TexEnvs:
       data:
         first:
-          name: _visible
+          name: _yellow_asset
         second:
-          m_Texture: {fileID: 2800000, guid: a84588c5617df3f4bb34c94c6181d6eb, type: 3}
+          m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _invisible
+          name: _organe_asset
         second:
-          m_Texture: {fileID: 2800000, guid: 0912c2000dc03684ab8fa95123c0fc37, type: 3}
+          m_Texture: {fileID: 2800000, guid: 4ea2a300cf25896498655b95016bb042, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _IMAGE
+          name: _invisible_shader
         second:
-          m_Texture: {fileID: 2800000, guid: 253a1ce48002f7542b447920e66dcce6, type: 3}
+          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _openMask
+        second:
+          m_Texture: {fileID: 2800000, guid: 9fdf68b668e374e6fb035921a2cfc576, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _node_1337
+        second:
+          m_Texture: {fileID: 2800000, guid: 2a1f411a86c264797a5e2d1d2d6a80c9, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _left
+        second:
+          m_Texture: {fileID: 2800000, guid: 2a1f411a86c264797a5e2d1d2d6a80c9, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -41,18 +62,14 @@ Material:
         second: .5
       data:
         first:
-          name: _node_wipe
+          name: _Blend
+        second: 0
+      data:
+        first:
+          name: _alpha_blend
         second: 1
       data:
         first:
-          name: _node_62
-        second: .5
-    m_Colors:
-      data:
-        first:
-          name: _node_51
-        second: {r: .694100022, g: .290100008, b: .141000003, a: 1}
-      data:
-        first:
-          name: _node_52
-        second: {r: .800000012, g: .435290009, b: .207800001, a: 1}
+          name: _open
+        second: 0
+    m_Colors: {}

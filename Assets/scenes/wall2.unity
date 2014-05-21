@@ -332,6 +332,7 @@ GameObject:
   - 114: {fileID: 476237922}
   - 114: {fileID: 476237924}
   - 114: {fileID: 476237923}
+  - 114: {fileID: 476237925}
   m_Layer: 0
   m_Name: LocationText
   m_TagString: Untagged
@@ -444,6 +445,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: .5
+--- !u!114 &476237925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 476237917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d5b661a9ba34175b95750b6f9b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &556769844
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plane_: {fileID: 2100995417}
   foregroundZCutoff: 35
+  dimColor: {r: .392156869, g: .392156869, b: .392156869, a: 1}
   timeBetweenHeroes: 65
   timeForFirstHero: 8
   spawnBgDelay_Min: 4
@@ -847,6 +860,7 @@ GameObject:
   - 65: {fileID: 1190961630}
   - 114: {fileID: 1190961629}
   - 114: {fileID: 1190961628}
+  - 114: {fileID: 1190961637}
   m_Layer: 0
   m_Name: GoldPlaneTiltedUp
   m_TagString: Untagged
@@ -1011,6 +1025,17 @@ Transform:
   m_LocalScale: {x: 1.79999995, y: 1.02363396, z: 1.02363396}
   m_Children: []
   m_Father: {fileID: 2100995418}
+--- !u!114 &1190961637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190961627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d5b661a9ba34175b95750b6f9b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1410316452
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1050,7 @@ GameObject:
   - 114: {fileID: 1410316458}
   - 114: {fileID: 1410316456}
   - 114: {fileID: 1410316457}
+  - 114: {fileID: 1410316460}
   m_Layer: 0
   m_Name: NameText
   m_TagString: Untagged
@@ -1137,6 +1163,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: .5
+--- !u!114 &1410316460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1410316452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d5b661a9ba34175b95750b6f9b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1487349971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,6 +1564,7 @@ GameObject:
   - 114: {fileID: 1940097210}
   - 114: {fileID: 1940097211}
   - 114: {fileID: 1940097212}
+  - 114: {fileID: 1940097207}
   m_Layer: 0
   m_Name: Photo
   m_TagString: Untagged
@@ -1556,6 +1594,17 @@ Renderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
+--- !u!114 &1940097207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940097205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d5b661a9ba34175b95750b6f9b427e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &1940097208
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -234,6 +234,20 @@ public class SetUpText : MonoBehaviour {
 		}
 		transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, Easing.EaseInOut(moveTimer/fadeInTimer, fadeInScaleEaseType));
 	}
+
+	public void Tint( Color color, float duration ) {
+		transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().StartTint(color, duration);
+		transform.Find ("NameText").GetComponent<TintController>().StartTint(color, duration);
+		transform.Find ("LocationText").GetComponent<TintController>().StartTint(color, duration);
+		transform.Find ("Photo").GetComponent<TintController>().StartTint(color, duration);
+	}
+
+	public void UnTint( float duration ) {
+		transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().UnTint(duration);
+		transform.Find ("NameText").GetComponent<TintController>().UnTint(duration);
+		transform.Find ("LocationText").GetComponent<TintController>().UnTint(duration);
+		transform.Find ("Photo").GetComponent<TintController>().UnTint(duration);
+	}
 	
 	public void moveToCenter() {
 		if(moveToCenterState == false) {
@@ -264,6 +278,9 @@ public class SetUpText : MonoBehaviour {
 		if(animateOpenState == false ) {
 			fadeBoxUp = true; 
 			animateOpenState = true;
+			m.TintNonFocusedNodes();
+//			transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().StartTint(Color.grey,1.0f);
+//			transform.Find ("NameText").GetComponent<TintController>().StartTint(Color.grey,1.0f);
 //			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
 //			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
 			return;
@@ -298,6 +315,9 @@ public class SetUpText : MonoBehaviour {
 		fadeBoxDown = true; 
 		if(animateCloseState == false ) {
 			animateCloseState = true;
+			m.UnTintNonFocusedNodes();
+//			transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().UnTint(1.0f);
+//			transform.Find ("NameText").GetComponent<TintController>().UnTint(1.0f);
 //			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
 			return;
 		}

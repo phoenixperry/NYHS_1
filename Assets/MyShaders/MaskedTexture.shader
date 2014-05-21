@@ -1,7 +1,7 @@
 // Shader created with Shader Forge Beta 0.32 
 // Shader Forge (c) Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:0.32;sub:START;pass:START;ps:flbk:,lico:1,lgpr:1,nrmq:1,limd:1,uamb:True,mssp:True,lmpd:False,lprd:False,enco:False,frtr:True,vitr:True,dbil:False,rmgx:True,hqsc:True,hqlp:False,blpr:1,bsrc:3,bdst:7,culm:0,dpts:2,wrdp:False,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,ofsf:0,ofsu:0,f2p0:False;n:type:ShaderForge.SFN_Final,id:1,x:32719,y:32712|diff-31-OUT,alpha-23-OUT;n:type:ShaderForge.SFN_Tex2d,id:7,x:33279,y:32598,ptlb:image,ptin:_image,tex:b48f6390da55d4060873679bbb022a4d,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:21,x:33244,y:33135,ptlb:visible,ptin:_visible,tex:ebc649d0c7b45455caffd1da7471ae93,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:22,x:33289,y:32900,ptlb:invisible,ptin:_invisible,tex:10350849f8eb00847b6e7aab7bb62aa3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:23,x:32967,y:32918|A-22-A,B-21-A,T-24-OUT;n:type:ShaderForge.SFN_ValueProperty,id:24,x:33029,y:33123,ptlb:alpha_blend,ptin:_alpha_blend,glob:False,v1:1;n:type:ShaderForge.SFN_Lerp,id:31,x:32967,y:32712|A-7-RGB,B-33-OUT,T-35-OUT;n:type:ShaderForge.SFN_Desaturate,id:33,x:33279,y:32755|COL-7-RGB;n:type:ShaderForge.SFN_ValueProperty,id:35,x:33144,y:32812,ptlb:desaturate,ptin:_desaturate,glob:False,v1:1;proporder:7-21-22-24-35;pass:END;sub:END;*/
+/*SF_DATA;ver:0.32;sub:START;pass:START;ps:flbk:,lico:1,lgpr:1,nrmq:1,limd:1,uamb:True,mssp:True,lmpd:False,lprd:False,enco:False,frtr:True,vitr:True,dbil:False,rmgx:True,hqsc:True,hqlp:False,blpr:1,bsrc:3,bdst:7,culm:0,dpts:2,wrdp:False,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,ofsf:0,ofsu:0,f2p0:False;n:type:ShaderForge.SFN_Final,id:1,x:32719,y:32712|diff-1502-OUT,alpha-23-OUT;n:type:ShaderForge.SFN_Tex2d,id:7,x:33370,y:32592,ptlb:image,ptin:_image,tex:b48f6390da55d4060873679bbb022a4d,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:21,x:33244,y:33135,ptlb:visible,ptin:_visible,tex:ebc649d0c7b45455caffd1da7471ae93,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:22,x:33289,y:32900,ptlb:invisible,ptin:_invisible,tex:10350849f8eb00847b6e7aab7bb62aa3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:23,x:32967,y:32918|A-22-A,B-21-A,T-24-OUT;n:type:ShaderForge.SFN_ValueProperty,id:24,x:33029,y:33123,ptlb:alpha_blend,ptin:_alpha_blend,glob:False,v1:1;n:type:ShaderForge.SFN_Lerp,id:31,x:33144,y:32670|A-7-RGB,B-33-OUT,T-35-OUT;n:type:ShaderForge.SFN_Desaturate,id:33,x:33370,y:32749|COL-7-RGB;n:type:ShaderForge.SFN_ValueProperty,id:35,x:33144,y:32812,ptlb:desaturate,ptin:_desaturate,glob:False,v1:1;n:type:ShaderForge.SFN_Multiply,id:1502,x:32957,y:32712|A-1503-RGB,B-31-OUT;n:type:ShaderForge.SFN_Color,id:1503,x:33144,y:32526,ptlb:TintColor,ptin:_TintColor,glob:False,c1:1,c2:1,c3:1,c4:1;proporder:7-21-22-24-35-1503;pass:END;sub:END;*/
 
 Shader "MaskedTexture" {
     Properties {
@@ -10,6 +10,7 @@ Shader "MaskedTexture" {
         _invisible ("invisible", 2D) = "white" {}
         _alpha_blend ("alpha_blend", Float ) = 1
         _desaturate ("desaturate", Float ) = 1
+        _TintColor ("TintColor", Color) = (1,1,1,1)
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -40,6 +41,7 @@ Shader "MaskedTexture" {
             uniform sampler2D _invisible; uniform float4 _invisible_ST;
             uniform float _alpha_blend;
             uniform float _desaturate;
+            uniform float4 _TintColor;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -72,12 +74,12 @@ Shader "MaskedTexture" {
                 float3 diffuse = max( 0.0, NdotL) * attenColor + UNITY_LIGHTMODEL_AMBIENT.xyz;
                 float3 finalColor = 0;
                 float3 diffuseLight = diffuse;
-                float2 node_49 = i.uv0;
-                float4 node_7 = tex2D(_image,TRANSFORM_TEX(node_49.rg, _image));
+                float2 node_1512 = i.uv0;
+                float4 node_7 = tex2D(_image,TRANSFORM_TEX(node_1512.rg, _image));
                 float node_33 = dot(node_7.rgb,float3(0.3,0.59,0.11));
-                finalColor += diffuseLight * lerp(node_7.rgb,float3(node_33,node_33,node_33),_desaturate);
+                finalColor += diffuseLight * (_TintColor.rgb*lerp(node_7.rgb,float3(node_33,node_33,node_33),_desaturate));
 /// Final Color:
-                return fixed4(finalColor,lerp(tex2D(_invisible,TRANSFORM_TEX(node_49.rg, _invisible)).a,tex2D(_visible,TRANSFORM_TEX(node_49.rg, _visible)).a,_alpha_blend));
+                return fixed4(finalColor,lerp(tex2D(_invisible,TRANSFORM_TEX(node_1512.rg, _invisible)).a,tex2D(_visible,TRANSFORM_TEX(node_1512.rg, _visible)).a,_alpha_blend));
             }
             ENDCG
         }
@@ -105,6 +107,7 @@ Shader "MaskedTexture" {
             uniform sampler2D _invisible; uniform float4 _invisible_ST;
             uniform float _alpha_blend;
             uniform float _desaturate;
+            uniform float4 _TintColor;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -139,12 +142,12 @@ Shader "MaskedTexture" {
                 float3 diffuse = max( 0.0, NdotL) * attenColor;
                 float3 finalColor = 0;
                 float3 diffuseLight = diffuse;
-                float2 node_50 = i.uv0;
-                float4 node_7 = tex2D(_image,TRANSFORM_TEX(node_50.rg, _image));
+                float2 node_1513 = i.uv0;
+                float4 node_7 = tex2D(_image,TRANSFORM_TEX(node_1513.rg, _image));
                 float node_33 = dot(node_7.rgb,float3(0.3,0.59,0.11));
-                finalColor += diffuseLight * lerp(node_7.rgb,float3(node_33,node_33,node_33),_desaturate);
+                finalColor += diffuseLight * (_TintColor.rgb*lerp(node_7.rgb,float3(node_33,node_33,node_33),_desaturate));
 /// Final Color:
-                return fixed4(finalColor * lerp(tex2D(_invisible,TRANSFORM_TEX(node_50.rg, _invisible)).a,tex2D(_visible,TRANSFORM_TEX(node_50.rg, _visible)).a,_alpha_blend),0);
+                return fixed4(finalColor * lerp(tex2D(_invisible,TRANSFORM_TEX(node_1513.rg, _invisible)).a,tex2D(_visible,TRANSFORM_TEX(node_1513.rg, _visible)).a,_alpha_blend),0);
             }
             ENDCG
         }

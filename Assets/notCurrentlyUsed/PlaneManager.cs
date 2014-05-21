@@ -20,7 +20,8 @@ public class PlaneManager : MonoBehaviour {
 	public ArrayList bgPlanes;
 	public ArrayList fgPlanes;
 	public float foregroundZCutoff = 45.0f;
-	
+
+	public Color dimColor = Color.grey;
 	public float timeBetweenHeroes = 2.0f;
 	public float timeForFirstHero = 1.0f;
 	public float spawnBgDelay_Min = 4.0f;
@@ -44,6 +45,7 @@ public class PlaneManager : MonoBehaviour {
 
 	private float heroTimer;
 	private GameObject heroInFocus;
+	private bool dimmedBackgroundNodes = false;
 	List<Vector3> positions; 
 	List<Vector3> vect3positions; 
 
@@ -183,6 +185,32 @@ public class PlaneManager : MonoBehaviour {
 	{
 		hero.GetComponent<SetUpText>().moveToCenter();
 	}
+
+	public void TintNonFocusedNodes() {
+		dimmedBackgroundNodes = true;
+		int i;
+		for (i = 0; i < bgPlanes.Count; i++) {
+			(bgPlanes[i] as GameObject).GetComponent<SetUpText>().Tint(dimColor, 1.0f);
+		}
+		for (i = 0; i < fgPlanes.Count; i++) {
+			if(fgPlanes[i] != heroInFocus) {
+				(fgPlanes[i] as GameObject).GetComponent<SetUpText>().Tint(dimColor, 1.0f);
+			}
+		}
+	}
+
+	public void UnTintNonFocusedNodes() {
+		int i;
+		for (i = 0; i < bgPlanes.Count; i++) {
+			(bgPlanes[i] as GameObject).GetComponent<SetUpText>().UnTint(1.0f);
+		}
+		for (i = 0; i < fgPlanes.Count; i++) {
+			if(fgPlanes[i] != heroInFocus) {
+				(fgPlanes[i] as GameObject).GetComponent<SetUpText>().UnTint(1.0f);
+			}
+		}
+		dimmedBackgroundNodes = false;
+	}
 	
 	public IEnumerator InitBackgroundPanels()
 	{
@@ -239,7 +267,7 @@ public class PlaneManager : MonoBehaviour {
 			yield return 0;
 		}
 		Debug.Log ("Try To Spawn BG");
-		if (bgPlanes.Count < numBgPlanes) {
+		if (bgPlanes.Count < numBgPlanes && !dimmedBackgroundNodes) {
 			Debug.Log ("OK to spawn BG");
 			GameObject p = SpawnPanel(false);
 			if (p != null) {
@@ -259,7 +287,7 @@ public class PlaneManager : MonoBehaviour {
 			yield return 0;
 		}
 		Debug.Log("Try To Spawn FG");
-		if (fgPlanes.Count < numPlanes) {
+		if (fgPlanes.Count < numPlanes && !dimmedBackgroundNodes) {
 			Debug.Log ("OK to spawn FG");
 			GameObject p = SpawnPanel(true);
 			if (p != null) {

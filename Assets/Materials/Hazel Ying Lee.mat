@@ -29,13 +29,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _rounded
-        second:
-          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _yellow_asset
         second:
           m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
@@ -53,6 +46,13 @@ Material:
           name: _invisible_shader
         second:
           m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _rounded
+        second:
+          m_Texture: {fileID: 2800000, guid: ebc649d0c7b45455caffd1da7471ae93, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -116,7 +116,7 @@ Material:
       data:
         first:
           name: _alpha_blend
-        second: 0
+        second: 1
       data:
         first:
           name: _desaturate
@@ -129,4 +129,8 @@ Material:
       data:
         first:
           name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _TintColor
         second: {r: 1, g: 1, b: 1, a: 1}

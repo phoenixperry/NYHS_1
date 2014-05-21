@@ -43,16 +43,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _node_1337
+          name: _left
         second:
-          m_Texture: {fileID: 2800000, guid: 2a1f411a86c264797a5e2d1d2d6a80c9, type: 3}
+          m_Texture: {fileID: 2800000, guid: 8bec0de97584248559c6443ea92110dc, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _left
+          name: _neg_corner_mask
         second:
-          m_Texture: {fileID: 2800000, guid: 2a1f411a86c264797a5e2d1d2d6a80c9, type: 3}
+          m_Texture: {fileID: 2800000, guid: 8bec0de97584248559c6443ea92110dc, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -72,4 +72,12 @@ Material:
         first:
           name: _open
         second: 0
+      data:
+        first:
+          name: _node_1433
+        second: .985000014
+      data:
+        first:
+          name: _rt_edge_smooth
+        second: .985000014
     m_Colors: {}

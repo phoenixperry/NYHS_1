@@ -51,7 +51,6 @@ public class SmoothAlpha : MonoBehaviour {
 		if (m_isVisible)
 		{
 			if(useShader) {
-//				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, stage) );
 				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, Easing.EaseIn(stage, alphaEaseType) ));
 				if (stage >= 1.0f)
 				{
@@ -59,7 +58,8 @@ public class SmoothAlpha : MonoBehaviour {
 					m_isVisible = targetAlpha > 0.0f;
 				}
 			} else {
-				transform.renderer.material.color = Color.Lerp(transitionStartColor, transitionEndColor, Easing.EaseIn(stage, alphaEaseType));
+				Color c = transform.renderer.material.color;
+				transform.renderer.material.color = Color.Lerp(new Color(c.r, c.g, c.b, transitionStartColor.a), new Color(c.r, c.g, c.b, transitionEndColor.a), Easing.EaseIn(stage, alphaEaseType));
 				if (transform.renderer.material.color == transitionEndColor)
 				{
 					m_isTransitioning = false;
@@ -77,7 +77,8 @@ public class SmoothAlpha : MonoBehaviour {
 					m_isVisible = targetAlpha > 0.0f;
 				}
 			} else {
-				transform.renderer.material.color = Color.Lerp(transitionStartColor, transitionEndColor, Easing.EaseIn(stage, alphaEaseType));
+				Color c = transform.renderer.material.color;
+				transform.renderer.material.color = Color.Lerp(new Color(c.r, c.g, c.b, transitionStartColor.a), new Color(c.r, c.g, c.b, transitionEndColor.a), Easing.EaseIn(stage, alphaEaseType));
 				if (transform.renderer.material.color == transitionEndColor)
 				{
 					m_isTransitioning = false;
@@ -107,18 +108,6 @@ public class SmoothAlpha : MonoBehaviour {
 
 		duration = (t >= 0.0f ? t : defaultDuration);
 
-//		if (m_isTransitioning && !force) {
-//			Debug.Log("make invisible: is transitioning");
-//			return;
-//		}
-		
-//		if (!m_isVisible) {
-//			Debug.Log("make invisible: is visible");
-//			return;
-//		}
-
-//		Debug.Log ("MakeInvisible " + oldAlpha + ", " + alpha);
-
 		stage = 0F;
 
 		if (transform.renderer.material.HasProperty("_Color") ) {
@@ -139,18 +128,6 @@ public class SmoothAlpha : MonoBehaviour {
 		alpha = Mathf.Min(1.0f, alpha);
 
 		duration = (t >= 0.0f ? t : defaultDuration);
-
-//		if (m_isTransitioning && !force) {
-//			Debug.Log("make visible: is transitioning");
-//			return;
-//		}
-		
-//		if (m_isVisible && oldAlpha == 1.0f) {
-//			Debug.Log("make visible: is visible");
-//			return;
-//		}
-
-//		Debug.Log ("MakeVisible " + oldAlpha + ", " + alpha);
 
 		stage = 0F;
 

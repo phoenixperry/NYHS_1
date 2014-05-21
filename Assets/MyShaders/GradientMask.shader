@@ -1,7 +1,7 @@
 // Shader created with Shader Forge Beta 0.32 
 // Shader Forge (c) Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:0.32;sub:START;pass:START;ps:flbk:,lico:1,lgpr:1,nrmq:1,limd:1,uamb:True,mssp:True,lmpd:False,lprd:False,enco:False,frtr:True,vitr:True,dbil:False,rmgx:True,hqsc:True,hqlp:False,blpr:1,bsrc:3,bdst:7,culm:0,dpts:2,wrdp:False,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,ofsf:0,ofsu:0,f2p0:False;n:type:ShaderForge.SFN_Final,id:1,x:32457,y:32690|diff-1447-OUT,alpha-1159-OUT;n:type:ShaderForge.SFN_Tex2d,id:12,x:33140,y:32645,tex:deca4b74a27d39a47a7bf2876513e462,ntxv:0,isnm:False|TEX-1126-TEX;n:type:ShaderForge.SFN_Lerp,id:121,x:32890,y:32792|A-12-RGB,B-122-RGB,T-1101-OUT;n:type:ShaderForge.SFN_Tex2d,id:122,x:33140,y:32767,tex:4ea2a300cf25896498655b95016bb042,ntxv:0,isnm:False|TEX-1132-TEX;n:type:ShaderForge.SFN_ValueProperty,id:1101,x:32962,y:33002,ptlb:Blend,ptin:_Blend,glob:False,v1:0;n:type:ShaderForge.SFN_Tex2dAsset,id:1126,x:33347,y:32651,ptlb:yellow_asset,ptin:_yellow_asset,glob:False,tex:deca4b74a27d39a47a7bf2876513e462;n:type:ShaderForge.SFN_Tex2dAsset,id:1132,x:33347,y:32830,ptlb:organe_asset,ptin:_organe_asset,glob:False,tex:4ea2a300cf25896498655b95016bb042;n:type:ShaderForge.SFN_ValueProperty,id:1142,x:32741,y:33316,ptlb:alpha_blend,ptin:_alpha_blend,glob:False,v1:1;n:type:ShaderForge.SFN_Tex2d,id:1144,x:33140,y:32922,ptlb:invisible_shader,ptin:_invisible_shader,tex:10350849f8eb00847b6e7aab7bb62aa3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:1159,x:32741,y:33160|A-1144-A,B-1370-OUT,T-1142-OUT;n:type:ShaderForge.SFN_Tex2d,id:1191,x:33857,y:33286,ptlb:openMask,ptin:_openMask,tex:9fdf68b668e374e6fb035921a2cfc576,ntxv:0,isnm:False;n:type:ShaderForge.SFN_ValueProperty,id:1198,x:33857,y:33473,ptlb:open,ptin:_open,glob:False,v1:0;n:type:ShaderForge.SFN_Clamp01,id:1262,x:33123,y:33316|IN-1434-OUT;n:type:ShaderForge.SFN_Add,id:1303,x:33649,y:33483|A-1191-A,B-1198-OUT;n:type:ShaderForge.SFN_Tex2d,id:1337,x:33123,y:33473,ptlb:neg_corner_mask,ptin:_neg_corner_mask,tex:8bec0de97584248559c6443ea92110dc,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Floor,id:1358,x:33465,y:33483|IN-1303-OUT;n:type:ShaderForge.SFN_Subtract,id:1370,x:32953,y:33316|A-1262-OUT,B-1337-A;n:type:ShaderForge.SFN_If,id:1431,x:33465,y:33316|A-1303-OUT,B-1433-OUT,GT-1191-A,EQ-1191-A,LT-1144-A;n:type:ShaderForge.SFN_ValueProperty,id:1433,x:33465,y:33256,ptlb:rt_edge_smooth,ptin:_rt_edge_smooth,glob:False,v1:0.985;n:type:ShaderForge.SFN_Add,id:1434,x:33295,y:33402|A-1431-OUT,B-1358-OUT;n:type:ShaderForge.SFN_Multiply,id:1447,x:32713,y:32690|A-1456-RGB,B-121-OUT;n:type:ShaderForge.SFN_Color,id:1456,x:32890,y:32645,ptlb:TintColor,ptin:_TintColor,glob:False,c1:1,c2:1,c3:1,c4:1;proporder:1101-1126-1132-1142-1144-1191-1198-1337-1433-1456;pass:END;sub:END;*/
+/*SF_DATA;ver:0.32;sub:START;pass:START;ps:flbk:,lico:1,lgpr:1,nrmq:1,limd:1,uamb:True,mssp:True,lmpd:False,lprd:False,enco:False,frtr:True,vitr:True,dbil:False,rmgx:True,hqsc:True,hqlp:False,blpr:1,bsrc:3,bdst:7,culm:0,dpts:2,wrdp:False,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,ofsf:0,ofsu:0,f2p0:False;n:type:ShaderForge.SFN_Final,id:1,x:32457,y:32690|diff-1447-OUT,alpha-1159-OUT;n:type:ShaderForge.SFN_Tex2d,id:12,x:33140,y:32645,tex:deca4b74a27d39a47a7bf2876513e462,ntxv:0,isnm:False|TEX-1126-TEX;n:type:ShaderForge.SFN_Lerp,id:121,x:32890,y:32792|A-12-RGB,B-122-RGB,T-1101-OUT;n:type:ShaderForge.SFN_Tex2d,id:122,x:33140,y:32767,tex:4ea2a300cf25896498655b95016bb042,ntxv:0,isnm:False|TEX-1132-TEX;n:type:ShaderForge.SFN_ValueProperty,id:1101,x:32962,y:33002,ptlb:Blend,ptin:_Blend,glob:False,v1:0;n:type:ShaderForge.SFN_Tex2dAsset,id:1126,x:33347,y:32651,ptlb:yellow_asset,ptin:_yellow_asset,glob:False,tex:deca4b74a27d39a47a7bf2876513e462;n:type:ShaderForge.SFN_Tex2dAsset,id:1132,x:33347,y:32830,ptlb:organe_asset,ptin:_organe_asset,glob:False,tex:4ea2a300cf25896498655b95016bb042;n:type:ShaderForge.SFN_ValueProperty,id:1142,x:32741,y:33316,ptlb:alpha_blend,ptin:_alpha_blend,glob:False,v1:1;n:type:ShaderForge.SFN_Tex2d,id:1144,x:33140,y:32922,ptlb:invisible_shader,ptin:_invisible_shader,tex:10350849f8eb00847b6e7aab7bb62aa3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:1159,x:32741,y:33160|A-1144-A,B-1370-OUT,T-1142-OUT;n:type:ShaderForge.SFN_Tex2d,id:1191,x:33857,y:33286,ptlb:openMask,ptin:_openMask,tex:9fdf68b668e374e6fb035921a2cfc576,ntxv:0,isnm:False;n:type:ShaderForge.SFN_ValueProperty,id:1198,x:33857,y:33473,ptlb:open,ptin:_open,glob:False,v1:0.5733331;n:type:ShaderForge.SFN_Clamp01,id:1262,x:33123,y:33316|IN-1434-OUT;n:type:ShaderForge.SFN_Add,id:1303,x:33649,y:33483|A-1191-A,B-1198-OUT;n:type:ShaderForge.SFN_Tex2d,id:1337,x:33123,y:33473,ptlb:neg_corner_mask,ptin:_neg_corner_mask,tex:8bec0de97584248559c6443ea92110dc,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Floor,id:1358,x:33465,y:33483|IN-1303-OUT;n:type:ShaderForge.SFN_Subtract,id:1370,x:32948,y:33386|A-1262-OUT,B-1337-A;n:type:ShaderForge.SFN_If,id:1431,x:33465,y:33316|A-1303-OUT,B-1433-OUT,GT-1191-A,EQ-1191-A,LT-1144-A;n:type:ShaderForge.SFN_ValueProperty,id:1433,x:33465,y:33256,ptlb:rt_edge_smooth,ptin:_rt_edge_smooth,glob:False,v1:0.985;n:type:ShaderForge.SFN_Add,id:1434,x:33295,y:33402|A-1431-OUT,B-1358-OUT;n:type:ShaderForge.SFN_Multiply,id:1447,x:32713,y:32690|A-1456-RGB,B-121-OUT;n:type:ShaderForge.SFN_Color,id:1456,x:32890,y:32645,ptlb:TintColor,ptin:_TintColor,glob:False,c1:1,c2:1,c3:1,c4:1;proporder:1101-1126-1132-1142-1144-1191-1198-1337-1433-1456;pass:END;sub:END;*/
 
 Shader "Mine/GradientMask" {
     Properties {
@@ -11,7 +11,7 @@ Shader "Mine/GradientMask" {
         _alpha_blend ("alpha_blend", Float ) = 1
         _invisible_shader ("invisible_shader", 2D) = "white" {}
         _openMask ("openMask", 2D) = "white" {}
-        _open ("open", Float ) = 0
+        _open ("open", Float ) = 0.5733331
         _neg_corner_mask ("neg_corner_mask", 2D) = "white" {}
         _rt_edge_smooth ("rt_edge_smooth", Float ) = 0.985
         _TintColor ("TintColor", Color) = (1,1,1,1)
@@ -82,15 +82,15 @@ Shader "Mine/GradientMask" {
                 float3 diffuse = max( 0.0, NdotL) * attenColor + UNITY_LIGHTMODEL_AMBIENT.xyz;
                 float3 finalColor = 0;
                 float3 diffuseLight = diffuse;
-                float2 node_1482 = i.uv0;
-                finalColor += diffuseLight * (_TintColor.rgb*lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1482.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1482.rg, _organe_asset)).rgb,_Blend));
-                float4 node_1144 = tex2D(_invisible_shader,TRANSFORM_TEX(node_1482.rg, _invisible_shader));
-                float4 node_1191 = tex2D(_openMask,TRANSFORM_TEX(node_1482.rg, _openMask));
+                float2 node_1550 = i.uv0;
+                finalColor += diffuseLight * (_TintColor.rgb*lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1550.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1550.rg, _organe_asset)).rgb,_Blend));
+                float4 node_1144 = tex2D(_invisible_shader,TRANSFORM_TEX(node_1550.rg, _invisible_shader));
+                float4 node_1191 = tex2D(_openMask,TRANSFORM_TEX(node_1550.rg, _openMask));
                 float node_1303 = (node_1191.a+_open);
                 float node_1431_if_leA = step(node_1303,_rt_edge_smooth);
                 float node_1431_if_leB = step(_rt_edge_smooth,node_1303);
 /// Final Color:
-                return fixed4(finalColor,lerp(node_1144.a,(saturate((lerp((node_1431_if_leA*node_1144.a)+(node_1431_if_leB*node_1191.a),node_1191.a,node_1431_if_leA*node_1431_if_leB)+floor(node_1303)))-tex2D(_neg_corner_mask,TRANSFORM_TEX(node_1482.rg, _neg_corner_mask)).a),_alpha_blend));
+                return fixed4(finalColor,lerp(node_1144.a,(saturate((lerp((node_1431_if_leA*node_1144.a)+(node_1431_if_leB*node_1191.a),node_1191.a,node_1431_if_leA*node_1431_if_leB)+floor(node_1303)))-tex2D(_neg_corner_mask,TRANSFORM_TEX(node_1550.rg, _neg_corner_mask)).a),_alpha_blend));
             }
             ENDCG
         }
@@ -157,15 +157,15 @@ Shader "Mine/GradientMask" {
                 float3 diffuse = max( 0.0, NdotL) * attenColor;
                 float3 finalColor = 0;
                 float3 diffuseLight = diffuse;
-                float2 node_1483 = i.uv0;
-                finalColor += diffuseLight * (_TintColor.rgb*lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1483.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1483.rg, _organe_asset)).rgb,_Blend));
-                float4 node_1144 = tex2D(_invisible_shader,TRANSFORM_TEX(node_1483.rg, _invisible_shader));
-                float4 node_1191 = tex2D(_openMask,TRANSFORM_TEX(node_1483.rg, _openMask));
+                float2 node_1551 = i.uv0;
+                finalColor += diffuseLight * (_TintColor.rgb*lerp(tex2D(_yellow_asset,TRANSFORM_TEX(node_1551.rg, _yellow_asset)).rgb,tex2D(_organe_asset,TRANSFORM_TEX(node_1551.rg, _organe_asset)).rgb,_Blend));
+                float4 node_1144 = tex2D(_invisible_shader,TRANSFORM_TEX(node_1551.rg, _invisible_shader));
+                float4 node_1191 = tex2D(_openMask,TRANSFORM_TEX(node_1551.rg, _openMask));
                 float node_1303 = (node_1191.a+_open);
                 float node_1431_if_leA = step(node_1303,_rt_edge_smooth);
                 float node_1431_if_leB = step(_rt_edge_smooth,node_1303);
 /// Final Color:
-                return fixed4(finalColor * lerp(node_1144.a,(saturate((lerp((node_1431_if_leA*node_1144.a)+(node_1431_if_leB*node_1191.a),node_1191.a,node_1431_if_leA*node_1431_if_leB)+floor(node_1303)))-tex2D(_neg_corner_mask,TRANSFORM_TEX(node_1483.rg, _neg_corner_mask)).a),_alpha_blend),0);
+                return fixed4(finalColor * lerp(node_1144.a,(saturate((lerp((node_1431_if_leA*node_1144.a)+(node_1431_if_leB*node_1191.a),node_1191.a,node_1431_if_leA*node_1431_if_leB)+floor(node_1303)))-tex2D(_neg_corner_mask,TRANSFORM_TEX(node_1551.rg, _neg_corner_mask)).a),_alpha_blend),0);
             }
             ENDCG
         }

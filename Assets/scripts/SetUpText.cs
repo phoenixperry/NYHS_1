@@ -87,41 +87,41 @@ public class SetUpText : MonoBehaviour {
 		if (spawnState) {
 			spawn();
 		}
-		if (fadeInState) {
-			fadeIn();
-		}
-		if (moveToCenterState) {
-			moveToCenter();
-		}
-		if (returnToOriginState) {
-			returnToOrigin();
-		}
-		if (animateOpenState) {
-			doOpenAnimation();
-		}
-		if (bodyTextAppearState) {
-			doBodyTextAppear();
-		}
-		if (animateCloseState) {
-			doCloseAnimation();
-		}
-		if (colorChangeDelayState) {
-			colorChangeDelay();
-		}
-		if (fadeOutDelayState) {
-			fadeOutDelay();
-		}
-		if (fadeOutState) {
-			fadeOut();
-		}
-		if(fadeBoxUp) 
-		{
-			fadeBoxIn(); 
-		}
-		if(fadeBoxDown) 
-		{
-			fadeBoxOut(); 
-		}
+//		if (fadeInState) {
+//			fadeIn();
+//		}
+//		if (moveToCenterState) {
+//			moveToCenter();
+//		}
+//		if (returnToOriginState) {
+//			returnToOrigin();
+//		}
+//		if (animateOpenState) {
+//			doOpenAnimation();
+//		}
+//		if (bodyTextAppearState) {
+//			doBodyTextAppear();
+//		}
+//		if (animateCloseState) {
+//			doCloseAnimation();
+//		}
+//		if (colorChangeDelayState) {
+//			colorChangeDelay();
+//		}
+//		if (fadeOutDelayState) {
+//			fadeOutDelay();
+//		}
+//		if (fadeOutState) {
+//			fadeOut();
+//		}
+//		if(fadeBoxUp) 
+//		{
+//			fadeBoxIn(); 
+//		}
+//		if(fadeBoxDown) 
+//		{
+//			fadeBoxOut(); 
+//		}
 	}
 	private float alpha_time = 0.0f; 
 	private float alpha_duration = 300.0f; 
@@ -488,6 +488,9 @@ public class SetUpText : MonoBehaviour {
 
 	public IEnumerator fadeOut( float duration = -1.0f) {
 		fadeOutState = true;
+		m.fgPlanes.Remove(gameObject);
+		m.bgPlanes.Remove(gameObject);
+		m.RecyclePerson(p);
 		Component[] faders;
 		faders = GetComponentsInChildren<SmoothAlpha>();
 		foreach (SmoothAlpha fader in faders) {
@@ -499,9 +502,6 @@ public class SetUpText : MonoBehaviour {
 			transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, Easing.EaseIn( t/duration, fadeOutScaleEaseType) );
 			yield return 0;
 		}
-		m.fgPlanes.Remove(gameObject);
-		m.bgPlanes.Remove(gameObject);
-		m.RecyclePerson(p);
 		sp.occupied = false;
 		Destroy(gameObject, 1.0f);
 		fadeOutState = false;

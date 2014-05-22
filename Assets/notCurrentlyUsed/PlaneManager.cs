@@ -305,10 +305,8 @@ public class PlaneManager : MonoBehaviour {
 		yield return new WaitForSeconds(Random.Range(removeBgDelay_Min, removeBgDelay_Max));
 
 		if (bgPlanes.Count > 0 && !dimmedBackgroundNodes) {
-//			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
 			GameObject plane = bgPlanes[0] as GameObject;
 			StartCoroutine(plane.GetComponent<SetUpText>().fadeOut(plane.GetComponent<SetUpText>().fadeOutTimer));
-//			plane.GetComponent<SetUpText>().fadeOut(plane.GetComponent<SetUpText>().fadeOutTimer);
 		}
 
 		StartCoroutine(TryToRemoveBG());

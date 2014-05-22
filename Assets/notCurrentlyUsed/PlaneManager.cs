@@ -30,8 +30,8 @@ public class PlaneManager : MonoBehaviour {
 	public float removeBgDelay_Max = 10.0f;
 	public float spawnFgDelay_Min = 4.0f;
 	public float spawnFgDelay_Max = 10.0f;
-	public static int numBgPlanes = 30;
-	public static int numPlanes = 10; //refractor to be numFgPlanes
+	public static int numBgPlanes = 40;
+	public static int numPlanes = 20; //refractor to be numFgPlanes
 	public float radius = 8;
 	public float radiusX = 10;
 	public float startAngle, range;
@@ -103,8 +103,8 @@ public class PlaneManager : MonoBehaviour {
 			//testAddfgPlaneData();
 		}
 		//will allow for new positions to be written while Unity is running 
-		//		if(Input.GetKeyDown(KeyCode.R))
-		//			 SaveNodes();
+				if(Input.GetKeyDown(KeyCode.R))
+					 SaveNodes();
 		
 	}
 	

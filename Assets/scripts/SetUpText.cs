@@ -19,6 +19,7 @@ public class SetUpText : MonoBehaviour {
 	public GameObject locationTextObject;
 	public GameObject bodyTextObject;
 	public GameObject photoObject;
+	public TextureFormat photoImportFormat = TextureFormat.DXT5;
 	Vector3 scaleRatio;
 
 	public SpawnPoint sp;
@@ -192,7 +193,7 @@ public class SetUpText : MonoBehaviour {
 	private Texture2D LoadPhoto(string path) {
 		WWW www = new WWW(path);
 		while (!www.isDone); // wait for file load to complete
-		Texture2D img = new Texture2D(1024, 1024, TextureFormat.ARGB32, false);
+		Texture2D img = new Texture2D(1024, 1024, photoImportFormat, false);
 		www.LoadImageIntoTexture(img);
 		return img;
 	}

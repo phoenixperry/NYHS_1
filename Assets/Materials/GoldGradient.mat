@@ -31,7 +31,7 @@ Material:
         first:
           name: _organe_asset
         second:
-          m_Texture: {fileID: 2800000, guid: 4ea2a300cf25896498655b95016bb042, type: 3}
+          m_Texture: {fileID: 2800000, guid: 253a1ce48002f7542b447920e66dcce6, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:

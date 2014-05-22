@@ -19,7 +19,7 @@ public class SetUpText : MonoBehaviour {
 	public GameObject locationTextObject;
 	public GameObject bodyTextObject;
 	public GameObject photoObject;
-	public TextureFormat photoImportFormat = TextureFormat.DXT5;
+	public TextureFormat photoImportFormat = TextureFormat.ARGB32;
 	Vector3 scaleRatio;
 
 	public SpawnPoint sp;
@@ -180,6 +180,8 @@ public class SetUpText : MonoBehaviour {
 		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
 
 		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename;
+
+
 
 		photoObject.GetComponent<Renderer>().material.SetTexture("_image", LoadPhoto(photoPath));
 

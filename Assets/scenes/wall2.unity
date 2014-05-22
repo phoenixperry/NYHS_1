@@ -491,8 +491,8 @@ MonoBehaviour:
   timeForFirstHero: 8
   spawnBgDelay_Min: 4
   spawnBgDelay_Max: 10
-  removeBgDelay_Min: 120
-  removeBgDelay_Max: 180
+  removeBgDelay_Min: 5
+  removeBgDelay_Max: 10
   spawnFgDelay_Min: 5
   spawnFgDelay_Max: 15
   radius: 8
@@ -727,6 +727,10 @@ Prefab:
     - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: animationDuration
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: openJumpStart
+      value: .800000012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
@@ -1907,6 +1911,7 @@ MonoBehaviour:
   fadeOutScaleEaseType: 3
   preFadeOutDelay: 40
   moveToCenterDuration: 4
+  openJumpStart: .800000012
   moveToCenterEaseType: 3
   colorChangeDelayDuration: .5
   animationDuration: 1.5

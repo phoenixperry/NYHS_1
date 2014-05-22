@@ -35,6 +35,7 @@ public class SetUpText : MonoBehaviour {
 	public EasingType fadeOutScaleEaseType = EasingType.Linear;
 	public float preFadeOutDelay = 5.0f;
 	public float moveToCenterDuration = 2.0f;
+	public float openJumpStart = 0.5f;
 	public EasingType moveToCenterEaseType = EasingType.Linear;
 	public float colorChangeDelayDuration = 2.0f;
 	public float animationDuration = 2.0f;
@@ -208,32 +209,52 @@ public class SetUpText : MonoBehaviour {
 		if (moveTimer >= 1.0f) {
 			moveTimer = 0.0f;
 			spawnState = false;
-			fadeIn(fadeInTimer);
+//			fadeIn(fadeInTimer);
+			StartCoroutine(fadeIn (fadeInTimer));
 		}
 	}
-	
-	public void fadeIn(float t = -1.0f) {
-		if ( fadeInState == false ) {
-			fadeInState = true;
-			
-			Component[] faders;
-			faders = GetComponentsInChildren<SmoothAlpha>();
-			foreach (SmoothAlpha fader in faders) {
-				if(fader.gameObject.name != "BodyTextMesh") {
-					fader.MakeVisible(t, 1.0f, fadeInEaseType);
-				}
+
+	public IEnumerator fadeIn( float duration = -1.0f ) {
+		fadeInState = true;
+		Component[] faders;
+		faders = GetComponentsInChildren<SmoothAlpha>();
+		foreach (SmoothAlpha fader in faders) {
+			if(fader.gameObject.name != "BodyTextMesh") {
+				fader.MakeVisible(duration, 1.0f, fadeInEaseType);
 			}
-			return;
 		}
-		moveTimer += Time.fixedDeltaTime;
-		if ( moveTimer >= fadeInTimer ) {
-			transform.localScale.Set(originalScale.x, originalScale.y, originalScale.z);
-			moveTimer = 0.0f;
-			fadeInState = false;
-			return;
+		float t = 0.0f;
+		while (t < duration) {
+			t += Time.fixedDeltaTime;
+			transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, Easing.EaseInOut(t/duration, fadeInScaleEaseType));
+			yield return 0;
 		}
-		transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, Easing.EaseInOut(moveTimer/fadeInTimer, fadeInScaleEaseType));
+		transform.localScale.Set(originalScale.x, originalScale.y, originalScale.z);
+		fadeInState = false;
 	}
+
+//	public void fadeIn(float t = -1.0f) {
+//		if ( fadeInState == false ) {
+//			fadeInState = true;
+//			
+//			Component[] faders;
+//			faders = GetComponentsInChildren<SmoothAlpha>();
+//			foreach (SmoothAlpha fader in faders) {
+//				if(fader.gameObject.name != "BodyTextMesh") {
+//					fader.MakeVisible(t, 1.0f, fadeInEaseType);
+//				}
+//			}
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if ( moveTimer >= fadeInTimer ) {
+//			transform.localScale.Set(originalScale.x, originalScale.y, originalScale.z);
+//			moveTimer = 0.0f;
+//			fadeInState = false;
+//			return;
+//		}
+//		transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, Easing.EaseInOut(moveTimer/fadeInTimer, fadeInScaleEaseType));
+//	}
 
 	public void Tint( Color color, float duration ) {
 		transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().StartTint(color, duration);
@@ -248,163 +269,266 @@ public class SetUpText : MonoBehaviour {
 		transform.Find ("LocationText").GetComponent<TintController>().UnTint(duration);
 		transform.Find ("Photo").GetComponent<TintController>().UnTint(duration);
 	}
-	
-	public void moveToCenter() {
-		if(moveToCenterState == false) {
-			moveToCenterState = true;
-			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if ( !animateOpenState && moveTimer >= moveToCenterDuration - 0.5f ) {
-			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
-//			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
-		}
-		if ( moveTimer >= moveToCenterDuration ) {
-			moveTimer = 0.0f;
-			gameObject.transform.position = centerPoint.transform.position;
-			moveToCenterState = false;
-			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
-			doOpenAnimation();
-			return;
-		}
-		transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, Easing.EaseInOut(moveTimer/moveToCenterDuration, moveToCenterEaseType));
-//		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
-	}
-	
-	
-	
-	public void doOpenAnimation() {
-		if(animateOpenState == false ) {
-			fadeBoxUp = true; 
-			animateOpenState = true;
-			m.TintNonFocusedNodes();
-//			transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().StartTint(Color.grey,1.0f);
-//			transform.Find ("NameText").GetComponent<TintController>().StartTint(Color.grey,1.0f);
-//			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
-//			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if( moveTimer >= animationDuration ) {
-			moveTimer = 0.0f;
-			animateOpenState = false;;
-			doBodyTextAppear();
-			return;
-		}
-		transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(0, 1, moveTimer/animationDuration ));
-	}
-	
-	public void doBodyTextAppear() {
-		if (bodyTextAppearState == false) {
-			bodyTextAppearState = true;
-			transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeVisible();
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if( moveTimer >= bodyTextAppearDuration ) {
-			moveTimer = 0.0f;
-			transform.Find ("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
-			bodyTextAppearState = false;
-			doCloseAnimation();
-			return;
-		}
-	}
-	
-	public void doCloseAnimation() {
-		fadeBoxDown = true; 
-		if(animateCloseState == false ) {
-			animateCloseState = true;
-			m.UnTintNonFocusedNodes();
-//			transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().UnTint(1.0f);
-//			transform.Find ("NameText").GetComponent<TintController>().UnTint(1.0f);
-//			transform.Find("openNode").GetComponent<AnimControl>().CloseNode();
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if( moveTimer >= animationDuration ) {
-			moveTimer = 0.0f;
-			animateCloseState = false;
-			colorChangeDelay();
-			return;
-		}
-		transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(1, 0, moveTimer/animationDuration ));
-	}
 
-	public void colorChangeDelay() {
-		if (colorChangeDelayState == false) {
-			colorChangeDelayState = true;
-			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if (moveTimer >= colorChangeDelayDuration) {
-			moveTimer = 0.0f;
-			colorChangeDelayState = false;
-			returnToOrigin();
-			return;
-		}
-	}
-
-	public void returnToOrigin() {
-//		Debug.Log("returnToOrigin");
-		if(returnToOriginState == false) {
-			returnToOriginState = true;
-			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if ( moveTimer >= moveToCenterDuration ) {
-			moveTimer = 0.0f;
-			gameObject.transform.position = originPos;
-			returnToOriginState = false;
-			Transform t = transform.Find("GoldPlaneTiltedUp").transform;
-			t.GetComponent<TriggerFade>().Reset();
-			t.collider.isTrigger = false;
-			fadeOutDelay();
-			return;
-		}
-		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, Easing.EaseInOut(moveTimer/moveToCenterDuration, moveToCenterEaseType));
-	}
-	
-	public void fadeOutDelay() {
-		if (fadeOutDelayState == false) {
-			fadeOutDelayState = true;
-			;
-			return;
-		}
-		moveTimer += Time.fixedDeltaTime;
-		if (moveTimer >= preFadeOutDelay) {
-			moveTimer = 0.0f;
-			fadeOutDelayState = false;
-			fadeOut (fadeOutTimer);
-			return;
-		}
-	}
-	
-	public void fadeOut(float t = -1.0f) {
-		if ( fadeOutState == false ) {
-			fadeOutState = true;
-			
-			Component[] faders;
-			faders = GetComponentsInChildren<SmoothAlpha>();
-			foreach (SmoothAlpha fader in faders) {
-				fader.MakeInvisible(t, 0.0f, fadeOutEaseType);
+	public IEnumerator moveToCenter() {
+		moveToCenterState = true;
+		transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
+		float t = 0.0f;
+		while (t < moveToCenterDuration) {
+			t += Time.fixedDeltaTime;
+			transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, Easing.EaseInOut(t/moveToCenterDuration, moveToCenterEaseType));
+			if ( !animateOpenState && t >= moveToCenterDuration - openJumpStart ) {
+				transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
+				StartCoroutine(doOpenAnimation());
 			}
-			return;
+			yield return 0;
 		}
-		moveTimer += Time.fixedDeltaTime;
-		if ( moveTimer >= fadeOutTimer ) {
-			moveTimer = 0.0f;
-			m.fgPlanes.Remove(gameObject);
-			m.bgPlanes.Remove(gameObject);
-			m.RecyclePerson(p);
-			sp.occupied = false;
-			Destroy(gameObject, 1.0f);
-			fadeOutState = false;
-			return;
-		}
-		transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, Easing.EaseIn( moveTimer/fadeOutTimer, fadeOutScaleEaseType) );
+		transform.position = centerPoint.transform.position;
+		transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
+		moveToCenterState = false;
 	}
+
+//	public void moveToCenter() {
+//		if(moveToCenterState == false) {
+//			moveToCenterState = true;
+//			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if ( !animateOpenState && moveTimer >= moveToCenterDuration - 0.5f ) {
+//			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
+//			doOpenAnimation();
+////			transform.Find("openNode").GetComponent<AnimControl>().OpenNode();
+//		}
+//		if ( moveTimer >= moveToCenterDuration ) {
+//			moveTimer = 0.0f;
+//			gameObject.transform.position = centerPoint.transform.position;
+//			moveToCenterState = false;
+//			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
+//			return;
+//		}
+//		transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, Easing.EaseInOut(moveTimer/moveToCenterDuration, moveToCenterEaseType));
+////		gameObject.transform.position = Vector3.Lerp(originPos, centerPoint.transform.position, moveTimer/moveToCenterDuration);
+//	}
+
+	public IEnumerator doOpenAnimation() {
+		animateOpenState = true;
+		float t = 0.0f;
+		m.TintNonFocusedNodes();
+		while (t < animationDuration) {
+			t += Time.fixedDeltaTime;
+			transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(0, 1, t/animationDuration ));
+			yield return 0;
+		}
+		animateOpenState = false;;
+		StartCoroutine(doBodyTextAppear());
+	}
+
+//	public void doOpenAnimation() {
+//		if(animateOpenState == false ) {
+//			fadeBoxUp = true; 
+//			animateOpenState = true;
+//			m.TintNonFocusedNodes();
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if( moveTimer >= animationDuration ) {
+//			moveTimer = 0.0f;
+//			animateOpenState = false;;
+//			doBodyTextAppear();
+//			return;
+//		}
+//		transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(0, 1, moveTimer/animationDuration ));
+//	}
+
+	public IEnumerator doBodyTextAppear() {
+		bodyTextAppearState = true;
+//		float t = 0.0f;
+		transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeVisible();
+		yield return new WaitForSeconds(bodyTextAppearDuration);
+		transform.Find ("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
+		bodyTextAppearState = false;
+		StartCoroutine( doCloseAnimation() );
+		StartCoroutine( colorChangeDelay() );
+		StartCoroutine( returnToOrigin() );
+	}
+
+//	public void doBodyTextAppear() {
+//		if (bodyTextAppearState == false) {
+//			bodyTextAppearState = true;
+//			transform.Find("BodyTextMesh").GetComponent<SmoothAlpha>().MakeVisible();
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if( moveTimer >= bodyTextAppearDuration ) {
+//			moveTimer = 0.0f;
+//			transform.Find ("BodyTextMesh").GetComponent<SmoothAlpha>().MakeInvisible();
+//			bodyTextAppearState = false;
+//			doCloseAnimation();
+//			colorChangeDelay();
+//			returnToOrigin();
+//			return;
+//		}
+//	}
+
+	public IEnumerator doCloseAnimation() {
+		animateCloseState = true;
+		m.UnTintNonFocusedNodes();
+		float t = 0.0f;
+		while (t < animationDuration) {
+			t += Time.deltaTime;
+			transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(1, 0, t/animationDuration ));
+			yield return 0;
+		}
+		animateCloseState = false;
+	}
+
+//	public void doCloseAnimation() {
+//		fadeBoxDown = true; 
+//		if(animateCloseState == false ) {
+//			animateCloseState = true;
+//			m.UnTintNonFocusedNodes();
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if( moveTimer >= animationDuration ) {
+//			moveTimer = 0.0f;
+//			animateCloseState = false;
+////			colorChangeDelay();
+//			return;
+//		}
+//		transform.FindChild("GoldPlaneTiltedUp").renderer.material.SetFloat("_open", Mathf.Lerp(1, 0, moveTimer/animationDuration ));
+//	}
+
+	public IEnumerator colorChangeDelay() {
+		colorChangeDelayState = true;
+		transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
+		yield return new WaitForSeconds(colorChangeDelayDuration);
+		colorChangeDelayState = false;
+	}
+
+//	public void colorChangeDelay() {
+//		if (colorChangeDelayState == false) {
+//			colorChangeDelayState = true;
+//			transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if (moveTimer >= colorChangeDelayDuration) {
+//			moveTimer = 0.0f;
+//			colorChangeDelayState = false;
+////			returnToOrigin();
+//			return;
+//		}
+//	}
+
+	public IEnumerator returnToOrigin() {
+		returnToOriginState = true;
+		transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
+		float t = 0.0f;
+		while (t < moveToCenterDuration) {
+			t += Time.fixedDeltaTime;
+			transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, Easing.EaseInOut(t/moveToCenterDuration, moveToCenterEaseType));
+//			if ( !animateOpenState && t >= moveToCenterDuration - 0.5f ) {
+//				transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeOrange();
+//			}
+			yield return 0;
+		}
+		transform.position = originPos;
+		transform.Find("GoldPlaneTiltedUp").collider.isTrigger = false;
+		returnToOriginState = false;
+		Transform tf = transform.Find("GoldPlaneTiltedUp").transform;
+		tf.GetComponent<TriggerFade>().Reset();
+		tf.collider.isTrigger = false;
+		StartCoroutine(fadeOutDelay());
+	}
+
+//	public void returnToOrigin() {
+////		Debug.Log("returnToOrigin");
+//		if(returnToOriginState == false) {
+//			returnToOriginState = true;
+//			transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if ( moveTimer >= moveToCenterDuration ) {
+//			moveTimer = 0.0f;
+//			gameObject.transform.position = originPos;
+//			returnToOriginState = false;
+//			Transform t = transform.Find("GoldPlaneTiltedUp").transform;
+//			t.GetComponent<TriggerFade>().Reset();
+//			t.collider.isTrigger = false;
+//			fadeOutDelay();
+//			return;
+//		}
+//		gameObject.transform.position = Vector3.Lerp(centerPoint.transform.position, originPos, Easing.EaseInOut(moveTimer/moveToCenterDuration, moveToCenterEaseType));
+//	}
+
+	public IEnumerator fadeOutDelay() {
+		fadeOutDelayState = true;
+		yield return new WaitForSeconds(preFadeOutDelay);
+		fadeOutDelayState = false;
+		StartCoroutine(fadeOut (fadeOutTimer));
+	}
+
+//	public void fadeOutDelay() {
+//		if (fadeOutDelayState == false) {
+//			fadeOutDelayState = true;
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if (moveTimer >= preFadeOutDelay) {
+//			moveTimer = 0.0f;
+//			fadeOutDelayState = false;
+//			fadeOut (fadeOutTimer);
+//			return;
+//		}
+//	}
+
+	public IEnumerator fadeOut( float duration = -1.0f) {
+		fadeOutState = true;
+		Component[] faders;
+		faders = GetComponentsInChildren<SmoothAlpha>();
+		foreach (SmoothAlpha fader in faders) {
+			fader.MakeInvisible(duration, 0.0f, fadeOutEaseType);
+		}
+		float t = 0.0f;
+		while ( t < duration ) {
+			t += Time.fixedDeltaTime;
+			transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, Easing.EaseIn( t/duration, fadeOutScaleEaseType) );
+			yield return 0;
+		}
+		m.fgPlanes.Remove(gameObject);
+		m.bgPlanes.Remove(gameObject);
+		m.RecyclePerson(p);
+		sp.occupied = false;
+		Destroy(gameObject, 1.0f);
+		fadeOutState = false;
+	}
+
+//	public void fadeOut(float t = -1.0f) {
+//		if ( fadeOutState == false ) {
+//			fadeOutState = true;
+//			
+//			Component[] faders;
+//			faders = GetComponentsInChildren<SmoothAlpha>();
+//			foreach (SmoothAlpha fader in faders) {
+//				fader.MakeInvisible(t, 0.0f, fadeOutEaseType);
+//			}
+//			return;
+//		}
+//		moveTimer += Time.fixedDeltaTime;
+//		if ( moveTimer >= fadeOutTimer ) {
+//			moveTimer = 0.0f;
+//			m.fgPlanes.Remove(gameObject);
+//			m.bgPlanes.Remove(gameObject);
+//			m.RecyclePerson(p);
+//			sp.occupied = false;
+//			Destroy(gameObject, 1.0f);
+//			fadeOutState = false;
+//			return;
+//		}
+//		transform.localScale = Vector3.Lerp (originalScale, fadeOutScalar * originalScale, Easing.EaseIn( moveTimer/fadeOutTimer, fadeOutScaleEaseType) );
+//	}
 	
 }

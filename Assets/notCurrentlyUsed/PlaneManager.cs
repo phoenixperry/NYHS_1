@@ -183,7 +183,7 @@ public class PlaneManager : MonoBehaviour {
 	
 	public void FocusOnHero(GameObject hero)
 	{
-		hero.GetComponent<SetUpText>().moveToCenter();
+		StartCoroutine(hero.GetComponent<SetUpText>().moveToCenter());
 	}
 
 	public void TintNonFocusedNodes() {
@@ -261,11 +261,12 @@ public class PlaneManager : MonoBehaviour {
 	}
 
 	public IEnumerator TryToSpawnBG() {
-		float t = Random.Range(spawnBgDelay_Min, spawnBgDelay_Max);
-		while (t > 0.0f) {
-			t -= Time.fixedDeltaTime;
-			yield return 0;
-		}
+//		float t = Random.Range(spawnBgDelay_Min, spawnBgDelay_Max);
+//		while (t > 0.0f) {
+//			t -= Time.fixedDeltaTime;
+//			yield return 0;
+//		}
+		yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min, spawnBgDelay_Max));
 		Debug.Log ("Try To Spawn BG");
 		if (bgPlanes.Count < numBgPlanes && !dimmedBackgroundNodes) {
 			Debug.Log ("OK to spawn BG");
@@ -281,11 +282,12 @@ public class PlaneManager : MonoBehaviour {
 	}
 	
 	public IEnumerator TryToSpawnFG() {
-		float t = Random.Range(spawnFgDelay_Min, spawnFgDelay_Max);
-		while (t > 0.0f) {
-			t -= Time.fixedDeltaTime;
-			yield return 0;
-		}
+//		float t = Random.Range(spawnFgDelay_Min, spawnFgDelay_Max);
+//		while (t > 0.0f) {
+//			t -= Time.fixedDeltaTime;
+//			yield return 0;
+//		}
+		yield return new WaitForSeconds(Random.Range(spawnFgDelay_Min, spawnFgDelay_Max));
 		Debug.Log("Try To Spawn FG");
 		if (fgPlanes.Count < numPlanes && !dimmedBackgroundNodes) {
 			Debug.Log ("OK to spawn FG");
@@ -300,16 +302,13 @@ public class PlaneManager : MonoBehaviour {
 	}
 	
 	public IEnumerator TryToRemoveBG() {
+		yield return new WaitForSeconds(Random.Range(removeBgDelay_Min, removeBgDelay_Max));
 
-		float t = Random.Range(removeBgDelay_Min, removeBgDelay_Max);
-		while (t > 0.0f) {
-			t -= Time.fixedDeltaTime;
-			yield return 0;
-		}
-
-		if (bgPlanes.Count > 0) {
-			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
-			plane.GetComponent<SetUpText>().fadeOut(plane.GetComponent<SetUpText>().fadeOutTimer);
+		if (bgPlanes.Count > 0 && !dimmedBackgroundNodes) {
+//			GameObject plane = bgPlanes[Random.Range(0, bgPlanes.Count-1)] as GameObject;
+			GameObject plane = bgPlanes[0] as GameObject;
+			StartCoroutine(plane.GetComponent<SetUpText>().fadeOut(plane.GetComponent<SetUpText>().fadeOutTimer));
+//			plane.GetComponent<SetUpText>().fadeOut(plane.GetComponent<SetUpText>().fadeOutTimer);
 		}
 
 		StartCoroutine(TryToRemoveBG());

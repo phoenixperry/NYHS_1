@@ -732,6 +732,14 @@ Prefab:
       propertyPath: openJumpStart
       value: .800000012
       objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: .785172999
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: .764994085
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
   m_RootGameObject: {fileID: 2100995417}
@@ -1625,7 +1633,7 @@ Transform:
   m_GameObject: {fileID: 1940097205}
   m_LocalRotation: {x: -3.09086303e-08, y: .707106829, z: -.707106829, w: -3.09086268e-08}
   m_LocalPosition: {x: 0, y: .660757184, z: -.0263850894}
-  m_LocalScale: {x: .764994144, y: .785172999, z: .785172999}
+  m_LocalScale: {x: .785172999, y: .764994085, z: .785172999}
   m_Children: []
   m_Father: {fileID: 2100995418}
 --- !u!114 &1940097210
@@ -1898,6 +1906,7 @@ MonoBehaviour:
   locationTextObject: {fileID: 476237917}
   bodyTextObject: {fileID: 852402486}
   photoObject: {fileID: 1940097205}
+  photoImportFormat: 12
   originPos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 1642384391}

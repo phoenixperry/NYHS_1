@@ -488,9 +488,9 @@ MonoBehaviour:
   foregroundZCutoff: 35
   dimColor: {r: .392156869, g: .392156869, b: .392156869, a: 1}
   timeBetweenHeroes: 65
-  timeForFirstHero: 8
-  spawnBgDelay_Min: 4
-  spawnBgDelay_Max: 10
+  timeForFirstHero: 15
+  spawnBgDelay_Min: 2
+  spawnBgDelay_Max: 6
   removeBgDelay_Min: 5
   removeBgDelay_Max: 10
   spawnFgDelay_Min: 5

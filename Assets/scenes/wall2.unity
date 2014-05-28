@@ -114,7 +114,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
 --- !u!114 &232047517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,8 +202,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!64 &366014396
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -236,7 +236,6 @@ Transform:
   m_LocalScale: {x: 1.49000001, y: 1, z: 1.05004001}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
 --- !u!1 &399893328
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,8 +273,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!65 &399893330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -306,7 +306,6 @@ Transform:
   m_LocalScale: {x: 1.19472134, y: .626958728, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
 --- !u!114 &399893333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +351,6 @@ Transform:
   m_LocalScale: {x: 2.20000005, y: 2.20000005, z: 2.20000005}
   m_Children: []
   m_Father: {fileID: 2100995418}
-  m_RootOrder: 2
 --- !u!102 &476237919
 TextMesh:
   serializedVersion: 3
@@ -394,8 +392,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!114 &476237921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,7 +514,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
 --- !u!114 &556769847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +558,6 @@ Transform:
   m_LocalScale: {x: 2.20000005, y: 2.20000005, z: 2.20000005}
   m_Children: []
   m_Father: {fileID: 2100995418}
-  m_RootOrder: 0
 --- !u!114 &852402488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,8 +617,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!114 &852402491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +698,7 @@ Prefab:
       objectReference: {fileID: 1642384391}
     - target: {fileID: 100012, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -806,8 +804,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_Sprite: {fileID: 21300000, guid: 68541885d1c844a1ca7454497cde1133, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &905923904
@@ -821,7 +820,6 @@ Transform:
   m_LocalScale: {x: 8, y: 8, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!114 &905923905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,8 +1039,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &1190961635
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1062,7 +1061,6 @@ Transform:
   m_LocalScale: {x: 1.79999995, y: 1.02363396, z: 1.02363396}
   m_Children: []
   m_Father: {fileID: 2100995418}
-  m_RootOrder: 1
 --- !u!114 &1190961637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,8 +1135,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!4 &1410316455
 Transform:
   m_ObjectHideFlags: 0
@@ -1150,7 +1149,6 @@ Transform:
   m_LocalScale: {x: 2.20000005, y: 2.20000005, z: 2.20000005}
   m_Children: []
   m_Father: {fileID: 2100995418}
-  m_RootOrder: 3
 --- !u!114 &1410316456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,8 +1247,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!65 &1487349973
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1283,7 +1282,6 @@ Transform:
   m_LocalScale: {x: 182.547455, y: 106.438171, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
 --- !u!1 &1558035221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,7 +1309,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!114 &1558035223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,7 +1350,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
 --- !u!1 &1654057357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,11 +1421,8 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
 --- !u!4 &1654057362
 Transform:
   m_ObjectHideFlags: 0
@@ -1441,7 +1434,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
 --- !u!114 &1654057363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1521,7 +1513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &1667985666
 Animator:
-  serializedVersion: 3
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 9500000, guid: 97b8b6872cac643bb85ba089a9a5de5b,
     type: 2}
@@ -1531,8 +1523,8 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5148aa9e2ee9a57439c2258fe98496e5, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
   m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!212 &1667985667
 SpriteRenderer:
@@ -1553,8 +1545,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
   m_Sprite: {fileID: 21300000, guid: ef7fe9d084e0ba4468626650e66f2033, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1667985668
@@ -1568,7 +1561,6 @@ Transform:
   m_LocalScale: {x: 2.1699481, y: 2.46585059, z: 2.46585059}
   m_Children: []
   m_Father: {fileID: 2100995418}
-  m_RootOrder: 4
 --- !u!1 &1923783755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,7 +1623,6 @@ Transform:
   m_LocalScale: {x: 1.09588003, y: 1.09588003, z: 1.09588003}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
 --- !u!1 &1940097205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,8 +1663,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!114 &1940097207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1704,7 +1696,6 @@ Transform:
   m_LocalScale: {x: .785172999, y: .764994085, z: .785172999}
   m_Children: []
   m_Father: {fileID: 2100995418}
-  m_RootOrder: 5
 --- !u!114 &1940097210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,7 +1749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2100995418
 Transform:
   m_ObjectHideFlags: 0
@@ -1776,7 +1767,6 @@ Transform:
   - {fileID: 1667985668}
   - {fileID: 1940097209}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!114 &2100995419
 MonoBehaviour:
   m_ObjectHideFlags: 0

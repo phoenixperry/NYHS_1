@@ -55,12 +55,12 @@ Material:
         second: .5
       data:
         first:
-          name: _alpha_blend
-        second: 1
-      data:
-        first:
           name: _Blend
         second: 0
+      data:
+        first:
+          name: _alpha_blend
+        second: 1
       data:
         first:
           name: _open

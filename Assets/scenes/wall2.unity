@@ -1906,7 +1906,7 @@ MonoBehaviour:
   locationTextObject: {fileID: 476237917}
   bodyTextObject: {fileID: 852402486}
   photoObject: {fileID: 1940097205}
-  photoImportFormat: 12
+  photoImportFormat: 5
   originPos: {x: 0, y: 0, z: 0}
   posLerp: {x: 0, y: 0, z: 0}
   centerPoint: {fileID: 1642384391}

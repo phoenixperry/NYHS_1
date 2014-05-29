@@ -58,6 +58,7 @@ public class PlaneManager : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+		Screen.showCursor = false;
 		heroTimer = timeBetweenHeroes - timeForFirstHero;
 		loadNodePositions();
 		StartCoroutine(InitBackgroundPanels());

@@ -124,39 +124,40 @@ public class SetUpText : MonoBehaviour {
 //		}
 	}
 	private float alpha_time = 0.0f; 
-	private float alpha_duration = 300.0f; 
-	public void fadeBoxIn()
-	{
-		Color fadedUpColor = new Color(0.0f, 0.0f, 0.0f, 1.0f); 
-		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
-		if(col.a < 0.4f) 
-		{
-			col = Color.Lerp(col, fadedUpColor, alpha_time); 
-			alpha_time += Time.deltaTime/alpha_duration; 
-			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+	private float alpha_duration = 300.0f;
 
-		}
-		else {
-			fadeBoxUp = false;
-			alpha_time = 0.0f; 
-		} 
-	}
-
-	public void fadeBoxOut()
-	{
-		Color fadedOutColor = new Color(0.0f, 0.0f, 0.0f, 0.0f); 
-		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
-		if(col.a > 0.0f) 
-		{
-			col = Color.Lerp(col, fadedOutColor, alpha_time); 
-			alpha_time += Time.deltaTime/alpha_duration; 
-			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
-			
-		}
-		else {
-			fadeBoxDown = false;
-		} 
-	}
+//	public void fadeBoxIn()
+//	{
+//		Color fadedUpColor = new Color(0.0f, 0.0f, 0.0f, 1.0f); 
+//		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
+//		if(col.a < 0.4f) 
+//		{
+//			col = Color.Lerp(col, fadedUpColor, alpha_time); 
+//			alpha_time += Time.deltaTime/alpha_duration; 
+//			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+//
+//		}
+//		else {
+//			fadeBoxUp = false;
+//			alpha_time = 0.0f; 
+//		} 
+//	}
+//
+//	public void fadeBoxOut()
+//	{
+//		Color fadedOutColor = new Color(0.0f, 0.0f, 0.0f, 0.0f); 
+//		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
+//		if(col.a > 0.0f) 
+//		{
+//			col = Color.Lerp(col, fadedOutColor, alpha_time); 
+//			alpha_time += Time.deltaTime/alpha_duration; 
+//			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
+//			
+//		}
+//		else {
+//			fadeBoxDown = false;
+//		} 
+//	}
 
 	void GetData() {
 		

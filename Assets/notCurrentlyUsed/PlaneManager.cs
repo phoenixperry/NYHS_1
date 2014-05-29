@@ -96,13 +96,14 @@ public class PlaneManager : MonoBehaviour {
 				heroInFocus = fgPlanes[0] as GameObject;
 				FocusOnHero(heroInFocus);
 				fgPlanes.RemoveAt(0);
+				fgPlanes.Insert(fgPlanes.Count, heroInFocus);
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			//loadNodePositions(); 
-			//testAddfgPlaneData();
-		}
+//		if (Input.GetKeyDown(KeyCode.Space))
+//		{
+//			loadNodePositions(); 
+//			testAddfgPlaneData();
+//		}
 		//will allow for new positions to be written while Unity is running 
 		if(Input.GetKeyDown(KeyCode.R))
 			SaveNodes();

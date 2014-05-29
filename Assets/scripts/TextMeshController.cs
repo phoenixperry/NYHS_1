@@ -10,6 +10,9 @@ public class TextMeshController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+//		Debug.Log (this.ToString() + " " + transform.renderer.material.color);
+//		if (GetComponent<DynamicText>() != null) {
+//			GetComponent<DynamicText>().color = renderer.material.color;
+//		}
 	}
 }

@@ -175,9 +175,17 @@ public class SetUpText : MonoBehaviour {
 		bodyTextObject.GetComponent<TextMesh>().text = p.description;
 		bodyTextObject.GetComponent<TextWrapper>().SetText();
 		
-		nameTextObject.GetComponent<TextMesh>().text = p.givenName.ToUpper() + " " + p.familyName.ToUpper() + " " + p.lifespan; //" (" + System.Text.RegularExpressions.Regex.Replace( p.lifespan, @"[\(\)]", "") + ")";
-		
-		locationTextObject.GetComponent<TextMesh>().text = p.location.ToUpper();
+//		nameTextObject.GetComponent<TextMesh>().text = p.givenName.ToUpper() + " " + p.familyName.ToUpper() + " " + p.lifespan; //" (" + System.Text.RegularExpressions.Regex.Replace( p.lifespan, @"[\(\)]", "") + ")";
+		DynamicText dt = nameTextObject.GetComponent<DynamicText>();
+		dt.textSB.Remove(0, dt.textSB.Length);
+		dt.textSB.Append( p.givenName.ToUpper() + " " + p.familyName.ToUpper() + " " + p.lifespan);
+		dt.FinishedTextSB();
+//		nameTextObject.GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+		dt = locationTextObject.GetComponent<DynamicText>();
+		dt.textSB.Remove(0, dt.textSB.Length);
+		dt.textSB.Append( p.location.ToUpper() );
+		dt.FinishedTextSB();
+//		locationTextObject.GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
 
 		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename;
 
@@ -212,7 +220,8 @@ public class SetUpText : MonoBehaviour {
 		if (moveTimer >= 1.0f) {
 			moveTimer = 0.0f;
 			spawnState = false;
-//			fadeIn(fadeInTimer);
+			locationTextObject.GetComponent<DynamicText>().enabled = true;
+			nameTextObject.GetComponent<DynamicText>().enabled = true;
 			StartCoroutine(fadeIn (fadeInTimer));
 		}
 	}
@@ -232,6 +241,9 @@ public class SetUpText : MonoBehaviour {
 			transform.localScale = Vector3.Lerp( fadeInScalar * originalScale, originalScale, Easing.EaseInOut(t/duration, fadeInScaleEaseType));
 			yield return 0;
 		}
+		DynamicText dt = nameTextObject.GetComponent<DynamicText>();
+		dt.color = new Color(dt.color.r, dt.color.g, dt.color.b, 1.0f);
+
 		transform.localScale.Set(originalScale.x, originalScale.y, originalScale.z);
 		fadeInState = false;
 	}

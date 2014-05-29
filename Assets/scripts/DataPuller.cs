@@ -163,7 +163,7 @@ public class DataPuller : MonoBehaviour
 			}
 
 		}
-		Debug.Log(person.familyName + " searched for and found"); 
+//		Debug.Log(person.familyName + " searched for and found"); 
 		return person;
 	}
 
@@ -194,7 +194,7 @@ public class DataPuller : MonoBehaviour
     //this function lets you remove a hero from the active list and add them to the inactive one
     public static void RemoveHeroFromActiveList(Person p)
     {
-		Debug.Log("Try to remove Hero: " + p.givenName + " ID: " + p.id);
+//		Debug.Log("Try to remove Hero: " + p.givenName + " ID: " + p.id);
 
 		if (activeHeroes.Contains(p)) {
 			activeHeroes.Remove(p);

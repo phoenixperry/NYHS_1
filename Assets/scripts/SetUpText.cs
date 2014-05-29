@@ -174,22 +174,18 @@ public class SetUpText : MonoBehaviour {
 	{   
 		bodyTextObject.GetComponent<TextMesh>().text = p.description;
 		bodyTextObject.GetComponent<TextWrapper>().SetText();
-		
-//		nameTextObject.GetComponent<TextMesh>().text = p.givenName.ToUpper() + " " + p.familyName.ToUpper() + " " + p.lifespan; //" (" + System.Text.RegularExpressions.Regex.Replace( p.lifespan, @"[\(\)]", "") + ")";
+
 		DynamicText dt = nameTextObject.GetComponent<DynamicText>();
 		dt.textSB.Remove(0, dt.textSB.Length);
 		dt.textSB.Append( p.givenName.ToUpper() + " " + p.familyName.ToUpper() + " " + p.lifespan);
 		dt.FinishedTextSB();
-//		nameTextObject.GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
+
 		dt = locationTextObject.GetComponent<DynamicText>();
 		dt.textSB.Remove(0, dt.textSB.Length);
 		dt.textSB.Append( p.location.ToUpper() );
 		dt.FinishedTextSB();
-//		locationTextObject.GetComponent<SmoothAlpha>().MakeInvisible(0.0f);
 
 		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename;
-
-
 
 		photoObject.GetComponent<Renderer>().material.SetTexture("_image", LoadPhoto(photoPath));
 

@@ -31,7 +31,7 @@ public class PlaneManager : MonoBehaviour {
 	public float spawnFgDelay_Min = 4.0f;
 	public float spawnFgDelay_Max = 10.0f;
 	public static int numBgPlanes = 45;
-	public static int numPlanes = 25; //refractor to be numFgPlanes
+	public static int numPlanes = 5; //refractor to be numFgPlanes
 	public float radius = 8;
 	public float radiusX = 10;
 	public float startAngle, range;
@@ -122,6 +122,7 @@ public class PlaneManager : MonoBehaviour {
 			
 			if(sp.position.z < foregroundZCutoff) {
 				heroPositions.Add(sp);
+				normalPositions.Add (sp);
 			} else {
 				normalPositions.Add(sp);
 			}
@@ -133,6 +134,8 @@ public class PlaneManager : MonoBehaviour {
 	public SpawnPoint GetValidSpawnPoint( List<SpawnPoint> pointList ) {
 		foreach (SpawnPoint sp in pointList) {
 			if (false == sp.occupied) {
+				pointList.Remove(sp);
+				pointList.Insert(pointList.Count, sp);
 				return sp;
 			}
 		}
@@ -244,7 +247,7 @@ public class PlaneManager : MonoBehaviour {
 	public GameObject SpawnPanel(bool isHero){
 		SpawnPoint sp = isHero ? GetValidSpawnPoint(heroPositions) : GetValidSpawnPoint(normalPositions);
 		if (sp == null) {
-			Debug.LogWarning("SPAWN FAILED: No unoccupied " + (isHero? "HERO" : "NORMAL")  + " spawnpoint was found.");
+//			Debug.LogWarning("SPAWN FAILED: No unoccupied " + (isHero? "HERO" : "NORMAL")  + " spawnpoint was found.");
 			return null;
 		}
 		sp.occupied = true;
@@ -267,9 +270,9 @@ public class PlaneManager : MonoBehaviour {
 		//			yield return 0;
 		//		}
 		yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min, spawnBgDelay_Max));
-		Debug.Log ("Try To Spawn BG");
+//		Debug.Log ("Try To Spawn BG");
 		if (bgPlanes.Count < numBgPlanes && !dimmedBackgroundNodes) {
-			Debug.Log ("OK to spawn BG");
+//			Debug.Log ("OK to spawn BG");
 			GameObject p = SpawnPanel(false);
 			if (p != null) {
 				bgPlanes.Add(p);
@@ -288,9 +291,9 @@ public class PlaneManager : MonoBehaviour {
 		//			yield return 0;
 		//		}
 		yield return new WaitForSeconds(Random.Range(spawnFgDelay_Min, spawnFgDelay_Max));
-		Debug.Log("Try To Spawn FG");
+//		Debug.Log("Try To Spawn FG");
 		if (fgPlanes.Count < numPlanes && !dimmedBackgroundNodes) {
-			Debug.Log ("OK to spawn FG");
+//			Debug.Log ("OK to spawn FG");
 			GameObject p = SpawnPanel(true);
 			if (p != null) {
 				fgPlanes.Add(p);

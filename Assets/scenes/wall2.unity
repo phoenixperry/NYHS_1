@@ -503,12 +503,12 @@ TextMesh:
     fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
     culpa qui officia deserunt mollit anim id est laborum.
   m_OffsetZ: 0
-  m_CharacterSize: .0529999994
+  m_CharacterSize: .119999997
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 38
+  m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 123696f20391a2d4cad0900a214a7a85, type: 3}
@@ -688,6 +688,14 @@ Prefab:
     - target: {fileID: 11400020, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: lineWidth
       value: 2.6500001
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200002, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_FontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200002, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_CharacterSize
+      value: .119999997
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 10200004, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
@@ -1284,6 +1292,7 @@ GameObject:
   - 114: {fileID: 1654057366}
   - 114: {fileID: 1654057365}
   - 114: {fileID: 1654057364}
+  - 114: {fileID: 1654057367}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -1399,6 +1408,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4328d3119dd634a23b5c14c83bc57f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1654057367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1654057357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23178877335b047758bbcf99d10b885c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wantedAspectRatio: 1.60000002
 --- !u!1 &1667985664
 GameObject:
   m_ObjectHideFlags: 0

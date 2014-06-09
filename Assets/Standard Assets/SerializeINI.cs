@@ -44,7 +44,8 @@ public class SerializeINI : MonoBehaviour
 			string formattedLine = Regex.Replace(line, @"[^\w\.,@#=-]", "").ToLower();
 
 			// SKIP COMMENTS
-			if (formattedLine.ToCharArray()[0] == '#' || formattedLine == "" )
+
+			if (formattedLine == "" || formattedLine.ToCharArray()[0] == '#' )
 				continue;
 			Debug.Log(formattedLine);
 			int i;
@@ -76,6 +77,16 @@ public class SerializeINI : MonoBehaviour
 				string[] rez = id_value[1].Split('x');
 				Screen.SetResolution(int.Parse(rez[0]), int.Parse(rez[1]), true);
 				Debug.Log("Config resolution: " + rez[0] + ", " + rez[1]);
+				break;
+			case "aspect_ratio":
+				string aspect = id_value[1];
+				mainCamera.GetComponent<AspectUtility>()._wantedAspectRatio = float.Parse(aspect);
+				AspectUtility.SetAspectRatio(float.Parse(aspect));
+				AspectUtility.SetCamera();
+				Debug.Log("Config aspect ratio = " + aspect);
+				break;
+			default:
+				Debug.Log("Unrecognized variable: " + id_value[0]);
 				break;
 			}
 		}

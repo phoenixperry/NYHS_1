@@ -98,4 +98,8 @@ public class AspectUtility : MonoBehaviour {
 			return mousePos;
 		}
 	}
+
+	public static void SetAspectRatio( float ratio ) {
+		wantedAspectRatio = ratio;
+	}
 }

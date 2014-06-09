@@ -12,6 +12,7 @@
 #camera_pos=0,0,-20
 #logo_pos=2.644268,-1.689596,-15
 #resolution=1280x800
+#aspect_ratio=1.6
 #
 ###################################
 ## PASTE MODIFIED SETTINGS BELOW ##

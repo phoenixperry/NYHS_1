@@ -514,7 +514,7 @@ TextMesh:
   m_FontSize: 16
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 123696f20391a2d4cad0900a214a7a85, type: 3}
+  m_Font: {fileID: 12800000, guid: 20dc8a2de976baf42aad1a5863f9c236, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4292341759
@@ -531,7 +531,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 123696f20391a2d4cad0900a214a7a85, type: 3}
+  - {fileID: 2100000, guid: 20dc8a2de976baf42aad1a5863f9c236, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -711,6 +711,15 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: .680000007
       objectReference: {fileID: 0}
+    - target: {fileID: 10200002, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 20dc8a2de976baf42aad1a5863f9c236,
+        type: 3}
+    - target: {fileID: 2300004, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 20dc8a2de976baf42aad1a5863f9c236, type: 3}
     m_RemovedComponents:
     - {fileID: 10200004, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
     - {fileID: 10200000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}

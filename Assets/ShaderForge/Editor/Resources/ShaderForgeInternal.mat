@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ShaderForgeInternal
-  m_Shader: {fileID: 4800000, guid: 8cfde385d91384de18242e473f08dee5, type: 3}
+  m_Shader: {fileID: 4800000, guid: dc3ce17d7f3274dca8ff745d270c9bec, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -15,37 +15,9 @@ Material:
     m_TexEnvs:
       data:
         first:
-          name: _yellow_asset
+          name: _node_2
         second:
-          m_Texture: {fileID: 2800000, guid: deca4b74a27d39a47a7bf2876513e462, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _organe_asset
-        second:
-          m_Texture: {fileID: 2800000, guid: 4ea2a300cf25896498655b95016bb042, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _invisible_shader
-        second:
-          m_Texture: {fileID: 2800000, guid: 10350849f8eb00847b6e7aab7bb62aa3, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _openMask
-        second:
-          m_Texture: {fileID: 2800000, guid: 9fdf68b668e374e6fb035921a2cfc576, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _neg_corner_mask
-        second:
-          m_Texture: {fileID: 2800000, guid: 8bec0de97584248559c6443ea92110dc, type: 3}
+          m_Texture: {fileID: 2800000, guid: 04d8529793ca645339d48d80482e4a92, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -55,22 +27,10 @@ Material:
         second: .5
       data:
         first:
-          name: _Blend
+          name: _node_7
         second: 0
       data:
         first:
-          name: _alpha_blend
+          name: _alpha
         second: 1
-      data:
-        first:
-          name: _open
-        second: .573333085
-      data:
-        first:
-          name: _rt_edge_smooth
-        second: .985000014
-    m_Colors:
-      data:
-        first:
-          name: _TintColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+    m_Colors: {}

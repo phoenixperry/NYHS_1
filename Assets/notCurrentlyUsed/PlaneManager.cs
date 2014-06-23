@@ -19,6 +19,7 @@ public class PlaneManager : MonoBehaviour {
 	public ArrayList planes;
 	public ArrayList bgPlanes;
 	public ArrayList fgPlanes;
+	public ArrayList fadingPlanes;
 	public float foregroundZCutoff = 45.0f;
 	
 	public Color dimColor = Color.grey;
@@ -31,6 +32,7 @@ public class PlaneManager : MonoBehaviour {
 	public float spawnFgDelay_Min = 4.0f;
 	public float spawnFgDelay_Max = 10.0f;
 	public static int numBgPlanes = 39;
+	public int minimumBgPlanes = 30;
 	public static int numPlanes = 5; //refractor to be numFgPlanes
 	public float radius = 8;
 	public float radiusX = 10;
@@ -58,6 +60,7 @@ public class PlaneManager : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+		fadingPlanes = new ArrayList();
 		Screen.showCursor = false;
 		heroTimer = timeBetweenHeroes - timeForFirstHero;
 		loadNodePositions();
@@ -202,6 +205,11 @@ public class PlaneManager : MonoBehaviour {
 				(fgPlanes[i] as GameObject).GetComponent<SetUpText>().Tint(dimColor, 1.0f);
 			}
 		}
+		for (i = 0; i < fadingPlanes.Count; i++) {
+			if(fadingPlanes[i] != heroInFocus) {
+				(fadingPlanes[i] as GameObject).GetComponent<SetUpText>().Tint(dimColor, 1.0f);
+			}
+		}
 	}
 	
 	public void UnTintNonFocusedNodes() {
@@ -271,7 +279,13 @@ public class PlaneManager : MonoBehaviour {
 		//			t -= Time.fixedDeltaTime;
 		//			yield return 0;
 		//		}
-		yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min, spawnBgDelay_Max));
+		if (bgPlanes.Count < minimumBgPlanes) {
+			Debug.LogWarning("Slow removal rate.");
+			yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min*2.0f, spawnBgDelay_Max*2.0f));
+		}
+		else {
+			yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min, spawnBgDelay_Max));
+		}
 //		Debug.Log ("Try To Spawn BG");
 		if (bgPlanes.Count < numBgPlanes && !dimmedBackgroundNodes) {
 //			Debug.Log ("OK to spawn BG");

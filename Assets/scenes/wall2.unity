@@ -413,6 +413,7 @@ MonoBehaviour:
   removeBgDelay_Max: 4
   spawnFgDelay_Min: 2
   spawnFgDelay_Max: 4
+  minimumBgPlanes: 30
   radius: 8
   radiusX: 10
   startAngle: 0

@@ -21,14 +21,17 @@ public class TintController : MonoBehaviour {
 	
 	}
 
+	// Start tinting this object
 	public void StartTint( Color color, float duration){
 		StartCoroutine(Tint (color, duration));
 	}
 
+	// Start untinting this object
 	public void UnTint( float duration) {
 		StartCoroutine(Tint (originalColor, duration));
 	}
 
+	// Co-routine that actually tints this object over time
 	IEnumerator Tint( Color color, float duration) {
 		float t = 0.0f;
 		if (renderer.material.HasProperty("_Color")) {

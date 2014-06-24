@@ -68,27 +68,27 @@ public class PlaneManager : MonoBehaviour {
 		StartCoroutine(InitForgroundPanels()); 
 	}
 	
-	public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
-	{
-		double U, u, v, S;
-		
-		do
-		{
-			u = 2.0 * Random.value - 1.0;
-			v = 2.0 * Random.value - 1.0;
-			S = u * u + v * v;
-		}
-		while (S >= 1.0);
-		float s_ = (float)S;
-		float Ss = (float)(-2.0 * Mathf.Log(s_) / S);
-		float fac = Mathf.Sqrt(Ss);
-		return u * fac * sigma + mu;
-	}
+//	public static double NextGaussianDouble(double mu = 0.0, double sigma = 1.0)
+//	{
+//		double U, u, v, S;
+//		
+//		do
+//		{
+//			u = 2.0 * Random.value - 1.0;
+//			v = 2.0 * Random.value - 1.0;
+//			S = u * u + v * v;
+//		}
+//		while (S >= 1.0);
+//		float s_ = (float)S;
+//		float Ss = (float)(-2.0 * Mathf.Log(s_) / S);
+//		float fac = Mathf.Sqrt(Ss);
+//		return u * fac * sigma + mu;
+//	}
 	
-	public void FixedUpdate()
-	{
-		
-	}
+//	public void FixedUpdate()
+//	{
+//		
+//	}
 	
 	public void Update()
 	{
@@ -112,7 +112,8 @@ public class PlaneManager : MonoBehaviour {
 			SaveNodes();
 		
 	}
-	
+
+	// load spawn point locations from external file
 	public void loadNodePositions() 
 	{	  
 		heroPositions = new List<SpawnPoint>();
@@ -135,22 +136,10 @@ public class PlaneManager : MonoBehaviour {
 		Debug.Log("Hero Positions: " + heroPositions.Count);
 		Debug.Log("Normal Positions: " + normalPositions.Count);
 	}
-	
-	public SpawnPoint GetValidSpawnPoint( List<SpawnPoint> pointList ) {
-		foreach (SpawnPoint sp in pointList) {
-			if (false == sp.occupied) {
-				pointList.Remove(sp);
-				pointList.Insert(pointList.Count, sp);
-				return sp;
-			}
-		}
-		Debug.LogWarning("There were no unoccupied spawn points in the list!");
-		return null;
-	}
-	
+
+	// Parses the external list of spawn point locations and turns them into usable data
 	public Vector3 stripData(string sourceString) 
 	{
-		
 		Vector3 outVector3; 
 		string outString;
 		string[] splitString; 
@@ -165,7 +154,8 @@ public class PlaneManager : MonoBehaviour {
 		int index = 0; 
 		return outVector3; 		
 	}
-	
+
+	// Writes the current panel positions out to the external spawn point file
 	public void SaveNodes()
 	{
 		ArrayList positions = new ArrayList(); 
@@ -188,12 +178,27 @@ public class PlaneManager : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	// Finds the first available spawn point, moves it to the end of the list, and returns it
+	public SpawnPoint GetValidSpawnPoint( List<SpawnPoint> pointList ) {
+		foreach (SpawnPoint sp in pointList) {
+			if (false == sp.occupied) {
+				pointList.Remove(sp);
+				pointList.Insert(pointList.Count, sp);
+				return sp;
+			}
+		}
+		Debug.LogWarning("There were no unoccupied spawn points in the list!");
+		return null;
+	}
+
+	// Starts the process of bringing a panel into the spotlight point.
 	public void FocusOnHero(GameObject hero)
 	{
 		StartCoroutine(hero.GetComponent<SetUpText>().moveToCenter());
 	}
-	
+
+	// Tells every node except the hero moving to the spotlight point to tint itself
 	public void TintNonFocusedNodes() {
 		dimmedBackgroundNodes = true;
 		int i;
@@ -211,7 +216,8 @@ public class PlaneManager : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	// Tells every node except the hero leaving the spotlight point to untint itself
 	public void UnTintNonFocusedNodes() {
 		int i;
 		for (i = 0; i < bgPlanes.Count; i++) {
@@ -224,7 +230,8 @@ public class PlaneManager : MonoBehaviour {
 		}
 		dimmedBackgroundNodes = false;
 	}
-	
+
+	// Do initial populating of normal people (spawn faster than normal)
 	public IEnumerator InitBackgroundPanels()
 	{
 		bgPlanes = new ArrayList();
@@ -239,7 +246,8 @@ public class PlaneManager : MonoBehaviour {
 		StartCoroutine(TryToSpawnBG());
 		StartCoroutine(TryToRemoveBG());
 	}
-	
+
+	// Do initial populating of hero people (spawn faster than normal)
 	public IEnumerator InitForgroundPanels()
 	{
 		fgPlanes = new ArrayList();
@@ -253,11 +261,11 @@ public class PlaneManager : MonoBehaviour {
 		Debug.Log( "fg Planes: " + fgPlanes.Count );
 		StartCoroutine(TryToSpawnFG());
 	}
-	
+
+	// Spawn a new panel if there is an available spawn point
 	public GameObject SpawnPanel(bool isHero){
 		SpawnPoint sp = isHero ? GetValidSpawnPoint(heroPositions) : GetValidSpawnPoint(normalPositions);
 		if (sp == null) {
-//			Debug.LogWarning("SPAWN FAILED: No unoccupied " + (isHero? "HERO" : "NORMAL")  + " spawnpoint was found.");
 			return null;
 		}
 		sp.occupied = true;
@@ -272,44 +280,33 @@ public class PlaneManager : MonoBehaviour {
 		p.SetActive(true);
 		return p;
 	}
-	
+
+	// Co-routine that tries to spawn a new normal person every few seconds if the current population
+	// of normal people is below the population cap
 	public IEnumerator TryToSpawnBG() {
-		//		float t = Random.Range(spawnBgDelay_Min, spawnBgDelay_Max);
-		//		while (t > 0.0f) {
-		//			t -= Time.fixedDeltaTime;
-		//			yield return 0;
-		//		}
-		if (bgPlanes.Count < minimumBgPlanes) {
-			Debug.LogWarning("Slow removal rate.");
-			yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min*2.0f, spawnBgDelay_Max*2.0f));
-		}
-		else {
+//		if (bgPlanes.Count < minimumBgPlanes) {
+//			Debug.LogWarning("Slow removal rate.");
+//			yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min*2.0f, spawnBgDelay_Max*2.0f));
+//		}
+//		else {
 			yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min, spawnBgDelay_Max));
-		}
-//		Debug.Log ("Try To Spawn BG");
+//		}
 		if (bgPlanes.Count < numBgPlanes && !dimmedBackgroundNodes) {
-//			Debug.Log ("OK to spawn BG");
 			GameObject p = SpawnPanel(false);
 			if (p != null) {
 				bgPlanes.Add(p);
 			}
-			//			addbgPanelData(p); 
 		} else {
 			Debug.LogWarning("Too many BG planes to add a new one!");
 		}
 		StartCoroutine(TryToSpawnBG());
 	}
-	
+
+	// Co-routine that tries to spawn a new hero every few seconds if the current hero population
+	// is below the population cap
 	public IEnumerator TryToSpawnFG() {
-		//		float t = Random.Range(spawnFgDelay_Min, spawnFgDelay_Max);
-		//		while (t > 0.0f) {
-		//			t -= Time.fixedDeltaTime;
-		//			yield return 0;
-		//		}
 		yield return new WaitForSeconds(Random.Range(spawnFgDelay_Min, spawnFgDelay_Max));
-//		Debug.Log("Try To Spawn FG");
 		if (fgPlanes.Count < numPlanes && !dimmedBackgroundNodes) {
-//			Debug.Log ("OK to spawn FG");
 			GameObject p = SpawnPanel(true);
 			if (p != null) {
 				fgPlanes.Add(p);
@@ -319,9 +316,17 @@ public class PlaneManager : MonoBehaviour {
 		}
 		StartCoroutine(TryToSpawnFG());
 	}
-	
+
+	// Co-routine that tries to remove a normal person every few seconds. Will wait longer if
+	// the population of normal people is below a threshold value
 	public IEnumerator TryToRemoveBG() {
-		yield return new WaitForSeconds(Random.Range(removeBgDelay_Min, removeBgDelay_Max));
+		if (bgPlanes.Count < minimumBgPlanes) {
+			Debug.LogWarning("Slow removal rate.");
+			yield return new WaitForSeconds(Random.Range(spawnBgDelay_Min*2.0f, spawnBgDelay_Max*2.0f));
+		}
+		else {
+			yield return new WaitForSeconds(Random.Range(removeBgDelay_Min, removeBgDelay_Max));
+		}
 		
 		if (bgPlanes.Count > 0 && !dimmedBackgroundNodes) {
 			GameObject plane = bgPlanes[0] as GameObject;
@@ -330,7 +335,8 @@ public class PlaneManager : MonoBehaviour {
 		
 		StartCoroutine(TryToRemoveBG());
 	}
-	
+
+	// Informs the system that a given person is no longer on screen
 	public void RecyclePerson( Person p ) {
 		if (p.hero == "no") {
 			DataPuller.RemoveNormalPersonFromActiveList(p);

@@ -54,8 +54,10 @@ public class SmoothAlpha : MonoBehaviour {
 			stage = 1.0f;
 		}
 
+		// For Fade-out
 		if (m_isVisible)
 		{
+			// For objects with shaders
 			if(useShader) {
 				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, Easing.EaseIn(stage, alphaEaseType) ));
 				if (stage >= 1.0f)
@@ -63,7 +65,9 @@ public class SmoothAlpha : MonoBehaviour {
 					m_isTransitioning = false;
 					m_isVisible = targetAlpha > 0.0f;
 				}
-			} else {
+			}
+			// For objects without shaders (text, mostly)
+			else {
 				if (GetComponent<DynamicText>() != null) {
 					DynamicText dt = GetComponent<DynamicText>();
 					Color c = dt.color;
@@ -83,8 +87,10 @@ public class SmoothAlpha : MonoBehaviour {
 				}
 			}
 		}
+		// For Fade-in
 		else
 		{
+			// For objects with shaders
 			if(useShader) {
 				transform.renderer.material.SetFloat("_alpha_blend", Mathf.Lerp(oldAlpha, targetAlpha, Easing.EaseIn(stage, alphaEaseType)) );
 				if (stage >= 1.0f)
@@ -92,7 +98,9 @@ public class SmoothAlpha : MonoBehaviour {
 					m_isTransitioning = false;
 					m_isVisible = targetAlpha > 0.0f;
 				}
-			} else {
+			}
+			// For objects without shaders (text, mostly)
+			else {
 				if (GetComponent<DynamicText>() != null) {
 					DynamicText dt = GetComponent<DynamicText>();
 					Color c = dt.color;
@@ -114,7 +122,8 @@ public class SmoothAlpha : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	// Set this object up to fade-out
 	public void MakeInvisible(float t = -1.0f, float alpha = 0.0f, EasingType easingType=EasingType.Linear, bool force = false)
 	{
 		alphaEaseType = easingType;
@@ -162,7 +171,8 @@ public class SmoothAlpha : MonoBehaviour {
 		targetAlpha = alpha;
 		m_isTransitioning = true;
 	}
-	
+
+	// Set this object up to fade-in
 	public void MakeVisible(float t = -1.0f, float alpha = 1.0f, EasingType easingType=EasingType.Linear, bool force = false)
 	{
 		alphaEaseType = easingType;

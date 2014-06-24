@@ -54,7 +54,6 @@ public class DataPuller : MonoBehaviour
 
 
         //set up the deligate to set a current hero. 
-     //   dataItem += PickHeroData;
 
         people = new List<Person>();
         //load up the data 
@@ -141,6 +140,8 @@ public class DataPuller : MonoBehaviour
 
 
     }
+
+	// find and return a Person by index number
 	public static Person findCurrentPerson(int num){
 		Person person = new Person(); 
 		bool found=false; 
@@ -295,7 +296,7 @@ public class DataPuller : MonoBehaviour
 
     }
 
-
+	// Populate herosList
     public void GetHeros()
     {
         heroes = from person in people
@@ -313,6 +314,7 @@ public class DataPuller : MonoBehaviour
         Debug.Log("there are " + herosList.Count() + " heroes");
     }
 
+	// Populate normalPeople list
     public void GetNormalPeople()
     {
         heroes = from person in people

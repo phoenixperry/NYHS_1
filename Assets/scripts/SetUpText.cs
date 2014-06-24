@@ -62,6 +62,8 @@ public class SetUpText : MonoBehaviour {
 
 	private Vector3 originalScale;
 
+//	private float alpha_time = 0.0f; 
+//	private float alpha_duration = 300.0f;
 
 	void Start () {
 		originalScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -87,82 +89,11 @@ public class SetUpText : MonoBehaviour {
 		if (spawnState) {
 			spawn();
 		}
-//		if (fadeInState) {
-//			fadeIn();
-//		}
-//		if (moveToCenterState) {
-//			moveToCenter();
-//		}
-//		if (returnToOriginState) {
-//			returnToOrigin();
-//		}
-//		if (animateOpenState) {
-//			doOpenAnimation();
-//		}
-//		if (bodyTextAppearState) {
-//			doBodyTextAppear();
-//		}
-//		if (animateCloseState) {
-//			doCloseAnimation();
-//		}
-//		if (colorChangeDelayState) {
-//			colorChangeDelay();
-//		}
-//		if (fadeOutDelayState) {
-//			fadeOutDelay();
-//		}
-//		if (fadeOutState) {
-//			fadeOut();
-//		}
-//		if(fadeBoxUp) 
-//		{
-//			fadeBoxIn(); 
-//		}
-//		if(fadeBoxDown) 
-//		{
-//			fadeBoxOut(); 
-//		}
 	}
-	private float alpha_time = 0.0f; 
-	private float alpha_duration = 300.0f;
 
-//	public void fadeBoxIn()
-//	{
-//		Color fadedUpColor = new Color(0.0f, 0.0f, 0.0f, 1.0f); 
-//		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
-//		if(col.a < 0.4f) 
-//		{
-//			col = Color.Lerp(col, fadedUpColor, alpha_time); 
-//			alpha_time += Time.deltaTime/alpha_duration; 
-//			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
-//
-//		}
-//		else {
-//			fadeBoxUp = false;
-//			alpha_time = 0.0f; 
-//		} 
-//	}
-//
-//	public void fadeBoxOut()
-//	{
-//		Color fadedOutColor = new Color(0.0f, 0.0f, 0.0f, 0.0f); 
-//		Color col = blackBox.GetComponent<Renderer>().material.GetVector("_Color"); 
-//		if(col.a > 0.0f) 
-//		{
-//			col = Color.Lerp(col, fadedOutColor, alpha_time); 
-//			alpha_time += Time.deltaTime/alpha_duration; 
-//			blackBox.GetComponent<Renderer>().material.SetVector("_Color", col); 
-//			
-//		}
-//		else {
-//			fadeBoxDown = false;
-//		} 
-//	}
-
+	
+	// Get Data for this panel from the database
 	void GetData() {
-		
-//		DataPuller.num = 2;
-//		data.GetComponent<DataPuller>().dataItem();
 		if( isHero ) {
 			p = DataPuller.PullNewHero();
 		} else {
@@ -170,7 +101,8 @@ public class SetUpText : MonoBehaviour {
 		}
 		populateData();
 	}
-	
+
+	// Do panel layout
 	void populateData()
 	{   
 		bodyTextObject.GetComponent<TextMesh>().text = p.description;
@@ -189,12 +121,6 @@ public class SetUpText : MonoBehaviour {
 		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename;
 
 		photoObject.GetComponent<Renderer>().material.SetTexture("_image", LoadPhoto(photoPath));
-
-
-//		string photoPath = "photos/" + p.filename.Split(new char[]{'.'})[0];
-//		Debug.Log("photo: " + photoPath);
-//		Texture2D img = Resources.Load(photoPath) as Texture2D;
-//		photoObject.GetComponent<Renderer>().material.SetTexture("_image", img);
 	}
 
 	private Texture2D LoadPhoto(string path) {
@@ -209,9 +135,9 @@ public class SetUpText : MonoBehaviour {
 	public void setOrigin()
 	{
 		originPos = transform.position;
-		//		Debug.Log("originPos set: " + originPos);
 	}
-	
+
+	// Prepare panel for fade-in.
 	public void spawn() {
 		moveTimer += Time.fixedDeltaTime;
 		if (moveTimer >= 1.0f) {
@@ -223,6 +149,7 @@ public class SetUpText : MonoBehaviour {
 		}
 	}
 
+	// Fade-in co-routine
 	public IEnumerator fadeIn( float duration = -1.0f ) {
 		fadeInState = true;
 		Component[] faders;
@@ -245,6 +172,7 @@ public class SetUpText : MonoBehaviour {
 		fadeInState = false;
 	}
 
+	// Tint panel and its component parts to a given color in a given time
 	public void Tint( Color color, float duration ) {
 		transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().StartTint(color, duration);
 		transform.Find ("NameText").GetComponent<TintController>().StartTint(color, duration);
@@ -252,6 +180,7 @@ public class SetUpText : MonoBehaviour {
 		transform.Find ("Photo").GetComponent<TintController>().StartTint(color, duration);
 	}
 
+	// Set panel tint back to normal in a given time
 	public void UnTint( float duration ) {
 		transform.Find ("GoldPlaneTiltedUp").GetComponent<TintController>().UnTint(duration);
 		transform.Find ("NameText").GetComponent<TintController>().UnTint(duration);
@@ -259,6 +188,7 @@ public class SetUpText : MonoBehaviour {
 		transform.Find ("Photo").GetComponent<TintController>().UnTint(duration);
 	}
 
+	// Co-routine for moving a panel into the spotlight point
 	public IEnumerator moveToCenter() {
 		moveToCenterState = true;
 		transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
@@ -277,6 +207,7 @@ public class SetUpText : MonoBehaviour {
 		moveToCenterState = false;
 	}
 
+	// Co-routine for opening the panel
 	public IEnumerator doOpenAnimation() {
 		animateOpenState = true;
 		float t = 0.0f;
@@ -290,6 +221,7 @@ public class SetUpText : MonoBehaviour {
 		StartCoroutine(doBodyTextAppear());
 	}
 
+	// Co-routine for fading in the body text
 	public IEnumerator doBodyTextAppear() {
 		bodyTextAppearState = true;
 //		float t = 0.0f;
@@ -302,7 +234,7 @@ public class SetUpText : MonoBehaviour {
 		StartCoroutine( returnToOrigin() );
 	}
 
-
+	// Co-routine for closing the panel
 	public IEnumerator doCloseAnimation() {
 		animateCloseState = true;
 		m.UnTintNonFocusedNodes();
@@ -315,7 +247,7 @@ public class SetUpText : MonoBehaviour {
 		animateCloseState = false;
 	}
 
-
+	// Co-routine for triggering the color change after closing
 	public IEnumerator colorChangeDelay() {
 		colorChangeDelayState = true;
 		transform.Find ("GoldPlaneTiltedUp").GetComponent<PlaneSetup>().fadeYellow();
@@ -323,7 +255,7 @@ public class SetUpText : MonoBehaviour {
 		colorChangeDelayState = false;
 	}
 
-
+	// Co-routine for moving a panel back to its starting point from the spotlight point
 	public IEnumerator returnToOrigin() {
 		returnToOriginState = true;
 		transform.Find("GoldPlaneTiltedUp").collider.isTrigger = true;
@@ -345,7 +277,7 @@ public class SetUpText : MonoBehaviour {
 		StartCoroutine(fadeOutDelay());
 	}
 
-
+	// Co-routine for waiting to trigger the fade-out
 	public IEnumerator fadeOutDelay() {
 		fadeOutDelayState = true;
 		yield return new WaitForSeconds(preFadeOutDelay);
@@ -353,7 +285,7 @@ public class SetUpText : MonoBehaviour {
 		StartCoroutine(fadeOut (fadeOutTimer));
 	}
 
-
+	// Co-routine for panel fade-out and triggering object destruction
 	public IEnumerator fadeOut( float duration = -1.0f) {
 		fadeOutState = true;
 		m.fadingPlanes.Add(gameObject);

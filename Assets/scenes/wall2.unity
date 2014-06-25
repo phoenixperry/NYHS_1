@@ -459,8 +459,8 @@ MonoBehaviour:
   timeForFirstHero: 15
   spawnBgDelay_Min: 2
   spawnBgDelay_Max: 4
-  removeBgDelay_Min: 2
-  removeBgDelay_Max: 4
+  removeBgDelay_Min: 3
+  removeBgDelay_Max: 5
   spawnFgDelay_Min: 2
   spawnFgDelay_Max: 4
   minimumBgPlanes: 30
@@ -700,7 +700,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: openJumpStart
-      value: .800000012
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
       propertyPath: m_LocalScale.x
@@ -771,6 +771,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 20dc8a2de976baf42aad1a5863f9c236, type: 3}
+    - target: {fileID: 11400038, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
+      propertyPath: moveToCenterDuration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 10200004, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
     - {fileID: 10200000, guid: 97b8b6872cac643bb85ba089a9a5de5b, type: 2}
@@ -2000,8 +2004,8 @@ MonoBehaviour:
   fadeOutScalar: .5
   fadeOutScaleEaseType: 3
   preFadeOutDelay: 60
-  moveToCenterDuration: 4
-  openJumpStart: .800000012
+  moveToCenterDuration: 3
+  openJumpStart: .5
   moveToCenterEaseType: 3
   colorChangeDelayDuration: .5
   animationDuration: 1.5

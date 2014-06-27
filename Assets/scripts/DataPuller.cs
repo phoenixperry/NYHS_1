@@ -11,17 +11,17 @@ using System.Linq;
 
 public class Person
 {
-
-    public string active = "no";
-    public string hero = "no";
-    public string familyName = "empty";
-	public string givenName="empty";
-	public string location="empty";
-	public string lifespan="empty";
-	public string filename="empty";
-	public string filepath="empty";
-	public string description="empty";
-    public int id=0;
+    public bool active; // false
+    public bool hero; // false
+	public string familyName; // = "empty";
+	public string givenName; // ="empty";
+	public string location; // ="empty";
+	public string lifespan; // ="empty";
+	public string filename; // ="empty";
+	public string filepath; // ="empty";
+	public Texture2D photo;
+	public string description; // ="empty";
+	public int id; // =0;
 }
 
 public class DataPuller : MonoBehaviour
@@ -32,6 +32,7 @@ public class DataPuller : MonoBehaviour
     List<Person> people;
     public static List<Person> herosList;
     public static List<Person> normalPeople;
+	public TextureFormat photoImportFormat = TextureFormat.ARGB32;
     //I set this up as a delegate so more than one function could subscribe to it if need be... 
     public delegate void SetData();
     public SetData dataItem;
@@ -77,27 +78,24 @@ public class DataPuller : MonoBehaviour
             if (nodeData[i].Name == "ROW")
             {
                 Person p = new Person();
-                p.familyName = nodeData[i][
-                                           "FamilyName"].InnerText;
+                p.familyName = nodeData[i]["FamilyName"].InnerText;
                 p.givenName = nodeData[i]["GivenName"].InnerText;
                 p.location = nodeData[i]["Location"].InnerText;
-                p.hero = nodeData[i]["Hero"].InnerText;
-                p.active = nodeData[i]["Active"].InnerText;
+                p.hero = "yes" == nodeData[i]["Hero"].InnerText.ToLower();
+                p.active = "yes" == nodeData[i]["Active"].InnerText.ToLower();
                 p.lifespan = nodeData[i]["Lifespan"].InnerText;
                 p.filename = nodeData[i]["Filename"].InnerText;
          //       p.filepath = nodeData[i]["File_Path"].InnerText;
                 p.description = nodeData[i]["HeroDescription"].InnerText;
                 p.id = int.Parse(nodeData[i]["UID"].InnerText);
+
+				p.photo = LoadPhoto(@"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename);
+
                 people.Add(p);
-
-
+//				Debug.Log(p.givenName);
             }
+
         }
-        foreach (Person p in people)
-        {
-            //			Debug.Log( p.familyName + " is in the database"); 
-        }
-        
 
 		//matches the number of planes to make to the user's input
 		SetNumHeroPeople = PlaneManager.numPlanes; 
@@ -106,7 +104,7 @@ public class DataPuller : MonoBehaviour
 
         Debug.Log("the database has " + people.Count + " records ");
         GetHeros();
-        GetNormalPeople();
+//        GetNormalPeople();
 //        SetActiveHeroes();
 //        SetActiveNormalPeople();
         Debug.Log("There are " + activeHeroes.Count() + " active heroes");
@@ -115,31 +113,15 @@ public class DataPuller : MonoBehaviour
         shuffleList(activeNormalPeople);
         shuffleList(activeHeroes);
 
-        //working remove test 
-//	
-//        RemoveHeroFromActiveList(activeHeroes[0]);
-//        RemoveNormalPersonFromActiveList(activeNormalPeople[0]);
-//        Debug.Log("There are " + activeHeroes.Count() + " active heroes after remove");
-//        Debug.Log("There are " + activeNormalPeople.Count() + " active normal people after remove");
-//
-//		//this is how you get a new person. Person class living at the top of the DataPuller.cs file    
-//		Person pn = PullNewNormalPerson();
-//        Debug.Log(pn.familyName + "the pulled normal person");
-//        //this is how you get a new hero out of the list 
-//		Person pa = PullNewHero();
-//        Debug.Log(pa.familyName + "the pulled hero");
-//		//this line will remove an activeHero from that list 
-//        RemoveHeroFromActiveList(pa);
-//		//this line will remove an activeNormalPerson from the list 
-//        RemoveNormalPersonFromActiveList(pn);
-//
-//        Person pn1 = PullNewNormalPerson();
-//        Debug.Log(pn1.familyName + "the pulled normal person double test");
-//        Person pa1 = PullNewHero();
-//        Debug.Log(pa1.familyName + "the pulled hero double test");
-
-
     }
+
+	private Texture2D LoadPhoto(string path) {
+		WWW www = new WWW(path);
+		while (!www.isDone); // wait for file load to complete
+		Texture2D img = new Texture2D(1024, 1024, photoImportFormat, false);
+		www.LoadImageIntoTexture(img);
+		return img;
+	}
 
 	// find and return a Person by index number
 	public static Person findCurrentPerson(int num){
@@ -203,48 +185,22 @@ public class DataPuller : MonoBehaviour
 		} else {
 			Debug.LogError("activeHeros did not contain " + p.givenName);
 		}
-//        for (int i = 0; i < activeHeroes.Count; i++)
-//        {
-//            if (p.id == activeHeroes[i].id)
-//            {
-//				//hero to remove found. 
-//				Debug.Log(p.familyName + " added to inactive heroes list"); 
-//                inactiveHeroes.Add(p); //add hero to innactive list 
-//				Debug.Log(p.familyName + " removed from active heroes list"); 
-//                activeHeroes.RemoveAt(i); //remove hero at their current location in the active array 
-//            }
-//        }
     }
 
     //this function lets you get a new hero out of the innactive list and put it to the active list
     public static Person PullNewHero()
     {
-
-		Person p = new Person(); 
+		Person p = null;// = new Person(); 
 		if(inactiveHeroes.Count > 0)
 		{
-			Debug.Log(inactiveHeroes.Count);
 			p = inactiveHeroes[0];
-			Debug.Log(p.givenName + " " + p.familyName);
 			activeHeroes.Add(p);
-//			inactiveHeroes.Remove(p);
 			inactiveHeroes.RemoveAt(0);
-//			Debug.Log(p.familyName + " active." );
-			Debug.Log(inactiveHeroes.Count);
-
-//			Debug.Log("there are " + inactiveHeroes.Count + " inactive heroes"); 
-//			activeHeroes.Add(inactiveHeroes[0]); //the active hereo is pulled from the innactive list 
-    	    //always get the first one in the list to move lists 
-//			Debug.Log(p.familyName + " moved to active heroes list"); 
-
-//       		p = inactiveHeroes[0]; //the inactive hero is sent back to the Plane Manager 
-			//then remove it out in innactive 
-//       	 	inactiveHeroes.RemoveAt(0);//we remove the now active hero from the innactive list
-//			Debug.Log(p.familyName + " removed from innactive heroes list " + inactiveHeroes.Count); 
 		}
-        return p;
-
+		return p;
     }
+
+
     //sets up the inactive and active normal people lists 
     public static void SetActiveNormalPeople()
     {	
@@ -267,6 +223,8 @@ public class DataPuller : MonoBehaviour
         }
         Debug.Log("there are " + inactiveNormalPeople.Count() + "inactive Normal people");
     }
+
+
     //lets you remove a normal person from the current normal active list and put them in the normal inactive list 
     public static void RemoveNormalPersonFromActiveList(Person p)
     {
@@ -281,66 +239,41 @@ public class DataPuller : MonoBehaviour
             }
         }
     }
+
+
     //gets a new normal person out of the inactive list and adds them to the active list. 
     public static Person PullNewNormalPerson()
     {
-		Person p = new Person(); 
+		Person p = null;// = new Person(); 
 		if(inactiveNormalPeople.Count > 0)
 		{
 			p = inactiveNormalPeople[0];
 			activeNormalPeople.Add(p);
 	        inactiveNormalPeople.RemoveAt(0);
 		}
-//		Debug.Log("there are " +inactiveNormalPeople.Count + " innactive Normal people"); 
 		return p;
-
     }
 
 	// Populate herosList
     public void GetHeros()
     {
-        heroes = from person in people
-                 where person.hero == "yes"
-                 select person;
-
         herosList = new List<Person>();
-        foreach (Person p in heroes)
-        {
-            herosList.Add(p);
-			inactiveHeroes.Add(p);
-        }
+		normalPeople = new List<Person>();
 
-//        int num = herosList.Count;
+		for (int i=0; i<people.Count; i++)
+		{
+			if (people[i].hero) {
+				herosList.Add(people[i]);
+				inactiveHeroes.Add (people[i]);
+			} else {
+				normalPeople.Add(people[i]);
+				inactiveNormalPeople.Add(people[i]);
+			}
+		}
         Debug.Log("there are " + herosList.Count() + " heroes");
+		Debug.Log("there are " + normalPeople.Count() + " normal people");
     }
-
-	// Populate normalPeople list
-    public void GetNormalPeople()
-    {
-        heroes = from person in people
-                 where person.hero == "no"
-                 select person;
-
-        normalPeople = new List<Person>();
-        foreach (Person p in heroes)
-        {
-            normalPeople.Add(p);
-			inactiveNormalPeople.Add(p);
-        }
-
-//        int num = normalPeople.Count();
-        Debug.Log("there are " + normalPeople.Count() + " normal people");
-    }
-//
-//    public void PickHeroData()
-//    {
-//        
-//	//to use. 
-//        //1 set the static number of the hero you want 
-//        // 2 call this function 
-//        // 3 get the current hero
-//        currentHero = people[0] as Person;
-//    }
+	
 
     public void shuffleList(List<Person> l)
     {

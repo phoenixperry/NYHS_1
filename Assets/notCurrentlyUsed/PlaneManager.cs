@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Text;
 using System.Linq;
-//using System.Xml.Li
 
 public class SpawnPoint {
 	public Vector3  position;
@@ -158,29 +157,49 @@ public class PlaneManager : MonoBehaviour {
 	// Writes the current panel positions out to the external spawn point file
 	public void SaveNodes()
 	{
-		ArrayList positions = new ArrayList(); 
-		foreach (GameObject bg in bgPlanes)
-		{
-			Vector3 pos = bg.transform.position;
-			positions.Add(pos); 
-		}
-		
-		foreach (GameObject fg in fgPlanes)
-		{
-			Vector3 pos = fg.transform.position;
+		ArrayList positions = new ArrayList();
+		for (int i=0; i<bgPlanes.Count; i++) {
+			Vector3 pos = (bgPlanes[i] as GameObject).transform.position;
 			positions.Add(pos);
 		}
+//		foreach (GameObject bg in bgPlanes)
+//		{
+//			Vector3 pos = bg.transform.position;
+//			positions.Add(pos); 
+//		}
+		for (int i=0; i<fgPlanes.Count; i++){
+			Vector3 pos = (fgPlanes[i] as GameObject).transform.position;
+			positions.Add(pos);
+		}
+//		foreach (GameObject fg in fgPlanes)
+//		{
+//			Vector3 pos = fg.transform.position;
+//			positions.Add(pos);
+//		}
 		Debug.Log("you have " + positions.Count + "number of positions");
-		foreach(Vector3 pos in positions){
+		for (int i=0; i<positions.Count; i++) {
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter("./Assets/data/dataPositions.txt", true))
 			{
-				file.WriteLine(pos);
+				file.WriteLine(positions[i]);
 			}
 		}
+//		foreach(Vector3 pos in positions){
+//			using (System.IO.StreamWriter file = new System.IO.StreamWriter("./Assets/data/dataPositions.txt", true))
+//			{
+//				file.WriteLine(pos);
+//			}
+//		}
 	}
 
 	// Finds the first available spawn point, moves it to the end of the list, and returns it
 	public SpawnPoint GetValidSpawnPoint( List<SpawnPoint> pointList ) {
+//		for (int i=0; i<pointList.Count; i++) {
+//			if (false == pointList[i].occupied) {
+//				pointList.Remove(pointList[i]);
+//				pointList.Insert(pointList.Count, pointList[i]);
+//				return pointList[i];
+//			}
+//		}
 		foreach (SpawnPoint sp in pointList) {
 			if (false == sp.occupied) {
 				pointList.Remove(sp);
@@ -338,7 +357,7 @@ public class PlaneManager : MonoBehaviour {
 
 	// Informs the system that a given person is no longer on screen
 	public void RecyclePerson( Person p ) {
-		if (p.hero == "no") {
+		if (!p.hero) {
 			DataPuller.RemoveNormalPersonFromActiveList(p);
 		} else {
 			DataPuller.RemoveHeroFromActiveList(p);

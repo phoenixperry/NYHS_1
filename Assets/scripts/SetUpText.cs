@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class SetUpText : MonoBehaviour {
-	public GameObject blackBox;  
-
 	//code for adding database text to screen 
 	//you put the data on the camera encase you forgot 
 	public PlaneManager m;
@@ -99,6 +97,7 @@ public class SetUpText : MonoBehaviour {
 		} else {
 			p = DataPuller.PullNewNormalPerson();
 		}
+//		Debug.Log(p.givenName);
 		populateData();
 	}
 
@@ -118,19 +117,8 @@ public class SetUpText : MonoBehaviour {
 		dt.textSB.Append( p.location.ToUpper() );
 		dt.FinishedTextSB();
 
-		string photoPath = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/photos/" + p.filename;
-
-		photoObject.GetComponent<Renderer>().material.SetTexture("_image", LoadPhoto(photoPath));
+		photoObject.GetComponent<Renderer>().material.SetTexture("_image", p.photo);
 	}
-
-	private Texture2D LoadPhoto(string path) {
-		WWW www = new WWW(path);
-		while (!www.isDone); // wait for file load to complete
-		Texture2D img = new Texture2D(1024, 1024, photoImportFormat, false);
-		www.LoadImageIntoTexture(img);
-		return img;
-	}
-
 	
 	public void setOrigin()
 	{
@@ -154,9 +142,9 @@ public class SetUpText : MonoBehaviour {
 		fadeInState = true;
 		Component[] faders;
 		faders = GetComponentsInChildren<SmoothAlpha>();
-		foreach (SmoothAlpha fader in faders) {
-			if(fader.gameObject.name != "BodyTextMesh") {
-				fader.MakeVisible(duration, 1.0f, fadeInEaseType);
+		for (int i=0; i<faders.Length; i++){
+			if(faders[i].gameObject.name != "BodyTextMesh") {
+				(faders[i] as SmoothAlpha).MakeVisible(duration, 1.0f, fadeInEaseType);
 			}
 		}
 		float t = 0.0f;
@@ -294,8 +282,8 @@ public class SetUpText : MonoBehaviour {
 		m.RecyclePerson(p);
 		Component[] faders;
 		faders = GetComponentsInChildren<SmoothAlpha>();
-		foreach (SmoothAlpha fader in faders) {
-			fader.MakeInvisible(duration, 0.0f, fadeOutEaseType);
+		for (int i=0; i<faders.Length; i++) {
+			(faders[i] as SmoothAlpha).MakeInvisible(duration, 0.0f, fadeOutEaseType);
 		}
 		float t = 0.0f;
 		while ( t < duration ) {

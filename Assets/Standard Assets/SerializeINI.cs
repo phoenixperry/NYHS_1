@@ -7,6 +7,8 @@ public class SerializeINI : MonoBehaviour
 	public Camera mainCamera;
 	public Transform logo;
 
+	public bool dim = true;
+
 //	public static void Serialize(string name, string GamePath)
 //	{
 //		System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -17,14 +19,8 @@ public class SerializeINI : MonoBehaviour
 //	}
 
 	public void Start() {
-//		StartCoroutine( wait () );
 		string cfgPath = "./config.txt";
-//		if (System.IO.Directory.Exists(cfgPath)) {
-			DeSerialize(cfgPath);
-
-//		} else {
-//			Debug.Log("No config file found: " + cfgPath);
-//		}
+		DeSerialize(cfgPath);
 	}
 
 	public IEnumerator wait() {
@@ -44,7 +40,6 @@ public class SerializeINI : MonoBehaviour
 			string formattedLine = Regex.Replace(line, @"[^\w\.,@#=-]", "").ToLower();
 
 			// SKIP COMMENTS
-
 			if (formattedLine == "" || formattedLine.ToCharArray()[0] == '#' )
 				continue;
 			Debug.Log(formattedLine);
@@ -84,6 +79,10 @@ public class SerializeINI : MonoBehaviour
 				AspectUtility.SetAspectRatio(float.Parse(aspect));
 				AspectUtility.SetCamera();
 				Debug.Log("Config aspect ratio = " + aspect);
+				break;
+			case "dim_cloud":
+				dim = (id_value[1] == "true");
+				Debug.Log("Config dim cloud enabled = " + dim.ToString());
 				break;
 			default:
 				Debug.Log("Unrecognized variable: " + id_value[0]);

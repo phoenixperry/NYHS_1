@@ -9,11 +9,11 @@ public class LogoController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		string path = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/Logo/logo.png";
+		string path = @"file://" + System.IO.Directory.GetCurrentDirectory() + "/Logo/Logo.png";
 		Debug.Log(path);
 		WWW www = new WWW(path);
 		while (!www.isDone); // wait for file load to complete
-		Debug.Log ("logo done");
+		Debug.Log ("background done");
 		Texture2D img = new Texture2D(1024, 1024, TextureFormat.ARGB32, false);
 		www.LoadImageIntoTexture(img);
 

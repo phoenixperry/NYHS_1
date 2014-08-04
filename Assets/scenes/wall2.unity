@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e159e822baea1bd4bacff1b2fa16db11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photoImportFormat: 5
 --- !u!4 &232047516
 Transform:
   m_ObjectHideFlags: 0
@@ -796,6 +797,7 @@ GameObject:
   - 4: {fileID: 905923904}
   - 212: {fileID: 905923903}
   - 114: {fileID: 905923905}
+  - 114: {fileID: 905923906}
   m_Layer: 0
   m_Name: background
   m_TagString: Untagged
@@ -823,7 +825,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 68541885d1c844a1ca7454497cde1133, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &905923904
 Transform:
@@ -849,6 +851,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderQ: 0
+--- !u!114 &905923906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 905923902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ab773b31de94fc28e4751dcb14b1c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1183379012
 Prefab:
   m_ObjectHideFlags: 0
@@ -1804,7 +1817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9378ae64cb601f4c8256d9db3f52885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blackBox: {fileID: 1487349971}
   m: {fileID: 556769845}
   data: {fileID: 232047514}
   descriptionStyle:

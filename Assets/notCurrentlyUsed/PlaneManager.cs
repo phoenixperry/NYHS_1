@@ -220,6 +220,11 @@ public class PlaneManager : MonoBehaviour {
 	// Tells every node except the hero moving to the spotlight point to tint itself
 	public void TintNonFocusedNodes() {
 		dimmedBackgroundNodes = true;
+
+		if (GetComponent<SerializeINI>().dim == false) {
+			return;
+		}
+
 		int i;
 		for (i = 0; i < bgPlanes.Count; i++) {
 			(bgPlanes[i] as GameObject).GetComponent<SetUpText>().Tint(dimColor, 1.0f);
@@ -238,13 +243,15 @@ public class PlaneManager : MonoBehaviour {
 
 	// Tells every node except the hero leaving the spotlight point to untint itself
 	public void UnTintNonFocusedNodes() {
-		int i;
-		for (i = 0; i < bgPlanes.Count; i++) {
-			(bgPlanes[i] as GameObject).GetComponent<SetUpText>().UnTint(1.0f);
-		}
-		for (i = 0; i < fgPlanes.Count; i++) {
-			if(fgPlanes[i] != heroInFocus) {
-				(fgPlanes[i] as GameObject).GetComponent<SetUpText>().UnTint(1.0f);
+		if (GetComponent<SerializeINI>().dim){
+			int i;
+			for (i = 0; i < bgPlanes.Count; i++) {
+				(bgPlanes[i] as GameObject).GetComponent<SetUpText>().UnTint(1.0f);
+			}
+			for (i = 0; i < fgPlanes.Count; i++) {
+				if(fgPlanes[i] != heroInFocus) {
+					(fgPlanes[i] as GameObject).GetComponent<SetUpText>().UnTint(1.0f);
+				}
 			}
 		}
 		dimmedBackgroundNodes = false;
